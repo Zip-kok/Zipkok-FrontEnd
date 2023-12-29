@@ -1,5 +1,22 @@
 import React from "react";
+import { useFunnel } from "@toss/use-funnel";
 
 export default function Login() {
-    return <div>index</div>;
+    const [Funnel, setStep] = useFunnel(["0", "1", "2", "3"] as const);
+    return (
+        <Funnel>
+            <Funnel.Step name="0">
+                <div></div>
+            </Funnel.Step>
+            <Funnel.Step name="1">
+                <div></div>
+            </Funnel.Step>
+            <Funnel.Step name="2">
+                <div></div>
+            </Funnel.Step>
+            <Funnel.Step name="3">
+                <div></div>
+            </Funnel.Step>
+        </Funnel>
+    );
 }
