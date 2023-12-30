@@ -1,24 +1,8 @@
-import React from "react";
-import { useFunnel } from "@toss/use-funnel";
+import React, { useState } from "react";
 
 import styles from "./Login.module.scss";
 
 export default function Login() {
-    const [Funnel, setStep] = useFunnel(["0", "1", "2", "3"] as const);
-    return (
-        <Funnel>
-            <Funnel.Step name="0">
-                <div></div>
-            </Funnel.Step>
-            <Funnel.Step name="1">
-                <div></div>
-            </Funnel.Step>
-            <Funnel.Step name="2">
-                <div></div>
-            </Funnel.Step>
-            <Funnel.Step name="3">
-                <div></div>
-            </Funnel.Step>
-        </Funnel>
-    );
+    const [step, setStep] = useState(0);
+    
 }
