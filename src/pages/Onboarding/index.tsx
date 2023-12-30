@@ -42,7 +42,7 @@ export default function Onboarding() {
             <div className={styles.progressBar}>
                 <div className={styles.progress} style={{ width: `${progress}%` }}></div>
             </div>
-            {steps[step]}
+            <div className={styles.content}>{steps[step]}</div>
         </div>
     );
 }
