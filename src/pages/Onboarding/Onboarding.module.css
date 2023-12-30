@@ -1,0 +1,36 @@
+.topBar {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+.imgBtn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.progressBar {
+    height: 4px;
+    margin: 12px 20px;
+    width: calc(100% - 40px);
+    background: var(--gray-color-gray020_border, #c8cbd1);
+}
+
+.progressBar > .progress {
+    height: 100%;
+    background: var(--gray-color-gray090, #141415);
+    transition: width 0.3s ease-in-out;
+}
+
+.content {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
