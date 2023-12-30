@@ -16,12 +16,22 @@ type StepKeys = "location" | "type" | "price" | "complete";
 
 export default function Onboarding() {
     const [step, setStep] = useState<StepKeys>("location");
+
     const steps: Record<StepKeys, JSX.Element> = {
         location: <Location />,
         type: <Type />,
         price: <Price />,
         complete: <Complete />,
     };
+
+    const progresses: Record<StepKeys, number> = {
+        location: 1,
+        type: 2,
+        price: 3,
+        complete: 4,
+    };
+    const progress = (progresses[step] / 4) * 100;
+
     return (
         <div>
             <div className={styles.topBar}>
@@ -29,7 +39,9 @@ export default function Onboarding() {
                     <img src={leftArrowIcon}></img>
                 </button>
             </div>
-            <div className={styles.progressBar}></div>
+            <div className={styles.progressBar}>
+                <div className={styles.progress} style={{ width: `${progress}%` }}></div>
+            </div>
             {steps[step]}
         </div>
     );
