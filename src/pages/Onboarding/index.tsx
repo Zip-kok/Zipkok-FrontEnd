@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import styles from "./Onboarding.module.scss";
+import styles from "./Onboarding.module.css";
 
 import Location from "./Location";
 import Type from "./Type";
 import Price from "./Price";
 import Complete from "./Complete";
+
+import leftArrowIcon from "../../assets/left_arrow.svg";
 
 // location: 온보딩_01_거주지역
 // type: 온보딩_02_매물종류
@@ -20,5 +22,15 @@ export default function Onboarding() {
         price: <Price />,
         complete: <Complete />,
     };
-    return steps[step];
+    return (
+        <div>
+            <div className={styles.topBar}>
+                <button className={styles.imgBtn}>
+                    <img src={leftArrowIcon}></img>
+                </button>
+            </div>
+            <div className={styles.progressBar}></div>
+            {steps[step]}
+        </div>
+    );
 }
