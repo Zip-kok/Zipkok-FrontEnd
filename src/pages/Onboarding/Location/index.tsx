@@ -4,11 +4,19 @@ import styles from "./Location.module.css";
 
 import searchIcon from "../../../assets/search.svg";
 
-export default function Location() {
+interface LocationProps {
+    confirmLocation: (location: string) => void;
+}
+
+export default function Location({ confirmLocation }: LocationProps) {
     const [location, setLocation] = useState("");
 
     function handleLocationChange(e: React.ChangeEvent<HTMLInputElement>) {
         setLocation(e.target.value);
+    }
+
+    function handleConfirmClick() {
+        confirmLocation(location);
     }
 
     return (
@@ -29,7 +37,7 @@ export default function Location() {
             </div>
             <div className={styles.footer}>
                 <a>나중에 설정하기</a>
-                <button className="btnBottom" disabled={location === ""}>
+                <button className="btnBottom" disabled={location === ""} onClick={handleConfirmClick}>
                     확인
                 </button>
             </div>

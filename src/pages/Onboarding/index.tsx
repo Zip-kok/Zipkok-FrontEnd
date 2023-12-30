@@ -15,15 +15,31 @@ import leftArrowIcon from "../../assets/left_arrow.svg";
 type StepKeys = "location" | "type" | "price" | "complete";
 
 export default function Onboarding() {
-    const [step, setStep] = useState<StepKeys>("location");
+    const [location, setLocation] = useState("");
 
+    const [step, setStep] = useState<StepKeys>("location");
     const steps: Record<StepKeys, JSX.Element> = {
-        location: <Location />,
+        // location
+        location: (
+            <Location
+                confirmLocation={(location: string) => {
+                    setLocation(location);
+                    setStep("type");
+                }}
+            />
+        ),
+
+        // type
         type: <Type />,
+
+        // price
         price: <Price />,
+
+        // complete
         complete: <Complete />,
     };
 
+    // 프로그레스바 가로 길이를 계산하기 위한 값
     const progresses: Record<StepKeys, number> = {
         location: 1,
         type: 2,
@@ -32,10 +48,23 @@ export default function Onboarding() {
     };
     const progress = (progresses[step] / 4) * 100;
 
+    // 뒤로 가기 버튼을 눌렀을 때
+    function handleBackClick() {
+        if (step === "location") {
+            return;
+        } else if (step === "type") {
+            setStep("location");
+        } else if (step === "price") {
+            setStep("type");
+        } else if (step === "complete") {
+            setStep("price");
+        }
+    }
+
     return (
         <div>
             <div className={styles.topBar}>
-                <button className={styles.imgBtn}>
+                <button className={styles.imgBtn} onClick={handleBackClick}>
                     <img src={leftArrowIcon}></img>
                 </button>
             </div>
