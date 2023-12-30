@@ -1,6 +1,8 @@
 import React from "react";
 import { useFunnel } from "@toss/use-funnel";
 
+import styles from "./Onboarding.module.scss";
+
 export default function Onboarding() {
     const [Funnel, setStep] = useFunnel(["0", "1", "2", "3"] as const);
     return (
