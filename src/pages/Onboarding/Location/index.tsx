@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styles from "./Location.module.css";
 
 import searchIcon from "../../../assets/search.svg";
 
 export default function Location() {
+    const [location, setLocation] = useState("");
+
+    function handleLocationChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setLocation(e.target.value);
+    }
+
     return (
         <div className={styles.root}>
             <div className={styles.header}>
@@ -13,12 +19,19 @@ export default function Location() {
                 </h1>
             </div>
             <div className={styles.searchBox}>
-                <input type="text" placeholder="최대 12자" id="locationInput"></input>
+                <input
+                    type="text"
+                    onChange={handleLocationChange}
+                    placeholder="도로명, 지번 검색"
+                    id="locationInput"
+                ></input>
                 <img src={searchIcon}></img>
             </div>
             <div className={styles.footer}>
                 <a>나중에 설정하기</a>
-                <button className="btnBottom">확인</button>
+                <button className="btnBottom" disabled={location === ""}>
+                    확인
+                </button>
             </div>
         </div>
     );

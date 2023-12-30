@@ -32,6 +32,17 @@
     height: 100%;
     box-sizing: border-box;
     border: none;
+    color: var(--gray-color-gray080_text, #1b1d1f);
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.018px;
+    caret-color: var(--primary-color-primary_default, #fa4549);
+}
+
+.searchBox > input[type="text"]::placeholder {
+    width: calc(100% - 32px);
     color: var(--gray-color-gray030_text, #9fa4a9);
     font-family: Pretendard;
     font-size: 18px;

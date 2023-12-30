@@ -18,3 +18,7 @@ body {
     line-height: normal;
     border: none;
 }
+
+.btnBottom:disabled {
+    background: var(--gray-color-gray020_border, #c8cbd1);
+}
