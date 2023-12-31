@@ -6,24 +6,41 @@ import styles from "./Location.module.css";
 import searchIcon from "../../../assets/search.svg";
 import deleteIcon from "../../../assets/delete.svg";
 
+import { JUSO_KEY } from "../../../keys";
+
 interface LocationProps {
     confirmLocation: (location: string) => void;
 }
 
 export default function Location({ confirmLocation }: LocationProps) {
+
     const isKeyboardOpen = useDetectKeyboardOpen();
     const locationInputRef = useRef<HTMLInputElement>(null);
+    const [query, setQuery] = useState(""); // 검색어
+    const [location, setLocation] = useState(""); // 최종 지역
+    const [isSearchBoxFocused, setIsSearchBoxFocused] = useState(false);
 
-    const [location, setLocation] = useState("");
-
-    const [isLocationInputFocused, setIsLocationInputFocused] = useState(false);
-
-    function handleLocationChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setLocation(e.target.value);
+    function handleQueryChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setQuery(e.target.value);
     }
 
-    function handleConfirmClick() {
-        confirmLocation(location);
+    async function handleConfirmClick() {
+        if (location === "" && query !== "") {
+            const res = await fetch(
+                `https://www.juso.go.kr/addrlink/addrLinkApi.do?confmKey=${JUSO_KEY}&resultType=json&keyword=${query}`
+            );
+            const data = await res.json();
+            const results = data.results.juso;
+
+            if (parseInt(data.results.common.totalCount) === 0) {
+                alert("검색 결과가 없습니다.");
+                return;
+            }
+
+            console.log(data);
+        } else if (location !== "") {
+            confirmLocation(query);
+        }
     }
 
     return (
@@ -38,17 +55,17 @@ export default function Location({ confirmLocation }: LocationProps) {
 
             <div
                 className={styles.searchBox}
-                onFocus={() => setIsLocationInputFocused(true)}
-                onBlur={() => setIsLocationInputFocused(false)}
+                onFocus={() => setIsSearchBoxFocused(true)}
+                onBlur={() => setIsSearchBoxFocused(false)}
             >
                 <input
                     type="text"
-                    onChange={handleLocationChange}
+                    onChange={handleQueryChange}
                     placeholder="도로명, 지번 검색"
                     id="locationInput"
                     ref={locationInputRef}
                 ></input>
-                {isLocationInputFocused ? (
+                {isSearchBoxFocused ? (
                     <button
                         className="imgBtn"
                         onClick={() => {
@@ -68,7 +85,7 @@ export default function Location({ confirmLocation }: LocationProps) {
                 {!isKeyboardOpen && <a>나중에 설정하기</a>}
                 <button
                     className={`btnBottom ${isKeyboardOpen ? "btnKeyboard" : ""}`}
-                    disabled={location === ""}
+                    disabled={query === ""}
                     onClick={handleConfirmClick}
                 >
                     확인
