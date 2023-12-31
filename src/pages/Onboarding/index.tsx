@@ -64,7 +64,7 @@ export default function Onboarding() {
     return (
         <div>
             <div className={styles.topBar}>
-                <button className={styles.imgBtn} onClick={handleBackClick}>
+                <button className="imgBtn" onClick={handleBackClick}>
                     <img src={leftArrowIcon}></img>
                 </button>
             </div>

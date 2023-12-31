@@ -26,3 +26,12 @@ body {
 .btnKeyboard {
     border-radius: 0;
 }
+
+.imgBtn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
