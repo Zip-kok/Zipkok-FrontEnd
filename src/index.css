@@ -22,3 +22,7 @@ body {
 .btnBottom:disabled {
     background: var(--gray-color-gray020_border, #c8cbd1);
 }
+
+.btnKeyboard {
+    border-radius: 0;
+}

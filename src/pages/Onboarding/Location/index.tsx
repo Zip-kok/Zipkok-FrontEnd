@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useDetectKeyboardOpen from "use-detect-keyboard-open";
 
 import styles from "./Location.module.css";
 
@@ -9,6 +10,7 @@ interface LocationProps {
 }
 
 export default function Location({ confirmLocation }: LocationProps) {
+    const isKeyboardOpen = useDetectKeyboardOpen();
     const [location, setLocation] = useState("");
 
     function handleLocationChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -35,9 +37,13 @@ export default function Location({ confirmLocation }: LocationProps) {
                 ></input>
                 <img src={searchIcon}></img>
             </div>
-            <div className={styles.footer}>
-                <a>나중에 설정하기</a>
-                <button className="btnBottom" disabled={location === ""} onClick={handleConfirmClick}>
+            <div className={`${styles.footer} ${isKeyboardOpen ? styles.full : ""}`}>
+                {!isKeyboardOpen && <a>나중에 설정하기</a>}
+                <button
+                    className={`btnBottom ${isKeyboardOpen ? "btnKeyboard" : ""}`}
+                    disabled={location === ""}
+                    onClick={handleConfirmClick}
+                >
                     확인
                 </button>
             </div>

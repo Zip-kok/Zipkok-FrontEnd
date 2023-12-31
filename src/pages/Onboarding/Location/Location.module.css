@@ -69,6 +69,11 @@
     align-items: center;
 }
 
+.footer.full {
+    padding: 0;
+    padding-top: 16px;
+}
+
 .footer > a {
     color: var(--gray-color-gray030_text, #9fa4a9);
     text-align: center;
