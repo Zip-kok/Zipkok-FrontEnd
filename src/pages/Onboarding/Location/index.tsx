@@ -90,7 +90,7 @@ export default function Location({ confirmLocation }: LocationProps) {
                 onSubmit={handleSubmit}
                 caption={
                     addresses.length > 0 || errorMessage !== ""
-                        ? `${addressCount.toLocaleString()}건 이상의 검색 결과`
+                        ? `${addressCount.toLocaleString()}건의 검색 결과`
                         : undefined
                 }
             />
