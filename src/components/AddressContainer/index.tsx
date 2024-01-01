@@ -7,11 +7,20 @@ interface AddressContainerProps {
     errorMessage?: string;
     addresses: Address[];
     onClick: (address: Address) => void;
+    onEndOfScroll?: () => void;
 }
 
-export default function AddressContainer({ errorMessage, addresses, onClick }: AddressContainerProps) {
+export default function AddressContainer({ errorMessage, addresses, onClick, onEndOfScroll }: AddressContainerProps) {
+    function handleScroll(e: React.UIEvent<HTMLDivElement, UIEvent>) {
+        const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
+
+        if (scrollHeight - scrollTop === clientHeight) {
+            if (onEndOfScroll) onEndOfScroll();
+        }
+    }
+
     return (
-        <div className={styles.container}>
+        <div className={styles.container} onScroll={handleScroll}>
             {errorMessage !== "" ? (
                 <span className={styles.errorMessage}>{errorMessage}</span>
             ) : (
