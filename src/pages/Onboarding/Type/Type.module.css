@@ -22,10 +22,13 @@
 
 .typeBtnContainer {
     display: grid;
+    grid-template-rows: 160px 160px;
     justify-content: center;
     padding: 0 20px;
     gap: 16px;
     row-gap: 16px;
+    height: 100%;
+    overflow-y: auto;
 }
 
 @media (min-width: 768px) {
@@ -34,13 +37,13 @@
     }
 }
 
-@media (min-width: 480px) and (max-width: 767px) {
+@media (min-width: 371px) and (max-width: 767px) {
     .typeBtnContainer {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 370px) {
     .typeBtnContainer {
         grid-template-columns: 1fr;
     }
@@ -53,8 +56,9 @@
     flex-direction: column;
     border-radius: 8px;
     background: var(--gray-color-gray010, #efeff2);
-    padding: 28px 12px;
+    padding: 0 12px;
     min-width: 152px;
+    height: 160px;
     border: 2px solid transparent;
     cursor: pointer;
 }
