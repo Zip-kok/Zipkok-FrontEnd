@@ -6,27 +6,6 @@ body {
     padding: 0;
 }
 
-.btnBottom {
-    border-radius: 8px;
-    background: var(--primary-color-primary_default, #fa4549);
-    color: var(--grayscale-white, #fff);
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    border: none;
-}
-
-.btnBottom:disabled {
-    background: var(--gray-color-gray020_border, #c8cbd1);
-}
-
-.btnKeyboard {
-    border-radius: 0;
-}
-
 .imgBtn {
     background: none;
     border: none;
@@ -34,4 +13,5 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0;
+    cursor: pointer;
 }
