@@ -1,0 +1,36 @@
+.root {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.header {
+  margin: 108px 20px 58px 20px;
+}
+
+.header > h1 {
+  margin: 0;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.024px;
+}
+
+.warning {
+  color: var(--primary-color-primary_default, #fa4549);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: -32px;
+  margin-left: 20px;
+}
+
+.wrapper {
+  position: absolute;
+  bottom: 12px; /* 바닥으로부터 12px 떨어진 위치에 배치 */
+  width: 100%;
+}
