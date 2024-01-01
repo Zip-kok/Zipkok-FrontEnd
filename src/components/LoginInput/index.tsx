@@ -9,9 +9,18 @@ interface LoginInputProps {
     numberOnly?: boolean;
     onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
     onSubmit?: () => void;
+    caption?: string;
 }
 
-export default function LoginInput({ value, placeholder, icon, numberOnly, onChange, onSubmit }: LoginInputProps) {
+export default function LoginInput({
+    value,
+    placeholder,
+    icon,
+    numberOnly,
+    onChange,
+    onSubmit,
+    caption,
+}: LoginInputProps) {
     const inputRef = useRef<HTMLInputElement>(null);
 
     function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -49,6 +58,7 @@ export default function LoginInput({ value, placeholder, icon, numberOnly, onCha
                     </button>
                 )}
             </div>
+            {caption && <span className={styles.caption}>{caption}</span>}
         </div>
     );
 }

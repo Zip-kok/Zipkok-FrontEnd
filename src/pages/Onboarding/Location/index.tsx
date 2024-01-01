@@ -22,6 +22,7 @@ export default function Location({ confirmLocation }: LocationProps) {
     const [inputValue, setInputValue] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [addresses, setAddresses] = useState<Address[]>([]);
+    const [addressCount, setAddressCount] = useState<number>(0);
     const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
     async function searchAddress(query: string) {
@@ -53,11 +54,13 @@ export default function Location({ confirmLocation }: LocationProps) {
             confirmLocation(selectedAddress.roadAddr);
         } else {
             const data = await searchAddress(inputValue);
+            const count = data.common.totalCount;
+            setAddressCount(parseInt(count));
 
             if (data === null) {
                 setErrorMessage("주소를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.");
                 setAddresses([]);
-            } else if (data.common.totalCount === "0") {
+            } else if (count === "0") {
                 if (data.common.errorMessage === "정상")
                     setErrorMessage("일치하는 검색 결과가 없어요.\n주소를 다시 확인해주세요.");
                 else setErrorMessage(data.common.errorMessage);
@@ -85,6 +88,11 @@ export default function Location({ confirmLocation }: LocationProps) {
                 icon={searchIcon}
                 onChange={handleInputChange}
                 onSubmit={handleSubmit}
+                caption={
+                    addresses.length > 0 || errorMessage !== ""
+                        ? `${addressCount.toLocaleString()}건 이상의 검색 결과`
+                        : undefined
+                }
             />
             <AddressContainer errorMessage={errorMessage} addresses={addresses} onClick={handleAddressClick} />
             {addresses.length === 0 && (

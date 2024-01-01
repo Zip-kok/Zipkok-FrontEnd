@@ -44,3 +44,11 @@
     width: 32px;
     height: 32px;
 }
+
+.caption {
+    color: var(--gray-color-gray050_text, #4b5259);
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+}
