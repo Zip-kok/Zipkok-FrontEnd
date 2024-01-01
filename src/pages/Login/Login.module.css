@@ -1,0 +1,45 @@
+body {
+  background: var(--gray-color-white, #fff);
+}
+.root {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+  justify-content: center;
+  align-items: center;
+}
+.zipkokIcon {
+  width: 140px;
+  height: 192px;
+  flex-shrink: 0;
+  margin-top: 251px;
+}
+
+.loginBtn {
+  display: flex;
+  width: 320px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #fee500;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  gap: 12px;
+}
+
+.notLoginBtn {
+  margin-top: 16px;
+  border: none;
+  color: var(--gray-color-gray030_text, #9fa4a9);
+  text-align: center;
+
+  /* button_14(20)_line */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  text-decoration-line: underline;
+  background-color: transparent;
+}
