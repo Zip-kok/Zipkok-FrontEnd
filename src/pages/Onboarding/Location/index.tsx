@@ -17,19 +17,31 @@ interface LocationProps {
 }
 
 export default function Location({ confirmLocation }: LocationProps) {
+    const countPerPage = 50;
+
     const isKeyboardOpen = useDetectKeyboardOpen();
 
     const [inputValue, setInputValue] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const [query, setQuery] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [addresses, setAddresses] = useState<Address[]>([]);
     const [addressCount, setAddressCount] = useState<number>(0);
     const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
-    async function searchAddress(query: string) {
+    async function searchAddress(query: string, page: number = 1) {
+        const url = "https://www.juso.go.kr/addrlink/addrLinkApi.do";
+        const params = {
+            confmKey: JUSO_KEY,
+            resultType: "json",
+            keyword: query,
+            currentPage: page.toString(),
+            countPerPage: countPerPage.toString(),
+        };
+        const paramStr = new URLSearchParams(params).toString();
+
         try {
-            const res = await fetch(
-                `https://www.juso.go.kr/addrlink/addrLinkApi.do?confmKey=${JUSO_KEY}&resultType=json&keyword=${query}`
-            );
+            const res = await fetch(`${url}?${paramStr}`);
             const data = await res.json();
             return await data.results;
         } catch (e) {
@@ -48,19 +60,43 @@ export default function Location({ confirmLocation }: LocationProps) {
         setSelectedAddress(address);
     }
 
+    function loadMoreAddresses() {
+        if (selectedAddress || isLoading) return;
+        if (addresses.length < addressCount) {
+            setIsLoading(true);
+            searchAddress(query, Math.floor(addresses.length / countPerPage) + 1).then((data) => {
+                if (data === null) {
+                    setErrorMessage("주소를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.");
+                    setAddresses([]);
+                } else {
+                    setErrorMessage("");
+                    setAddresses((prev) => [...prev, ...(data.juso as Address[])]);
+                }
+                setIsLoading(false);
+            });
+        }
+    }
+
     async function handleSubmit() {
         if (inputValue === "") return;
         if (selectedAddress) {
             confirmLocation(selectedAddress.roadAddr);
         } else {
-            const data = await searchAddress(inputValue);
-            const count = data.common.totalCount;
-            setAddressCount(parseInt(count));
+            const query = inputValue.replace(/\s/g, "");
+
+            setQuery(query);
+            const data = await searchAddress(query);
 
             if (data === null) {
                 setErrorMessage("주소를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.");
                 setAddresses([]);
-            } else if (count === "0") {
+                return;
+            }
+
+            const count = data.common.totalCount;
+            setAddressCount(parseInt(count));
+
+            if (count === "0") {
                 if (data.common.errorMessage === "정상")
                     setErrorMessage("일치하는 검색 결과가 없어요.\n주소를 다시 확인해주세요.");
                 else setErrorMessage(data.common.errorMessage);
@@ -94,7 +130,12 @@ export default function Location({ confirmLocation }: LocationProps) {
                         : undefined
                 }
             />
-            <AddressContainer errorMessage={errorMessage} addresses={addresses} onClick={handleAddressClick} />
+            <AddressContainer
+                errorMessage={errorMessage}
+                addresses={addresses}
+                onClick={handleAddressClick}
+                onEndOfScroll={loadMoreAddresses}
+            />
             {addresses.length === 0 && (
                 <BottomBtn
                     onClick={handleSubmit}

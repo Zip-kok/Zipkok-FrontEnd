@@ -41,20 +41,18 @@ export default function LoginInput({
             <div className={styles.textBox}>
                 <input
                     type={numberOnly ? "number" : "text"}
-                    onChange={onChange}
+                    onChange={onChange  }
                     onKeyUp={handleKeyUp}
                     value={value}
                     placeholder={placeholder}
                     ref={inputRef}
                 ></input>
 
-                {inputRef.current?.value !== "" ? (
+                {!inputRef.current || inputRef.current.value === "" ? (
+                    <img src={icon}></img>
+                ) : (
                     <button className="imgBtn" onClick={handleDeleteClick}>
                         <img src={deleteIcon}></img>
-                    </button>
-                ) : (
-                    <button className="imgBtn" onClick={() => {}}>
-                        <img src={icon}></img>
                     </button>
                 )}
             </div>
