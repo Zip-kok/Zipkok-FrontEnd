@@ -28,7 +28,6 @@
 .price > button {
     width: 100px;
     height: 44px;
-    color: #1b1d1f;
     padding: 8px 31px;
     border-radius: 62px;
     border: 2px solid var(--gray-color-gray020_border, #C8CBD1);
@@ -42,6 +41,29 @@
     cursor:pointer;
 }
 
+.price > .activeButton {
+    background-color: #ffefef;
+    border-color:#fa4549 ;
+   
+}
+
+.priceTypeInf{
+    color: var(--gray-color-gray080_text, #1B1D1F);
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.priceTypeInf > div{
+    display: flex;
+}
+
+.priceTypeInf > div > a {
+width: 320px ;
+height: 109px;
+}
 .footer {
     width: 100%;
     padding: 16px;

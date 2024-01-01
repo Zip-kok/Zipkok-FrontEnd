@@ -8,9 +8,14 @@ interface PriceProps{
 
 export default function Price( {confirmPrice} : PriceProps) {
   const [price, setPrice] = useState("");
+  const [priceType,setPriceType] = useState("");
 
   function handleConfirmClick() {
     confirmPrice(price);
+}
+
+  function handlePriceType(priceType : string){
+    setPriceType(priceType);
 }
 
   return (
@@ -21,10 +26,36 @@ export default function Price( {confirmPrice} : PriceProps) {
             </h1>
         </div>
         <div className={styles.price}>
-            <button>월세</button>
-            <button>전세</button>
-            <button>매매</button>
+            <button className={priceType ==="월세" ? styles.activeButton : ""}
+            onClick={() => handlePriceType("월세")}>월세</button>
+            <button className={priceType ==="전세" ? styles.activeButton : ""}
+            onClick={() => handlePriceType("전세")}>전세</button>
+            <button className={priceType ==="매매" ? styles.activeButton : ""}
+            onClick={() => handlePriceType("매매")}>매매</button>
         </div>
+
+      <div className={styles.priceTypeInf}>
+        {priceType === "월세" && (
+        <div>
+          <a>보증금</a>
+          <progress className={styles.depositProgress} ></progress>
+        </div> )}
+        {priceType === "전세" && (
+        <div>
+          <a>보증금</a>
+          <progress className={styles.depositProgress} ></progress>
+          <a>월세</a>
+          <progress className={styles.RentProgress} ></progress>
+        </div> )}
+        {priceType === "매매" && (
+        <div>
+          <a>매매가</a>
+          <progress className={styles.saleProgress} ></progress>
+
+        </div> )}
+      </div>
+
+      
         <div className={styles.footer}>
           <a>나중에 설정하기</a>
           <button className="btnBottom" disabled={price === ""} 
