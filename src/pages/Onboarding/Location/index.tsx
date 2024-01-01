@@ -136,6 +136,12 @@ export default function Location({ confirmLocation }: LocationProps) {
                 onClick={handleAddressClick}
                 onEndOfScroll={loadMoreAddresses}
             />
+            <AddressContainer
+                errorMessage={errorMessage}
+                addresses={addresses}
+                onClick={handleAddressClick}
+                onEndOfScroll={loadMoreAddresses}
+            />
             {addresses.length === 0 && (
                 <BottomBtn
                     onClick={handleSubmit}
