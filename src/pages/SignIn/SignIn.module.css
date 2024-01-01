@@ -1,0 +1,14 @@
+.topBar {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.content {
+  width: 100%;
+  height: calc(100vh - 92px);
+  box-sizing: border-box;
+}

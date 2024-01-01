@@ -9,7 +9,7 @@ export default function Login() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 5000);
+    const timer = setTimeout(() => setShowSplash(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -24,7 +24,7 @@ export default function Login() {
             src={zipkokIcon}
             alt="zipkokIcon"
           />
-          <Link to="/sign">
+          <Link to="/signin">
             <button className={styles.loginBtn}>
               <img src={kakaoIcon} alt="kakaoIcon" />
               <div>카카오 로그인</div>
