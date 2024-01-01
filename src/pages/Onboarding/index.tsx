@@ -14,8 +14,11 @@ import leftArrowIcon from "../../assets/left_arrow.svg";
 // complete: 온보딩_04_완료
 type StepKeys = "location" | "type" | "price" | "complete";
 
+export type HouseType = "아파트" | "원룸" | "빌라/투룸" | "오피스텔" | null;
+
 export default function Onboarding() {
     const [location, setLocation] = useState("");
+    const [houseType, setHouseType] = useState<"아파트" | "원룸" | "빌라/투룸" | "오피스텔" | null>(null);
 
     const [step, setStep] = useState<StepKeys>("location");
     const steps: Record<StepKeys, JSX.Element> = {
@@ -30,7 +33,14 @@ export default function Onboarding() {
         ),
 
         // type
-        type: <Type />,
+        type: (
+            <Type
+                confirmHouseType={(houseType: HouseType) => {
+                    setHouseType(houseType);
+                    setStep("price");
+                }}
+            />
+        ),
 
         // price
         price: <Price />,
