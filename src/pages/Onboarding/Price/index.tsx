@@ -295,8 +295,10 @@ export default function Price( {confirmPrice} : PriceProps) {
       </div>
         <div className={styles.footer}>
           <a>나중에 설정하기</a>
-          <button className="btnBottom" disabled={priceType === ""} 
-            onClick={handleConfirmClick}>
+          <button disabled={priceType === ""} 
+            onClick={handleConfirmClick}
+            style={{ backgroundColor: priceType === "" ? '#c8cbd1' : '' }}
+            >
               확인
           </button>
         </div>
