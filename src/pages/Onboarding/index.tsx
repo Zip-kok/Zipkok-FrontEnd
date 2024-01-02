@@ -32,7 +32,7 @@ export default function Onboarding() {
             <Location
                 confirmLocation={(location: string) => {
                     setLocation(location);
-                    setStep("price");
+                    setStep("type");
                 }}
             />
         ),
@@ -50,8 +50,8 @@ export default function Onboarding() {
 
         // price
         price: <Price 
-                confirmPrice={(Price: string) => {
-                    setPrice(Price);
+                confirmPrice={(price: string) => {
+                    setPrice(price);
                     setStep("complete")
                 }}
                 />,
