@@ -5,8 +5,7 @@ import complete from "../../../assets/complete.svg";
 
 export default function Complete() {
 
-    const handleClick = (e) => {
-
+    const handleClick = () => {
     }
 
     return (<div className={styles.root}>
