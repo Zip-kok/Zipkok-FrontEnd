@@ -7,15 +7,6 @@
     box-sizing: border-box;
 }
 
-.imgBtn {
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-}
-
 .progressBar {
     height: 4px;
     margin: 12px 20px;
@@ -31,6 +22,6 @@
 
 .content {
     width: 100%;
-    padding: 0 20px;
+    height: calc(100vh - 92px);
     box-sizing: border-box;
 }

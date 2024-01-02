@@ -14,10 +14,16 @@ import Type from "./Type";
 // complete: 온보딩_04_완료
 type StepKeys = "location" | "type" | "price" | "complete";
 
+export type HouseType = "아파트" | "원룸" | "빌라/투룸" | "오피스텔" | null;
+
 export default function Onboarding() {
     const [location, setLocation] = useState("");
-    const [type,settype] = useState("");
+
+  
     const [price, setPrice] = useState("");
+
+    const [houseType, setHouseType] = useState<"아파트" | "원룸" | "빌라/투룸" | "오피스텔" | null>(null);
+
 
     const [step, setStep] = useState<StepKeys>("location");
     const steps: Record<StepKeys, JSX.Element> = {
@@ -32,7 +38,16 @@ export default function Onboarding() {
         ),
 
         // type
-        type: <Type />,
+
+        type: (
+            <Type
+                confirmHouseType={(houseType: HouseType) => {
+                    setHouseType(houseType);
+                    setStep("price");
+                }}
+            />
+        ),
+
         // price
         price: <Price 
                 confirmPrice={(Price: string) => {
@@ -70,7 +85,7 @@ export default function Onboarding() {
     return (
         <div>
             <div className={styles.topBar}>
-                <button className={styles.imgBtn} onClick={handleBackClick}>
+                <button className="imgBtn" onClick={handleBackClick}>
                     <img src={leftArrowIcon}></img>
                 </button>
             </div>
