@@ -89,9 +89,11 @@ export default function Onboarding() {
                     <img src={leftArrowIcon}></img>
                 </button>
             </div>
+{step !== "complete" && (
             <div className={styles.progressBar}>
                 <div className={styles.progress} style={{ width: `${progress}%` }}></div>
             </div>
+)}
             <div className={styles.content}>{steps[step]}</div>
         </div>
     );
