@@ -10,7 +10,6 @@ interface LoginInputProps {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
   caption?: string;
-  className?: string;
 }
 
 export default function LoginInput({
@@ -21,7 +20,6 @@ export default function LoginInput({
   onChange,
   onSubmit,
   caption,
-  className,
 }: LoginInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -51,7 +49,6 @@ export default function LoginInput({
           value={value}
           placeholder={placeholder}
           ref={inputRef}
-          className={className}
         ></input>
 
         {!inputRef.current || inputRef.current.value === "" ? (
