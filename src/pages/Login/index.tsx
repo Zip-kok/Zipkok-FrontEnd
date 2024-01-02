@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import kakaoIcon from "../../assets/kakaoIcon.svg";
 import zipkokIcon from "../../assets/zipkokIcon_white.svg";

@@ -31,6 +31,6 @@
 
 .wrapper {
   position: absolute;
-  bottom: 12px; /* 바닥으로부터 12px 떨어진 위치에 배치 */
+  bottom: 12px;
   width: 100%;
 }

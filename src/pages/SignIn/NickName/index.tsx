@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
 import BottomBtn from "../../../components/BottomBtn";
 import LoginInput from "../../../components/LoginInput";
@@ -11,21 +10,16 @@ interface NickNameProps {
 
 export default function NickName({ onConfirm }: NickNameProps) {
   const [nickname, setNickname] = useState("");
-  const [isNicknameValid, setIsNicknameValid] = useState(true);
+  const [isNicknameValid, setIsNicknameValid] = useState(false);
   const [isNotNicknameExist, setIsNotNicknameExist] = useState(true);
+  const [isTouched, setIsTouched] = useState(false); // 입력이 시작되었는지 추적하기 위한 상태
   const isKeyboardOpen = useDetectKeyboardOpen();
-
-  //API 요청을 통해 닉네임 중복 여부를 확인
-  //   const checkNicknameExists = async (nickname) => {
-
-  //   };
 
   const handleInputChange = async (e: React.FormEvent<HTMLInputElement>) => {
     const inputVal = e.currentTarget.value;
+    if (!isTouched) setIsTouched(true); // 사용자가 입력을 시작하면 isTouched를 true로 설정
     setNickname(inputVal);
-    setIsNicknameValid(inputVal.length > 0 && inputVal.length <= 12);
-    // const exists = await checkNicknameExists(nickname);
-    setIsNotNicknameExist(true);
+    setIsNicknameValid(inputVal.length >= 1 && inputVal.length <= 12);
   };
 
   const handleSubmit = () => {
@@ -49,7 +43,7 @@ export default function NickName({ onConfirm }: NickNameProps) {
         placeholder="최대 12자"
         onChange={handleInputChange}
       />
-      {!isNicknameValid && (
+      {isTouched && !isNicknameValid && (
         <div className={styles.warning}>닉네임은 최대 12자까지 가능합니다.</div>
       )}
       {!isNotNicknameExist && (

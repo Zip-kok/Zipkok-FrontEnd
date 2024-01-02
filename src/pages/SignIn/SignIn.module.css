@@ -12,3 +12,7 @@
   height: calc(100vh - 92px);
   box-sizing: border-box;
 }
+
+.leftArrowIcon {
+  margin-top: 16px;
+}

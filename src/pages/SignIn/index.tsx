@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import React, { useState } from "react";
 import Birth from "./Birth";
 import Complete from "./Complete";
 import Gender from "./Gender";
@@ -16,13 +15,15 @@ export default function SignIn() {
 
   const steps: Record<StepKeys, JSX.Element> = {
     nickname: <NickName onConfirm={() => setStep("gender")} />,
-    gender: <Gender />,
-    birth: <Birth />,
+    gender: <Gender onConfirm={() => setStep("birth")} />,
+    birth: <Birth onConfirm={() => setStep("complete")} />,
     complete: <Complete />,
   };
 
   function isBackBtn(step: StepKeys) {
     if (step === "nickname") {
+      return false;
+    } else if (step === "complete") {
       return false;
     } else {
       return true;
@@ -42,7 +43,7 @@ export default function SignIn() {
       {isBackBtn(step) && (
         <div className={styles.topBar}>
           <button className="imgBtn" onClick={handleBackClick}>
-            <img src={leftArrowIcon}></img>
+            <img className={styles.leftArrowIcon} src={leftArrowIcon}></img>
           </button>
         </div>
       )}
