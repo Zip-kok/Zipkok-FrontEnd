@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styles from "./Onboarding.module.css";
 
 import Location from "./Location";
-import Type from "./Type";
 import Price from "./Price";
 import Complete from "./Complete";
 
 import leftArrowIcon from "../../assets/left_arrow.svg";
+import Type from "./Type";
 
 // location: 온보딩_01_거주지역
 // type: 온보딩_02_매물종류
@@ -18,7 +18,12 @@ export type HouseType = "아파트" | "원룸" | "빌라/투룸" | "오피스텔
 
 export default function Onboarding() {
     const [location, setLocation] = useState("");
+
+  
+    const [price, setPrice] = useState("");
+
     const [houseType, setHouseType] = useState<"아파트" | "원룸" | "빌라/투룸" | "오피스텔" | null>(null);
+
 
     const [step, setStep] = useState<StepKeys>("location");
     const steps: Record<StepKeys, JSX.Element> = {
@@ -27,12 +32,13 @@ export default function Onboarding() {
             <Location
                 confirmLocation={(location: string) => {
                     setLocation(location);
-                    setStep("type");
+                    setStep("price");
                 }}
             />
         ),
 
         // type
+
         type: (
             <Type
                 confirmHouseType={(houseType: HouseType) => {
@@ -43,7 +49,12 @@ export default function Onboarding() {
         ),
 
         // price
-        price: <Price />,
+        price: <Price 
+                confirmPrice={(Price: string) => {
+                    setPrice(Price);
+                    setStep("complete")
+                }}
+                />,
 
         // complete
         complete: <Complete />,
@@ -56,7 +67,7 @@ export default function Onboarding() {
         price: 3,
         complete: 4,
     };
-    const progress = (progresses[step] / 4) * 100;
+    const progress = (progresses[step] / 3) * 100;
 
     // 뒤로 가기 버튼을 눌렀을 때
     function handleBackClick() {
@@ -69,7 +80,7 @@ export default function Onboarding() {
         } else if (step === "complete") {
             setStep("price");
         }
-    }
+    } 
 
     return (
         <div>

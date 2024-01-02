@@ -1,0 +1,210 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 58px;
+}
+
+.header {
+    padding: 16px 0;
+}
+
+.header > h1 {
+    margin: 0;
+    color: var(--gray-color-gray080_text, #1b1d1f);
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.024px;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    
+}
+
+.price > button {
+    width: 100px;
+    height: 44px;
+    padding: 8px 31px;
+    border-radius: 62px;
+    border: 2px solid var(--gray-color-gray020_border, #C8CBD1);
+    color: var(--gray-color-gray080_text, #1B1D1F);
+    background-color: #fefefe;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; 
+    cursor:pointer;
+}
+
+.price > .activeButton {
+    background-color: #ffefef;
+    border-color:#fa4549 ;
+
+}
+
+.priceTypeInf > a{
+    color: var(--gray-color-gray080_text, #1B1D1F);
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    gap:30px
+}
+
+
+
+.priceTypeInf > a> div {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    gap:3px;
+    
+
+}
+.priceTypeInf > a> div > p {
+    position: relative;
+}
+.priceTypeInf > a> div > p > a{
+    color: var(--gray-color-gray050_text, #4B5259);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    position: absolute;
+    bottom:1px;
+}
+
+.priceRangeText{
+    color: var(--gray-color-gray050_text, #4B5259);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; 
+
+}
+
+.priceTypeInf > a> div >div{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+
+.priceSlide{
+    position: relative;
+    height: 4px;
+    background-color: #dddddd;
+    width:100%
+    
+}
+
+
+
+.priceSlideInner{
+    position: absolute;
+    height: 4px;
+    border-radius: 10px;
+    background: var(--gray-color-gray050_text, #4B5259);
+    
+
+}
+.priceRangeWrap{
+    position: relative;
+}
+
+.priceRangeWrap > .priceRangeLine1{
+    border-left: 1px solid #C8CBD1;
+    height: 12px;
+    position: absolute;
+    left: 103px;
+    top:5px;
+}
+.priceRangeWrap > .priceRangeLine2{
+    border-left: 1px solid #C8CBD1;
+    height: 12px;
+    position: absolute;
+    left: 210px;
+    top:5px;
+}
+.priceRangeWrap > .priceRangeText1{
+    color: var(--gray-color-gray030_text, #9FA4A9);
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; 
+    position: absolute;
+    left:90px;
+    top:16px;
+    display: flex;
+}
+.priceRangeWrap > .priceRangeText2{
+    color: var(--gray-color-gray030_text, #9FA4A9);
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; 
+    position: absolute;
+    left:195px;
+    top:16px;
+}
+
+.priceRangeWrap > input {
+    position:absolute;
+    top: -3px;
+    width: 100%;
+    height: 7px;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
+ 
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 24px;  
+        height: 24px; 
+        background: url('../Price/slider_thumb.svg') center center no-repeat; 
+        background-size: cover;
+        border: none; 
+        cursor: pointer; 
+        pointer-events: auto;
+    }
+}
+
+.footer {
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer > a {
+    color: var(--gray-color-gray030_text, #9fa4a9);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration-line: underline;
+}
+
+.footer > button {
+    width: 100%;
+    height: 48px;
+}
