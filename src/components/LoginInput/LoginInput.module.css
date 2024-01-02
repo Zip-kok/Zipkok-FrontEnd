@@ -1,54 +1,79 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 0 20px;
-    margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 20px;
+  margin-bottom: 40px;
 }
 
 .textBox {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-bottom: 2px #9fa4a9 solid;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-bottom: 2px #9fa4a9 solid;
+  display: flex;
+  align-items: center;
 }
 
 .textBox > input[type="text"] {
-    width: calc(100% - 32px);
-    height: 100%;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    color: var(--gray-color-gray080_text, #1b1d1f);
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    letter-spacing: 0.018px;
-    caret-color: var(--primary-color-primary_default, #fa4549);
+  width: calc(100% - 32px);
+  height: 100%;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.018px;
+  caret-color: var(--primary-color-primary_default, #fa4549);
 }
 
 .textBox > input[type="text"]::placeholder {
-    width: calc(100% - 32px);
-    color: var(--gray-color-gray030_text, #9fa4a9);
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0.018px;
+  width: calc(100% - 32px);
+  color: var(--gray-color-gray030_text, #9fa4a9);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.018px;
 }
 
 .textBox > button {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .caption {
-    color: var(--gray-color-gray050_text, #4b5259);
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
+  color: var(--gray-color-gray050_text, #4b5259);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.textBox > input[type="number"] {
+  width: calc(100% - 32px);
+  height: 100%;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.018px;
+  caret-color: var(--primary-color-primary_default, #fa4549);
+}
+
+.textBox > input[type="number"]::placeholder {
+  width: calc(100% - 32px);
+  color: var(--gray-color-gray030_text, #9fa4a9);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.018px;
 }
