@@ -1,7 +1,26 @@
 import React from "react";
 
 import styles from "./Complete.module.css"
+import complete from "../../../assets/complete.svg";
 
 export default function Complete() {
-    return <div>142</div>;
+
+    const handleClick = (e) => {
+
+    }
+
+    return (<div className={styles.root}>
+        <div className={styles.imgContainer}><img src={complete}></img></div>
+        <p className={styles.completeText}>키워드 설정을 완료했어요!</p>
+        <p className={styles.detailText}>선택한 내용은 
+        <br />마이페이지에서 수정 가능해요</p>
+
+        <div className={styles.footer}>
+         
+          <button onClick={handleClick}>
+              홈으로 돌아가기
+          </button>
+        </div>
+    </div>
+    )
 }
