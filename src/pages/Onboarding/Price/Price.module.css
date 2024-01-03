@@ -178,7 +178,7 @@
         -webkit-appearance: none;
         width: 24px;  
         height: 24px; 
-        background: url('../Price/slider_thumb.svg') center center no-repeat; 
+        background: url('../../../assets/slider_thumb.svg') center center no-repeat; 
         background-size: cover;
         border: none; 
         cursor: pointer; 
