@@ -15,18 +15,18 @@ export default function Complete() {
     }
 
     const handleSkipBtnClick = () => {
-      navigate("/");
-  }
+        navigate("/");
+    }
 
 
-    return (<div className={styles.root}>
+    return (
+    <div className={styles.root}>
         <div className={styles.imgContainer}>
-        <Lottie animationData={checkLottie} loop={false}/>
+            <Lottie animationData={checkLottie} loop={false}/>
         </div>
         <p className={styles.completeText}>프로필 설정을 완료했어요!</p>
         <p className={styles.detailText}>키워드 설정 후
         <br />더 빠르게 매물을 검색해보세요</p>
-
         <div className={styles.footer}>   
             <button className={styles.skipBtn} onClick={handleSkipBtnClick}>나중에 설정하기</button>
             <button className={styles.nextBtn} onClick={handleNextBtnClick}>

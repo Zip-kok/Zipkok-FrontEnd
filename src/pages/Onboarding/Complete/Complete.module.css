@@ -1,20 +1,15 @@
 .root{
-
         display: flex;
         flex-direction: column;
         position: relative;
     
 }
-
 .root > .imgContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 120px 0 0 0;
 }
-
-
-
 .completeText{
     color: var(--gray-color-gray080_text, #1B1D1F);
     text-align: center;
@@ -27,7 +22,6 @@
     left:4em;
     top:19em;
 }
-
 .detailText{
     color: var(--gray-color-gray050_text, #4B5259);
     text-align: center;
@@ -40,7 +34,6 @@
     left:6.5em;
     top:31em;
 }
-
 .footer {
     width: 100%;
     padding: 16px;
@@ -53,7 +46,6 @@
     flex-direction: column;
     align-items: center;
 }
-
 .footer > button {
     width: 100%;
     height: 48px;

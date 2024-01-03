@@ -7,36 +7,36 @@ interface PriceProps{
   confirmPrice: (Price: string) => void ;
 }
 
-const fixedMinPrice = 0;
-const fixedMaxPrice = 10000 ;
-const priceGap = 100;
+const fixedMinPrice:number = 0;
+const fixedMaxPrice:number = 10000 ;
+const priceGap:number = 100;
 
-const fixed2MinPrice = 0;
-const fixed2MaxPrice = 180 ;
-const priceGap2 = 1;
+const fixed2MinPrice:number = 0;
+const fixed2MaxPrice:number = 180 ;
+const priceGap2:number = 1;
 
-const fixed3MinPrice = 0;
-const fixed3MaxPrice = 90 ;
-const priceGap3 = 1; 
+const fixed3MinPrice:number = 0;
+const fixed3MaxPrice:number = 90 ;
+const priceGap3:number = 1; 
 
 export default function Price( {confirmPrice} : PriceProps) {
   const [price, setPrice] = useState("");
-  const [priceType,setPriceType] = useState("");
+  const [priceType,setPriceType] = useState<string>("");
 
-  const [rangeMinValue, setRangeMinValue] = useState(fixedMinPrice); 
-  const [rangeMaxValue, setRangeMaxValue] = useState(fixedMaxPrice);
-  const [rangeMinPercent, setRangeMinPercent] = useState(0);
-  const [rangeMaxPercent, setRangeMaxPercent] = useState(0);  
+  const [rangeMinValue, setRangeMinValue] = useState<number>(fixedMinPrice); 
+  const [rangeMaxValue, setRangeMaxValue] = useState<number>(fixedMaxPrice);
+  const [rangeMinPercent, setRangeMinPercent] = useState<number>(0);
+  const [rangeMaxPercent, setRangeMaxPercent] = useState<number>(0);  
 
-  const [range2MinValue, setRange2MinValue] = useState(fixed2MinPrice); 
-  const [range2MaxValue, setRange2MaxValue] = useState(fixed2MaxPrice);
-  const [range2MinPercent, setRange2MinPercent] = useState(0);
-  const [range2MaxPercent, setRange2MaxPercent] = useState(0);  
+  const [range2MinValue, setRange2MinValue] = useState<number>(fixed2MinPrice); 
+  const [range2MaxValue, setRange2MaxValue] = useState<number>(fixed2MaxPrice);
+  const [range2MinPercent, setRange2MinPercent] = useState<number>(0);
+  const [range2MaxPercent, setRange2MaxPercent] = useState<number>(0);  
 
-  const [range3MinValue, setRange3MinValue] = useState(fixed3MinPrice); 
-  const [range3MaxValue, setRange3MaxValue] = useState(fixed3MaxPrice);
-  const [range3MinPercent, setRange3MinPercent] = useState(0);
-  const [range3MaxPercent, setRange3MaxPercent] = useState(0);  
+  const [range3MinValue, setRange3MinValue] = useState<number>(fixed3MinPrice); 
+  const [range3MaxValue, setRange3MaxValue] = useState<number>(fixed3MaxPrice);
+  const [range3MinPercent, setRange3MinPercent] = useState<number>(0);
+  const [range3MaxPercent, setRange3MaxPercent] = useState<number>(0);  
 
   const priceRangeMinValueHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setRangeMinValue(parseInt(e.target.value));
@@ -92,36 +92,34 @@ export default function Price( {confirmPrice} : PriceProps) {
     }
   };
 
-
-
-  function handleConfirmClick() {
+  const handleConfirmClick = () => {
     confirmPrice(price);
-}
+  }
 
-  function handlePriceType(priceType : string){
+  const handlePriceType = (priceType:string) => {
     setPriceType(priceType);
-}
+  }
 
   const navigate = useNavigate();
   const handleSkipBtnClick = () => {
     navigate("/");
-}
+  }
 
   return (
     <div className={styles.root}>
-        <div className={styles.header}>
-            <h1>
-              거래 유형에 따른<br></br>가격 범위를 설정해주세요
-            </h1>
-        </div>
-        <div className={styles.price}>
-            <button className={priceType ==="월세" ? styles.activeButton : ""}
-            onClick={() => handlePriceType("월세")}>월세</button>
-            <button className={priceType ==="전세" ? styles.activeButton : ""}
-            onClick={() => handlePriceType("전세")}>전세</button>
-            <button className={priceType ==="매매" ? styles.activeButton : ""}
-            onClick={() => handlePriceType("매매")}>매매</button>
-        </div>
+      <div className={styles.header}>
+        <h1>
+          거래 유형에 따른<br></br>가격 범위를 설정해주세요
+        </h1>
+      </div>
+      <div className={styles.price}>
+        <button className={priceType ==="월세" ? styles.activeButton : ""}
+          onClick={() => handlePriceType("월세")}>월세</button>
+        <button className={priceType ==="전세" ? styles.activeButton : ""}
+          onClick={() => handlePriceType("전세")}>전세</button>
+        <button className={priceType ==="매매" ? styles.activeButton : ""}
+          onClick={() => handlePriceType("매매")}>매매</button>
+      </div>
 
       <div className={styles.priceTypeInf}>
         {priceType === "월세" && (
@@ -130,34 +128,33 @@ export default function Price( {confirmPrice} : PriceProps) {
             <p>보증금</p> 
             <p>
               <a style={{ left: `${rangeMinPercent}%` }}>
-              {rangeMinPercent !== 0 ? `${Math.ceil(rangeMinPercent*100)}만` : "최소"}
+                {rangeMinPercent !== 0 ? `${Math.ceil(rangeMinPercent*100)}만` : "최소"}
               </a>
               <a style={{right: `${rangeMaxPercent-5}%`}}>
-              {Math.ceil(100-rangeMaxPercent)*100}만
+                {Math.ceil(100-rangeMaxPercent)*100}만
               </a>
             </p>
           
           <div className={styles.priceSlide}>
             <div className={styles.priceSlideInner} 
               style={{left: `${rangeMinPercent}%`,right:`${rangeMaxPercent}%`}}></div>
-            
             <div className={styles.priceRangeWrap}>
               <input className={styles.priceRangeMin} type="range"
-              min={fixedMinPrice}  max={fixedMaxPrice - priceGap}
-              step="100"
-              value={rangeMinValue}
-              onChange={e => {
-                priceRangeMinValueHandler(e);
-                twoRangeHandler();
+                min={fixedMinPrice}  max={fixedMaxPrice - priceGap}
+                step="100"
+                value={rangeMinValue}
+                onChange={e => {
+                  priceRangeMinValueHandler(e);
+                  twoRangeHandler();
               }}/>
               <input className={styles.priceRangeMax} type="range" 
-              min={fixedMinPrice + priceGap}
-              max={fixedMaxPrice}
-              step="100"
-              value={rangeMaxValue}
-              onChange={e => {
-                priceRangeMaxValueHandler(e);
-                twoRangeHandler();
+                min={fixedMinPrice + priceGap}
+                max={fixedMaxPrice}
+                step="100"
+                value={rangeMaxValue}
+                onChange={e => {
+                  priceRangeMaxValueHandler(e);
+                  twoRangeHandler();
               }}/>
               <div className={styles.priceRangeLine1}></div>
               <div className={styles.priceRangeLine2}></div>
@@ -170,7 +167,7 @@ export default function Price( {confirmPrice} : PriceProps) {
           <p>월세</p> 
           <p>
             <a style={{ left: `${range2MinPercent}%` }}>
-            {range2MinPercent !== 0 ? `${Math.ceil(range2MinPercent)}만` : "최소"}
+              {range2MinPercent !== 0 ? `${Math.ceil(range2MinPercent)}만` : "최소"}
             </a>
             <a style={{right: `${range2MaxPercent-5}%`}}>
               {Math.ceil(180-range2MaxPercent)}만
@@ -183,21 +180,21 @@ export default function Price( {confirmPrice} : PriceProps) {
             
             <div className={styles.priceRangeWrap}>
               <input className={styles.priceRangeMin} type="range"
-              min={fixed2MinPrice}  max={fixed2MaxPrice - priceGap2}
-              step="1"
-              value={range2MinValue}
-              onChange={e => {
-                priceRange2MinValueHandler(e);
-                twoRange2Handler();
+                min={fixed2MinPrice}  max={fixed2MaxPrice - priceGap2}
+                step="1"
+                value={range2MinValue}
+                onChange={e => {
+                  priceRange2MinValueHandler(e);
+                  twoRange2Handler();
               }}/>
               <input className={styles.priceRangeMax} type="range" 
-              min={fixed2MinPrice + priceGap2}
-              max={fixed2MaxPrice}
-              step="1"
-              value={range2MaxValue}
-              onChange={e => {
-                priceRange2MaxValueHandler(e);
-                twoRange2Handler();
+                min={fixed2MinPrice + priceGap2}
+                max={fixed2MaxPrice}
+                step="1"
+                value={range2MaxValue}
+                onChange={e => {
+                  priceRange2MaxValueHandler(e);
+                  twoRange2Handler();
               }}/>
               <div className={styles.priceRangeLine1}></div>
               <div className={styles.priceRangeLine2}></div>
@@ -212,45 +209,45 @@ export default function Price( {confirmPrice} : PriceProps) {
         {priceType === "전세" && (
         <a>
           <div>
-          <p>보증금</p> 
-          <p>
-            <a style={{ left: `${range3MinPercent}%` }}>
-            {range3MinPercent !== 0 ? `${Math.ceil(range3MinPercent)}만` : "최소"}
-            </a>
-            <a style={{right: `${range3MaxPercent-5}%`}}>
-              {Math.ceil(180-range3MaxPercent)}만
-            </a>
-          </p>
+            <p>보증금</p> 
+            <p>
+              <a style={{ left: `${range3MinPercent}%` }}>
+                {range3MinPercent !== 0 ? `${Math.ceil(range3MinPercent)}만` : "최소"}
+              </a>
+              <a style={{right: `${range3MaxPercent-5}%`}}>
+                {Math.ceil(180-range3MaxPercent)}만
+              </a>
+            </p>
           
-          <div className={styles.priceSlide}>
-            <div className={styles.priceSlideInner} 
-              style={{left: `${range3MinPercent}%`,right:`${range3MaxPercent}%`}}></div>
+            <div className={styles.priceSlide}>
+              <div className={styles.priceSlideInner} 
+                style={{left: `${range3MinPercent}%`,right:`${range3MaxPercent}%`}}></div>
             
-            <div className={styles.priceRangeWrap}>
+              <div className={styles.priceRangeWrap}>
               <input className={styles.priceRangeMin} type="range"
-              min={fixed3MinPrice}  max={fixed3MaxPrice - priceGap3}
-              step="1"
-              value={range3MinValue}
-              onChange={e => {
-                priceRange3MinValueHandler(e);
-                twoRange3Handler();
+                min={fixed3MinPrice}  max={fixed3MaxPrice - priceGap3}
+                step="1"
+                value={range3MinValue}
+                onChange={e => {
+                  priceRange3MinValueHandler(e);
+                  twoRange3Handler();
               }}/>
               <input className={styles.priceRangeMax} type="range" 
-              min={fixed3MinPrice + priceGap3}
-              max={fixed3MaxPrice}
-              step="1"
-              value={range3MaxValue}
-              onChange={e => {
-                priceRange3MaxValueHandler(e);
-                twoRange3Handler();
+                min={fixed3MinPrice + priceGap3}
+                max={fixed3MaxPrice}
+                step="1"
+                value={range3MaxValue}
+                onChange={e => {
+                  priceRange3MaxValueHandler(e);
+                  twoRange3Handler();
               }}/>
               <div className={styles.priceRangeLine1}></div>
               <div className={styles.priceRangeLine2}></div>
               <div className={styles.priceRangeText1}>60만</div>
               <div className={styles.priceRangeText2}>120만</div>
             </div>
+            </div>
           </div>
-        </div>
         </a>
         )}
         
@@ -260,7 +257,7 @@ export default function Price( {confirmPrice} : PriceProps) {
           <p>매매가</p> 
           <p>
             <a style={{ left: `${rangeMinPercent}%` }}>
-            {rangeMinPercent !== 0 ? `${Math.ceil(rangeMinPercent)}억` : "최소"}
+              {rangeMinPercent !== 0 ? `${Math.ceil(rangeMinPercent)}억` : "최소"}
             </a>
             <a style={{right: `${rangeMaxPercent-5}%`}}>
               {Math.ceil(90-rangeMaxPercent)}억
@@ -273,21 +270,21 @@ export default function Price( {confirmPrice} : PriceProps) {
             
             <div className={styles.priceRangeWrap}>
               <input className={styles.priceRangeMin} type="range"
-              min={fixedMinPrice}  max={fixedMaxPrice - priceGap}
-              step="1"
-              value={rangeMinValue}
-              onChange={e => {
-                priceRangeMinValueHandler(e);
-                twoRangeHandler();
+                min={fixedMinPrice}  max={fixedMaxPrice - priceGap}
+                step="1"
+                value={rangeMinValue}
+                onChange={e => {
+                  priceRangeMinValueHandler(e);
+                  twoRangeHandler();
               }}/>
               <input className={styles.priceRangeMax} type="range" 
-              min={fixedMinPrice + priceGap}
-              max={fixedMaxPrice}
-              step="1"
-              value={rangeMaxValue}
-              onChange={e => {
-                priceRangeMaxValueHandler(e);
-                twoRangeHandler();
+                min={fixedMinPrice + priceGap}
+                max={fixedMaxPrice}
+                step="1"
+                value={rangeMaxValue}
+                onChange={e => {
+                  priceRangeMaxValueHandler(e);
+                  twoRangeHandler();
               }}/>
               <div className={styles.priceRangeLine1}></div>
               <div className={styles.priceRangeLine2}></div>
@@ -301,9 +298,8 @@ export default function Price( {confirmPrice} : PriceProps) {
         <div className={styles.footer}>
           <button className={styles.skipBtn} onClick={handleSkipBtnClick}>나중에 설정하기</button>
           <button className={styles.confirmBtn} disabled={priceType === ""} onClick={handleConfirmClick}
-            style={{ backgroundColor: priceType === "" ? '#c8cbd1' : '' }}
-            >
-              확인
+            style={{ backgroundColor: priceType === "" ? '#c8cbd1' : '' }}>
+            확인
           </button>
         </div>
     </div>
