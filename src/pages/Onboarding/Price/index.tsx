@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import styles from "./Price.module.css"
+import { useNavigate } from 'react-router-dom';
 
 interface PriceProps{
   confirmPrice: (Price: string) => void ;
@@ -101,6 +102,10 @@ export default function Price( {confirmPrice} : PriceProps) {
     setPriceType(priceType);
 }
 
+  const navigate = useNavigate();
+  const handleSkipBtnClick = () => {
+    navigate("/");
+}
 
   return (
     <div className={styles.root}>
@@ -294,9 +299,8 @@ export default function Price( {confirmPrice} : PriceProps) {
         </a> )}
       </div>
         <div className={styles.footer}>
-          <a>나중에 설정하기</a>
-          <button disabled={priceType === ""} 
-            onClick={handleConfirmClick}
+          <button className={styles.skipBtn} onClick={handleSkipBtnClick}>나중에 설정하기</button>
+          <button className={styles.confirmBtn} disabled={priceType === ""} onClick={handleConfirmClick}
             style={{ backgroundColor: priceType === "" ? '#c8cbd1' : '' }}
             >
               확인

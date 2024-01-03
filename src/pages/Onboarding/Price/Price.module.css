@@ -209,7 +209,7 @@
     text-decoration-line: underline;
 }
 
-.footer > button {
+.confirmBtn {
     width: 100%;
     height: 48px;
     background-color: #fa4549;
@@ -221,4 +221,17 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    }
+
+    
+.skipBtn{
+    color: var(--gray-color-gray030_text, #9fa4a9);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration-line: underline;
+    background-color: #fff;
+    border: none;
 }
