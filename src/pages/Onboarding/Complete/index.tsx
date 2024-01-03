@@ -3,12 +3,15 @@ import React from "react";
 import styles from "./Complete.module.css"
 import Lottie from "lottie-react";
 import checkLottie from "../../../assets/checkLottie.json"
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Complete() {
     
-     const handleClick = () => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate("/");
     }
 
 
