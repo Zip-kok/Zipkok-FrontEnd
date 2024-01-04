@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import Birth from "./Birth";
-import Complete from "./Complete";
-import Gender from "./Gender";
-import NickName from "./NickName";
+import React, { useState } from 'react';
+import Birth from './Birth';
+import Complete from './Complete';
+import Gender from './Gender';
+import NickName from './NickName';
 
-import styles from "./SignIn.module.css";
+import styles from './SignIn.module.css';
 
-import leftArrowIcon from "../../assets/left_arrow.svg";
+import leftArrowIcon from '../../assets/img/left_arrow.svg';
 
-type StepKeys = "nickname" | "gender" | "birth" | "complete";
+type StepKeys = 'nickname' | 'gender' | 'birth' | 'complete';
 
 export default function SignIn() {
-  const [step, setStep] = useState<StepKeys>("nickname");
+  const [step, setStep] = useState<StepKeys>('nickname');
 
   const steps: Record<StepKeys, JSX.Element> = {
-    nickname: <NickName onConfirm={() => setStep("gender")} />,
-    gender: <Gender onConfirm={() => setStep("birth")} />,
-    birth: <Birth onConfirm={() => setStep("complete")} />,
+    nickname: <NickName onConfirm={() => setStep('gender')} />,
+    gender: <Gender onConfirm={() => setStep('birth')} />,
+    birth: <Birth onConfirm={() => setStep('complete')} />,
     complete: <Complete />,
   };
 
   function isBackBtn(step: StepKeys) {
-    if (step === "nickname") {
+    if (step === 'nickname') {
       return false;
-    } else if (step === "complete") {
+    } else if (step === 'complete') {
       return false;
     } else {
       return true;
@@ -31,10 +31,10 @@ export default function SignIn() {
   }
 
   function handleBackClick() {
-    if (step === "gender") {
-      setStep("nickname");
-    } else if (step === "birth") {
-      setStep("gender");
+    if (step === 'gender') {
+      setStep('nickname');
+    } else if (step === 'birth') {
+      setStep('gender');
     }
   }
 

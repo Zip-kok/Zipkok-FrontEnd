@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import kakaoIcon from "../../assets/kakaoIcon.svg";
-import zipkokIcon from "../../assets/zipkokIcon_white.svg";
-import Splash from "../../components/Splash";
-import styles from "./Login.module.css";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import kakaoIcon from '../../assets/img/kakaoIcon.svg';
+import zipkokIcon from '../../assets/img/zipkokIcon_white.svg';
+import Splash from '../../components/Splash';
+import styles from './Login.module.css';
 
 export default function Login() {
   const [showSplash, setShowSplash] = useState(true);

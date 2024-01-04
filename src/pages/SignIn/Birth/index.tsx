@@ -1,14 +1,14 @@
-import React, { FormEvent, useState } from "react";
-import BottomBtn from "../../../components/BottomBtn";
-import LoginInput from "../../../components/LoginInput";
-import styles from "./Birth.module.css";
+import React, { FormEvent, useState } from 'react';
+import BottomBtn from '../../../components/BottomBtn';
+import LoginInput from '../../../components/LoginInput';
+import styles from './Birth.module.css';
 
 interface BirthProps {
   onConfirm: () => void;
 }
 
 const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
-  const [birth, setBirth] = useState<string>("");
+  const [birth, setBirth] = useState<string>('');
   const [isBirthValid, setIsBirthValid] = useState<boolean>(false);
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {

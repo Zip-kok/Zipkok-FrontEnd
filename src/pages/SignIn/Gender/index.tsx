@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import BottomBtn from "../../../components/BottomBtn";
-import RadioBtn from "../../../components/RadioBtn";
-import styles from "./Gender.module.css";
+import React, { useState } from 'react';
+import BottomBtn from '../../../components/BottomBtn';
+import RadioBtn from '../../../components/RadioBtn';
+import styles from './Gender.module.css';
 
 interface GenderProps {
   onConfirm: () => void;
 }
 
 export default function Gender({ onConfirm }: GenderProps) {
-  const genderOptions = ["남성", "여성", "비공개"];
+  const genderOptions = ['남성', '여성', '비공개'];
   const [selectedGenderIndex, setSelectedGenderIndex] = useState(-1);
 
   const handleGenderSelect = (index: number) => {

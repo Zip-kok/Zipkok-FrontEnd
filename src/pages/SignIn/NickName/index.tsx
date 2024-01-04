@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import useDetectKeyboardOpen from "use-detect-keyboard-open";
-import BottomBtn from "../../../components/BottomBtn";
-import LoginInput from "../../../components/LoginInput";
-import styles from "./NickName.module.css";
+import React, { useState } from 'react';
+import useDetectKeyboardOpen from 'use-detect-keyboard-open';
+import BottomBtn from '../../../components/BottomBtn';
+import LoginInput from '../../../components/LoginInput';
+import styles from './NickName.module.css';
 
 interface NickNameProps {
   onConfirm: () => void;
 }
 
 export default function NickName({ onConfirm }: NickNameProps) {
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useState('');
   const [isNicknameValid, setIsNicknameValid] = useState(false);
   const [isNotNicknameExist, setIsNotNicknameExist] = useState(true);
   const [isTouched, setIsTouched] = useState(false); // 입력이 시작되었는지 추적하기 위한 상태

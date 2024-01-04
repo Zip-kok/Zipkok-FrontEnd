@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import deleteIcon from "../../assets/delete.svg";
-import styles from "./LoginInput.module.css";
+import React, { useRef } from 'react';
+import deleteIcon from '../../assets/img/delete.svg';
+import styles from './LoginInput.module.css';
 
 interface LoginInputProps {
   value?: string;
@@ -24,14 +24,14 @@ export default function LoginInput({
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       if (onSubmit) onSubmit();
     }
   }
 
   function handleDeleteClick() {
     if (inputRef.current) {
-      inputRef.current.value = "";
+      inputRef.current.value = '';
       if (onChange)
         onChange({
           currentTarget: inputRef.current,
@@ -43,7 +43,7 @@ export default function LoginInput({
     <div className={styles.container}>
       <div className={styles.textBox}>
         <input
-          type={numberOnly ? "number" : "text"}
+          type={numberOnly ? 'number' : 'text'}
           onChange={onChange}
           onKeyUp={handleKeyUp}
           value={value}
@@ -51,7 +51,7 @@ export default function LoginInput({
           ref={inputRef}
         ></input>
 
-        {!inputRef.current || inputRef.current.value === "" ? (
+        {!inputRef.current || inputRef.current.value === '' ? (
           <img src={icon}></img>
         ) : (
           <button className="imgBtn" onClick={handleDeleteClick}>
