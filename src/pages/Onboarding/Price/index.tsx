@@ -6,101 +6,108 @@ import { useNavigate } from 'react-router-dom';
 interface PriceProps {
   confirmPrice: (Price: string) => void;
 }
+// 보증금 최소값 , 최대값 ,1칸당 크기
+const depositMinPrice: number = 0;
+const depositMaxPrice: number = 10000;
+const depositPriceGap: number = 100;
 
-const fixedMinPrice: number = 0;
-const fixedMaxPrice: number = 10000;
-const priceGap: number = 100;
+// 월세 최소값 , 최대값 ,1칸당 크기
+const rentMinPrice: number = 0;
+const rentMaxPrice: number = 100;
+const rentPriceGap: number = 1;
 
-const fixed2MinPrice: number = 0;
-const fixed2MaxPrice: number = 180;
-const priceGap2: number = 1;
-
-const fixed3MinPrice: number = 0;
-const fixed3MaxPrice: number = 90;
-const priceGap3: number = 1;
+// 매매가 최소값 , 최대값 ,1칸당 크기
+const saleMinPrice: number = 0;
+const saleMaxPrice: number = 100;
+const salePriceGap: number = 1;
 
 export default function Price({ confirmPrice }: PriceProps) {
   const [price, setPrice] = useState('');
   const [priceType, setPriceType] = useState<string>('');
 
-  const [rangeMinValue, setRangeMinValue] = useState<number>(fixedMinPrice);
-  const [rangeMaxValue, setRangeMaxValue] = useState<number>(fixedMaxPrice);
-  const [rangeMinPercent, setRangeMinPercent] = useState<number>(0);
-  const [rangeMaxPercent, setRangeMaxPercent] = useState<number>(0);
+// 보증금 상태 값  minvalue = 왼쪽 range값 maxvalue = 오른쪽 range값
+// Minpercent = 왼쪽 range값 위에 따라다니는 text   maxpercent = 오른쪽 
+  const [depositMinValue, setdepositMinValue] = useState<number>(depositMinPrice);
+  const [depositMaxValue, setdepositMaxValue] = useState<number>(depositMaxPrice);
+  const [depositMinPercent, setdepositMinPercent] = useState<number>(0);
+  const [depositMaxPercent, setdepositMaxPercent] = useState<number>(0);
 
-  const [range2MinValue, setRange2MinValue] = useState<number>(fixed2MinPrice);
-  const [range2MaxValue, setRange2MaxValue] = useState<number>(fixed2MaxPrice);
-  const [range2MinPercent, setRange2MinPercent] = useState<number>(0);
-  const [range2MaxPercent, setRange2MaxPercent] = useState<number>(0);
+  const [rentMinValue, setrentMinValue] = useState<number>(rentMinPrice);
+  const [rentMaxValue, setrentMaxValue] = useState<number>(rentMaxPrice);
+  const [rentMinPercent, setrentMinPercent] = useState<number>(0);
+  const [rentMaxPercent, setrentMaxPercent] = useState<number>(0);
 
-  const [range3MinValue, setRange3MinValue] = useState<number>(fixed3MinPrice);
-  const [range3MaxValue, setRange3MaxValue] = useState<number>(fixed3MaxPrice);
-  const [range3MinPercent, setRange3MinPercent] = useState<number>(0);
-  const [range3MaxPercent, setRange3MaxPercent] = useState<number>(0);
+  const [saleMinValue, setsaleMinValue] = useState<number>(saleMinPrice);
+  const [saleMaxValue, setsaleMaxValue] = useState<number>(saleMaxPrice);
+  const [saleMinPercent, setsaleMinPercent] = useState<number>(0);
+  const [saleMaxPercent, setsaleMaxPercent] = useState<number>(0);
 
-  const priceRangeMinValueHandler = (
+  // 왼쪽 range 값에 따라서 뒤에 있는 div 값을 움직여 값이 채워지는 효과
+  const depositMinValueHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setRangeMinValue(parseInt(e.target.value));
+    setdepositMinValue(parseInt(e.target.value));
   };
-
-  const priceRangeMaxValueHandler = (
+// 오른쪽 
+  const depositMaxValueHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setRangeMaxValue(parseInt(e.target.value));
+    setdepositMaxValue(parseInt(e.target.value));
   };
 
-  const twoRangeHandler = () => {
-    if (rangeMaxValue - rangeMinValue < priceGap) {
-      setRangeMaxValue(rangeMinValue + priceGap);
-      setRangeMinValue(rangeMaxValue - priceGap);
+// 왼쪽 range값이 오른쪽 range값을 넘어가지 못하게 조정함 반대의 경우도 마찬가지
+  const depositRangeHandler = () => {
+    if (depositMaxValue - depositMinValue   < depositPriceGap) {
+      setdepositMaxValue(depositMinValue + depositPriceGap);
+      setdepositMinValue(depositMaxValue - depositPriceGap);
     } else {
-      setRangeMinPercent((rangeMinValue / fixedMaxPrice) * 100);
-      setRangeMaxPercent(100 - (rangeMaxValue / fixedMaxPrice) * 100);
+      setdepositMinPercent((depositMinValue / depositMaxPrice) * 100);
+      setdepositMaxPercent(100 - (depositMaxValue / depositMaxPrice) * 100);
     }
   };
 
-  const priceRange2MinValueHandler = (
+  //위의 보증금의 경우와 같은 로직 
+  const rentMinValueHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setRange2MinValue(parseInt(e.target.value));
+    setrentMinValue(parseInt(e.target.value));
   };
 
-  const priceRange2MaxValueHandler = (
+  const rentMaxValueHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setRange2MaxValue(parseInt(e.target.value));
+    setrentMaxValue(parseInt(e.target.value));
   };
 
-  const twoRange2Handler = () => {
-    if (range2MaxValue - range2MinValue < priceGap2) {
-      setRange2MaxValue(range2MinValue + priceGap2);
-      setRange2MinValue(range2MaxValue - priceGap2);
+  const rentRangeHandler = () => {
+    if (rentMaxValue - rentMinValue < rentPriceGap) {
+      setrentMaxValue(rentMinValue + rentPriceGap);
+      setrentMinValue(rentMaxValue - rentPriceGap);
     } else {
-      setRange2MinPercent((range2MinValue / fixed2MaxPrice) * 100);
-      setRange2MaxPercent(100 - (range2MaxValue / fixed2MaxPrice) * 100);
+      setrentMinPercent((rentMinValue / rentMaxPrice) * 100);
+      setrentMaxPercent(100 - (rentMaxValue / rentMaxPrice) * 100);
     }
   };
 
-  const priceRange3MinValueHandler = (
+  const saleMinValueHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setRange3MinValue(parseInt(e.target.value));
+    setsaleMinValue(parseInt(e.target.value));
   };
 
-  const priceRange3MaxValueHandler = (
+  const saleMaxValueHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setRange3MaxValue(parseInt(e.target.value));
+    setsaleMaxValue(parseInt(e.target.value));
   };
 
-  const twoRange3Handler = () => {
-    if (range3MaxValue - range3MinValue < priceGap3) {
-      setRange3MaxValue(range3MinValue + priceGap3);
-      setRange3MinValue(range3MaxValue - priceGap3);
+  const saleRangeHandler = () => {
+    if (saleMaxValue - saleMinValue < salePriceGap) {
+      setsaleMaxValue(saleMinValue + salePriceGap);
+      setsaleMinValue(saleMaxValue - salePriceGap);
     } else {
-      setRange3MinPercent((range3MinValue / fixed3MaxPrice) * 100);
-      setRange3MaxPercent(100 - (range3MaxValue / fixed3MaxPrice) * 100);
+      setsaleMinPercent((saleMinValue / saleMaxPrice) * 100);
+      setsaleMaxPercent(100 - (saleMaxValue / saleMaxPrice) * 100);
     }
   };
 
@@ -125,39 +132,29 @@ export default function Price({ confirmPrice }: PriceProps) {
         </h1>
       </div>
       <div className={styles.price}>
-        <button
-          className={priceType === '월세' ? styles.activeButton : ''}
-          onClick={() => handlePriceType('월세')}
-        >
-          월세
-        </button>
-        <button
-          className={priceType === '전세' ? styles.activeButton : ''}
-          onClick={() => handlePriceType('전세')}
-        >
-          전세
-        </button>
-        <button
-          className={priceType === '매매' ? styles.activeButton : ''}
-          onClick={() => handlePriceType('매매')}
-        >
-          매매
-        </button>
+      {['월세', '전세', '매매'].map((type) => (
+          <button
+            key={type}
+            className={priceType === type ? styles.activeButton : ''}
+            onClick={() => handlePriceType(type)}
+          >
+            {type}
+          </button>
+        ))}
       </div>
-
       <div className={styles.priceTypeInf}>
         {priceType === '월세' && (
           <a className={styles.depositRange}>
             <div>
               <p>보증금</p>
               <p>
-                <a style={{ left: `${rangeMinPercent}%` }}>
-                  {rangeMinPercent !== 0
-                    ? `${Math.ceil(rangeMinPercent * 100)}만`
+                <a style={{ left: `${depositMinPercent}%` }}>
+                  {depositMinPercent !== 0
+                    ? `${Math.ceil(depositMinPercent * 100)}만`
                     : '최소'}
                 </a>
-                <a style={{ right: `${rangeMaxPercent - 5}%` }}>
-                  {Math.ceil(100 - rangeMaxPercent) * 100}만
+                <a style={{ right: `${depositMaxPercent - 5}%` }}>
+                  {Math.ceil(100 - depositMaxPercent) * 100}만
                 </a>
               </p>
 
@@ -165,52 +162,52 @@ export default function Price({ confirmPrice }: PriceProps) {
                 <div
                   className={styles.priceSlideInner}
                   style={{
-                    left: `${rangeMinPercent}%`,
-                    right: `${rangeMaxPercent}%`,
+                    left: `${depositMinPercent}%`,
+                    right: `${depositMaxPercent}%`,
                   }}
                 ></div>
                 <div className={styles.priceRangeWrap}>
                   <input
                     className={styles.priceRangeMin}
                     type="range"
-                    min={fixedMinPrice}
-                    max={fixedMaxPrice - priceGap}
+                    min={depositMinPrice}
+                    max={depositMaxPrice - depositPriceGap}
                     step="100"
-                    value={rangeMinValue}
+                    value={depositMinValue}
                     onChange={(e) => {
-                      priceRangeMinValueHandler(e);
-                      twoRangeHandler();
+                      depositMinValueHandler(e);
+                      depositRangeHandler();
                     }}
                   />
                   <input
                     className={styles.priceRangeMax}
                     type="range"
-                    min={fixedMinPrice + priceGap}
-                    max={fixedMaxPrice}
+                    min={depositMinPrice + depositPriceGap}
+                    max={depositMaxPrice}
                     step="100"
-                    value={rangeMaxValue}
+                    value={depositMaxValue}
                     onChange={(e) => {
-                      priceRangeMaxValueHandler(e);
-                      twoRangeHandler();
+                      depositMaxValueHandler(e);
+                      depositRangeHandler();
                     }}
                   />
                   <div className={styles.priceRangeLine1}></div>
                   <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>3300만</div>
-                  <div className={styles.priceRangeText2}>6600만</div>
+                  <div className={styles.priceRangeText1}>3000만</div>
+                  <div className={styles.priceRangeText2}>7000만</div>
                 </div>
               </div>
             </div>
             <div>
               <p>월세</p>
               <p>
-                <a style={{ left: `${range2MinPercent}%` }}>
-                  {range2MinPercent !== 0
-                    ? `${Math.ceil(range2MinPercent)}만`
+                <a style={{ left: `${rentMinPercent}%` }}>
+                  {rentMinPercent !== 0
+                    ? `${Math.ceil(rentMinPercent)}만`
                     : '최소'}
                 </a>
-                <a style={{ right: `${range2MaxPercent - 5}%` }}>
-                  {Math.ceil(180 - range2MaxPercent)}만
+                <a style={{ right: `${rentMaxPercent - 5}%` }}>
+                  {Math.ceil(100 - rentMaxPercent)}만
                 </a>
               </p>
 
@@ -218,8 +215,8 @@ export default function Price({ confirmPrice }: PriceProps) {
                 <div
                   className={styles.priceSlideInner}
                   style={{
-                    left: `${range2MinPercent}%`,
-                    right: `${range2MaxPercent}%`,
+                    left: `${rentMinPercent}%`,
+                    right: `${rentMaxPercent}%`,
                   }}
                 ></div>
 
@@ -227,31 +224,31 @@ export default function Price({ confirmPrice }: PriceProps) {
                   <input
                     className={styles.priceRangeMin}
                     type="range"
-                    min={fixed2MinPrice}
-                    max={fixed2MaxPrice - priceGap2}
+                    min={rentMinPrice}
+                    max={rentMaxPrice - rentPriceGap}
                     step="1"
-                    value={range2MinValue}
+                    value={rentMinValue}
                     onChange={(e) => {
-                      priceRange2MinValueHandler(e);
-                      twoRange2Handler();
+                      rentMinValueHandler(e);
+                      rentRangeHandler();
                     }}
                   />
                   <input
                     className={styles.priceRangeMax}
                     type="range"
-                    min={fixed2MinPrice + priceGap2}
-                    max={fixed2MaxPrice}
+                    min={rentMinPrice + rentPriceGap}
+                    max={rentMaxPrice}
                     step="1"
-                    value={range2MaxValue}
+                    value={rentMaxValue}
                     onChange={(e) => {
-                      priceRange2MaxValueHandler(e);
-                      twoRange2Handler();
+                      rentMaxValueHandler(e);
+                      rentRangeHandler();
                     }}
                   />
                   <div className={styles.priceRangeLine1}></div>
                   <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>60만</div>
-                  <div className={styles.priceRangeText2}>120만</div>
+                  <div className={styles.priceRangeText1}>30만</div>
+                  <div className={styles.priceRangeText2}>70만</div>
                 </div>
               </div>
             </div>
@@ -263,13 +260,13 @@ export default function Price({ confirmPrice }: PriceProps) {
             <div>
               <p>보증금</p>
               <p>
-                <a style={{ left: `${range3MinPercent}%` }}>
-                  {range3MinPercent !== 0
-                    ? `${Math.ceil(range3MinPercent)}만`
+                <a style={{ left: `${depositMinPercent}%` }}>
+                  {depositMinPercent !== 0
+                    ? `${Math.ceil(depositMinPercent)}만`
                     : '최소'}
                 </a>
-                <a style={{ right: `${range3MaxPercent - 5}%` }}>
-                  {Math.ceil(180 - range3MaxPercent)}만
+                <a style={{ right: `${depositMaxPercent - 5}%` }}>
+                  {Math.ceil(100 - depositMaxPercent)}만
                 </a>
               </p>
 
@@ -277,8 +274,8 @@ export default function Price({ confirmPrice }: PriceProps) {
                 <div
                   className={styles.priceSlideInner}
                   style={{
-                    left: `${range3MinPercent}%`,
-                    right: `${range3MaxPercent}%`,
+                    left: `${depositMinPercent}%`,
+                    right: `${depositMaxPercent}%`,
                   }}
                 ></div>
 
@@ -286,31 +283,31 @@ export default function Price({ confirmPrice }: PriceProps) {
                   <input
                     className={styles.priceRangeMin}
                     type="range"
-                    min={fixed3MinPrice}
-                    max={fixed3MaxPrice - priceGap3}
+                    min={depositMinPrice}
+                    max={depositMaxPrice - depositPriceGap}
                     step="1"
-                    value={range3MinValue}
+                    value={depositMinValue}
                     onChange={(e) => {
-                      priceRange3MinValueHandler(e);
-                      twoRange3Handler();
+                      depositMinValueHandler(e);
+                      saleRangeHandler();
                     }}
                   />
                   <input
                     className={styles.priceRangeMax}
                     type="range"
-                    min={fixed3MinPrice + priceGap3}
-                    max={fixed3MaxPrice}
+                    min={depositMinPrice + depositPriceGap}
+                    max={depositMaxPrice}
                     step="1"
-                    value={range3MaxValue}
+                    value={depositMaxValue}
                     onChange={(e) => {
-                      priceRange3MaxValueHandler(e);
-                      twoRange3Handler();
+                      depositMaxValueHandler(e);
+                      saleRangeHandler();
                     }}
                   />
                   <div className={styles.priceRangeLine1}></div>
                   <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>60만</div>
-                  <div className={styles.priceRangeText2}>120만</div>
+                  <div className={styles.priceRangeText1}>30만</div>
+                  <div className={styles.priceRangeText2}>70만</div>
                 </div>
               </div>
             </div>
@@ -322,13 +319,13 @@ export default function Price({ confirmPrice }: PriceProps) {
             <div>
               <p>매매가</p>
               <p>
-                <a style={{ left: `${rangeMinPercent}%` }}>
-                  {rangeMinPercent !== 0
-                    ? `${Math.ceil(rangeMinPercent)}억`
+                <a style={{ left: `${saleMinPercent}%` }}>
+                  {saleMinPercent !== 0
+                    ? `${Math.ceil(saleMinPercent)}억`
                     : '최소'}
                 </a>
-                <a style={{ right: `${rangeMaxPercent - 5}%` }}>
-                  {Math.ceil(90 - rangeMaxPercent)}억
+                <a style={{ right: `${saleMaxPercent - 5}%` }}>
+                  {Math.ceil(100 - saleMaxPercent)}억
                 </a>
               </p>
 
@@ -336,8 +333,8 @@ export default function Price({ confirmPrice }: PriceProps) {
                 <div
                   className={styles.priceSlideInner}
                   style={{
-                    left: `${rangeMinPercent}%`,
-                    right: `${rangeMaxPercent}%`,
+                    left: `${saleMinPercent}%`,
+                    right: `${saleMaxPercent}%`,
                   }}
                 ></div>
 
@@ -345,31 +342,31 @@ export default function Price({ confirmPrice }: PriceProps) {
                   <input
                     className={styles.priceRangeMin}
                     type="range"
-                    min={fixedMinPrice}
-                    max={fixedMaxPrice - priceGap}
+                    min={saleMinPrice}
+                    max={saleMaxPrice - salePriceGap}
                     step="1"
-                    value={rangeMinValue}
+                    value={saleMinValue}
                     onChange={(e) => {
-                      priceRangeMinValueHandler(e);
-                      twoRangeHandler();
+                      saleMinValueHandler(e);
+                      saleRangeHandler();
                     }}
                   />
                   <input
                     className={styles.priceRangeMax}
                     type="range"
-                    min={fixedMinPrice + priceGap}
-                    max={fixedMaxPrice}
+                    min={saleMinPrice + salePriceGap}
+                    max={saleMaxPrice}
                     step="1"
-                    value={rangeMaxValue}
+                    value={saleMaxValue}
                     onChange={(e) => {
-                      priceRangeMaxValueHandler(e);
-                      twoRangeHandler();
+                      saleMaxValueHandler(e);
+                      saleRangeHandler();
                     }}
                   />
                   <div className={styles.priceRangeLine1}></div>
                   <div className={styles.priceRangeLine2}></div>
                   <div className={styles.priceRangeText1}>30억</div>
-                  <div className={styles.priceRangeText2}>60억</div>
+                  <div className={styles.priceRangeText2}>70억</div>
                 </div>
               </div>
             </div>
