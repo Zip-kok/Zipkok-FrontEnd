@@ -10,7 +10,7 @@ import Address from '../../../types/Address';
 
 import searchIcon from '../../../assets/img/search.svg';
 
-import { JUSO_KEY } from '../../../keys';
+import { JUSO_KEY } from '../../../api/keys';
 
 interface LocationProps {
   confirmLocation: (location: string) => void;

@@ -262,11 +262,11 @@ export default function Price({ confirmPrice }: PriceProps) {
               <p>
                 <a style={{ left: `${depositMinPercent}%` }}>
                   {depositMinPercent !== 0
-                    ? `${Math.ceil(depositMinPercent)}만`
+                    ? `${Math.ceil(depositMinPercent * 100)}만`
                     : '최소'}
                 </a>
                 <a style={{ right: `${depositMaxPercent - 5}%` }}>
-                  {Math.ceil(100 - depositMaxPercent)}만
+                  {Math.ceil(100 - depositMaxPercent) * 100}만
                 </a>
               </p>
 
@@ -278,18 +278,17 @@ export default function Price({ confirmPrice }: PriceProps) {
                     right: `${depositMaxPercent}%`,
                   }}
                 ></div>
-
                 <div className={styles.priceRangeWrap}>
                   <input
                     className={styles.priceRangeMin}
                     type="range"
                     min={depositMinPrice}
                     max={depositMaxPrice - depositPriceGap}
-                    step="1"
+                    step="100"
                     value={depositMinValue}
                     onChange={(e) => {
                       depositMinValueHandler(e);
-                      saleRangeHandler();
+                      depositRangeHandler();
                     }}
                   />
                   <input
@@ -297,17 +296,17 @@ export default function Price({ confirmPrice }: PriceProps) {
                     type="range"
                     min={depositMinPrice + depositPriceGap}
                     max={depositMaxPrice}
-                    step="1"
+                    step="100"
                     value={depositMaxValue}
                     onChange={(e) => {
                       depositMaxValueHandler(e);
-                      saleRangeHandler();
+                      depositRangeHandler();
                     }}
                   />
                   <div className={styles.priceRangeLine1}></div>
                   <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>30만</div>
-                  <div className={styles.priceRangeText2}>70만</div>
+                  <div className={styles.priceRangeText1}>3000만</div>
+                  <div className={styles.priceRangeText2}>7000만</div>
                 </div>
               </div>
             </div>
