@@ -23,7 +23,7 @@ export default function Jeonse({ onChange, defaultValues }: JeonseProps) {
           defaultRangeEnd={defaultValues[0][1]}
           onChange={onChange}
           markers={[50_000_000, 250_000_000]}
-          label={getPriceLabelString}
+          priceToString={getPriceLabelString}
         />
       </div>
     </div>

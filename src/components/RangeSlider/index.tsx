@@ -8,7 +8,7 @@ interface RangeSliderProps {
   defaultRangeStart: number;
   defaultRangeEnd: number;
   markers?: number[];
-  label?: (number: number) => string;
+  priceToString?: (number: number) => string;
   onChange: (rangeStart: number, rangeEnd: number) => void;
 }
 
@@ -19,7 +19,7 @@ export default function RangeSlider({
   defaultRangeStart,
   defaultRangeEnd,
   markers = [],
-  label = (number) => number.toLocaleString(),
+  priceToString: label = (number) => number.toLocaleString(),
   onChange,
 }: RangeSliderProps) {
   const sliderRef1 = useRef<HTMLInputElement>(null);

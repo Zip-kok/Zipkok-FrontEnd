@@ -28,7 +28,7 @@ export default function Monthly({
           defaultRangeEnd={defaultValues[0][1]}
           onChange={onChange1}
           markers={[50_000_000, 250_000_000]}
-          label={getPriceLabelString}
+          priceToString={getPriceLabelString}
         />
       </div>
 
@@ -42,7 +42,7 @@ export default function Monthly({
           defaultRangeEnd={defaultValues[1][1]}
           onChange={onChange2}
           markers={[350_000, 1_500_000]}
-          label={getPriceLabelString}
+          priceToString={getPriceLabelString}
         />
       </div>
     </div>

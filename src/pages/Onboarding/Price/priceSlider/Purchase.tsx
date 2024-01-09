@@ -23,7 +23,7 @@ export default function Purchase({ onChange, defaultValues }: PurchaseProps) {
           defaultRangeEnd={defaultValues[0][1]}
           onChange={onChange}
           markers={[100_000_000, 250_000_000]}
-          label={getPriceLabelString}
+          priceToString={getPriceLabelString}
         />
       </div>
     </div>
