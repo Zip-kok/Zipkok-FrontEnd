@@ -18,12 +18,12 @@ export default function Purchase({ onChange, defaultValues }: PurchaseProps) {
         <RangeSlider
           min={0}
           max={1_000_000_000}
-          step={1_000_000}
           defaultRangeStart={defaultValues[0][0]}
           defaultRangeEnd={defaultValues[0][1]}
           onChange={onChange}
           markers={[100_000_000, 250_000_000]}
           priceToString={getPriceLabelString}
+          scaleMethod="square"
         />
       </div>
     </div>

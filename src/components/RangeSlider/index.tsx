@@ -1,13 +1,19 @@
 import React, { useState, useRef } from 'react';
+
+import getScaledValue from './getScaledValue';
+import getVisualValue from './getVisualValue';
+
 import styles from './RangeSlider.module.css';
+
+export type ScaleMethod = 'linear' | 'square' | 'logarithmic' | 'exponential';
 
 interface RangeSliderProps {
   min: number;
   max: number;
-  step: number;
   defaultRangeStart: number;
   defaultRangeEnd: number;
   markers?: number[];
+  scaleMethod?: ScaleMethod;
   priceToString?: (number: number) => string;
   onChange: (rangeStart: number, rangeEnd: number) => void;
 }
@@ -15,46 +21,51 @@ interface RangeSliderProps {
 export default function RangeSlider({
   min,
   max,
-  step,
   defaultRangeStart,
   defaultRangeEnd,
   markers = [],
+  scaleMethod = 'linear',
   priceToString: label = (number) => number.toLocaleString(),
   onChange,
 }: RangeSliderProps) {
-  const sliderRef1 = useRef<HTMLInputElement>(null);
-  const sliderRef2 = useRef<HTMLInputElement>(null);
+  const slider1 = useRef<HTMLInputElement>(null);
+  const slider2 = useRef<HTMLInputElement>(null);
 
+  // 반환 값
   const [start, setStart] = useState<number>(defaultRangeStart);
   const [end, setEnd] = useState<number>(defaultRangeEnd);
 
+  // 원본 값
+  const [visualStart, setVisualStart] = useState<number>(
+    getVisualValue(defaultRangeStart, min, max, scaleMethod),
+  );
+  const [visualEnd, setVisualEnd] = useState<number>(
+    getVisualValue(defaultRangeEnd, min, max, scaleMethod),
+  );
+
   function getLeftStyle(value: number) {
-    return `calc((((${value} - ${min}) / ${max - min}) * (100% - 24px) + 12px)`;
+    return `calc((${value} / 100 * (100% - 24px) + 12px)`;
   }
 
-  function handleSliderChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = parseInt(e.target.value);
-    const slider1 = sliderRef1.current;
-    const slider2 = sliderRef2.current;
+  function handleSliderChange(index: number) {
+    console.assert(index === 1 || index === 2, 'index must be 1 or 2');
 
-    if (e.target === slider1) {
-      const oppositeValue = slider2!.valueAsNumber;
-      if (value > oppositeValue) {
-        setStart(oppositeValue);
-        setEnd(value);
-      } else {
-        setStart(value);
-        setEnd(oppositeValue);
-      }
+    const value = (index === 1 ? slider1 : slider2).current!.valueAsNumber;
+    const oppositeValue = (index === 1 ? slider2 : slider1).current!
+      .valueAsNumber;
+
+    if (value > oppositeValue) {
+      setVisualStart(oppositeValue);
+      setVisualEnd(value);
+
+      setStart(getScaledValue(oppositeValue, min, max, scaleMethod));
+      setEnd(getScaledValue(value, min, max, scaleMethod));
     } else {
-      const oppositeValue = slider1!.valueAsNumber;
-      if (value < oppositeValue) {
-        setStart(value);
-        setEnd(oppositeValue);
-      } else {
-        setStart(oppositeValue);
-        setEnd(value);
-      }
+      setVisualStart(value);
+      setVisualEnd(oppositeValue);
+
+      setStart(getScaledValue(value, min, max, scaleMethod));
+      setEnd(getScaledValue(oppositeValue, min, max, scaleMethod));
     }
 
     onChange(start, end);
@@ -66,7 +77,7 @@ export default function RangeSlider({
       <div
         className={styles.label}
         style={{
-          left: getLeftStyle(start),
+          left: getLeftStyle(visualStart),
         }}
       >
         {label(start)}
@@ -74,7 +85,7 @@ export default function RangeSlider({
       <div
         className={styles.label}
         style={{
-          left: getLeftStyle(end),
+          left: getLeftStyle(visualEnd),
         }}
       >
         {label(end)}
@@ -83,30 +94,34 @@ export default function RangeSlider({
       <input
         className={styles.slider}
         type="range"
-        min={min}
-        max={max}
-        step={step}
-        defaultValue={defaultRangeStart}
-        onChange={handleSliderChange}
-        ref={sliderRef1}
+        min={0}
+        max={100}
+        step={0.1}
+        defaultValue={getVisualValue(defaultRangeStart, min, max, scaleMethod)}
+        onChange={() => {
+          handleSliderChange(1);
+        }}
+        ref={slider1}
       />
       <input
         className={styles.slider}
         type="range"
-        min={min}
-        max={max}
-        step={step}
-        defaultValue={defaultRangeEnd}
-        onChange={handleSliderChange}
-        ref={sliderRef2}
+        min={0}
+        max={100}
+        step={0.1}
+        defaultValue={getVisualValue(defaultRangeEnd, min, max, scaleMethod)}
+        onChange={() => {
+          handleSliderChange(2);
+        }}
+        ref={slider2}
       />
 
       <div className={styles.sliderBackground}></div>
       <div
         className={styles.sliderForeground}
         style={{
-          left: `${(start / max) * 100}%`,
-          width: `${((end - start) / max) * 100}%`,
+          left: `${visualStart}%`,
+          width: `${visualEnd - visualStart}%`,
         }}
       ></div>
 
@@ -114,7 +129,7 @@ export default function RangeSlider({
         <div
           className={styles.marker}
           style={{
-            left: getLeftStyle(value),
+            left: getLeftStyle(getVisualValue(value, min, max, scaleMethod)),
           }}
           key={value}
         >

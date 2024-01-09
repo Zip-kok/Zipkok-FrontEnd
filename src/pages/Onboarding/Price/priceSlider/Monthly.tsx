@@ -23,12 +23,12 @@ export default function Monthly({
         <RangeSlider
           min={0}
           max={1_000_000_000}
-          step={1_000_000}
           defaultRangeStart={defaultValues[0][0]}
           defaultRangeEnd={defaultValues[0][1]}
           onChange={onChange1}
           markers={[50_000_000, 250_000_000]}
           priceToString={getPriceLabelString}
+          scaleMethod="square"
         />
       </div>
 
@@ -37,12 +37,12 @@ export default function Monthly({
         <RangeSlider
           min={0}
           max={3_000_000}
-          step={50_000}
           defaultRangeStart={defaultValues[1][0]}
           defaultRangeEnd={defaultValues[1][1]}
           onChange={onChange2}
           markers={[350_000, 1_500_000]}
           priceToString={getPriceLabelString}
+          scaleMethod="square"
         />
       </div>
     </div>
