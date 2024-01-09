@@ -1,0 +1,123 @@
+.root{
+  display: flex;
+  flex-direction: column;
+}
+.top{
+  display: flex;
+  justify-content: center;
+  gap:5px;
+  color: var(--gray-color-gray080_text, #1B1D1F);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.body{
+  margin:0 20px 0 20px;
+}
+.body > div > button{
+  background-color: #fff;
+  border: none;
+}
+.profile{
+  display: flex;
+  font-style: normal;
+  font-family: Pretendard;
+  margin-top: 48px;
+}
+.profile > .text{
+  margin-left: 16px;
+  
+  >.name{
+    color: var(--gray-color-gray080_text, #1B1D1F);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: 0.018px;
+  }
+  >.location{
+    color: var(--gray-color-gray050_text, #4B5259);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 2px;
+  }
+  >.tag{
+    color: var(--gray-color-gray050_text, #4B5259);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px; 
+    display: flex;
+    gap: 8px;
+  }
+}
+.tag > p{
+  height: 20px;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid var(--gray-color-gray020_border, #C8CBD1);
+}
+.profile > img{
+  width: 80px;
+  height: 80px;
+  border-radius: 48px;
+  flex-shrink: 0;
+  border: 2px solid var(--gray-color-gray020_border, #C8CBD1);
+}
+.profileEdit{
+  width: 320px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 2px solid var(--gray-color-gray020_border, #C8CBD1);border: 2px solid var(--gray-color-gray020_border, #C8CBD1);
+  margin:20px 0 30px 0;
+  > img{
+    margin-right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
+.bodyBtns{
+  display: flex;
+  justify-content: space-between;
+  
+  >button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    gap:8px;
+    width: 107px;
+    height: 64px;
+  }
+}
+.btnList{
+  display: flex;
+  flex-direction: column ;
+  gap:36px;
+  margin-top: 60px;
+  >button{
+    display: flex;
+    gap:12px;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--gray-color-gray050_text, #4B5259);
+  }
+}
