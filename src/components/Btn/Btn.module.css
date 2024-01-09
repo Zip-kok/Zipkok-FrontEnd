@@ -18,6 +18,11 @@
   cursor: pointer;
 }
 
+.btn:focus,
+.btn:active {
+  background: var(--primary-color-primary_pressed, #ff2d2a);
+}
+
 .btn.round {
   border-radius: 8px;
 }
