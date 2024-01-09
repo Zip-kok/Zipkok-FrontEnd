@@ -17,9 +17,11 @@ export default function Complete() {
 
   return (
     <div className={styles.root}>
-      <div className={styles.imgContainer}>
-        <Lottie animationData={checkLottie} loop={false} />
-      </div>
+      <Lottie
+        className={styles.animation}
+        animationData={checkLottie}
+        loop={false}
+      />
       <p className={styles.completeText}>프로필 설정을 완료했어요!</p>
       <p className={styles.detailText}>
         키워드 설정 후
