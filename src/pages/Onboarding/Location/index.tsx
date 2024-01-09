@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useDetectKeyboardOpen from 'use-detect-keyboard-open';
 
 import LoginInput from '../../../components/LoginInput';
 import AddressContainer from '../../../components/AddressContainer';
@@ -10,7 +9,7 @@ import Address from '../../../types/Address';
 
 import searchIcon from '../../../assets/img/search.svg';
 
-import { JUSO_KEY } from '../../../keys';
+import searchAddress from './searchAddress';
 
 interface LocationProps {
   confirmLocation: (location: string) => void;
@@ -19,8 +18,6 @@ interface LocationProps {
 export default function Location({ confirmLocation }: LocationProps) {
   const countPerPage = 50;
 
-  const isKeyboardOpen = useDetectKeyboardOpen();
-
   const [inputValue, setInputValue] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [query, setQuery] = useState<string>('');
@@ -28,26 +25,6 @@ export default function Location({ confirmLocation }: LocationProps) {
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [addressCount, setAddressCount] = useState<number>(0);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
-
-  async function searchAddress(query: string, page: number = 1) {
-    const url = 'https://www.juso.go.kr/addrlink/addrLinkApi.do';
-    const params = {
-      confmKey: JUSO_KEY,
-      resultType: 'json',
-      keyword: query,
-      currentPage: page.toString(),
-      countPerPage: countPerPage.toString(),
-    };
-    const paramStr = new URLSearchParams(params).toString();
-
-    try {
-      const res = await fetch(`${url}?${paramStr}`);
-      const data = await res.json();
-      return await data.results;
-    } catch (e) {
-      return null;
-    }
-  }
 
   function handleInputChange(e: React.FormEvent<HTMLInputElement>) {
     setSelectedAddress(null);
@@ -151,7 +128,6 @@ export default function Location({ confirmLocation }: LocationProps) {
           text="확인"
           onAnchorClick={() => {}}
           anchorText="나중에 설정하기"
-          isKeyboardOpen={isKeyboardOpen}
           disabled={inputValue === ''}
         />
       )}

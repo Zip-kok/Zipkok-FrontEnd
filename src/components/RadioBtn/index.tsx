@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./RadioBtn.module.css";
+import React from 'react';
+import styles from './RadioBtn.module.css';
 
 interface RadioBtnProps {
   content: string;
