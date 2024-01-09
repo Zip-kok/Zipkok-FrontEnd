@@ -54,10 +54,29 @@ export default function Price({ confirmPrice }: PriceProps) {
 
       <div className={styles.priceSliderContainer}>
         {priceType === '월세' && (
-          <Monthly onChange1={() => {}} onChange2={() => {}} />
+          <Monthly
+            onChange1={(rangeStart, rangeEnd) => {
+              setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
+            }}
+            onChange2={(rangeStart, rangeEnd) => {
+              setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
+            }}
+          />
         )}
-        {priceType === '전세' && <Jeonse onChange={() => {}} />}
-        {priceType === '매매' && <Purchase onChange={() => {}} />}
+        {priceType === '전세' && (
+          <Jeonse
+            onChange={(rangeStart, rangeEnd) => {
+              setPriceRanges([[rangeStart, rangeEnd]]);
+            }}
+          />
+        )}
+        {priceType === '매매' && (
+          <Purchase
+            onChange={(rangeStart, rangeEnd) => {
+              setPriceRanges([[rangeStart, rangeEnd]]);
+            }}
+          />
+        )}
       </div>
 
       <BottomBtn
@@ -65,6 +84,7 @@ export default function Price({ confirmPrice }: PriceProps) {
         text="확인"
         onAnchorClick={handleSkipBtnClick}
         anchorText="나중에 설정하기"
+        disabled={priceType === null}
       />
     </div>
   );
