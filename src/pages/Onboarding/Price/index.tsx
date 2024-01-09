@@ -8,18 +8,18 @@ import Monthly from './priceSlider/Monthly';
 import Jeonse from './priceSlider/Jeonse';
 import Purchase from './priceSlider/Purchase';
 
+import { PriceType, PriceRange } from '../';
+
 interface PriceProps {
-  confirmPrice: (Price: string) => void;
+  confirmPrice: (priceType: PriceType, priceRanges: PriceRange[]) => void;
 }
 
-type PriceType = '월세' | '전세' | '매매';
-
 export default function Price({ confirmPrice }: PriceProps) {
-  const [price, setPrice] = useState('');
-  const [priceType, setPriceType] = useState<PriceType | undefined>(undefined);
+  const [priceType, setPriceType] = useState<PriceType>(null);
+  const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
 
   const handleConfirmClick = () => {
-    confirmPrice(price);
+    confirmPrice(priceType, priceRanges);
   };
 
   const handlePriceType = (priceType: PriceType) => {
@@ -40,7 +40,7 @@ export default function Price({ confirmPrice }: PriceProps) {
           가격 범위를 설정해주세요
         </h1>
       </div>
-      <div className={styles.price}>
+      <div className={styles.priceTypeBtnContainer}>
         {(['월세', '전세', '매매'] as PriceType[]).map((type) => (
           <button
             key={type}
@@ -52,11 +52,13 @@ export default function Price({ confirmPrice }: PriceProps) {
         ))}
       </div>
 
-      {priceType === '월세' && (
-        <Monthly onChange1={() => {}} onChange2={() => {}} />
-      )}
-      {priceType === '전세' && <Jeonse onChange={() => {}} />}
-      {priceType === '매매' && <Purchase onChange={() => {}} />}
+      <div className={styles.priceSliderContainer}>
+        {priceType === '월세' && (
+          <Monthly onChange1={() => {}} onChange2={() => {}} />
+        )}
+        {priceType === '전세' && <Jeonse onChange={() => {}} />}
+        {priceType === '매매' && <Purchase onChange={() => {}} />}
+      </div>
 
       <BottomBtn
         onClick={handleConfirmClick}

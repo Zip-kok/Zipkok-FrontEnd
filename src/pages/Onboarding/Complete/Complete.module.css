@@ -10,6 +10,9 @@
   width: 100vw;
   max-width: 400px;
 }
+.textContainer {
+  height: 100%;
+}
 .completeText {
   color: var(--gray-color-gray080_text, #1b1d1f);
   text-align: center;

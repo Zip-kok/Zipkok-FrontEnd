@@ -1,27 +1,31 @@
 .topBar {
-    width: 100%;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    box-sizing: border-box;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .progressBar {
-    height: 4px;
-    margin: 12px 20px;
-    width: calc(100% - 40px);
-    background: var(--gray-color-gray020_border, #c8cbd1);
+  height: 4px;
+  margin: 12px 20px;
+  width: calc(100% - 40px);
+  background: var(--gray-color-gray020_border, #c8cbd1);
 }
 
 .progressBar > .progress {
-    height: 100%;
-    background: var(--gray-color-gray090, #141415);
-    transition: width 0.3s ease-in-out;
+  height: 100%;
+  background: var(--gray-color-gray090, #141415);
+  transition: width 0.3s ease-in-out;
 }
 
 .content {
-    width: 100%;
-    height: calc(100vh - 92px);
-    box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 92px);
+  box-sizing: border-box;
+}
+
+.content.full {
+  height: 100vh;
 }

@@ -12,37 +12,27 @@ import Type from './Type';
 // type: 온보딩_02_매물종류
 // price: 온보딩_03_가격범위
 // complete: 온보딩_04_완료
-type StepKeys = 'location' | 'type' | 'price' | 'complete';
-
+type Step = 'location' | 'type' | 'price' | 'complete';
 export type HouseType = '아파트' | '원룸' | '빌라/투룸' | '오피스텔' | null;
+export type PriceType = '월세' | '전세' | '매매' | null;
+export type PriceRange = [number, number];
 
 export default function Onboarding() {
-  const [location, setLocation] = useState('');
-
-  const [price, setPrice] = useState('');
-
-  const [houseType, setHouseType] = useState<
-    '아파트' | '원룸' | '빌라/투룸' | '오피스텔' | null
-  >(null);
-
-  const [step, setStep] = useState<StepKeys>('location');
-  const steps: Record<StepKeys, JSX.Element> = {
+  const [step, setStep] = useState<Step>('location');
+  const steps: Record<Step, JSX.Element> = {
     // location
     location: (
       <Location
         confirmLocation={(location: string) => {
-          setLocation(location);
           setStep('type');
         }}
       />
     ),
 
     // type
-
     type: (
       <Type
         confirmHouseType={(houseType: HouseType) => {
-          setHouseType(houseType);
           setStep('price');
         }}
       />
@@ -51,8 +41,7 @@ export default function Onboarding() {
     // price
     price: (
       <Price
-        confirmPrice={(price: string) => {
-          setPrice(price);
+        confirmPrice={(priceType: PriceType, priceRanges: PriceRange[]) => {
           setStep('complete');
         }}
       />
@@ -63,11 +52,11 @@ export default function Onboarding() {
   };
 
   // 프로그레스바 가로 길이를 계산하기 위한 값
-  const progresses: Record<StepKeys, number> = {
-    location: 1,
-    type: 2,
-    price: 3,
-    complete: 4,
+  const progresses: Record<Step, number> = {
+    location: 0,
+    type: 1,
+    price: 2,
+    complete: 3,
   };
   const progress = (progresses[step] / 3) * 100;
 
@@ -101,7 +90,13 @@ export default function Onboarding() {
           ></div>
         </div>
       )}
-      <div className={styles.content}>{steps[step]}</div>
+      <div
+        className={`${styles.content} ${
+          step === 'complete' ? styles.full : ''
+        }`}
+      >
+        {steps[step]}
+      </div>
     </div>
   );
 }
