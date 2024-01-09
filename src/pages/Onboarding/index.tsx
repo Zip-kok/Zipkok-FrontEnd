@@ -75,21 +75,24 @@ export default function Onboarding() {
 
   return (
     <div>
+      {/* 상단 바 및 프로그레스 바 */}
       {step !== 'complete' && (
-        <div className={styles.topBar}>
-          <button className="imgBtn" onClick={handleBackClick}>
-            <img src={leftArrowIcon}></img>
-          </button>
-        </div>
+        <>
+          <div className={styles.topBar}>
+            <button className="imgBtn" onClick={handleBackClick}>
+              <img src={leftArrowIcon}></img>
+            </button>
+          </div>
+          <div className={styles.progressBar}>
+            <div
+              className={styles.progress}
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        </>
       )}
-      {step !== 'complete' && (
-        <div className={styles.progressBar}>
-          <div
-            className={styles.progress}
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-      )}
+
+      {/* 콘텐츠 */}
       <div
         className={`${styles.content} ${
           step === 'complete' ? styles.full : ''
