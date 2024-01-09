@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useDetectKeyboardOpen from 'use-detect-keyboard-open';
 import BottomBtn from '../../../components/BottomBtn';
 import LoginInput from '../../../components/LoginInput';
 import styles from './NickName.module.css';
@@ -13,7 +12,6 @@ export default function NickName({ onConfirm }: NickNameProps) {
   const [isNicknameValid, setIsNicknameValid] = useState(false);
   const [isNotNicknameExist, setIsNotNicknameExist] = useState(true);
   const [isTouched, setIsTouched] = useState(false); // 입력이 시작되었는지 추적하기 위한 상태
-  const isKeyboardOpen = useDetectKeyboardOpen();
 
   const handleInputChange = async (e: React.FormEvent<HTMLInputElement>) => {
     const inputVal = e.currentTarget.value;
@@ -53,7 +51,6 @@ export default function NickName({ onConfirm }: NickNameProps) {
         <BottomBtn
           onClick={handleSubmit}
           text="확인"
-          isKeyboardOpen={isKeyboardOpen}
           disabled={!isNicknameValid || !isNotNicknameExist}
         />
       </div>

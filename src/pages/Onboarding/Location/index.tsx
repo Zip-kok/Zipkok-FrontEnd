@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useDetectKeyboardOpen from 'use-detect-keyboard-open';
 
 import LoginInput from '../../../components/LoginInput';
 import AddressContainer from '../../../components/AddressContainer';
@@ -18,8 +17,6 @@ interface LocationProps {
 
 export default function Location({ confirmLocation }: LocationProps) {
   const countPerPage = 50;
-
-  const isKeyboardOpen = useDetectKeyboardOpen();
 
   const [inputValue, setInputValue] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -151,7 +148,6 @@ export default function Location({ confirmLocation }: LocationProps) {
           text="확인"
           onAnchorClick={() => {}}
           anchorText="나중에 설정하기"
-          isKeyboardOpen={isKeyboardOpen}
           disabled={inputValue === ''}
         />
       )}
