@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './Complete.module.css';
 import Lottie from 'lottie-react';
 import checkLottie from '../../../assets/Lottie/checkLottie.json';
+import BottomBtn from '../../../components/BottomBtn';
 import { useNavigate } from 'react-router-dom';
 
 export default function Complete() {
@@ -24,9 +25,7 @@ export default function Complete() {
         <br />
         마이페이지에서 수정 가능해요
       </p>
-      <div className={styles.footer}>
-        <button onClick={handleClick}>홈으로 돌아가기</button>
-      </div>
+      <BottomBtn onClick={handleClick} text="홈으로 돌아가기" />
     </div>
   );
 }

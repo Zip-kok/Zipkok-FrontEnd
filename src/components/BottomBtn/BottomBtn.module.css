@@ -1,27 +1,27 @@
 .container {
-    width: 100%;
-    padding: 16px;
-    box-sizing: border-box;
-    position: sticky;
-    bottom: 0;
-    display: flex;
-    gap: 16px;
-    flex-direction: column;
-    align-items: center;
-    background: white;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  background: white;
 }
 
 .container.full {
-    padding: 0;
+  padding: 0;
 }
 
 .anchor {
-    color: var(--gray-color-gray030_text, #9fa4a9);
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    text-decoration-line: underline;
-    cursor: pointer;
+  color: var(--gray-color-gray030_text, #9fa4a9);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration-line: underline;
+  cursor: pointer;
 }
