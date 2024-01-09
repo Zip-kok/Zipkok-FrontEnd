@@ -4,20 +4,24 @@ import styles from './Price.module.css';
 import BottomBtn from '../../../components/BottomBtn';
 import { useNavigate } from 'react-router-dom';
 
+import Monthly from './priceSlider/Monthly';
+import Jeonse from './priceSlider/Jeonse';
+import Purchase from './priceSlider/Purchase';
+
 interface PriceProps {
   confirmPrice: (Price: string) => void;
 }
-// 보증금 최소값 , 최대값 ,1칸당 크기
+// 보증금 최솟값, 최댓값, 1칸당 크기
 const depositMinPrice: number = 0;
 const depositMaxPrice: number = 10000;
 const depositPriceGap: number = 100;
 
-// 월세 최소값 , 최대값 ,1칸당 크기
+// 월세 최솟값, 최댓값, 1칸당 크기
 const rentMinPrice: number = 0;
 const rentMaxPrice: number = 100;
 const rentPriceGap: number = 1;
 
-// 매매가 최소값 , 최대값 ,1칸당 크기
+// 매매가 최솟값, 최댓값, 1칸당 크기
 const saleMinPrice: number = 0;
 const saleMaxPrice: number = 100;
 const salePriceGap: number = 1;
@@ -119,7 +123,9 @@ export default function Price({ confirmPrice }: PriceProps) {
     <div className={styles.root}>
       <div className={styles.header}>
         <h1>
-          거래 유형에 따른<br></br>가격 범위를 설정해주세요
+          거래 유형에 따른
+          <br />
+          가격 범위를 설정해주세요
         </h1>
       </div>
       <div className={styles.price}>
@@ -133,236 +139,13 @@ export default function Price({ confirmPrice }: PriceProps) {
           </button>
         ))}
       </div>
-      <div className={styles.priceTypeInf}>
-        {priceType === '월세' && (
-          <a className={styles.depositRange}>
-            <div>
-              <p>보증금</p>
-              <p>
-                <a style={{ left: `${depositMinPercent}%` }}>
-                  {depositMinPercent !== 0
-                    ? `${Math.ceil(depositMinPercent * 100)}만`
-                    : '최소'}
-                </a>
-                <a style={{ right: `${depositMaxPercent - 5}%` }}>
-                  {Math.ceil(100 - depositMaxPercent) * 100}만
-                </a>
-              </p>
 
-              <div className={styles.priceSlide}>
-                <div
-                  className={styles.priceSlideInner}
-                  style={{
-                    left: `${depositMinPercent}%`,
-                    right: `${depositMaxPercent}%`,
-                  }}
-                ></div>
-                <div className={styles.priceRangeWrap}>
-                  <input
-                    className={styles.priceRangeMin}
-                    type="range"
-                    min={depositMinPrice}
-                    max={depositMaxPrice - depositPriceGap}
-                    step="100"
-                    value={depositMinValue}
-                    onChange={(e) => {
-                      depositMinValueHandler(e);
-                      depositRangeHandler();
-                    }}
-                  />
-                  <input
-                    className={styles.priceRangeMax}
-                    type="range"
-                    min={depositMinPrice + depositPriceGap}
-                    max={depositMaxPrice}
-                    step="100"
-                    value={depositMaxValue}
-                    onChange={(e) => {
-                      depositMaxValueHandler(e);
-                      depositRangeHandler();
-                    }}
-                  />
-                  <div className={styles.priceRangeLine1}></div>
-                  <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>3000만</div>
-                  <div className={styles.priceRangeText2}>7000만</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p>월세</p>
-              <p>
-                <a style={{ left: `${rentMinPercent}%` }}>
-                  {rentMinPercent !== 0
-                    ? `${Math.ceil(rentMinPercent)}만`
-                    : '최소'}
-                </a>
-                <a style={{ right: `${rentMaxPercent - 5}%` }}>
-                  {Math.ceil(100 - rentMaxPercent)}만
-                </a>
-              </p>
+      {priceType === '월세' && (
+        <Monthly onChange1={() => {}} onChange2={() => {}} />
+      )}
+      {priceType === '전세' && <Jeonse onChange={() => {}} />}
+      {priceType === '매매' && <Purchase onChange={() => {}} />}
 
-              <div className={styles.priceSlide}>
-                <div
-                  className={styles.priceSlideInner}
-                  style={{
-                    left: `${rentMinPercent}%`,
-                    right: `${rentMaxPercent}%`,
-                  }}
-                ></div>
-
-                <div className={styles.priceRangeWrap}>
-                  <input
-                    className={styles.priceRangeMin}
-                    type="range"
-                    min={rentMinPrice}
-                    max={rentMaxPrice - rentPriceGap}
-                    step="1"
-                    value={rentMinValue}
-                    onChange={(e) => {
-                      rentMinValueHandler(e);
-                      rentRangeHandler();
-                    }}
-                  />
-                  <input
-                    className={styles.priceRangeMax}
-                    type="range"
-                    min={rentMinPrice + rentPriceGap}
-                    max={rentMaxPrice}
-                    step="1"
-                    value={rentMaxValue}
-                    onChange={(e) => {
-                      rentMaxValueHandler(e);
-                      rentRangeHandler();
-                    }}
-                  />
-                  <div className={styles.priceRangeLine1}></div>
-                  <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>30만</div>
-                  <div className={styles.priceRangeText2}>70만</div>
-                </div>
-              </div>
-            </div>
-          </a>
-        )}
-
-        {priceType === '전세' && (
-          <a>
-            <div>
-              <p>보증금</p>
-              <p>
-                <a style={{ left: `${depositMinPercent}%` }}>
-                  {depositMinPercent !== 0
-                    ? `${Math.ceil(depositMinPercent * 100)}만`
-                    : '최소'}
-                </a>
-                <a style={{ right: `${depositMaxPercent - 5}%` }}>
-                  {Math.ceil(100 - depositMaxPercent) * 100}만
-                </a>
-              </p>
-
-              <div className={styles.priceSlide}>
-                <div
-                  className={styles.priceSlideInner}
-                  style={{
-                    left: `${depositMinPercent}%`,
-                    right: `${depositMaxPercent}%`,
-                  }}
-                ></div>
-                <div className={styles.priceRangeWrap}>
-                  <input
-                    className={styles.priceRangeMin}
-                    type="range"
-                    min={depositMinPrice}
-                    max={depositMaxPrice - depositPriceGap}
-                    step="100"
-                    value={depositMinValue}
-                    onChange={(e) => {
-                      depositMinValueHandler(e);
-                      depositRangeHandler();
-                    }}
-                  />
-                  <input
-                    className={styles.priceRangeMax}
-                    type="range"
-                    min={depositMinPrice + depositPriceGap}
-                    max={depositMaxPrice}
-                    step="100"
-                    value={depositMaxValue}
-                    onChange={(e) => {
-                      depositMaxValueHandler(e);
-                      depositRangeHandler();
-                    }}
-                  />
-                  <div className={styles.priceRangeLine1}></div>
-                  <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>3000만</div>
-                  <div className={styles.priceRangeText2}>7000만</div>
-                </div>
-              </div>
-            </div>
-          </a>
-        )}
-
-        {priceType === '매매' && (
-          <a>
-            <div>
-              <p>매매가</p>
-              <p>
-                <a style={{ left: `${saleMinPercent}%` }}>
-                  {saleMinPercent !== 0
-                    ? `${Math.ceil(saleMinPercent)}억`
-                    : '최소'}
-                </a>
-                <a style={{ right: `${saleMaxPercent - 5}%` }}>
-                  {Math.ceil(100 - saleMaxPercent)}억
-                </a>
-              </p>
-
-              <div className={styles.priceSlide}>
-                <div
-                  className={styles.priceSlideInner}
-                  style={{
-                    left: `${saleMinPercent}%`,
-                    right: `${saleMaxPercent}%`,
-                  }}
-                ></div>
-
-                <div className={styles.priceRangeWrap}>
-                  <input
-                    className={styles.priceRangeMin}
-                    type="range"
-                    min={saleMinPrice}
-                    max={saleMaxPrice - salePriceGap}
-                    step="1"
-                    value={saleMinValue}
-                    onChange={(e) => {
-                      saleMinValueHandler(e);
-                      saleRangeHandler();
-                    }}
-                  />
-                  <input
-                    className={styles.priceRangeMax}
-                    type="range"
-                    min={saleMinPrice + salePriceGap}
-                    max={saleMaxPrice}
-                    step="1"
-                    value={saleMaxValue}
-                    onChange={(e) => {
-                      saleMaxValueHandler(e);
-                      saleRangeHandler();
-                    }}
-                  />
-                  <div className={styles.priceRangeLine1}></div>
-                  <div className={styles.priceRangeLine2}></div>
-                  <div className={styles.priceRangeText1}>30억</div>
-                  <div className={styles.priceRangeText2}>70억</div>
-                </div>
-              </div>
-            </div>
-          </a>
-        )}
-      </div>
       <BottomBtn
         onClick={handleConfirmClick}
         text="확인"

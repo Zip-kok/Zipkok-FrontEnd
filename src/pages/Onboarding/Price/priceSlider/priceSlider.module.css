@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 0 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sliderContainer > h1 {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  margin: 0;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.018px;
+}
