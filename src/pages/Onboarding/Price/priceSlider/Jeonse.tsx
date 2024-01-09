@@ -1,5 +1,6 @@
 import React from 'react';
 import RangeSlider from '../../../../components/RangeSlider';
+import getPriceLabelString from './getPriceLabelString';
 import styles from './priceSlider.module.css';
 
 interface JeonseProps {
@@ -19,6 +20,7 @@ export default function Jeonse({ onChange }: JeonseProps) {
           defaultRangeEnd={60_000_000}
           onChange={onChange}
           markers={[50_000_000, 250_000_000]}
+          label={getPriceLabelString}
         />
       </div>
     </div>

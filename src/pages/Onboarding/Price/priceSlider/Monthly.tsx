@@ -29,7 +29,7 @@ export default function Monthly({ onChange1, onChange2 }: MonthlyProps) {
         <h1>월세</h1>
         <RangeSlider
           min={0}
-          max={30_000_000}
+          max={3_000_000}
           step={50_000}
           defaultRangeStart={0}
           defaultRangeEnd={400_000}

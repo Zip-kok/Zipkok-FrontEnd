@@ -2,7 +2,7 @@
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   display: flex;
   gap: 16px;
