@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.textBox > input[type="text"] {
+.textBox > input[type='text'] {
   width: calc(100% - 32px);
   height: 100%;
   box-sizing: border-box;
@@ -30,7 +30,7 @@
   caret-color: var(--primary-color-primary_default, #fa4549);
 }
 
-.textBox > input[type="text"]::placeholder {
+.textBox > input[type='text']::placeholder {
   width: calc(100% - 32px);
   color: var(--gray-color-gray030_text, #9fa4a9);
   font-family: Pretendard;
@@ -53,7 +53,7 @@
   font-weight: 400;
 }
 
-.textBox > input[type="number"] {
+.textBox > input[type='number'] {
   width: calc(100% - 32px);
   height: 100%;
   box-sizing: border-box;
@@ -68,7 +68,7 @@
   caret-color: var(--primary-color-primary_default, #fa4549);
 }
 
-.textBox > input[type="number"]::placeholder {
+.textBox > input[type='number']::placeholder {
   width: calc(100% - 32px);
   color: var(--gray-color-gray030_text, #9fa4a9);
   font-family: Pretendard;
