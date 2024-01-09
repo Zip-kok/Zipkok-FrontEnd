@@ -22,7 +22,6 @@
 
 .typeBtnContainer {
   display: grid;
-  grid-template-rows: 160px 160px;
   justify-content: center;
   padding: 0 20px;
   gap: 16px;
@@ -34,18 +33,21 @@
 @media (min-width: 768px) {
   .typeBtnContainer {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 160px;
   }
 }
 
-@media (min-width: 371px) and (max-width: 767px) {
+@media (min-width: 257px) and (max-width: 767px) {
   .typeBtnContainer {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 160px 160px;
   }
 }
 
-@media (max-width: 370px) {
+@media (max-width: 256px) {
   .typeBtnContainer {
     grid-template-columns: 1fr;
+    grid-template-rows: 160px 160px 160px 160px;
   }
 }
 
@@ -56,8 +58,9 @@
   flex-direction: column;
   border-radius: 8px;
   background: var(--gray-color-gray010, #efeff2);
+
   padding: 0 12px;
-  min-width: 152px;
+  width: 100%;
   height: 160px;
   border: 2px solid transparent;
   cursor: pointer;
@@ -66,6 +69,11 @@
 .typeBtn.selected {
   border: 2px solid var(--primary-color-primary_default, #fa4549);
   background: var(--primary-color-primary_bg, #ffefef);
+}
+
+.typeBtn > img {
+  width: 60%;
+  max-width: 100px;
 }
 
 .typeBtn > span {
