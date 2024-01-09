@@ -18,11 +18,21 @@ export default function Price({ confirmPrice }: PriceProps) {
   const [priceType, setPriceType] = useState<PriceType>(null);
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
 
+  const defaultValues: Record<Exclude<PriceType, null>, PriceRange[]> = {
+    월세: [
+      [0, 60_000_000],
+      [0, 400_000],
+    ],
+    전세: [[0, 60_000_000]],
+    매매: [[0, 120_000_000]],
+  };
+
   const handleConfirmClick = () => {
     confirmPrice(priceType, priceRanges);
   };
 
   const handlePriceType = (priceType: PriceType) => {
+    if (priceType !== null) setPriceRanges(defaultValues[priceType]);
     setPriceType(priceType);
   };
 
@@ -61,6 +71,7 @@ export default function Price({ confirmPrice }: PriceProps) {
             onChange2={(rangeStart, rangeEnd) => {
               setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
             }}
+            defaultValues={defaultValues[priceType]}
           />
         )}
         {priceType === '전세' && (
@@ -68,6 +79,7 @@ export default function Price({ confirmPrice }: PriceProps) {
             onChange={(rangeStart, rangeEnd) => {
               setPriceRanges([[rangeStart, rangeEnd]]);
             }}
+            defaultValues={defaultValues[priceType]}
           />
         )}
         {priceType === '매매' && (
@@ -75,6 +87,7 @@ export default function Price({ confirmPrice }: PriceProps) {
             onChange={(rangeStart, rangeEnd) => {
               setPriceRanges([[rangeStart, rangeEnd]]);
             }}
+            defaultValues={defaultValues[priceType]}
           />
         )}
       </div>
