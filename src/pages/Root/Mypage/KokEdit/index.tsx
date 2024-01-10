@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useNaviStore from '../../../../contexts/naviStore';
+import styles from './KokEdit.module.css';
 
-import styles from './Kok.module.css';
+import Hightlight from '../../../../components/Highlight';
+
+import useNaviStore from '../../../../contexts/naviStore';
 
 export const KokEdit = () => {
   const { setNaviMenu } = useNaviStore();
@@ -11,5 +13,5 @@ export const KokEdit = () => {
     setNaviMenu('my');
   }, []);
 
-  return <div className={styles.root}>KokEdit</div>;
+  return <div className={styles.root}></div>;
 };

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-import styles from '../Highlight/styles.module.css';
+import styles from './Highlight.module.css';
 
 import plusIcon from '../../assets/img/plus.svg';
 import minusIcon from '../../assets/img/minus.svg';
 
 interface HighlightProps {
   text: string;
-  onEnable: () => void;
-  onDisable: () => void;
+  onEnable?: () => void;
+  onDisable?: () => void;
   highlightEnabled?: boolean;
 }
 
@@ -23,17 +23,17 @@ const IconTextBtn = ({
   const handleClick = () => {
     if (enabled) {
       setEnabled(false);
-      onDisable();
+      onEnable?.();
     } else {
       setEnabled(true);
-      onEnable();
+      onDisable?.();
     }
   };
 
   return (
     <button
       className={`${styles.container} ${
-        enabled ? styles.enabeld : styles.disabled
+        enabled ? styles.enabled : styles.disabled
       }`}
       onClick={handleClick}
     >
