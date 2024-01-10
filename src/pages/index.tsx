@@ -11,6 +11,8 @@ import { Kok } from './Root/Kok';
 import { Home } from './Root/Home';
 import { Mypage } from './Root/Mypage';
 
+import { KokEdit } from './Root/Mypage/KokEdit';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,6 +21,7 @@ const router = createBrowserRouter([
       { path: 'kok', element: <Kok /> },
       { path: 'home', element: <Home /> },
       { path: 'my', element: <Mypage /> },
+      { path: 'kokEdit', element: <KokEdit /> },
     ],
   },
   {
