@@ -4,9 +4,9 @@ import styles from './Onboarding.module.css';
 import Location from './Location';
 import Price from './Price';
 import Complete from './Complete';
+import Type from './Type';
 
 import leftArrowIcon from '../../assets/img/left_arrow.svg';
-import Type from './Type';
 
 // location: 온보딩_01_거주지역
 // type: 온보딩_02_매물종류
@@ -60,6 +60,15 @@ export default function Onboarding() {
   };
   const progress = (progresses[step] / 3) * 100;
 
+  // 상단 바 및 뒤로 가기 버튼을 표시할지 여부
+  function topBarEnabled(step: Step) {
+    if (step === 'complete') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   // 뒤로 가기 버튼을 눌렀을 때
   function handleBackClick() {
     if (step === 'location') {
@@ -76,7 +85,7 @@ export default function Onboarding() {
   return (
     <div>
       {/* 상단 바 및 프로그레스 바 */}
-      {step !== 'complete' && (
+      {topBarEnabled(step) && (
         <>
           <div className={styles.topBar}>
             <button className="imgBtn" onClick={handleBackClick}>
