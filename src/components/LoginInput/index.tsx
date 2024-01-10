@@ -30,6 +30,11 @@ export default function LoginInput({
 }: LoginInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
+    if (e.currentTarget.value.length > maxLength) return;
+    onChange && onChange(e);
+  }
+
   function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       if (onSubmit) onSubmit();
@@ -51,7 +56,7 @@ export default function LoginInput({
       <div className={styles.textBox}>
         <input
           type={numberOnly ? 'number' : 'text'}
-          onChange={onChange}
+          onChange={handleChange}
           onKeyUp={handleKeyUp}
           onFocus={onFocus}
           onBlur={onBlur}
