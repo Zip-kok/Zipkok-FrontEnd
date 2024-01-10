@@ -7,6 +7,7 @@ import Monthly from './priceSlider/Monthly';
 import Jeonse from './priceSlider/Jeonse';
 import Purchase from './priceSlider/Purchase';
 import BottomBtn from '../../../components/BottomBtn';
+import RadioBtn from '../../../components/RadioBtn';
 
 import { PriceType, PriceRange } from '../';
 
@@ -18,6 +19,10 @@ export default function Price({ confirmPrice }: PriceProps) {
   const [priceType, setPriceType] = useState<PriceType>(null);
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
 
+  const priceTypeOptions = ['월세', '전세', '매매'] as Exclude<
+    PriceType,
+    null
+  >[];
   const defaultValues: Record<Exclude<PriceType, null>, PriceRange[]> = {
     월세: [
       [0, 60_000_000],
@@ -50,17 +55,16 @@ export default function Price({ confirmPrice }: PriceProps) {
           가격 범위를 설정해주세요
         </h1>
       </div>
-      <div className={styles.priceTypeBtnContainer}>
-        {(['월세', '전세', '매매'] as PriceType[]).map((type) => (
-          <button
+      <ul className={styles.priceTypeBtnContainer}>
+        {priceTypeOptions.map((type) => (
+          <RadioBtn
             key={type}
-            className={priceType === type ? styles.activeButton : ''}
-            onClick={() => handlePriceType(type)}
-          >
-            {type}
-          </button>
+            content={type}
+            isSelected={priceType === type}
+            handleClick={() => handlePriceType(type)}
+          />
         ))}
-      </div>
+      </ul>
 
       <div className={styles.priceSliderContainer}>
         {priceType === '월세' && (
@@ -74,6 +78,7 @@ export default function Price({ confirmPrice }: PriceProps) {
             defaultValues={defaultValues[priceType]}
           />
         )}
+
         {priceType === '전세' && (
           <Jeonse
             onChange={(rangeStart, rangeEnd) => {
@@ -82,6 +87,7 @@ export default function Price({ confirmPrice }: PriceProps) {
             defaultValues={defaultValues[priceType]}
           />
         )}
+
         {priceType === '매매' && (
           <Purchase
             onChange={(rangeStart, rangeEnd) => {

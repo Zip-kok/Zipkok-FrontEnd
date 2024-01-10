@@ -34,7 +34,7 @@ export default function Gender({ onConfirm }: GenderProps) {
         </h1>
       </div>
 
-      <ul>
+      <ul className={styles.genderBtnContainer}>
         {genderOptions.map((genderOption) => (
           <RadioBtn
             key={genderOption}

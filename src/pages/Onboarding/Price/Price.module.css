@@ -5,9 +5,7 @@
 }
 
 .header {
-  padding: 16px 0;
-  margin: 0 20px;
-  margin-bottom: 58px;
+  margin: 16px 20px 58px 20px;
 }
 
 .header > h1 {
@@ -22,7 +20,6 @@
 
 .priceTypeBtnContainer {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
   padding: 0 20px 0 20px;
   margin-bottom: 60px;
