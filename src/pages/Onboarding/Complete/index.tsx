@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Lottie from 'lottie-react';
 
 import styles from './Complete.module.css';
-import Lottie from 'lottie-react';
-import checkLottie from '../../../assets/Lottie/checkLottie.json';
+
 import BottomBtn from '../../../components/BottomBtn';
-import { useNavigate } from 'react-router-dom';
+
+import checkLottie from '../../../assets/Lottie/checkLottie.json';
 
 export default function Complete() {
   const navigate = useNavigate();

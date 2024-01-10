@@ -1,8 +1,8 @@
 import React from 'react';
 
-import BottomBtn from '../../../components/BottomBtn';
-
 import styles from './Type.module.css';
+
+import BottomBtn from '../../../components/BottomBtn';
 
 import apartmentIcon from '../../../assets/img/apartment.svg';
 import oneroomIcon from '../../../assets/img/oneroom.svg';

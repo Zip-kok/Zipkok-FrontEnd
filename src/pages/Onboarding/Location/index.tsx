@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 
-import LoginInput from '../../../components/LoginInput';
-import AddressContainer from '../../../components/AddressContainer';
-import BottomBtn from '../../../components/BottomBtn';
-
 import styles from './Location.module.css';
+
+import searchAddress from './searchAddress';
+import LoginInput from '../../../components/LoginInput';
+import BottomBtn from '../../../components/BottomBtn';
+import AddressContainer from '../../../components/AddressContainer';
 import Address from '../../../types/Address';
 
 import searchIcon from '../../../assets/img/search.svg';
-
-import searchAddress from './searchAddress';
 
 interface LocationProps {
   confirmLocation: (location: string) => void;

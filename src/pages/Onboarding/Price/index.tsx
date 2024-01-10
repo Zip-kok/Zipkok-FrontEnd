@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Price.module.css';
-import BottomBtn from '../../../components/BottomBtn';
-import { useNavigate } from 'react-router-dom';
 
 import Monthly from './priceSlider/Monthly';
 import Jeonse from './priceSlider/Jeonse';
 import Purchase from './priceSlider/Purchase';
+import BottomBtn from '../../../components/BottomBtn';
 
 import { PriceType, PriceRange } from '../';
 
