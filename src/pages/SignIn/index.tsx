@@ -40,7 +40,7 @@ export default function SignIn() {
     // birth
     birth: (
       <Birth
-        onConfirm={(birth: number) => {
+        onConfirm={(birth: string) => {
           setStep('complete');
         }}
       />

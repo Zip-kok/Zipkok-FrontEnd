@@ -6,7 +6,7 @@ import BottomBtn from '../../../components/BottomBtn';
 import LoginInput from '../../../components/LoginInput';
 
 interface NickNameProps {
-  onConfirm: () => void;
+  onConfirm: (nickname: string) => void;
 }
 
 export default function NickName({ onConfirm }: NickNameProps) {
@@ -26,7 +26,7 @@ export default function NickName({ onConfirm }: NickNameProps) {
     if (!isNicknameValid) {
       return;
     }
-    onConfirm();
+    onConfirm(nickname);
   };
 
   return (
