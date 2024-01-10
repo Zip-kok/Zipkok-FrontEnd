@@ -26,6 +26,14 @@ body {
   align-items: center;
   border: none;
   gap: 12px;
+
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
 }
 
 .notLoginBtn {
