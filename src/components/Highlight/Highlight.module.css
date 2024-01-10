@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  background: var(--gray-color-white, #fff);
+  cursor: pointer;
+}
+
+.container > span {
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.container.enabled {
+  border: 1px solid var(--gray-color-gray050_text, #4b5259);
+}
+
+.container.enabled > span {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+}
+
+.container.disabled {
+  border: 1px solid var(--gray-color-gray020_border, #c8cbd1);
+}
+
+.container.disabled > span {
+  color: var(--gray-color-gray030_text, #9fa4a9);
+}
