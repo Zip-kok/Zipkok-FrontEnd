@@ -10,6 +10,7 @@ interface LoginInputProps {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
   caption?: string;
+  maxLength?: number;
 }
 
 export default function LoginInput({
@@ -20,6 +21,7 @@ export default function LoginInput({
   onChange,
   onSubmit,
   caption,
+  maxLength = 524288,
 }: LoginInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -49,6 +51,7 @@ export default function LoginInput({
           value={value}
           placeholder={placeholder}
           ref={inputRef}
+          maxLength={maxLength}
         ></input>
 
         {!inputRef.current || inputRef.current.value === '' ? (

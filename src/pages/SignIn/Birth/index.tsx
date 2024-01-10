@@ -41,6 +41,7 @@ const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
         value={birth}
         placeholder="6자리 숫자로 입력해주세요"
         numberOnly
+        maxLength={6}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
