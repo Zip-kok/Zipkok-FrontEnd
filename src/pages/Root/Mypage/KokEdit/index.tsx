@@ -9,7 +9,6 @@ import Contract from './Contract';
 
 import Header from '../../../../components/Header';
 import TopMenu from '../../../../components/TopMenu';
-import Hightlight from '../../../../components/Highlight';
 
 import useNaviStore from '../../../../contexts/naviStore';
 
@@ -29,13 +28,17 @@ export const KokEdit = () => {
     setNaviMenu('my');
   }, []);
 
+  const navigate = useNavigate();
+
   const [menu, setMenu] = useState<Menu>('집 주변');
 
   return (
     <div className={styles.root}>
       <Header
         title="콕리스트 항목 수정하기"
-        onBack={() => {}}
+        onBack={() => {
+          navigate(-1);
+        }}
         backBtnEnabled
       ></Header>
 
