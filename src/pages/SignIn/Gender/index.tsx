@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
-import BottomBtn from '../../../components/BottomBtn';
-import RadioBtn from '../../../components/RadioBtn';
+
 import styles from './Gender.module.css';
 
+import BottomBtn from '../../../components/BottomBtn';
+import RadioBtn from '../../../components/RadioBtn';
+
+import { Gender as GenderType } from '../';
+
 interface GenderProps {
-  onConfirm: () => void;
+  onConfirm: (gender: GenderType) => void;
 }
 
 export default function Gender({ onConfirm }: GenderProps) {
-  const genderOptions = ['남성', '여성', '비공개'];
-  const [selectedGenderIndex, setSelectedGenderIndex] = useState(-1);
-
-  const handleGenderSelect = (index: number) => {
-    setSelectedGenderIndex(index);
-  };
+  const genderOptions = ['남성', '여성', '비공개'] as Exclude<
+    GenderType,
+    null
+  >[];
+  const [gender, setGender] = useState<GenderType>(null);
 
   const handleSubmit = () => {
-    if (selectedGenderIndex !== -1) {
-      onConfirm();
+    if (gender !== null) {
+      onConfirm(gender);
     }
   };
 
@@ -31,24 +34,24 @@ export default function Gender({ onConfirm }: GenderProps) {
         </h1>
       </div>
 
-      <ul>
-        {genderOptions.map((gender, index) => (
+      <ul className={styles.genderBtnContainer}>
+        {genderOptions.map((genderOption) => (
           <RadioBtn
-            key={index}
-            content={gender}
-            isSelected={selectedGenderIndex === index}
-            handleClick={() => handleGenderSelect(index)}
+            key={genderOption}
+            content={genderOption}
+            isSelected={genderOption === gender}
+            handleClick={() => setGender(genderOption)}
           />
         ))}
       </ul>
 
-      <div className={styles.wrapper}>
-        <BottomBtn
-          onClick={handleSubmit}
-          text="확인"
-          disabled={selectedGenderIndex === -1}
-        />
-      </div>
+      <div className={styles.blank}></div>
+
+      <BottomBtn
+        onClick={handleSubmit}
+        text="확인"
+        disabled={gender === null}
+      />
     </div>
   );
 }

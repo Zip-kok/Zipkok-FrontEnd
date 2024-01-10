@@ -9,7 +9,11 @@ interface LoginInputProps {
   numberOnly?: boolean;
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
   caption?: string;
+  maxLength?: number;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export default function LoginInput({
@@ -19,9 +23,17 @@ export default function LoginInput({
   numberOnly,
   onChange,
   onSubmit,
+  onFocus,
+  onBlur,
   caption,
+  maxLength = 524288,
 }: LoginInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
+    if (e.currentTarget.value.length > maxLength) return;
+    onChange && onChange(e);
+  }
 
   function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
@@ -44,11 +56,14 @@ export default function LoginInput({
       <div className={styles.textBox}>
         <input
           type={numberOnly ? 'number' : 'text'}
-          onChange={onChange}
+          onChange={handleChange}
           onKeyUp={handleKeyUp}
+          onFocus={onFocus}
+          onBlur={onBlur}
           value={value}
           placeholder={placeholder}
           ref={inputRef}
+          maxLength={maxLength}
         ></input>
 
         {!inputRef.current || inputRef.current.value === '' ? (

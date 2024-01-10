@@ -5,9 +5,7 @@
 }
 
 .header {
-  padding: 16px 0;
-  margin: 0 20px;
-  margin-bottom: 30px;
+  margin: 44px 20px 58px 20px;
 }
 
 .header > h1 {
@@ -18,16 +16,13 @@
   font-style: normal;
   font-weight: 700;
   letter-spacing: 0.024px;
-  margin-top: 28px;
 }
 
-.wrapper {
-  position: absolute;
-  bottom: 12px;
-  width: 100%;
-}
-
-.root > ul {
+.genderBtnContainer {
   display: flex;
   gap: 10px;
+}
+
+.blank {
+  height: 100%;
 }

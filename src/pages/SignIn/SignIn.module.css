@@ -9,10 +9,10 @@
 
 .content {
   width: 100%;
-  height: calc(100vh - 92px);
+  height: calc(100vh - 64px);
   box-sizing: border-box;
 }
 
-.leftArrowIcon {
-  margin-top: 16px;
+.content.full {
+  height: 100vh;
 }

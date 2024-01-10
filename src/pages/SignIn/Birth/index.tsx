@@ -1,13 +1,15 @@
 import React, { FormEvent, useState } from 'react';
-import BottomBtn from '../../../components/BottomBtn';
-import LoginInput from '../../../components/LoginInput';
+
 import styles from './Birth.module.css';
 
+import BottomBtn from '../../../components/BottomBtn';
+import LoginInput from '../../../components/LoginInput';
+
 interface BirthProps {
-  onConfirm: () => void;
+  onConfirm: (birth: string) => void;
 }
 
-const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
+const Birth = ({ onConfirm }: BirthProps) => {
   const [birth, setBirth] = useState<string>('');
   const [isBirthValid, setIsBirthValid] = useState<boolean>(false);
 
@@ -22,7 +24,7 @@ const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
 
   const handleSubmit = () => {
     if (isBirthValid) {
-      onConfirm();
+      onConfirm(birth);
     }
   };
 
@@ -35,20 +37,19 @@ const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
           알려주세요.
         </h1>
       </div>
+
       <LoginInput
         value={birth}
         placeholder="6자리 숫자로 입력해주세요"
         numberOnly
+        maxLength={6}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
-      <div className={styles.wrapper}>
-        <BottomBtn
-          onClick={handleSubmit}
-          text="확인"
-          disabled={!isBirthValid}
-        />
-      </div>
+
+      <div className={styles.blank}></div>
+
+      <BottomBtn onClick={handleSubmit} text="확인" disabled={!isBirthValid} />
     </div>
   );
 };
