@@ -27,7 +27,9 @@ export const Mypage = () => {
   const navigate = useNavigate();
 
   const handleKeepClick = () => {};
-  const handleListEditClick = () => {};
+  const handleListEditClick = () => {
+    navigate('/kokEdit');
+  };
   const handlePinClick = () => {};
   const handleRecentClick = () => {};
   const handleNoticeClick = () => {};
