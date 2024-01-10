@@ -8,7 +8,9 @@ import styles from './Root.module.css';
 export default function Root() {
   return (
     <div className={styles.root}>
-      <Outlet />
+      <div className={styles.content}>
+        <Outlet />
+      </div>
       <NaviBar />
     </div>
   );
