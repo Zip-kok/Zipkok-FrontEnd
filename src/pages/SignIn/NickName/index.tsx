@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+
+import styles from './NickName.module.css';
+
 import BottomBtn from '../../../components/BottomBtn';
 import LoginInput from '../../../components/LoginInput';
-import styles from './NickName.module.css';
 
 interface NickNameProps {
   onConfirm: () => void;

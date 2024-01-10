@@ -1,7 +1,9 @@
 import React, { FormEvent, useState } from 'react';
+
+import styles from './Birth.module.css';
+
 import BottomBtn from '../../../components/BottomBtn';
 import LoginInput from '../../../components/LoginInput';
-import styles from './Birth.module.css';
 
 interface BirthProps {
   onConfirm: () => void;

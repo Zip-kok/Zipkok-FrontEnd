@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+
+import styles from './Gender.module.css';
+
 import BottomBtn from '../../../components/BottomBtn';
 import RadioBtn from '../../../components/RadioBtn';
-import styles from './Gender.module.css';
 
 interface GenderProps {
   onConfirm: () => void;
