@@ -6,7 +6,7 @@ import BottomBtn from '../../../components/BottomBtn';
 import LoginInput from '../../../components/LoginInput';
 
 interface BirthProps {
-  onConfirm: () => void;
+  onConfirm: (birth: string) => void;
 }
 
 const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
@@ -24,7 +24,7 @@ const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
 
   const handleSubmit = () => {
     if (isBirthValid) {
-      onConfirm();
+      onConfirm(birth);
     }
   };
 
