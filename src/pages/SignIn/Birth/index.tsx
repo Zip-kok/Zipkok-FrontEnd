@@ -9,7 +9,7 @@ interface BirthProps {
   onConfirm: (birth: string) => void;
 }
 
-const Birth: React.FC<BirthProps> = ({ onConfirm }) => {
+const Birth = ({ onConfirm }: BirthProps) => {
   const [birth, setBirth] = useState<string>('');
   const [isBirthValid, setIsBirthValid] = useState<boolean>(false);
 

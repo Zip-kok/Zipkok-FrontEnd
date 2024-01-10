@@ -13,20 +13,37 @@ export default function NickName({ onConfirm }: NickNameProps) {
   const [nickname, setNickname] = useState('');
   const [isNicknameValid, setIsNicknameValid] = useState(false);
   const [isNotNicknameExist, setIsNotNicknameExist] = useState(true);
-  const [isTouched, setIsTouched] = useState(false); // 입력이 시작되었는지 추적하기 위한 상태
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleInputChange = async (e: React.FormEvent<HTMLInputElement>) => {
-    const inputVal = e.currentTarget.value;
-    if (!isTouched) setIsTouched(true); // 사용자가 입력을 시작하면 isTouched를 true로 설정
-    setNickname(inputVal);
-    setIsNicknameValid(inputVal.length >= 1 && inputVal.length <= 12);
+    const value = e.currentTarget.value;
+    setNickname(value);
+    setIsNicknameValid(value.length >= 1 && value.length <= 12);
+    setIsNotNicknameExist(true);
   };
 
   const handleSubmit = () => {
     if (!isNicknameValid) {
       return;
     }
+
+    // 닉네임이 중복되지 않았을 시
+    if (true) {
+      setIsNotNicknameExist(true);
+    } else {
+      setIsNotNicknameExist(false);
+      return;
+    }
+
     onConfirm(nickname);
+  };
+
+  const hnadleInputFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
   };
 
   return (
@@ -38,17 +55,24 @@ export default function NickName({ onConfirm }: NickNameProps) {
           입력해주세요.
         </h1>
       </div>
+
       <LoginInput
         value={nickname}
         placeholder="최대 12자"
         onChange={handleInputChange}
+        onFocus={hnadleInputFocus}
+        onBlur={handleInputBlur}
+        maxLength={12}
       />
-      {isTouched && !isNicknameValid && (
-        <div className={styles.warning}>닉네임은 최대 12자까지 가능합니다.</div>
-      )}
-      {!isNotNicknameExist && (
-        <div className={styles.warning}>이미 존재하는 닉네임입니다.</div>
-      )}
+
+      <div className={styles.warning}>
+        {isInputFocused &&
+          !isNicknameValid &&
+          '닉네임은 1자 이상 12자 이하여야 합니다.'}
+
+        {!isNotNicknameExist && '이미 존재하는 닉네임입니다.'}
+      </div>
+
       <div className={styles.wrapper}>
         <BottomBtn
           onClick={handleSubmit}
