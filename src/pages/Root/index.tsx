@@ -1,7 +1,9 @@
 import React from 'react';
 
-import styles from './Root.module.scss';
+import NaviBar from '../../components/NaviBar';
+
+import styles from './Root.module.css';
 
 export default function Root() {
-  return <div>Zipkok</div>;
+  return <div className={styles.root}></div>;
 }
