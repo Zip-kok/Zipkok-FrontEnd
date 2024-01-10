@@ -12,7 +12,7 @@ interface HighlightProps {
   highlightEnabled?: boolean;
 }
 
-const IconTextBtn = ({
+const Highlight = ({
   text,
   onEnable,
   onDisable,
@@ -43,4 +43,4 @@ const IconTextBtn = ({
   );
 };
 
-export default IconTextBtn;
+export default Highlight;
