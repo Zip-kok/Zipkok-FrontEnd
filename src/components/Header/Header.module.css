@@ -4,12 +4,20 @@
   align-items: center;
   padding: 12px 16px;
   height: 56px;
+  box-sizing: border-box;
 }
 
 .titleContainer {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.titleContainer > span {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .btnContainer {
