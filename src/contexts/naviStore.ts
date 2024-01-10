@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import NaviMneu from '../types/NaviMenu';
+import NaviMenu from '../types/NaviMenu';
 
 export interface NaviStore {
-  naviMenu: NaviMneu;
-  setNaviMenu: (naviMenu: NaviMneu) => void;
+  naviMenu: NaviMenu;
+  setNaviMenu: (naviMenu: NaviMenu) => void;
 }
 
 const initialState: NaviStore = {
@@ -14,7 +14,7 @@ const initialState: NaviStore = {
 const useNaviStore = create<NaviStore>((set) => ({
   ...initialState,
 
-  setNaviMenu: (naviMenu: NaviMneu) => {
+  setNaviMenu: (naviMenu: NaviMenu) => {
     set((state) => ({
       ...state,
       naviMenu,
