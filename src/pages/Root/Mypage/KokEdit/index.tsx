@@ -39,8 +39,6 @@ export const KokEdit = () => {
         backBtnEnabled
       ></Header>
 
-      <div className={styles.content}>{pages[menu]}</div>
-
       <TopMenu
         menus={menuOptions.map((menu) => ({
           name: menu,
@@ -49,6 +47,8 @@ export const KokEdit = () => {
         selectedMenu={menu}
         height={48}
       />
+
+      <div className={styles.content}>{pages[menu]}</div>
     </div>
   );
 };

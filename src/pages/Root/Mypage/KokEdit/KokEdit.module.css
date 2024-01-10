@@ -2,3 +2,22 @@
   display: flex;
   flex-direction: column;
 }
+
+.highlightContainer {
+  padding: 0 20px;
+}
+
+.highlightContainer > h1 {
+  margin: 47px 0 15px 0;
+  color: #000;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.highlightContainer > div {
+  display: flex;
+  flex-direction: row;
+  gap: 12px 8px;
+  flex-wrap: wrap;
+}
