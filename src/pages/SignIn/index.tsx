@@ -50,11 +50,9 @@ export default function SignIn() {
     complete: <Complete />,
   };
 
-  // 뒤로 가기 버튼을 표시할지 여부
-  function backBtnEnabled(step: Step) {
-    if (step === 'nickname') {
-      return false;
-    } else if (step === 'complete') {
+  // 상단 바 및 뒤로 가기 버튼을 표시할지 여부
+  function topBarEnabled(step: Step) {
+    if (step === 'complete') {
       return false;
     } else {
       return true;
@@ -73,16 +71,22 @@ export default function SignIn() {
   return (
     <div className={styles.root}>
       {/* 상단 바 */}
-      {backBtnEnabled(step) && (
+      {topBarEnabled(step) && (
         <div className={styles.topBar}>
           <button className="imgBtn" onClick={handleBackClick}>
-            <img className={styles.leftArrowIcon} src={leftArrowIcon}></img>
+            <img src={leftArrowIcon}></img>
           </button>
         </div>
       )}
 
       {/* 콘텐츠 */}
-      <div className={styles.content}>{steps[step]}</div>
+      <div
+        className={`${styles.content} ${
+          !topBarEnabled(step) ? styles.full : ''
+        }`}
+      >
+        {steps[step]}
+      </div>
     </div>
   );
 }

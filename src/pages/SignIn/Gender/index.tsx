@@ -12,7 +12,10 @@ interface GenderProps {
 }
 
 export default function Gender({ onConfirm }: GenderProps) {
-  const genderOptions = ['남성', '여성', '비공개'] as Exclude<GenderType, null>[];
+  const genderOptions = ['남성', '여성', '비공개'] as Exclude<
+    GenderType,
+    null
+  >[];
   const [gender, setGender] = useState<GenderType>(null);
 
   const handleSubmit = () => {
@@ -42,13 +45,13 @@ export default function Gender({ onConfirm }: GenderProps) {
         ))}
       </ul>
 
-      <div className={styles.wrapper}>
-        <BottomBtn
-          onClick={handleSubmit}
-          text="확인"
-          disabled={gender === null}
-        />
-      </div>
+      <div className={styles.blank}></div>
+
+      <BottomBtn
+        onClick={handleSubmit}
+        text="확인"
+        disabled={gender === null}
+      />
     </div>
   );
 }

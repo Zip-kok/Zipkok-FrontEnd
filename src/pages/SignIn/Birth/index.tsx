@@ -37,6 +37,7 @@ const Birth = ({ onConfirm }: BirthProps) => {
           알려주세요.
         </h1>
       </div>
+
       <LoginInput
         value={birth}
         placeholder="6자리 숫자로 입력해주세요"
@@ -45,13 +46,10 @@ const Birth = ({ onConfirm }: BirthProps) => {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
-      <div className={styles.wrapper}>
-        <BottomBtn
-          onClick={handleSubmit}
-          text="확인"
-          disabled={!isBirthValid}
-        />
-      </div>
+
+      <div className={styles.blank}></div>
+
+      <BottomBtn onClick={handleSubmit} text="확인" disabled={!isBirthValid} />
     </div>
   );
 };

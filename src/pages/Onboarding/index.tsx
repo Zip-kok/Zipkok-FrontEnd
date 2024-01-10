@@ -105,7 +105,7 @@ export default function Onboarding() {
       {/* 콘텐츠 */}
       <div
         className={`${styles.content} ${
-          step === 'complete' ? styles.full : ''
+          !topBarEnabled(step) ? styles.full : ''
         }`}
       >
         {steps[step]}

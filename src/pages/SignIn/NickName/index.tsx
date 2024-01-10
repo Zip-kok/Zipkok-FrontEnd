@@ -73,13 +73,13 @@ export default function NickName({ onConfirm }: NickNameProps) {
         {!isNotNicknameExist && '이미 존재하는 닉네임입니다.'}
       </div>
 
-      <div className={styles.wrapper}>
-        <BottomBtn
-          onClick={handleSubmit}
-          text="확인"
-          disabled={!isNicknameValid || !isNotNicknameExist}
-        />
-      </div>
+      <div className={styles.blank}></div>
+
+      <BottomBtn
+        onClick={handleSubmit}
+        text="확인"
+        disabled={!isNicknameValid || !isNotNicknameExist}
+      />
     </div>
   );
 }

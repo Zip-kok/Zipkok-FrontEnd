@@ -5,7 +5,17 @@
 }
 
 .header {
-  margin: 108px 20px 58px 20px;
+  margin: 44px 20px 58px 20px;
+}
+
+.header > h1 {
+  margin: 0;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.024px;
 }
 
 .header > h1 {
@@ -29,8 +39,6 @@
   margin-left: 20px;
 }
 
-.wrapper {
-  position: absolute;
-  bottom: 12px;
-  width: 100%;
+.blank {
+  height: 100%;
 }
