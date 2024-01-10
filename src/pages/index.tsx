@@ -2,15 +2,24 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import Root from './Root';
+
 import Login from './Login';
 import Onboarding from './Onboarding';
 import SignIn from './SignIn';
-import { Mypage } from './Mypage';
+
+import { Kok } from './Root/Kok';
+import { Home } from './Root/Home';
+import { Mypage } from './Root/Mypage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    children: [
+      { path: 'kok', element: <Kok /> },
+      { path: 'home', element: <Home /> },
+      { path: 'my', element: <Mypage /> },
+    ],
   },
   {
     path: 'login',
@@ -24,10 +33,6 @@ const router = createBrowserRouter([
     path: 'onboarding',
     element: <Onboarding />,
   },
-  {
-    path: 'myPage',
-    element: <Mypage />
-  }
 ]);
 
 export default router;
