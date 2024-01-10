@@ -10,7 +10,7 @@ import homeDefault from '../../assets/img/navi/home_default.svg';
 import mySelected from '../../assets/img/navi/my_selected.svg';
 import myDefault from '../../assets/img/navi/my_default.svg';
 
-export default () => {
+const NaviBar = () => {
   const { naviMenu, setNaviMenu } = useNaviStore();
 
   return (
@@ -22,7 +22,7 @@ export default () => {
         onClick={() => setNaviMenu('kok')}
       >
         <img src={naviMenu === 'kok' ? koklistSelected : koklistDefault}></img>
-        <span>콕리스트</span>
+        <span className={styles.label}>콕리스트</span>
       </button>
 
       <button
@@ -32,7 +32,7 @@ export default () => {
         onClick={() => setNaviMenu('home')}
       >
         <img src={naviMenu === 'home' ? homeSelected : homeDefault}></img>
-        <span>콕리스트</span>
+        <span className={styles.label}>홈</span>
       </button>
 
       <button
@@ -42,8 +42,10 @@ export default () => {
         onClick={() => setNaviMenu('my')}
       >
         <img src={naviMenu === 'my' ? mySelected : myDefault}></img>
-        <span>콕리스트</span>
+        <span className={styles.label}>마이페이지</span>
       </button>
     </div>
   );
 };
+
+export default NaviBar;

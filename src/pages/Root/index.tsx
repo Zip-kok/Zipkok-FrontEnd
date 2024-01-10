@@ -5,5 +5,9 @@ import NaviBar from '../../components/NaviBar';
 import styles from './Root.module.css';
 
 export default function Root() {
-  return <div className={styles.root}></div>;
+  return (
+    <div className={styles.root}>
+      <NaviBar />
+    </div>
+  );
 }
