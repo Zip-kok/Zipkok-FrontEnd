@@ -14,11 +14,12 @@ const initialState: NaviStore = {
 const useNaviStore = create<NaviStore>((set) => ({
   ...initialState,
 
-  setNaviMenu: (naviMenu: NaviMneu) =>
+  setNaviMenu: (naviMenu: NaviMneu) => {
     set((state) => ({
       ...state,
       naviMenu,
-    })),
+    }));
+  },
 }));
 
 export default useNaviStore;

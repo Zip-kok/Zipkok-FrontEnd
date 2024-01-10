@@ -1,7 +1,11 @@
-import React from 'react';
-import IconTextBtn from '../../../components/IconTextBtn';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Mypage.module.css';
+
+import useNaviStore from '../../../contexts/naviStore';
+
+import IconTextBtn from '../../../components/IconTextBtn';
 
 import my from '../../../assets/img/my.svg';
 import edit from '../../../assets/img/edit.svg';
@@ -13,9 +17,13 @@ import notice from '../../../assets/img/notice.svg';
 import inquiry from '../../../assets/img/inquiry.svg';
 import logout from '../../../assets/img/logout.svg';
 import quit from '../../../assets/img/quit.svg';
-import { useNavigate } from 'react-router-dom';
 
 export const Mypage = () => {
+  const { setNaviMenu } = useNaviStore();
+  useEffect(() => {
+    setNaviMenu('my');
+  }, []);
+
   const navigate = useNavigate();
 
   const handleKeepClick = () => {};
