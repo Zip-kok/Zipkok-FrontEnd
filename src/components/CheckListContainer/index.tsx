@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Btn.module.css';
+import styles from './CheckListContainer.module.css';
 
 import onIcon from '../../assets/img/checkList/on.svg';
 import offIcon from '../../assets/img/checkList/off.svg';

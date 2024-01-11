@@ -1,10 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './KokEdit.module.css';
 
 import Highlight from '../../../../components/Highlight';
+import CheckList from '../../../../components/CheckList';
+import CheckListContainer from '../../../../components/CheckListContainer';
+
+interface CheckListItem {
+  name: string;
+  enabled: boolean;
+}
+
+interface CheckListGroup {
+  name: string;
+  enabled: boolean;
+  items: CheckListItem[];
+}
 
 const NearHome = () => {
+  const [checkListGroups, setCheckListGroups] = useState<CheckListGroup[]>([
+    {
+      name: '편의성',
+      enabled: true,
+      items: [
+        {
+          name: '학교 / 직장과 가깝나요?',
+          enabled: true,
+        },
+        {
+          name: '편의점이 근처에 있나요?',
+          enabled: true,
+        },
+        {
+          name: '대형마트가 근처에 있나요?',
+          enabled: true,
+        },
+      ],
+    },
+    {
+      name: '접근성',
+      enabled: true,
+      items: [
+        {
+          name: '언덕과 오르막길이 있나요?',
+          enabled: true,
+        },
+        {
+          name: '골목길이 많나요?',
+          enabled: true,
+        },
+        {
+          name: '버스정류장이 근처에 있나요?',
+          enabled: false,
+        },
+      ],
+    },
+    {
+      name: '예시',
+      enabled: false,
+      items: [],
+    },
+  ]);
+
+  const handleContainerClick = (index: number) => {};
+
+  const handleItemClick = (groupIndex: number, itemIndex: number) => {};
+
   return (
     <div className={styles.root}>
       <div className={styles.highlightContainer}>
@@ -20,6 +81,26 @@ const NearHome = () => {
           <Highlight text="트리플역세권" highlightEnabled />
           <Highlight text="마트" />
         </div>
+      </div>
+
+      <div>
+        {checkListGroups.map((group, groupIndex) => (
+          <CheckListContainer
+            name={group.name}
+            enabled={group.enabled}
+            onClick={() => handleContainerClick(groupIndex)}
+            key={group.name}
+          >
+            {group.items.map((item, itemIndex) => (
+              <CheckList
+                name={item.name}
+                enabled={item.enabled}
+                key={item.name}
+                onClick={() => handleItemClick(groupIndex, itemIndex)}
+              />
+            ))}
+          </CheckListContainer>
+        ))}
       </div>
     </div>
   );
