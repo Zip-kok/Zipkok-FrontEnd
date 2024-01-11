@@ -5,6 +5,7 @@ import styles from './KokEdit.module.css';
 import Highlight from '../../../../components/Highlight';
 import CheckList from '../../../../components/CheckList';
 import CheckListGroup from '../../../../components/CheckListGroup';
+import CheckListGroupContainer from '../../../../components/CheckListGroupContainer';
 
 interface CheckListItem {
   name: string;
@@ -83,7 +84,7 @@ const NearHome = () => {
         </div>
       </div>
 
-      <div>
+      <CheckListGroupContainer>
         {checkListGroups.map((group, groupIndex) => (
           <CheckListGroup
             name={group.name}
@@ -101,7 +102,7 @@ const NearHome = () => {
             ))}
           </CheckListGroup>
         ))}
-      </div>
+      </CheckListGroupContainer>
     </div>
   );
 };
