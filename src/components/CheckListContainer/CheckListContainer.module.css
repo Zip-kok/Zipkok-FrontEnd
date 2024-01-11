@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.header > span {
+.headerLeft > span {
   color: var(--gray-color-gray080_text, #1b1d1f);
   font-family: Pretendard;
   font-size: 18px;
