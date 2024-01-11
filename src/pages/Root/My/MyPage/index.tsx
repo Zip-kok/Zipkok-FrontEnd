@@ -5,6 +5,7 @@ import styles from './Mypage.module.css';
 
 import useNaviStore from '../../../../contexts/naviStore';
 
+import Header from '../../../../components/Header';
 import IconTextBtn from '../../../../components/IconTextBtn';
 
 import my from '../../../../assets/img/my.svg';
@@ -39,10 +40,17 @@ const Mypage = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.top}>
-        <img src={my} />
-        <p>마이페이지</p>
-      </div>
+      <Header
+        title="마이페이지"
+        titleIcon={my}
+        onBack={() => {
+          navigate(-1);
+        }}
+      >
+        <button className="imgBtn">
+          <img src={heart}></img>
+        </button>
+      </Header>
 
       <div className={styles.body}>
         <div className={styles.profile}>
