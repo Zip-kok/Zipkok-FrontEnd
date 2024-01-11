@@ -3,20 +3,9 @@ import React, { useState } from 'react';
 import styles from './KokEdit.module.css';
 
 import Highlight from '../../../../components/Highlight';
-import CheckList from '../../../../components/CheckList';
-import CheckListGroup from '../../../../components/CheckListGroup';
 import CheckListGroupContainer from '../../../../components/CheckListGroupContainer';
 
-interface CheckListItem {
-  name: string;
-  enabled: boolean;
-}
-
-interface CheckListGroup {
-  name: string;
-  enabled: boolean;
-  items: CheckListItem[];
-}
+import CheckListGroup from '../../../../types/CheckListGroup';
 
 const NearHome = () => {
   const [checkListGroups, setCheckListGroups] = useState<CheckListGroup[]>([
@@ -85,25 +74,10 @@ const NearHome = () => {
       </div>
 
       <div className={styles.checkListGroupContainer}>
-        <CheckListGroupContainer>
-          {checkListGroups.map((group, groupIndex) => (
-            <CheckListGroup
-              name={group.name}
-              enabled={group.enabled}
-              onClick={() => handleContainerClick(groupIndex)}
-              key={group.name}
-            >
-              {group.items.map((item, itemIndex) => (
-                <CheckList
-                  name={item.name}
-                  enabled={item.enabled}
-                  key={item.name}
-                  onClick={() => handleItemClick(groupIndex, itemIndex)}
-                />
-              ))}
-            </CheckListGroup>
-          ))}
-        </CheckListGroupContainer>
+        <CheckListGroupContainer
+          checkListGroups={checkListGroups}
+          setCheckListGroups={setCheckListGroups}
+        />
       </div>
     </div>
   );
