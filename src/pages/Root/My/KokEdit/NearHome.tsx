@@ -84,25 +84,27 @@ const NearHome = () => {
         </div>
       </div>
 
-      <CheckListGroupContainer>
-        {checkListGroups.map((group, groupIndex) => (
-          <CheckListGroup
-            name={group.name}
-            enabled={group.enabled}
-            onClick={() => handleContainerClick(groupIndex)}
-            key={group.name}
-          >
-            {group.items.map((item, itemIndex) => (
-              <CheckList
-                name={item.name}
-                enabled={item.enabled}
-                key={item.name}
-                onClick={() => handleItemClick(groupIndex, itemIndex)}
-              />
-            ))}
-          </CheckListGroup>
-        ))}
-      </CheckListGroupContainer>
+      <div className={styles.checkListGroupContainer}>
+        <CheckListGroupContainer>
+          {checkListGroups.map((group, groupIndex) => (
+            <CheckListGroup
+              name={group.name}
+              enabled={group.enabled}
+              onClick={() => handleContainerClick(groupIndex)}
+              key={group.name}
+            >
+              {group.items.map((item, itemIndex) => (
+                <CheckList
+                  name={item.name}
+                  enabled={item.enabled}
+                  key={item.name}
+                  onClick={() => handleItemClick(groupIndex, itemIndex)}
+                />
+              ))}
+            </CheckListGroup>
+          ))}
+        </CheckListGroupContainer>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@
 
 .highlightContainer {
   padding: 0 20px;
+  margin-bottom: 20px;
 }
 
 .highlightContainer > h1 {
@@ -20,4 +21,8 @@
   flex-direction: row;
   gap: 12px 8px;
   flex-wrap: wrap;
+}
+
+.checkListGroupContainer {
+  padding: 0 20px;
 }

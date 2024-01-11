@@ -27,7 +27,7 @@ export default function CheckListGroup({
           </button>
           <span>{name}</span>
         </div>
-        <div>
+        <div className={styles.drag}>
           <img src={dragIcon}></img>
         </div>
       </div>
