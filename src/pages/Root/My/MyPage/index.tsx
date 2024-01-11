@@ -8,16 +8,16 @@ import useNaviStore from '../../../../contexts/naviStore';
 import Header from '../../../../components/Header';
 import IconTextBtn from '../../../../components/IconTextBtn';
 
-import my from '../../../../assets/img/my.svg';
-import edit from '../../../../assets/img/edit.svg';
-import heart from '../../../../assets/img/heart.svg';
-import pen from '../../../../assets/img/pen.svg';
-import pin from '../../../../assets/img/pin.svg';
-import location_Pin from '../../../../assets/img/location_pin.svg';
-import notice from '../../../../assets/img/notice.svg';
-import inquiry from '../../../../assets/img/inquiry.svg';
-import logout from '../../../../assets/img/logout.svg';
-import quit from '../../../../assets/img/quit.svg';
+import my from '../../../../assets/img/mypage/my.svg';
+import edit from '../../../../assets/img/mypage/edit.svg';
+import heart from '../../../../assets/img/mypage/heart.svg';
+import pen from '../../../../assets/img/mypage/pen.svg';
+import pin from '../../../../assets/img/mypage/pin.svg';
+import location_Pin from '../../../../assets/img/mypage/location_pin.svg';
+import notice from '../../../../assets/img/mypage/notice.svg';
+import inquiry from '../../../../assets/img/mypage/inquiry.svg';
+import logout from '../../../../assets/img/mypage/logout.svg';
+import quit from '../../../../assets/img/mypage/quit.svg';
 
 const Mypage = () => {
   const { setNaviMenu } = useNaviStore();
