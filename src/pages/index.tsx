@@ -9,9 +9,10 @@ import SignIn from './SignIn';
 
 import { Kok } from './Root/Kok';
 import { Home } from './Root/Home';
-import { Mypage } from './Root/Mypage';
+import My from './Root/My';
 
-import { KokEdit } from './Root/Mypage/KokEdit';
+import MyPage from './Root/My/MyPage';
+import KokEdit from './Root/My/KokEdit';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,14 @@ const router = createBrowserRouter([
     children: [
       { path: 'kok', element: <Kok /> },
       { path: 'home', element: <Home /> },
-      { path: 'my', element: <Mypage /> },
-      { path: 'kokEdit', element: <KokEdit /> },
+      {
+        path: 'my',
+        element: <My />,
+        children: [
+          { index: true, element: <MyPage /> },
+          { path: 'kokEdit', element: <KokEdit /> },
+        ],
+      },
     ],
   },
   {

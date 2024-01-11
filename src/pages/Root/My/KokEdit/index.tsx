@@ -14,7 +14,7 @@ import useNaviStore from '../../../../contexts/naviStore';
 
 type Menu = '집 주변' | '집 내부' | '중개 / 계약';
 
-export const KokEdit = () => {
+const KokEdit = () => {
   const menuOptions = ['집 주변', '집 내부', '중개 / 계약'] as Menu[];
 
   const pages: Record<Menu, JSX.Element> = {
@@ -55,3 +55,5 @@ export const KokEdit = () => {
     </div>
   );
 };
+
+export default KokEdit;

@@ -3,22 +3,22 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './Mypage.module.css';
 
-import useNaviStore from '../../../contexts/naviStore';
+import useNaviStore from '../../../../contexts/naviStore';
 
-import IconTextBtn from '../../../components/IconTextBtn';
+import IconTextBtn from '../../../../components/IconTextBtn';
 
-import my from '../../../assets/img/my.svg';
-import edit from '../../../assets/img/edit.svg';
-import heart from '../../../assets/img/heart.svg';
-import pen from '../../../assets/img/pen.svg';
-import pin from '../../../assets/img/pin.svg';
-import location_Pin from '../../../assets/img/location_pin.svg';
-import notice from '../../../assets/img/notice.svg';
-import inquiry from '../../../assets/img/inquiry.svg';
-import logout from '../../../assets/img/logout.svg';
-import quit from '../../../assets/img/quit.svg';
+import my from '../../../../assets/img/my.svg';
+import edit from '../../../../assets/img/edit.svg';
+import heart from '../../../../assets/img/heart.svg';
+import pen from '../../../../assets/img/pen.svg';
+import pin from '../../../../assets/img/pin.svg';
+import location_Pin from '../../../../assets/img/location_pin.svg';
+import notice from '../../../../assets/img/notice.svg';
+import inquiry from '../../../../assets/img/inquiry.svg';
+import logout from '../../../../assets/img/logout.svg';
+import quit from '../../../../assets/img/quit.svg';
 
-export const Mypage = () => {
+const Mypage = () => {
   const { setNaviMenu } = useNaviStore();
   useEffect(() => {
     setNaviMenu('my');
@@ -28,7 +28,7 @@ export const Mypage = () => {
 
   const handleKeepClick = () => {};
   const handleListEditClick = () => {
-    navigate('/kokEdit');
+    navigate('./kokEdit');
   };
   const handlePinClick = () => {};
   const handleRecentClick = () => {};
@@ -103,3 +103,5 @@ export const Mypage = () => {
     </div>
   );
 };
+
+export default Mypage;
