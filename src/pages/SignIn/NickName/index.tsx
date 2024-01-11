@@ -31,8 +31,6 @@ export default function NickName({ onConfirm }: NickNameProps) {
     if (true) {
       setIsNotNicknameExist(true);
     } else {
-      setIsNotNicknameExist(false);
-      return;
     }
 
     onConfirm(nickname);
@@ -66,10 +64,6 @@ export default function NickName({ onConfirm }: NickNameProps) {
       />
 
       <div className={styles.warning}>
-        {isInputFocused &&
-          !isNicknameValid &&
-          '닉네임은 1자 이상 12자 이하여야 합니다.'}
-
         {!isNotNicknameExist && '이미 존재하는 닉네임입니다.'}
       </div>
 
