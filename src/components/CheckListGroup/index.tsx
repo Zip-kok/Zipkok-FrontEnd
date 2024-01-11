@@ -1,23 +1,23 @@
 import React from 'react';
-import styles from './CheckListContainer.module.css';
+import styles from './CheckListGroup.module.css';
 
 import onIcon from '../../assets/img/checkList/on.svg';
 import offIcon from '../../assets/img/checkList/off.svg';
 import dragIcon from '../../assets/img/checkList/drag.svg';
 
-interface CheckListContainerProps {
+interface CheckListGroupProps {
   name: string;
   enabled: boolean;
   children: React.ReactNode;
   onClick: () => void;
 }
 
-export default function CheckListContainer({
+export default function CheckListGroup({
   name,
   enabled = true,
   children,
   onClick,
-}: CheckListContainerProps) {
+}: CheckListGroupProps) {
   return (
     <div className={styles.container}>
       <div className={`${styles.header} ${!enabled ? styles.disabled : ''}`}>

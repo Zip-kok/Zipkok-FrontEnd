@@ -28,3 +28,7 @@
   font-weight: 600;
   line-height: 26px;
 }
+
+.header.disabled > .headerLeft > span {
+  color: var(--gray-color-gray020_border, #c8cbd1);
+}

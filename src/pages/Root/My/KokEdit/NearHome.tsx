@@ -4,7 +4,7 @@ import styles from './KokEdit.module.css';
 
 import Highlight from '../../../../components/Highlight';
 import CheckList from '../../../../components/CheckList';
-import CheckListContainer from '../../../../components/CheckListContainer';
+import CheckListGroup from '../../../../components/CheckListGroup';
 
 interface CheckListItem {
   name: string;
@@ -85,7 +85,7 @@ const NearHome = () => {
 
       <div>
         {checkListGroups.map((group, groupIndex) => (
-          <CheckListContainer
+          <CheckListGroup
             name={group.name}
             enabled={group.enabled}
             onClick={() => handleContainerClick(groupIndex)}
@@ -99,7 +99,7 @@ const NearHome = () => {
                 onClick={() => handleItemClick(groupIndex, itemIndex)}
               />
             ))}
-          </CheckListContainer>
+          </CheckListGroup>
         ))}
       </div>
     </div>
