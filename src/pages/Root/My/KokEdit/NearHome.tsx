@@ -67,7 +67,16 @@ const NearHome = () => {
     },
   ]);
 
-  const handleContainerClick = (index: number) => {};
+  const handleContainerClick = (index: number) => {
+    setCheckListGroups((prev) => {
+      const newCheckListGroups = [...prev];
+      newCheckListGroups[index].enabled = !newCheckListGroups[index].enabled;
+      newCheckListGroups[index].items.forEach((item) => {
+        item.enabled = newCheckListGroups[index].enabled;
+      });
+      return newCheckListGroups;
+    });
+  };
 
   const handleItemClick = (groupIndex: number, itemIndex: number) => {};
 
