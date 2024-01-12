@@ -78,7 +78,17 @@ const NearHome = () => {
     });
   };
 
-  const handleItemClick = (groupIndex: number, itemIndex: number) => {};
+  const handleItemClick = (groupIndex: number, itemIndex: number) => {
+    setCheckListGroups((prev) => {
+      const newCheckListGroups = [...prev];
+      newCheckListGroups[groupIndex].items[itemIndex].enabled =
+        !newCheckListGroups[groupIndex].items[itemIndex].enabled;
+      newCheckListGroups[groupIndex].enabled = newCheckListGroups[
+        groupIndex
+      ].items.some((item) => item.enabled);
+      return newCheckListGroups;
+    });
+  };
 
   // 드래그 앤 드롭
   useEffect(() => {
