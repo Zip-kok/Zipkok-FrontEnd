@@ -31,8 +31,6 @@ export default function NickName({ onConfirm }: NickNameProps) {
     if (true) {
       setIsNotNicknameExist(true);
     } else {
-      setIsNotNicknameExist(false);
-      return;
     }
 
     onConfirm(nickname);
