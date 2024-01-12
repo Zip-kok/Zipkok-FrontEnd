@@ -19,9 +19,7 @@ export const Kok = () => {
     setNaviMenu('kok');
   }, []);
 
-  function handleSubmit(): void {
-    throw new Error('Function not implemented.');
-  }
+  const handleClick = () => {};
 
   return (
     <div className={styles.root}>
@@ -46,7 +44,7 @@ export const Kok = () => {
       <div className={styles.bottomBtnContainer}>
         <BottomBtn
           text="새 콕리스트 작성"
-          onClick={handleSubmit}
+          onClick={handleClick}
           icon={<PenIcon />}
           style={{ backgroundColor: 'transparent' }}
         />

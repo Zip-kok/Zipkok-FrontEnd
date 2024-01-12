@@ -3,6 +3,10 @@
   width: 320px;
   height: 120px;
   padding: 0px 20px;
+  &:hover {
+    background: var(--gray-color-gray010, #efeff2);
+    cursor: pointer;
+  }
 }
 .item {
   position: relative;
