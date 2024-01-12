@@ -56,6 +56,7 @@
 .tag > p {
   height: 20px;
   padding: 2px 8px;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
@@ -81,8 +82,9 @@
   border: 2px solid var(--gray-color-gray020_border, #c8cbd1);
   border: 2px solid var(--gray-color-gray020_border, #c8cbd1);
   margin: 20px 0 30px 0;
+  font-family: Pretendard;
   > img {
-    margin-right: 8px;
+    margin-right: 4px;
     width: 32px;
     height: 32px;
   }

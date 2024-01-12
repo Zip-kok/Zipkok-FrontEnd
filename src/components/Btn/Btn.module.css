@@ -1,0 +1,41 @@
+.footer > button {
+  width: 100%;
+  height: 48px;
+}
+
+.btn {
+  background: var(--primary-color-primary_default, #fa4549);
+  color: var(--grayscale-white, #fff);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: none;
+  height: 48px;
+  width: 100%;
+  display: flex; /* Flexbox를 사용하여 아이콘과 텍스트를 행으로 배치 */
+  align-items: center; /* 아이콘과 텍스트를 수직 중앙으로 정렬 */
+  justify-content: center; /* 아이콘과 텍스트를 수평 중앙으로 정렬 */
+}
+
+.btn:focus,
+.btn:active {
+  background: var(--primary-color-primary_pressed, #ff2d2a);
+}
+
+.btn.round {
+  border-radius: 8px;
+}
+
+.btn:disabled {
+  background: var(--gray-color-gray020_border, #c8cbd1);
+  cursor: not-allowed;
+}
+
+/* .icon {
+  margin-right: 8px;
+  width: 32px;
+  height: 32px;
+} */

@@ -7,6 +7,10 @@ import styles from './RangeSlider.module.css';
 
 export type ScaleMethod = 'linear' | 'square' | 'logarithmic' | 'exponential';
 
+// markers: 분기점 배열
+// scaleMethod: 속도 조절 (square)
+// priceToString: 문자열로 매핑해주는 함수
+// onChange
 interface RangeSliderProps {
   min: number;
   max: number;
@@ -31,6 +35,7 @@ export default function RangeSlider({
   const getScaledValue = getScaler(min, max, scaleMethod);
   const getVisualValue = getUnscaler(min, max, scaleMethod);
 
+  //슬라이더 html 요소를 가르킴
   const slider1 = useRef<HTMLInputElement>(null);
   const slider2 = useRef<HTMLInputElement>(null);
 
@@ -46,10 +51,12 @@ export default function RangeSlider({
     getVisualValue(defaultRangeEnd),
   );
 
+  // 분기점 좌표 계산 함수
   function getLeftStyle(value: number) {
     return `calc((${value} / 100 * (100% - 24px) + 12px)`;
   }
 
+// min max 전환 함수
   function handleSliderChange(index: number) {
     console.assert(index === 1 || index === 2, 'index must be 1 or 2');
 
