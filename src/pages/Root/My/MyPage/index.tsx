@@ -27,7 +27,9 @@ const Mypage = () => {
 
   const navigate = useNavigate();
 
-  const handleKeepClick = () => {};
+  const handleKeepClick = () => {
+    navigate('./likedProperties');
+  };
   const handleListEditClick = () => {
     navigate('./kokEdit');
   };
