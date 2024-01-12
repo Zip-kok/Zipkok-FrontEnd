@@ -50,6 +50,7 @@ const KokEdit = () => {
         backBtnEnabled
       ></Header>
       <TopMenu />
+      <div className={styles.blank}></div>
       <Content />
     </div>
   );
