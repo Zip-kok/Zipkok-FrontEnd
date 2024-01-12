@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sortable from 'sortablejs';
 
 import styles from './KokEdit.module.css';
 
 import Highlight from '../../../../components/Highlight';
 import CheckList from '../../../../components/CheckList';
-import CheckListGroup from '../../../../components/CheckListGroup';
+import CheckListGroup, {
+  handleClass,
+} from '../../../../components/CheckListGroup';
 import CheckListGroupContainer from '../../../../components/CheckListGroupContainer';
 
 interface CheckListItem {
@@ -20,6 +22,7 @@ interface CheckListGroup {
 }
 
 const NearHome = () => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const [checkListGroups, setCheckListGroups] = useState<CheckListGroup[]>([
     {
       name: '편의성',
@@ -68,6 +71,31 @@ const NearHome = () => {
 
   const handleItemClick = (groupIndex: number, itemIndex: number) => {};
 
+  // 드래그 앤 드롭
+  useEffect(() => {
+    Sortable.create(containerRef.current as HTMLElement, {
+      direction: 'vertical',
+      delay: 150,
+      delayOnTouchOnly: true,
+      touchStartThreshold: 4,
+      animation: 150,
+      handle: `.${handleClass}`,
+
+      onUpdate: (event) => {
+        const { oldIndex, newIndex } = event;
+
+        if (oldIndex !== undefined && newIndex !== undefined) {
+          setCheckListGroups((prev) => {
+            const newCheckListGroups = [...prev];
+            const [removed] = newCheckListGroups.splice(oldIndex, 1);
+            newCheckListGroups.splice(newIndex, 0, removed);
+            return newCheckListGroups;
+          });
+        }
+      },
+    });
+  }, []);
+
   return (
     <div className={styles.root}>
       <div className={styles.highlightContainer}>
@@ -86,7 +114,7 @@ const NearHome = () => {
       </div>
 
       <div className={styles.checkListGroupContainer}>
-        <CheckListGroupContainer>
+        <CheckListGroupContainer ref={containerRef}>
           {checkListGroups.map((group, groupIndex) => (
             <CheckListGroup
               name={group.name}

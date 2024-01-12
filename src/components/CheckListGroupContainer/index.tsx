@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styles from './CheckListGroupContainer.module.css';
 
 interface CheckListGroupContainerProps {
   children: React.ReactNode;
 }
 
-export default function CheckListGroupContainer({
-  children,
-}: CheckListGroupContainerProps) {
-  return <div className={styles.container}>{children}</div>;
-}
+const CheckListGroupContainer = forwardRef<
+  HTMLDivElement,
+  CheckListGroupContainerProps
+>((props, ref) => (
+  <div className={styles.container} ref={ref}>
+    {props.children}
+  </div>
+));
+CheckListGroupContainer.displayName = 'CheckListGroupContainer';
+
+export default CheckListGroupContainer;

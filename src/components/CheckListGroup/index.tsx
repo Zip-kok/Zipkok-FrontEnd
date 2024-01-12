@@ -28,10 +28,12 @@ export default function CheckListGroup({
           <span>{name}</span>
         </div>
         <div className={styles.drag}>
-          <img src={dragIcon}></img>
+          <img src={dragIcon} draggable={false}></img>
         </div>
       </div>
       <div className={styles.checkListContainer}>{children}</div>
     </div>
   );
 }
+
+export const handleClass = styles.drag;
