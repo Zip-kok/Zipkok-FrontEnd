@@ -23,9 +23,11 @@ const KokEdit = () => {
     '중개 / 계약': <Contract />,
   };
 
-  const { setNaviMenu } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+
   useEffect(() => {
     setNaviMenu('my');
+    setShowNaviBar(false);
   }, []);
 
   const navigate = useNavigate();

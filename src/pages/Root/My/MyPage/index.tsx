@@ -20,9 +20,10 @@ import logout from '../../../../assets/img/logout.svg';
 import quit from '../../../../assets/img/quit.svg';
 
 const Mypage = () => {
-  const { setNaviMenu } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('my');
+    setShowNaviBar(true);
   }, []);
 
   const navigate = useNavigate();

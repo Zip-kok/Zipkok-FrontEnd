@@ -6,9 +6,10 @@ import useNaviStore from '../../../contexts/naviStore';
 import styles from './Kok.module.css';
 
 export const Kok = () => {
-  const { setNaviMenu } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('kok');
+    setShowNaviBar(true);
   }, []);
 
   return <div className={styles.root}>콕리스트</div>;
