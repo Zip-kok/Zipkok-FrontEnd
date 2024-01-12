@@ -13,15 +13,16 @@ import useMenu from '../../../../hooks/useMenu';
 import useNaviStore from '../../../../contexts/naviStore';
 
 const KokEdit = () => {
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const navigate = useNavigate();
 
+  // 하단 내비게이션 바 설정
+  const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('my');
     setShowNaviBar(false);
   }, []);
 
-  const navigate = useNavigate();
-
+  // 상단 메뉴 설정
   const [TopMenu, Content, menuIndex] = useMenu([
     {
       name: '집 주변',

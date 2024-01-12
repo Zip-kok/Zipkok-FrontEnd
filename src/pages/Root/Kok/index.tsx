@@ -6,6 +6,9 @@ import useNaviStore from '../../../contexts/naviStore';
 import styles from './Kok.module.css';
 
 export const Kok = () => {
+  const navigate = useNavigate();
+
+  // 하단 내비게이션 바 설정
   const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('kok');

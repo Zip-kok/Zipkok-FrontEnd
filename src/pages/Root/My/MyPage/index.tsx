@@ -20,13 +20,14 @@ import logout from '../../../../assets/img/logout.svg';
 import quit from '../../../../assets/img/quit.svg';
 
 const Mypage = () => {
+  const navigate = useNavigate();
+
+  // 하단 내비게이션 바 설정
   const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('my');
     setShowNaviBar(true);
   }, []);
-
-  const navigate = useNavigate();
 
   const handleKeepClick = () => {};
   const handleListEditClick = () => {
