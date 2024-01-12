@@ -27,6 +27,9 @@ const Mypage = () => {
 
   const navigate = useNavigate();
 
+  const handleProfileEditClick = () => {
+    navigate('./ProfileEdit')
+  }
   const handleKeepClick = () => {};
   const handleListEditClick = () => {
     navigate('./kokEdit');
@@ -63,7 +66,7 @@ const Mypage = () => {
           </div>
         </div>
 
-        <button className={styles.profileEdit}>
+        <button className={styles.profileEdit} onClick={handleProfileEditClick}>
           <img src={edit} />
           프로필 수정하기
         </button>
