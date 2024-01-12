@@ -1,0 +1,112 @@
+.root {
+  display: flex;
+  width: 320px;
+  height: 120px;
+  padding: 0px 20px;
+  &:hover {
+    background: var(--gray-color-gray010, #efeff2);
+    cursor: pointer;
+  }
+}
+.item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.propertyImg {
+  border-radius: 8px;
+  width: 120px;
+  height: 96px;
+  object-fit: cover;
+  position: relative;
+}
+
+.heartBtn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  bottom: 6px;
+  right: 0px;
+  padding: 0;
+
+  width: 32px;
+  height: 32px;
+}
+.listBtn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  bottom: 6px;
+  right: -16px;
+  padding: 0;
+
+  width: 32px;
+  height: 32px;
+}
+
+.price {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+
+  /* head_20(28)_bold */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 140% */
+}
+
+.address {
+  color: var(--gray-color-gray050_text, #4b5259);
+
+  /* body_14(20)_regular */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.property {
+  color: var(--gray-color-gray050_text, #4b5259);
+
+  /* caption_12(16)_regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  margin-top: 9px;
+  margin-bottom: 3px;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+.tag {
+  display: flex;
+  height: 20px;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--gray-color-gray020_border, #c8cbd1);
+  color: var(--gray-color-gray050_text, #4b5259);
+  text-align: center;
+
+  /* caption_12(16)_regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.detail {
+  gap: 12px;
+  position: relative;
+}

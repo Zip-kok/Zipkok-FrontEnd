@@ -6,6 +6,7 @@ interface BtnProps {
   text: string;
   isKeyboardOpen?: boolean;
   disabled?: boolean;
+  icon?: React.ReactNode;
 }
 
 export default function Btn({
@@ -13,6 +14,7 @@ export default function Btn({
   text,
   isKeyboardOpen,
   disabled,
+  icon,
 }: BtnProps) {
   return (
     <button
@@ -20,6 +22,7 @@ export default function Btn({
       disabled={disabled}
       onClick={onClick}
     >
+      {icon && <span className={styles.icon}>{icon}</span>}
       <span>{text}</span>
     </button>
   );

@@ -13,6 +13,7 @@ import My from './Root/My';
 
 import MyPage from './Root/My/MyPage';
 import KokEdit from './Root/My/KokEdit';
+import LikedProperties from './Root/My/LikedProperties';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <MyPage /> },
           { path: 'kokEdit', element: <KokEdit /> },
+          { path: 'likedProperties', element: <LikedProperties /> },
         ],
       },
     ],

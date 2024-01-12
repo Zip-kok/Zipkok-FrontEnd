@@ -1,4 +1,13 @@
 .root {
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+}
+
+.bottomBtnContainer {
+  position: fixed;
+  bottom: 64px;
+  width: 100%;
+
+  background-color: transparent;
 }

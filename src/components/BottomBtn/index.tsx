@@ -7,8 +7,10 @@ interface BottomBtnProps {
   onClick: () => void;
   text: string;
   onAnchorClick?: () => void;
+  icon?: React.ReactNode;
   anchorText?: string;
   disabled?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function BottomBtn({
@@ -16,7 +18,9 @@ export default function BottomBtn({
   text,
   onAnchorClick,
   anchorText = '',
+  icon,
   disabled = false,
+  style,
 }: BottomBtnProps) {
   console.assert(
     anchorText === '' || onAnchorClick !== undefined,
@@ -26,7 +30,10 @@ export default function BottomBtn({
   const isKeyboardOpen = useDetectKeyboardOpen();
 
   return (
-    <div className={`${styles.container} ${isKeyboardOpen ? styles.full : ''}`}>
+    <div
+      style={style}
+      className={`${styles.container} ${isKeyboardOpen ? styles.full : ''}`}
+    >
       {anchorText !== '' && (
         <a className={styles.anchor} onClick={onAnchorClick}>
           {anchorText}
@@ -37,6 +44,7 @@ export default function BottomBtn({
         text={text}
         isKeyboardOpen={isKeyboardOpen}
         disabled={disabled}
+        icon={icon}
       />
     </div>
   );
