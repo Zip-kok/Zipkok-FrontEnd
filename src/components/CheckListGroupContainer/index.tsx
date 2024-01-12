@@ -1,18 +1,83 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
+import { ReactSortable } from 'react-sortablejs';
+
 import styles from './CheckListGroupContainer.module.css';
 
-interface CheckListGroupContainerProps {
-  children: React.ReactNode;
+import CheckList from '../../components/CheckList';
+import CheckListGroup, { handleClass } from '../../components/CheckListGroup';
+
+export interface CheckListGroupContainerProps {
+  checkListGroups: CheckListGroup[];
+  setCheckListGroups: React.Dispatch<React.SetStateAction<CheckListGroup[]>>;
 }
 
-const CheckListGroupContainer = forwardRef<
-  HTMLDivElement,
-  CheckListGroupContainerProps
->((props, ref) => (
-  <div className={styles.container} ref={ref}>
-    {props.children}
-  </div>
-));
-CheckListGroupContainer.displayName = 'CheckListGroupContainer';
+export interface CheckListItem {
+  name: string;
+  enabled: boolean;
+}
 
-export default CheckListGroupContainer;
+export interface CheckListGroup {
+  id: number;
+  name: string;
+  enabled: boolean;
+  items: CheckListItem[];
+}
+
+export default function CheckListGroupContainer({
+  checkListGroups,
+  setCheckListGroups,
+}: CheckListGroupContainerProps) {
+  const handleContainerClick = (index: number) => {
+    setCheckListGroups((prev) => {
+      const newCheckList = [...prev];
+      newCheckList[index].enabled = !newCheckList[index].enabled;
+      newCheckList[index].items.forEach((item) => {
+        item.enabled = newCheckList[index].enabled;
+      });
+      return newCheckList;
+    });
+  };
+
+  const handleItemClick = (groupIndex: number, itemIndex: number) => {
+    setCheckListGroups((prev) => {
+      const newCheckListGroups = [...prev];
+      newCheckListGroups[groupIndex].items[itemIndex].enabled =
+        !newCheckListGroups[groupIndex].items[itemIndex].enabled;
+      newCheckListGroups[groupIndex].enabled = newCheckListGroups[
+        groupIndex
+      ].items.some((item) => item.enabled);
+      return newCheckListGroups;
+    });
+  };
+
+  return (
+    <ReactSortable
+      className={styles.container}
+      list={checkListGroups}
+      setList={setCheckListGroups}
+      delay={150}
+      delayOnTouchOnly
+      touchStartThreshold={4}
+      animation={150}
+      handle={`.${handleClass}`}
+    >
+      {checkListGroups.map((group, groupIndex) => (
+        <CheckListGroup
+          name={group.name}
+          enabled={group.enabled}
+          onClick={() => handleContainerClick(groupIndex)}
+          key={`${group.id}`}
+        >
+          {group.items.map((item, itemIndex) => (
+            <CheckList
+              name={item.name}
+              enabled={item.enabled}
+              key={item.name}
+              onClick={() => handleItemClick(groupIndex, itemIndex)}
+            />
+          ))}
+        </CheckListGroup>
+      ))}
+    </ReactSortable>
+  );
+}

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './CheckListGroup.module.css';
 
 import onIcon from '../../assets/img/checkList/on.svg';
 import offIcon from '../../assets/img/checkList/off.svg';
 import dragIcon from '../../assets/img/checkList/drag.svg';
 
-interface CheckListGroupProps {
+export interface CheckListGroupProps {
   name: string;
   enabled: boolean;
   children: React.ReactNode;
@@ -35,5 +35,4 @@ export default function CheckListGroup({
     </div>
   );
 }
-
 export const handleClass = styles.drag;

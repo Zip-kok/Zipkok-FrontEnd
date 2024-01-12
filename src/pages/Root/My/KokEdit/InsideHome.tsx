@@ -5,8 +5,9 @@ import styles from './KokEdit.module.css';
 import useCheckList from '../../../../hooks/useCheckList';
 
 const InsideHome = () => {
-  const [CheckListGroupContainer, checkList, setCheckList] = useCheckList([
+  const [checkListContainer, checkList, setCheckList] = useCheckList([
     {
+      id: 0,
       name: '현관 / 보안',
       enabled: true,
       items: [
@@ -29,6 +30,7 @@ const InsideHome = () => {
       ],
     },
     {
+      id: 1,
       name: '부엌',
       enabled: true,
       items: [
@@ -70,9 +72,7 @@ const InsideHome = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.checkListGroupContainer}>
-        <CheckListGroupContainer />
-      </div>
+      <div className={styles.checkListGroupContainer}>{checkListContainer}</div>
     </div>
   );
 };

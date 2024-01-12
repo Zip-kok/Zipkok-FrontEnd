@@ -5,8 +5,9 @@ import styles from './KokEdit.module.css';
 import useCheckList from '../../../../hooks/useCheckList';
 
 const Contract = () => {
-  const [CheckListGroupContainer, checkList, setCheckList] = useCheckList([
+  const [checkListContainer, checkList, setCheckList] = useCheckList([
     {
+      id: 0,
       name: '집주인/매물 관련 질문체크',
       enabled: true,
       items: [
@@ -44,9 +45,7 @@ const Contract = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.checkListGroupContainer}>
-        <CheckListGroupContainer />
-      </div>
+      <div className={styles.checkListGroupContainer}>{checkListContainer}</div>
     </div>
   );
 };
