@@ -42,14 +42,16 @@ const KokEdit = () => {
 
   return (
     <div className={styles.root}>
-      <Header
-        title="콕리스트 항목 수정하기"
-        onBack={() => {
-          navigate(-1);
-        }}
-        backBtnEnabled
-      ></Header>
-      <TopMenu />
+      <div className="top">
+        <Header
+          title="콕리스트 항목 수정하기"
+          onBack={() => {
+            navigate(-1);
+          }}
+          backBtnEnabled
+        ></Header>
+        <TopMenu />
+      </div>
       <div className={styles.blank}></div>
       <Content />
     </div>
