@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Sortable from 'sortablejs';
+import React from 'react';
 
 import styles from './KokEdit.module.css';
 
 import Highlight from '../../../../components/Highlight';
 import useCheckList from '../../../../hooks/useCheckList';
-
-interface CheckListItem {
-  name: string;
-  enabled: boolean;
-}
-
-interface CheckListGroup {
-  name: string;
-  enabled: boolean;
-  items: CheckListItem[];
-}
 
 const NearHome = () => {
   const [CheckListGroupContainer, checkList, setCheckList] = useCheckList([
