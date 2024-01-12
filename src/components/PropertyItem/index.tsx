@@ -5,6 +5,7 @@ import propertyImg from '../../assets/img/kokList/propertyImg.svg';
 import heartIcon from '../../assets/img/kokList/white-heart.svg';
 import listIcon from '../../assets/img/kokList/list.svg';
 import propertyImg_null from '../../assets/img/kokList/propertyImg_null.svg';
+import heartFillIcon from '../../assets/img/kokList/heart_fill.svg';
 
 interface PropertyItemProps {
   id: number;
@@ -47,7 +48,7 @@ export default function PropertyItem({
             className={styles.propertyImg}
           />
           <button className={styles.heartBtn}>
-            <img src={heartIcon} alt="heartIcon" />
+            <img src={like ? heartFillIcon : heartIcon} alt="Heart Icon" />
           </button>
         </div>
 

@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './LikedProperties.module.css';
 import Header from '../../../../components/Header';
-import { useNavigate } from 'react-router-dom';
+import properties from '../../../../models/properties';
+import PropertyItem from '../../../../components/PropertyItem';
 
 const LikedProperties = () => {
   const navigate = useNavigate();
@@ -15,6 +17,25 @@ const LikedProperties = () => {
         }}
         backBtnEnabled
       ></Header>
+      <div>
+        {properties
+          .filter((property) => property.like)
+          .map((property) => (
+            <PropertyItem
+              key={property.id}
+              id={property.id}
+              like={property.like}
+              type={property.type}
+              priceType={property.priceType}
+              price={property.price}
+              maintenanceFee={property.maintenanceFee}
+              address={property.address}
+              propertyName={property.propertyName}
+              imageUrl={property.imageUrl}
+              showListIcon={false}
+            />
+          ))}
+      </div>
     </div>
   );
 };
