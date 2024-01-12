@@ -49,9 +49,6 @@ const Mypage = () => {
           navigate(-1);
         }}
       >
-        <button className="imgBtn">
-          <img src={heart}></img>
-        </button>
       </Header>
 
       <div className={styles.body}>
