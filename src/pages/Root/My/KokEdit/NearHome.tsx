@@ -4,11 +4,7 @@ import Sortable from 'sortablejs';
 import styles from './KokEdit.module.css';
 
 import Highlight from '../../../../components/Highlight';
-import CheckList from '../../../../components/CheckList';
-import CheckListGroup, {
-  handleClass,
-} from '../../../../components/CheckListGroup';
-import CheckListGroupContainer from '../../../../components/CheckListGroupContainer';
+import useCheckList from '../../../../hooks/useCheckList';
 
 interface CheckListItem {
   name: string;
@@ -22,8 +18,7 @@ interface CheckListGroup {
 }
 
 const NearHome = () => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const [checkListGroups, setCheckListGroups] = useState<CheckListGroup[]>([
+  const [CheckListGroupContainer, checkList, setCheckList] = useCheckList([
     {
       name: '편의성',
       enabled: true,
@@ -67,54 +62,6 @@ const NearHome = () => {
     },
   ]);
 
-  const handleContainerClick = (index: number) => {
-    setCheckListGroups((prev) => {
-      const newCheckListGroups = [...prev];
-      newCheckListGroups[index].enabled = !newCheckListGroups[index].enabled;
-      newCheckListGroups[index].items.forEach((item) => {
-        item.enabled = newCheckListGroups[index].enabled;
-      });
-      return newCheckListGroups;
-    });
-  };
-
-  const handleItemClick = (groupIndex: number, itemIndex: number) => {
-    setCheckListGroups((prev) => {
-      const newCheckListGroups = [...prev];
-      newCheckListGroups[groupIndex].items[itemIndex].enabled =
-        !newCheckListGroups[groupIndex].items[itemIndex].enabled;
-      newCheckListGroups[groupIndex].enabled = newCheckListGroups[
-        groupIndex
-      ].items.some((item) => item.enabled);
-      return newCheckListGroups;
-    });
-  };
-
-  // 드래그 앤 드롭
-  useEffect(() => {
-    Sortable.create(containerRef.current as HTMLElement, {
-      direction: 'vertical',
-      delay: 150,
-      delayOnTouchOnly: true,
-      touchStartThreshold: 4,
-      animation: 150,
-      handle: `.${handleClass}`,
-
-      onUpdate: (event) => {
-        const { oldIndex, newIndex } = event;
-
-        if (oldIndex !== undefined && newIndex !== undefined) {
-          setCheckListGroups((prev) => {
-            const newCheckListGroups = [...prev];
-            const [removed] = newCheckListGroups.splice(oldIndex, 1);
-            newCheckListGroups.splice(newIndex, 0, removed);
-            return newCheckListGroups;
-          });
-        }
-      },
-    });
-  }, []);
-
   return (
     <div className={styles.root}>
       <div className={styles.highlightContainer}>
@@ -133,25 +80,7 @@ const NearHome = () => {
       </div>
 
       <div className={styles.checkListGroupContainer}>
-        <CheckListGroupContainer ref={containerRef}>
-          {checkListGroups.map((group, groupIndex) => (
-            <CheckListGroup
-              name={group.name}
-              enabled={group.enabled}
-              onClick={() => handleContainerClick(groupIndex)}
-              key={group.name}
-            >
-              {group.items.map((item, itemIndex) => (
-                <CheckList
-                  name={item.name}
-                  enabled={item.enabled}
-                  key={item.name}
-                  onClick={() => handleItemClick(groupIndex, itemIndex)}
-                />
-              ))}
-            </CheckListGroup>
-          ))}
-        </CheckListGroupContainer>
+        <CheckListGroupContainer />
       </div>
     </div>
   );
