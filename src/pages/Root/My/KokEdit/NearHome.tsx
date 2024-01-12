@@ -3,8 +3,56 @@ import React from 'react';
 import styles from './KokEdit.module.css';
 
 import Highlight from '../../../../components/Highlight';
+import useCheckList from '../../../../hooks/useCheckList';
 
 const NearHome = () => {
+  const [checkListContainer, checkList, setCheckList] = useCheckList([
+    {
+      id: 0,
+      name: '편의성',
+      enabled: true,
+      items: [
+        {
+          name: '학교 / 직장과 가깝나요?',
+          enabled: true,
+        },
+        {
+          name: '편의점이 근처에 있나요?',
+          enabled: true,
+        },
+        {
+          name: '대형마트가 근처에 있나요?',
+          enabled: true,
+        },
+      ],
+    },
+    {
+      id: 1,
+      name: '접근성',
+      enabled: true,
+      items: [
+        {
+          name: '언덕과 오르막길이 있나요?',
+          enabled: true,
+        },
+        {
+          name: '골목길이 많나요?',
+          enabled: true,
+        },
+        {
+          name: '버스정류장이 근처에 있나요?',
+          enabled: false,
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: '예시',
+      enabled: false,
+      items: [],
+    },
+  ]);
+
   return (
     <div className={styles.root}>
       <div className={styles.highlightContainer}>
@@ -21,6 +69,8 @@ const NearHome = () => {
           <Highlight text="마트" />
         </div>
       </div>
+
+      <div className={styles.checkListGroupContainer}>{checkListContainer}</div>
     </div>
   );
 };

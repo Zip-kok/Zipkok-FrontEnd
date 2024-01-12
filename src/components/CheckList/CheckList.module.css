@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.container > span {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.container.disabled > span {
+  color: var(--gray-color-gray020_border, #c8cbd1);
+}

@@ -14,9 +14,13 @@ import properties from '../../../models/properties';
 import PropertyItem from '../../../components/PropertyItem';
 
 export const Kok = () => {
-  const { setNaviMenu } = useNaviStore();
+  const navigate = useNavigate();
+
+  // 하단 내비게이션 바 설정
+  const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('kok');
+    setShowNaviBar(true);
   }, []);
 
   const handleClick = () => {};

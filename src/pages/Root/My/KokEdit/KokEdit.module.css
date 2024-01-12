@@ -5,10 +5,11 @@
 
 .highlightContainer {
   padding: 0 20px;
+  margin-bottom: 20px;
 }
 
 .highlightContainer > h1 {
-  margin: 47px 0 15px 0;
+  margin: 0 0 15px 0;
   color: #000;
   font-family: Pretendard;
   font-size: 18px;
@@ -20,4 +21,12 @@
   flex-direction: row;
   gap: 12px 8px;
   flex-wrap: wrap;
+}
+
+.blank {
+  height: 47px;
+}
+
+.checkListGroupContainer {
+  padding: 0 20px;
 }
