@@ -31,9 +31,10 @@ const ProfileEdit = () => {
     homeType: "원룸"});
 
   const [imgSrc, setImgSrc] = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const defaultValues: Record<Exclude<priceTypeState['priceType'], null>, PriceRange[]> = {
     월세: [
@@ -125,14 +126,14 @@ const ProfileEdit = () => {
           onChange={handleFileChange}
           ref={fileInputRef}
           /> 
-        <img src={imgSrc} onClick={handleImgClick}/> 
+        <img src={imgSrc || "https://picpac.kr/common/img/default_profile.png"} onClick={handleImgClick} /> 
         <p>수정하기</p>
       </div>
       <p>닉네임</p>
-      <input className={styles.inputName} type="text" />
+      <input className={styles.inputName} type="text" placeholder="안녕 보리"/>
       <p>생년월일</p>
       <div>
-        <input className={styles.inputBirth} type="text" />
+        <input className={styles.inputBirth} type="text" placeholder="001028"/>
         {genderTypes.map((type) => (
           <EditGenderBtn
             key={type.genderType}
