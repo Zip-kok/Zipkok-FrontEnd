@@ -29,9 +29,18 @@ const Mypage = () => {
     setShowNaviBar(true);
   }, []);
 
+
+  const navigate = useNavigate();
+
+  const handleProfileEditClick = () => {
+    navigate('./ProfileEdit')
+  }
+
+
   const handleKeepClick = () => {
     navigate('./likedProperties');
   };
+
   const handleListEditClick = () => {
     navigate('./kokEdit');
   };
@@ -62,12 +71,12 @@ const Mypage = () => {
             <div className={styles.tag}>
               <p>월세</p>
               <p>원룸</p>
-              <p>1000/60이하</p>
+              <p>~6천/~40만</p>
             </div>
           </div>
         </div>
 
-        <button className={styles.profileEdit}>
+        <button className={styles.profileEdit} onClick={handleProfileEditClick}>
           <img src={edit} />
           프로필 수정하기
         </button>
