@@ -61,7 +61,7 @@ const Mypage = () => {
             <div className={styles.tag}>
               <p>월세</p>
               <p>원룸</p>
-              <p>1000/60이하</p>
+              <p>~6천/~40만</p>
             </div>
           </div>
         </div>

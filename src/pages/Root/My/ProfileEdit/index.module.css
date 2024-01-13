@@ -32,7 +32,7 @@
   display: none;
 }
 
-div> div > p {
+.body > p {
   color: var(--gray-color-gray050_text, #4B5259);
   font-family: Pretendard;
   font-size: 12px;
@@ -40,7 +40,6 @@ div> div > p {
   font-weight: 400;
   line-height: 16px; 
   margin:0 0 5px 7px;
-  padding: none;
 }
 div> div > h3 {
   color: var(--gray-color-gray080_text, #1B1D1F);
@@ -108,8 +107,8 @@ div> div > h3 {
   line-height: 20px;
   outline: none;
 }
-.filterText{
-  margin-bottom:10px;
+.priceTypeContainer{
+  margin-top:10px;
 }
 .priceSliderContainer {
   height: 100%;

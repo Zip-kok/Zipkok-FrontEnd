@@ -145,8 +145,8 @@ const ProfileEdit = () => {
       </div>
       <p>희망 거주지역</p>
       <input className={styles.inputLocation} type="text" />
-      <p className={styles.filterText}>필터 설정</p>
-      <div>
+      <p>필터 설정</p>
+      <div className={styles.priceTypeContainer}>
       {priceTypes.map((type) => (
           <EditFilterBtn
             key={type.priceType}
