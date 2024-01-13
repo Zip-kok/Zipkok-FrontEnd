@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './index.module.css';
 
+import useNaviStore from '../../../../contexts/naviStore';
+import useBirthInput from '../../../../hooks/useBirthInput';
+
 import Header from '../../../../components/Header';
 import EditGenderBtn from '../../../../components/EditGenderBtn/indes';
 import EditFilterBtn from '../../../../components/EditFilterBtn';
@@ -10,7 +13,6 @@ import BottomBtn from '../../../../components/Btn';
 import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
 import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
 import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';
-import useNaviStore from '../../../../contexts/naviStore';
 
 interface genderTypeState {
   genderType: '남성' | '여성' | '비공개';
@@ -35,8 +37,8 @@ const ProfileEdit = () => {
   });
 
   const [imgSrc, setImgSrc] = useState('');
-
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
+  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -163,11 +165,7 @@ const ProfileEdit = () => {
         />
         <p>생년월일</p>
         <div>
-          <input
-            className={styles.inputBirth}
-            type="text"
-            placeholder="001028"
-          />
+          <BirthInput />
           {genderTypes.map((type) => (
             <EditGenderBtn
               key={type.genderType}
