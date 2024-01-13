@@ -1,0 +1,21 @@
+.EditGenderBtn{
+  display: flex;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-color-gray020_border, #C8CBD1);
+  background-color: #fff;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-weight: 600;
+}
+.selected {
+  border: 1px solid var(--primary-color-primary_default, #FA4549);
+  background: var(--primary-color-primary_bg, #FFEFEF);}
+
+.notSelected {
+  color: var(--gray-color-gray030_text, #9FA4A9);
+}
