@@ -38,7 +38,6 @@ const ProfileEdit = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { setNaviMenu, setShowNaviBar } = useNaviStore();
-
   useEffect(() => { 
     setNaviMenu('my');
     setShowNaviBar(false);
@@ -86,11 +85,11 @@ const ProfileEdit = () => {
   };
 
   const navigate = useNavigate();
-
   const handleConfirmClick = () => {
     navigate(-1)
   }
-  
+
+  // 이미지 누르면 파일 업로드 로직
   const fileChange = async (fileBlob: File) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
