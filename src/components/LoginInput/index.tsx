@@ -31,7 +31,12 @@ export default function LoginInput({
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
-    if (e.currentTarget.value.length > maxLength) return;
+    if (numberOnly) {
+      const value = e.currentTarget.value;
+      if (value.length > maxLength) {
+        inputRef.current!.value = value.slice(0, maxLength);
+      }
+    }
     onChange && onChange(e);
   }
 
