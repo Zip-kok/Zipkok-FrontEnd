@@ -35,6 +35,12 @@ export default function LoginInput({
     onChange && onChange(e);
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!numberOnly) return;
+    if (e.key === 'e' || e.key === '.' || e.key === '-' || e.key === '+')
+      e.preventDefault();
+  }
+
   function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       if (onSubmit) onSubmit();
@@ -57,6 +63,7 @@ export default function LoginInput({
         <input
           type={numberOnly ? 'number' : 'text'}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           onFocus={onFocus}
           onBlur={onBlur}
