@@ -20,8 +20,6 @@ import logout from '../../../../assets/img/mypage/logout.svg';
 import quit from '../../../../assets/img/mypage/quit.svg';
 
 const Mypage = () => {
-  const navigate = useNavigate();
-
   // 하단 내비게이션 바 설정
   const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
