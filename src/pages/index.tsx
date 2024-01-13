@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <MyPage /> },
           { path: 'kokEdit', element: <KokEdit /> },
-          { path: 'ProfileEdit', element: <ProfileEdit /> },
+          { path: 'profileEdit', element: <ProfileEdit /> },
           { path: 'likedProperties', element: <LikedProperties /> },
         ],
       },
