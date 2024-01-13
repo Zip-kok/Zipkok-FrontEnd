@@ -18,6 +18,7 @@
   display: flex; /* Flexbox를 사용하여 아이콘과 텍스트를 행으로 배치 */
   align-items: center; /* 아이콘과 텍스트를 수직 중앙으로 정렬 */
   justify-content: center; /* 아이콘과 텍스트를 수평 중앙으로 정렬 */
+  
 }
 
 .btn:focus,

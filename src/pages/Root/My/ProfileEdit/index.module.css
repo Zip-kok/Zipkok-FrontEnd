@@ -1,7 +1,5 @@
 .root>div{
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
+  
   >div{
     display: flex;
     gap:8px;
@@ -32,14 +30,19 @@
   display: none;
 }
 
-.body > p {
-  color: var(--gray-color-gray050_text, #4B5259);
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px; 
-  margin:0 0 5px 7px;
+.body{
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  > p {
+    color: var(--gray-color-gray050_text, #4B5259);
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; 
+    margin:0 0 5px 7px;
+  } 
 }
 div> div > h3 {
   color: var(--gray-color-gray080_text, #1B1D1F);
@@ -113,8 +116,15 @@ div> div > h3 {
 .priceSliderContainer {
   height: 100%;
   overflow-y: auto;
-  width: 90%;
   margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.btnContainer{
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin: 40px 0 0 20px;
 }
 
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import styles from "./index.module.css"
@@ -10,6 +10,7 @@ import BottomBtn from "../../../../components/Btn"
 import Monthly from "../../../Onboarding/Price/priceSlider/Monthly"
 import Jeonse from "../../../Onboarding/Price/priceSlider/Jeonse"
 import Purchase from "../../../Onboarding/Price/priceSlider/Purchase"
+import useNaviStore from "../../../../contexts/naviStore"
 
 interface genderTypeState{
   genderType : "남성" | "여성" | "비공개";
@@ -35,6 +36,13 @@ const ProfileEdit = () => {
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+
+  useEffect(() => { 
+    setNaviMenu('my');
+    setShowNaviBar(false);
+  }, []);
 
   const defaultValues: Record<Exclude<priceTypeState['priceType'], null>, PriceRange[]> = {
     월세: [
@@ -78,6 +86,7 @@ const ProfileEdit = () => {
   };
 
   const navigate = useNavigate();
+
   const handleConfirmClick = () => {
     navigate(-1)
   }
@@ -199,12 +208,12 @@ const ProfileEdit = () => {
           />
         )}
       </div>
-      
-
-      <BottomBtn 
-      text="수정완료"
-      onClick={handleConfirmClick}
-      />
+      <div className={styles.btnContainer}>
+        <BottomBtn 
+        text="수정완료"
+        onClick={handleConfirmClick}
+        />
+      </div>
     </div>
   
 )}
