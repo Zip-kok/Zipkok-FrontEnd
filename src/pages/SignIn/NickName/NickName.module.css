@@ -42,3 +42,7 @@
 .blank {
   height: 100%;
 }
+
+.inputContainer {
+  padding: 0 20px;
+}

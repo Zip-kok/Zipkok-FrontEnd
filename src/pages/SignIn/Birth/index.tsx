@@ -18,10 +18,7 @@ const Birth = ({ onConfirm }: BirthProps) => {
     }
   };
 
-  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput(
-    '6자리 숫자로 입력해주세요.',
-    handleSubmit,
-  );
+  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput();
 
   return (
     <div className={styles.root}>
@@ -33,8 +30,18 @@ const Birth = ({ onConfirm }: BirthProps) => {
         </h1>
       </div>
 
-      <BirthInput />
-      <div className={styles.warning}>{birthWarningMsg}</div>
+      <div className={styles.inputContainer}>
+        <BirthInput
+          placeholder="6자리 숫자로 입력해주세요"
+          handleSubmit={handleSubmit}
+          caption={birthWarningMsg}
+          captionStyle={{
+            color: 'var(--primary-color-primary_default, #FA4549)',
+            fontSize: '14px',
+            fontWeight: '400',
+          }}
+        />
+      </div>
       <div className={styles.blank}></div>
       <BottomBtn onClick={handleSubmit} text="확인" disabled={!isBirthValid} />
     </div>

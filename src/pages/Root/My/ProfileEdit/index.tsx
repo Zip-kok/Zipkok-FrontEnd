@@ -6,6 +6,7 @@ import styles from './index.module.css';
 import useNaviStore from '../../../../contexts/naviStore';
 import useBirthInput from '../../../../hooks/useBirthInput';
 
+import TextInput from '../../../../components/TextInput';
 import Header from '../../../../components/Header';
 import EditGenderBtn from '../../../../components/EditGenderBtn/indes';
 import EditFilterBtn from '../../../../components/EditFilterBtn';
@@ -38,11 +39,7 @@ const ProfileEdit = () => {
 
   const [imgSrc, setImgSrc] = useState('');
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput(
-    '6자리 숫자로 입력해주세요.',
-    () => {},
-    'roundedBox',
-  );
+  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -144,6 +141,7 @@ const ProfileEdit = () => {
           navigate(-1);
         }}
       />
+
       <div className={styles.body}>
         <div className={styles.imgContainer}>
           <input
@@ -161,6 +159,7 @@ const ProfileEdit = () => {
           />
           <p>수정하기</p>
         </div>
+
         <p>닉네임</p>
         <input
           className={styles.inputName}
@@ -169,7 +168,17 @@ const ProfileEdit = () => {
         />
         <p>생년월일</p>
         <div>
-          <BirthInput />
+          <BirthInput
+            defaultValue="011203"
+            placeholder="6자리 숫자로 입력해주세요"
+            style="roundedBox"
+            caption={birthWarningMsg}
+            captionStyle={{
+              color: 'var(--primary-color-primary_default, #FA4549)',
+              fontSize: '14px',
+              fontWeight: '400',
+            }}
+          />
           {genderTypes.map((type) => (
             <EditGenderBtn
               key={type.genderType}

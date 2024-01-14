@@ -6,6 +6,7 @@ export type TextInputStyle = 'underline' | 'roundedBox';
 
 interface TextInputProps {
   value?: string;
+  defaultValue?: string;
   placeholder?: string;
   icon?: string;
   numberOnly?: boolean;
@@ -15,12 +16,14 @@ interface TextInputProps {
   onFocus?: () => void;
   onBlur?: () => void;
   caption?: string;
+  captionStyle?: React.CSSProperties;
   maxLength?: number;
   ref?: React.Ref<HTMLInputElement>;
 }
 
 export default function TextInput({
   value,
+  defaultValue,
   placeholder,
   icon,
   numberOnly,
@@ -30,6 +33,7 @@ export default function TextInput({
   onFocus,
   onBlur,
   caption,
+  captionStyle,
   maxLength = 524288,
 }: TextInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -78,6 +82,7 @@ export default function TextInput({
       >
         <input
           type={numberOnly ? 'number' : 'text'}
+          defaultValue={defaultValue}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
@@ -97,7 +102,11 @@ export default function TextInput({
           </button>
         )}
       </div>
-      {caption && <span className={styles.caption}>{caption}</span>}
+      {caption && (
+        <span className={styles.caption} style={captionStyle}>
+          {caption}
+        </span>
+      )}
     </div>
   );
 }

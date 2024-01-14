@@ -44,6 +44,17 @@ export default function NickName({ onConfirm }: NickNameProps) {
     setIsInputFocused(false);
   };
 
+  function caption() {
+    if (isInputFocused) {
+      if (!isNicknameValid) {
+        return '닉네임은 1자 이상 12자 이하여야 합니다.';
+      } else if (!isNotNicknameExist) {
+        return '이미 존재하는 닉네임입니다.';
+      }
+    }
+    return undefined;
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.header}>
@@ -54,21 +65,22 @@ export default function NickName({ onConfirm }: NickNameProps) {
         </h1>
       </div>
 
-      <TextInput
-        value={nickname}
-        placeholder="최대 12자"
-        onChange={handleInputChange}
-        onFocus={hnadleInputFocus}
-        onBlur={handleInputBlur}
-        maxLength={12}
-      />
-
-      <div className={styles.warning}>
-        {isInputFocused &&
-          !isNicknameValid &&
-          '닉네임은 1자 이상 12자 이하여야 합니다.'}
-
-        {!isNotNicknameExist && '이미 존재하는 닉네임입니다.'}
+      <div className={styles.inputContainer}>
+        <TextInput
+          value={nickname}
+          placeholder="최대 12자"
+          onChange={handleInputChange}
+          onFocus={hnadleInputFocus}
+          onBlur={handleInputBlur}
+          onSubmit={handleSubmit}
+          maxLength={12}
+          caption={caption()}
+          captionStyle={{
+            color: 'var(--primary-color-primary_default, #FA4549)',
+            fontSize: '14px',
+            fontWeight: '400',
+          }}
+        />
       </div>
 
       <div className={styles.blank}></div>

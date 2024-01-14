@@ -27,6 +27,14 @@
   caret-color: var(--primary-color-primary_default, #fa4549);
 }
 
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 .textBox > button {
   width: 32px;
   height: 32px;

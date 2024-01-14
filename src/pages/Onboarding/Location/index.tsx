@@ -103,18 +103,21 @@ export default function Location({ confirmLocation }: LocationProps) {
         </h1>
       </div>
 
-      <TextInput
-        placeholder="도로명, 지번 검색"
-        value={inputValue}
-        icon={searchIcon}
-        onChange={handleInputChange}
-        onSubmit={handleSubmit}
-        caption={
-          addresses.length > 0 || errorMessage !== ''
-            ? `${addressCount.toLocaleString()}건의 검색 결과`
-            : undefined
-        }
-      />
+      <div className={styles.inputContainer}>
+        <TextInput
+          placeholder="도로명, 지번 검색"
+          value={inputValue}
+          icon={searchIcon}
+          onChange={handleInputChange}
+          onSubmit={handleSubmit}
+          caption={
+            addresses.length > 0 || errorMessage !== ''
+              ? `${addressCount.toLocaleString()}건의 검색 결과`
+              : undefined
+          }
+        />
+      </div>
+
       <AddressContainer
         errorMessage={errorMessage}
         addresses={addresses}
