@@ -6,6 +6,7 @@ import styles from './index.module.css';
 import useNaviStore from '../../../../contexts/naviStore';
 import useBirthInput from '../../../../hooks/useBirthInput';
 
+import searchIcon from '../../../../assets/img/search.svg';
 import TextInput from '../../../../components/TextInput';
 import Header from '../../../../components/Header';
 import EditGenderBtn from '../../../../components/EditGenderBtn/indes';
@@ -134,15 +135,18 @@ const ProfileEdit = () => {
 
   return (
     <div className={styles.root}>
-      <Header
-        title="프로필 수정하기"
-        backBtnEnabled={true}
-        onBack={() => {
-          navigate(-1);
-        }}
-      />
+      <div className="top">
+        <Header
+          title="프로필 수정하기"
+          backBtnEnabled={true}
+          onBack={() => {
+            navigate(-1);
+          }}
+        />
+      </div>
 
       <div className={styles.body}>
+        {/* 프로필 이미지 */}
         <div className={styles.imgContainer}>
           <input
             id="inputFile"
@@ -160,96 +164,127 @@ const ProfileEdit = () => {
           <p>수정하기</p>
         </div>
 
-        <p>닉네임</p>
-        <input
-          className={styles.inputName}
-          type="text"
-          placeholder="안녕 보리"
-        />
-        <p>생년월일</p>
-        <div>
-          <BirthInput
-            defaultValue="011203"
-            placeholder="6자리 숫자로 입력해주세요"
+        {/* 닉네임 */}
+        <div className={styles.inputContainer}>
+          <p className={styles.title}>닉네임</p>
+          <TextInput
+            defaultValue="보리는 강아지 내가 주인"
+            placeholder="닉네임을 입력해주세요"
             style="roundedBox"
-            caption={birthWarningMsg}
-            captionStyle={{
-              color: 'var(--primary-color-primary_default, #FA4549)',
-              fontSize: '14px',
-              fontWeight: '400',
-            }}
           />
-          {genderTypes.map((type) => (
-            <EditGenderBtn
-              key={type.genderType}
-              text={
-                type.genderType === '남성'
-                  ? '남'
-                  : type.genderType === '여성'
-                    ? '여'
-                    : type.genderType
-              }
-              onClick={() => handleGenderClick(type.genderType)}
-              isSelected={type.genderType === genderType.genderType}
-            />
-          ))}
         </div>
-        <p>희망 거주지역</p>
-        <input className={styles.inputLocation} type="text" />
-        <p>필터 설정</p>
-        <div className={styles.priceTypeContainer}>
-          {priceTypes.map((type) => (
-            <EditFilterBtn
-              key={type.priceType}
-              text={type.priceType}
-              onClick={() => handlePriceClick(type.priceType)}
-              isSelected={type.priceType === priceType.priceType}
+
+        {/* 생년월일 및 성별 */}
+        <div className={styles.inputContainer}>
+          <p className={styles.title}>생년월일</p>
+
+          <div className={styles.birthGenerContainer}>
+            <BirthInput
+              defaultValue="011203"
+              placeholder="6자리 숫자로 입력해주세요"
+              style="roundedBox"
+              caption={birthWarningMsg}
+              captionStyle={{
+                color: 'var(--primary-color-primary_default, #FA4549)',
+                fontSize: '14px',
+                fontWeight: '400',
+              }}
             />
-          ))}
+
+            {genderTypes.map((type) => (
+              <EditGenderBtn
+                key={type.genderType}
+                text={
+                  type.genderType === '남성'
+                    ? '남'
+                    : type.genderType === '여성'
+                      ? '여'
+                      : type.genderType
+                }
+                onClick={() => handleGenderClick(type.genderType)}
+                isSelected={type.genderType === genderType.genderType}
+              />
+            ))}
+          </div>
         </div>
-        <div>
-          {homeTypes.map((type) => (
-            <EditFilterBtn
-              key={type.homeType}
-              text={type.homeType}
-              onClick={() => handleHomeClick(type.homeType)}
-              isSelected={type.homeType === homeType.homeType}
+
+        {/* 희망 거주지역 */}
+        <div className={styles.inputContainer}>
+          <p className={styles.title}>희망 거주지역</p>
+          <TextInput
+            defaultValue="서울특별시 성북구 정릉동"
+            icon={searchIcon}
+            style="roundedBox"
+            onClick={() => {}}
+            readOnly
+          />
+        </div>
+
+        {/* 필터 설정 */}
+        <div className={styles.inputContainer}>
+          <p className={styles.title}>필터 설정</p>
+
+          <div className={styles.filterContainers}>
+            {/* 가격 타입 */}
+            <div className={styles.filterContainer}>
+              {priceTypes.map((type) => (
+                <EditFilterBtn
+                  key={type.priceType}
+                  text={type.priceType}
+                  onClick={() => handlePriceClick(type.priceType)}
+                  isSelected={type.priceType === priceType.priceType}
+                />
+              ))}
+            </div>
+
+            {/* 집 타입 */}
+            <div className={styles.filterContainer}>
+              {homeTypes.map((type) => (
+                <EditFilterBtn
+                  key={type.homeType}
+                  text={type.homeType}
+                  onClick={() => handleHomeClick(type.homeType)}
+                  isSelected={type.homeType === homeType.homeType}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 가격 설정 */}
+        <div className={styles.priceSliderContainer}>
+          {priceType?.priceType === '월세' && (
+            <Monthly
+              onChange1={(rangeStart, rangeEnd) => {
+                setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
+              }}
+              onChange2={(rangeStart, rangeEnd) => {
+                setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
+              }}
+              defaultValues={defaultValues[priceType.priceType]}
             />
-          ))}
+          )}
+
+          {priceType?.priceType === '전세' && (
+            <Jeonse
+              onChange={(rangeStart, rangeEnd) => {
+                setPriceRanges([[rangeStart, rangeEnd]]);
+              }}
+              defaultValues={defaultValues[priceType.priceType]}
+            />
+          )}
+
+          {priceType?.priceType === '매매' && (
+            <Purchase
+              onChange={(rangeStart, rangeEnd) => {
+                setPriceRanges([[rangeStart, rangeEnd]]);
+              }}
+              defaultValues={defaultValues[priceType.priceType]}
+            />
+          )}
         </div>
       </div>
 
-      <div className={styles.priceSliderContainer}>
-        {priceType?.priceType === '월세' && (
-          <Monthly
-            onChange1={(rangeStart, rangeEnd) => {
-              setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
-            }}
-            onChange2={(rangeStart, rangeEnd) => {
-              setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
-            }}
-            defaultValues={defaultValues[priceType.priceType]}
-          />
-        )}
-
-        {priceType?.priceType === '전세' && (
-          <Jeonse
-            onChange={(rangeStart, rangeEnd) => {
-              setPriceRanges([[rangeStart, rangeEnd]]);
-            }}
-            defaultValues={defaultValues[priceType.priceType]}
-          />
-        )}
-
-        {priceType?.priceType === '매매' && (
-          <Purchase
-            onChange={(rangeStart, rangeEnd) => {
-              setPriceRanges([[rangeStart, rangeEnd]]);
-            }}
-            defaultValues={defaultValues[priceType.priceType]}
-          />
-        )}
-      </div>
       <div className={styles.btnContainer}>
         <BottomBtn text="수정완료" onClick={handleConfirmClick} />
       </div>

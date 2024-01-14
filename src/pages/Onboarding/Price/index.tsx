@@ -67,35 +67,37 @@ export default function Price({ confirmPrice }: PriceProps) {
       </ul>
 
       <div className={styles.priceSliderContainer}>
-        {priceType === '월세' && (
-          <Monthly
-            onChange1={(rangeStart, rangeEnd) => {
-              setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
-            }}
-            onChange2={(rangeStart, rangeEnd) => {
-              setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
-            }}
-            defaultValues={defaultValues[priceType]}
-          />
-        )}
+        <div>
+          {priceType === '월세' && (
+            <Monthly
+              onChange1={(rangeStart, rangeEnd) => {
+                setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
+              }}
+              onChange2={(rangeStart, rangeEnd) => {
+                setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
+              }}
+              defaultValues={defaultValues[priceType]}
+            />
+          )}
 
-        {priceType === '전세' && (
-          <Jeonse
-            onChange={(rangeStart, rangeEnd) => {
-              setPriceRanges([[rangeStart, rangeEnd]]);
-            }}
-            defaultValues={defaultValues[priceType]}
-          />
-        )}
+          {priceType === '전세' && (
+            <Jeonse
+              onChange={(rangeStart, rangeEnd) => {
+                setPriceRanges([[rangeStart, rangeEnd]]);
+              }}
+              defaultValues={defaultValues[priceType]}
+            />
+          )}
 
-        {priceType === '매매' && (
-          <Purchase
-            onChange={(rangeStart, rangeEnd) => {
-              setPriceRanges([[rangeStart, rangeEnd]]);
-            }}
-            defaultValues={defaultValues[priceType]}
-          />
-        )}
+          {priceType === '매매' && (
+            <Purchase
+              onChange={(rangeStart, rangeEnd) => {
+                setPriceRanges([[rangeStart, rangeEnd]]);
+              }}
+              defaultValues={defaultValues[priceType]}
+            />
+          )}
+        </div>
       </div>
 
       <BottomBtn

@@ -11,6 +11,7 @@ interface TextInputProps {
   icon?: string;
   numberOnly?: boolean;
   style?: TextInputStyle;
+  onClick?: () => void;
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
   onFocus?: () => void;
@@ -19,6 +20,7 @@ interface TextInputProps {
   captionStyle?: React.CSSProperties;
   maxLength?: number;
   ref?: React.Ref<HTMLInputElement>;
+  readOnly?: boolean;
 }
 
 export default function TextInput({
@@ -28,6 +30,7 @@ export default function TextInput({
   icon,
   numberOnly,
   style = 'underline',
+  onClick,
   onChange,
   onSubmit,
   onFocus,
@@ -35,6 +38,7 @@ export default function TextInput({
   caption,
   captionStyle,
   maxLength = 524288,
+  readOnly,
 }: TextInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -74,6 +78,8 @@ export default function TextInput({
     <div className={styles.container}>
       <div
         className={`${styles.textBox} ${
+          readOnly && onClick ? styles.clickable : ''
+        } ${
           {
             underline: styles.underline,
             roundedBox: styles.roundedBox,
@@ -83,6 +89,7 @@ export default function TextInput({
         <input
           type={numberOnly ? 'number' : 'text'}
           defaultValue={defaultValue}
+          onClick={onClick}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
@@ -92,14 +99,15 @@ export default function TextInput({
           placeholder={placeholder}
           ref={inputRef}
           maxLength={maxLength}
+          readOnly={readOnly}
         ></input>
 
-        {!inputRef.current || inputRef.current.value === '' ? (
-          <img src={icon}></img>
-        ) : (
+        {inputRef.current && inputRef.current.value !== '' && !readOnly ? (
           <button className="imgBtn" onClick={handleDeleteClick}>
             <img src={deleteIcon}></img>
           </button>
+        ) : (
+          <img src={icon}></img>
         )}
       </div>
       {caption && (
