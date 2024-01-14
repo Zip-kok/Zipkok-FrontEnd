@@ -37,6 +37,7 @@
 .genderBtnContainer {
   display: flex;
   flex-direction: row;
+  height: 48px;
   gap: 8px;
 }
 

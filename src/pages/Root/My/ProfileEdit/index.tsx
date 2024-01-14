@@ -145,9 +145,15 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>닉네임</p>
           <TextInput
+            placeholder="최대 12자"
             defaultValue="보리는 강아지 내가 주인"
-            placeholder="닉네임을 입력해주세요"
+            maxLength={12}
             style="roundedBox"
+            captionStyle={{
+              color: 'var(--primary-color-primary_default, #FA4549)',
+              fontSize: '14px',
+              fontWeight: '400',
+            }}
           />
         </div>
 

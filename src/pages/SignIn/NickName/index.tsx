@@ -36,7 +36,7 @@ export default function NickName({ onConfirm }: NickNameProps) {
     onConfirm(nickname);
   };
 
-  const hnadleInputFocus = () => {
+  const handleInputFocus = () => {
     setIsInputFocused(true);
   };
 
@@ -70,7 +70,7 @@ export default function NickName({ onConfirm }: NickNameProps) {
           value={nickname}
           placeholder="최대 12자"
           onChange={handleInputChange}
-          onFocus={hnadleInputFocus}
+          onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           onSubmit={handleSubmit}
           maxLength={12}
