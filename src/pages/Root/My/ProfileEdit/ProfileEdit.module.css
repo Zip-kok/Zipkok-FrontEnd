@@ -1,3 +1,9 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .body {
   display: flex;
   flex-direction: column;
@@ -69,4 +75,8 @@
   flex-direction: row;
   gap: 4px 8px;
   flex-wrap: wrap;
+}
+
+.blank {
+  height: 100%;
 }

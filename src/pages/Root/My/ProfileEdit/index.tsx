@@ -239,6 +239,8 @@ const ProfileEdit = () => {
         </div>
       </div>
 
+      <div className={styles.blank}></div>
+
       <BottomBtn text="수정 완료" onClick={handleConfirmClick} />
     </div>
   );
