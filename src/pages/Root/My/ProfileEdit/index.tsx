@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './index.module.css';
+import styles from './ProfileEdit.module.css';
 
 import useNaviStore from '../../../../contexts/naviStore';
 import useBirthInput from '../../../../hooks/useBirthInput';
@@ -11,7 +11,7 @@ import TextInput from '../../../../components/TextInput';
 import Header from '../../../../components/Header';
 import EditGenderBtn from '../../../../components/EditGenderBtn/indes';
 import EditFilterBtn from '../../../../components/EditFilterBtn';
-import BottomBtn from '../../../../components/Btn';
+import BottomBtn from '../../../../components/BottomBtn';
 import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
 import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
 import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';
@@ -285,9 +285,7 @@ const ProfileEdit = () => {
         </div>
       </div>
 
-      <div className={styles.btnContainer}>
-        <BottomBtn text="수정완료" onClick={handleConfirmClick} />
-      </div>
+      <BottomBtn text="수정 완료" onClick={handleConfirmClick} />
     </div>
   );
 };

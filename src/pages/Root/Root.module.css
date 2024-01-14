@@ -1,4 +1,4 @@
-.root {
+.root.padded {
   /* 내비게이션 바 가림 방지 */
   padding-bottom: 64px;
 }

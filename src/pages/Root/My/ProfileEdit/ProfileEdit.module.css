@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 32px 20px 20px 0;
+  margin: 32px 0 20px 0;
   position: relative;
   > img {
     width: 120px;
