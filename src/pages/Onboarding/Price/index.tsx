@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './Price.module.css';
 
+import useRadioBtn from '../../../hooks/useRadioBtn';
 import Monthly from './priceSlider/Monthly';
 import Jeonse from './priceSlider/Jeonse';
 import Purchase from './priceSlider/Purchase';
 import BottomBtn from '../../../components/BottomBtn';
-import RadioBtn from '../../../components/RadioBtn';
 
 import { PriceType, PriceRange } from '../';
 
@@ -16,14 +16,25 @@ interface PriceProps {
 }
 
 export default function Price({ confirmPrice }: PriceProps) {
-  const [priceType, setPriceType] = useState<PriceType>(null);
+  const priceTypeOptions = [
+    {
+      value: '월세' as PriceType,
+      content: '월세',
+    },
+    {
+      value: '전세' as PriceType,
+      content: '전세',
+    },
+    {
+      value: '매매' as PriceType,
+      content: '매매',
+    },
+  ];
+  const [RadioBtnContainer, priceType] =
+    useRadioBtn<PriceType>(priceTypeOptions);
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
 
-  const priceTypeOptions = ['월세', '전세', '매매'] as Exclude<
-    PriceType,
-    null
-  >[];
-  const defaultValues: Record<Exclude<PriceType, null>, PriceRange[]> = {
+  const defaultValues: Record<PriceType, PriceRange[]> = {
     월세: [
       [0, 60_000_000],
       [0, 400_000],
@@ -33,12 +44,7 @@ export default function Price({ confirmPrice }: PriceProps) {
   };
 
   const handleConfirmClick = () => {
-    confirmPrice(priceType, priceRanges);
-  };
-
-  const handlePriceType = (priceType: PriceType) => {
-    if (priceType !== null) setPriceRanges(defaultValues[priceType]);
-    setPriceType(priceType);
+    if (priceType !== undefined) confirmPrice(priceType, priceRanges);
   };
 
   const navigate = useNavigate();
@@ -55,16 +61,8 @@ export default function Price({ confirmPrice }: PriceProps) {
           가격 범위를 설정해주세요
         </h1>
       </div>
-      <ul className={styles.priceTypeBtnContainer}>
-        {priceTypeOptions.map((type) => (
-          <RadioBtn
-            key={type}
-            content={type}
-            isSelected={priceType === type}
-            handleClick={() => handlePriceType(type)}
-          />
-        ))}
-      </ul>
+
+      <RadioBtnContainer className={styles.priceTypeBtnContainer} />
 
       <div className={styles.priceSliderContainer}>
         <div>

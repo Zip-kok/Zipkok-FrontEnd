@@ -1,0 +1,114 @@
+.btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* capsule */
+
+.btn.capsule {
+  display: flex;
+  height: 44px;
+  min-width: 100px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 500px;
+  border: 2px solid var(--gray-color-gray030_text, #9fa4a9);
+
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.btn.capsule.selected {
+  border: 2px solid var(--primary-color-primary_default, #fa4549);
+  background: var(--primary-color-primary_bg, #ffefef);
+}
+
+/* icon */
+
+.btn.icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 8px;
+  background: var(--gray-color-gray010, #efeff2);
+
+  padding: 0 12px;
+  width: 100%;
+  height: 160px;
+  border: 2px solid transparent;
+}
+
+.btn.icon > img {
+  width: 60%;
+  max-width: 100px;
+}
+
+.btn.icon > span {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.018px;
+}
+
+.btn.icon.selected {
+  border: 2px solid var(--primary-color-primary_default, #fa4549);
+  background: var(--primary-color-primary_bg, #ffefef);
+}
+
+/* round */
+
+.btn.round {
+  display: flex;
+  min-width: 48px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--gray-color-gray020_border, #c8cbd1);
+  white-space: nowrap;
+  word-wrap: break-word;
+
+  color: var(--gray-color-gray030_text, #9fa4a9);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn.round.selected {
+  border-radius: 6px;
+  border: 1px solid var(--primary-color-primary_default, #fa4549);
+  background: var(--primary-color-primary_bg, #ffefef);
+  color: var(--d-9-d-9-d-9, #000);
+}
+
+/* tag */
+
+.btn.tag {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 500px;
+  padding: 6px 12px;
+  border: 1px solid var(--gray-color-gray020_border, #c8cbd1);
+  background: var(--gray-color-white, #fff);
+
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.btn.tag.selected {
+  border-radius: 16px;
+  border: 1px solid var(--gray-color-gray100, #00000a);
+  background: var(--gray-color-gray080_text, #1b1d1f);
+  color: var(--gray-color-white, #fff);
+}

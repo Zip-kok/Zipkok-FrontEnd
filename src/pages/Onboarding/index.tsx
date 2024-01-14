@@ -14,8 +14,8 @@ import leftArrowIcon from '../../assets/img/left_arrow.svg';
 // price: 온보딩_03_가격범위
 // complete: 온보딩_04_완료
 type Step = 'location' | 'type' | 'price' | 'complete';
-export type HouseType = '아파트' | '원룸' | '빌라/투룸' | '오피스텔' | null;
-export type PriceType = '월세' | '전세' | '매매' | null;
+export type HouseType = '아파트' | '원룸' | '빌라/투룸' | '오피스텔';
+export type PriceType = '월세' | '전세' | '매매';
 export type PriceRange = [number, number];
 
 export default function Onboarding() {

@@ -27,11 +27,17 @@
   }
 }
 
-.birthGenerContainer {
+.birthGenderContainer {
   width: 100%;
   display: flex;
   gap: 8px;
   flex-direction: row;
+}
+
+.genderBtnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
 .inputImg {

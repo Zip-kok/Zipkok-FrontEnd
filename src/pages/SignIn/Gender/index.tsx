@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 import styles from './Gender.module.css';
 
+import useRadioBtn from '../../../hooks/useRadioBtn';
+
 import BottomBtn from '../../../components/BottomBtn';
-import RadioBtn from '../../../components/RadioBtn';
 
 import { Gender as GenderType } from '../';
 
@@ -12,16 +13,24 @@ interface GenderProps {
 }
 
 export default function Gender({ onConfirm }: GenderProps) {
-  const genderOptions = ['남성', '여성', '비공개'] as Exclude<
-    GenderType,
-    null
-  >[];
-  const [gender, setGender] = useState<GenderType>(null);
+  const genderOptions = [
+    {
+      value: '남자' as GenderType,
+      content: '남자',
+    },
+    {
+      value: '여자' as GenderType,
+      content: '여자',
+    },
+    {
+      value: '비공개' as GenderType,
+      content: '비공개',
+    },
+  ];
+  const [RadioBtnContainer, gender] = useRadioBtn<GenderType>(genderOptions);
 
   const handleSubmit = () => {
-    if (gender !== null) {
-      onConfirm(gender);
-    }
+    if (gender !== undefined) onConfirm(gender);
   };
 
   return (
@@ -34,16 +43,7 @@ export default function Gender({ onConfirm }: GenderProps) {
         </h1>
       </div>
 
-      <ul className={styles.genderBtnContainer}>
-        {genderOptions.map((genderOption) => (
-          <RadioBtn
-            key={genderOption}
-            content={genderOption}
-            isSelected={genderOption === gender}
-            handleClick={() => setGender(genderOption)}
-          />
-        ))}
-      </ul>
+      <RadioBtnContainer className={styles.genderBtnContainer} />
 
       <div className={styles.blank}></div>
 

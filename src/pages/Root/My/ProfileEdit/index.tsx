@@ -3,44 +3,65 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './ProfileEdit.module.css';
 
+import useRadioBtn from '../../../../hooks/useRadioBtn';
 import useNaviStore from '../../../../contexts/naviStore';
 import useBirthInput from '../../../../hooks/useBirthInput';
 
 import searchIcon from '../../../../assets/img/search.svg';
 import TextInput from '../../../../components/TextInput';
 import Header from '../../../../components/Header';
-import EditGenderBtn from '../../../../components/EditGenderBtn/indes';
-import EditFilterBtn from '../../../../components/EditFilterBtn';
 import BottomBtn from '../../../../components/BottomBtn';
 import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
 import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
 import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';
 
-interface genderTypeState {
-  genderType: '남성' | '여성' | '비공개';
-}
-interface priceTypeState {
-  priceType: '월세' | '전세' | '매매';
-}
-interface homeTypeState {
-  homeType: '원룸' | '투룸' | '오피스텔' | '아파트';
-}
+import { Gender } from '../../../SignIn';
+import { HouseType } from '../../../Onboarding';
+import { PriceType } from '../../../Onboarding';
+
 type PriceRange = [number, number];
 
 const ProfileEdit = () => {
-  const [genderType, setGenderType] = useState<genderTypeState>({
-    genderType: '비공개',
-  });
-  const [priceType, setPriceType] = useState<priceTypeState>({
-    priceType: '월세',
-  });
-  const [homeType, setHomeType] = useState<homeTypeState>({
-    homeType: '원룸',
-  });
+  // 성별 라디오 버튼
+  const genderOptions = [
+    { value: '남자' as Gender, content: '남' },
+    { value: '여자' as Gender, content: '여' },
+    { value: '비공개' as Gender, content: '비공개' },
+  ];
+  const [GenderRadioBtnContainer, gender] = useRadioBtn<Gender>(
+    genderOptions,
+    'round',
+    '남자',
+  );
+
+  // 집 형태 라디오 버튼
+  const houseTypeOptions = [
+    { value: '원룸' as HouseType, content: '원룸' },
+    { value: '오피스텔' as HouseType, content: '오피스텔' },
+    { value: '아파트' as HouseType, content: '아파트' },
+    { value: '빌라/투룸' as HouseType, content: '빌라/투룸' },
+  ];
+  const [HouseTypeRadioBtnContainer, houseType] = useRadioBtn<HouseType>(
+    houseTypeOptions,
+    'tag',
+    '원룸',
+  );
+
+  // 가격 타입 라디오 버튼
+  const priceTypeOptions = [
+    { value: '월세' as PriceType, content: '월세' },
+    { value: '전세' as PriceType, content: '전세' },
+    { value: '매매' as PriceType, content: '매매' },
+  ];
+  const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
+    priceTypeOptions,
+    'tag',
+    '월세',
+  );
 
   const [imgSrc, setImgSrc] = useState('');
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput();
+  const [BirthInput, , , birthWarningMsg] = useBirthInput();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -50,57 +71,13 @@ const ProfileEdit = () => {
     setShowNaviBar(false);
   }, []);
 
-  const defaultValues: Record<
-    Exclude<priceTypeState['priceType'], null>,
-    PriceRange[]
-  > = {
+  const defaultValues: Record<PriceType, PriceRange[]> = {
     월세: [
       [0, 60_000_000],
       [0, 400_000],
     ],
     전세: [[0, 60_000_000]],
     매매: [[0, 120_000_000]],
-  };
-
-  const genderTypes: genderTypeState[] = [
-    { genderType: '남성' },
-    { genderType: '여성' },
-    { genderType: '비공개' },
-  ];
-  const priceTypes: priceTypeState[] = [
-    { priceType: '월세' },
-    { priceType: '전세' },
-    { priceType: '매매' },
-  ];
-  const homeTypes: homeTypeState[] = [
-    { homeType: '원룸' },
-    { homeType: '투룸' },
-    { homeType: '오피스텔' },
-    { homeType: '아파트' },
-  ];
-
-  const handleGenderClick = (selectedType: '남성' | '여성' | '비공개') => {
-    setGenderType({
-      ...genderType,
-      genderType: selectedType,
-    });
-  };
-  const handlePriceClick = (selectedType: '월세' | '전세' | '매매') => {
-    setPriceType({
-      ...priceType,
-      priceType: selectedType,
-    });
-    setPriceType({
-      priceType: selectedType,
-    });
-  };
-  const handleHomeClick = (
-    selectedType: '원룸' | '투룸' | '오피스텔' | '아파트',
-  ) => {
-    setHomeType({
-      ...homeType,
-      homeType: selectedType,
-    });
   };
 
   const navigate = useNavigate();
@@ -178,7 +155,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>생년월일</p>
 
-          <div className={styles.birthGenerContainer}>
+          <div className={styles.birthGenderContainer}>
             <BirthInput
               defaultValue="011203"
               placeholder="6자리 숫자로 입력해주세요"
@@ -191,20 +168,7 @@ const ProfileEdit = () => {
               }}
             />
 
-            {genderTypes.map((type) => (
-              <EditGenderBtn
-                key={type.genderType}
-                text={
-                  type.genderType === '남성'
-                    ? '남'
-                    : type.genderType === '여성'
-                      ? '여'
-                      : type.genderType
-                }
-                onClick={() => handleGenderClick(type.genderType)}
-                isSelected={type.genderType === genderType.genderType}
-              />
-            ))}
+            <GenderRadioBtnContainer className={styles.genderBtnContainer} />
           </div>
         </div>
 
@@ -226,62 +190,46 @@ const ProfileEdit = () => {
 
           <div className={styles.filterContainers}>
             {/* 가격 타입 */}
-            <div className={styles.filterContainer}>
-              {priceTypes.map((type) => (
-                <EditFilterBtn
-                  key={type.priceType}
-                  text={type.priceType}
-                  onClick={() => handlePriceClick(type.priceType)}
-                  isSelected={type.priceType === priceType.priceType}
-                />
-              ))}
-            </div>
+            <PriceTypeRadioBtnContainer className={styles.filterContainer} />
 
             {/* 집 타입 */}
-            <div className={styles.filterContainer}>
-              {homeTypes.map((type) => (
-                <EditFilterBtn
-                  key={type.homeType}
-                  text={type.homeType}
-                  onClick={() => handleHomeClick(type.homeType)}
-                  isSelected={type.homeType === homeType.homeType}
-                />
-              ))}
-            </div>
+            <HouseTypeRadioBtnContainer className={styles.filterContainer} />
           </div>
         </div>
 
         {/* 가격 설정 */}
         <div className={styles.priceSliderContainer}>
-          {priceType?.priceType === '월세' && (
-            <Monthly
-              onChange1={(rangeStart, rangeEnd) => {
-                setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
-              }}
-              onChange2={(rangeStart, rangeEnd) => {
-                setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
-              }}
-              defaultValues={defaultValues[priceType.priceType]}
-            />
-          )}
+          <div>
+            {priceType === '월세' && (
+              <Monthly
+                onChange1={(rangeStart, rangeEnd) => {
+                  setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
+                }}
+                onChange2={(rangeStart, rangeEnd) => {
+                  setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
+                }}
+                defaultValues={defaultValues[priceType]}
+              />
+            )}
 
-          {priceType?.priceType === '전세' && (
-            <Jeonse
-              onChange={(rangeStart, rangeEnd) => {
-                setPriceRanges([[rangeStart, rangeEnd]]);
-              }}
-              defaultValues={defaultValues[priceType.priceType]}
-            />
-          )}
+            {priceType === '전세' && (
+              <Jeonse
+                onChange={(rangeStart, rangeEnd) => {
+                  setPriceRanges([[rangeStart, rangeEnd]]);
+                }}
+                defaultValues={defaultValues[priceType]}
+              />
+            )}
 
-          {priceType?.priceType === '매매' && (
-            <Purchase
-              onChange={(rangeStart, rangeEnd) => {
-                setPriceRanges([[rangeStart, rangeEnd]]);
-              }}
-              defaultValues={defaultValues[priceType.priceType]}
-            />
-          )}
+            {priceType === '매매' && (
+              <Purchase
+                onChange={(rangeStart, rangeEnd) => {
+                  setPriceRanges([[rangeStart, rangeEnd]]);
+                }}
+                defaultValues={defaultValues[priceType]}
+              />
+            )}
+          </div>
         </div>
       </div>
 
