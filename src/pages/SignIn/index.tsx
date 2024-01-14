@@ -14,7 +14,7 @@ import leftArrowIcon from '../../assets/img/left_arrow.svg';
 // birth: 회원가입_03_생년월일
 // complete: 회원가입_04_완료
 type Step = 'nickname' | 'gender' | 'birth' | 'complete';
-export type Gender = '남자' | '여자' | '비공개' | null;
+export type Gender = '남자' | '여자' | '비공개';
 
 export default function SignIn() {
   const [step, setStep] = useState<Step>('nickname');
@@ -40,7 +40,7 @@ export default function SignIn() {
     // birth
     birth: (
       <Birth
-        onConfirm={(birth: string) => {
+        onConfirm={(birth: Date) => {
           setStep('complete');
         }}
       />

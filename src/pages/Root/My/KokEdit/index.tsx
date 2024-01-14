@@ -49,7 +49,7 @@ const KokEdit = () => {
             navigate(-1);
           }}
           backBtnEnabled
-        ></Header>
+        />
         <TopMenu />
       </div>
       <div className={styles.blank}></div>

@@ -1,13 +1,10 @@
 .root {
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  height: 100%;
 }
 
-.bottomBtnContainer {
-  position: fixed;
-  bottom: 64px;
-  width: 100%;
-
-  background-color: transparent;
+.propertyContainer {
+  overflow-y: auto;
+  height: 100%;
 }

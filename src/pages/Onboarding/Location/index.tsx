@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from './Location.module.css';
 
 import searchAddress from './searchAddress';
-import LoginInput from '../../../components/LoginInput';
+import TextInput from '../../../components/TextInput';
 import BottomBtn from '../../../components/BottomBtn';
 import AddressContainer from '../../../components/AddressContainer';
 import Address from '../../../types/Address';
@@ -12,9 +12,13 @@ import searchIcon from '../../../assets/img/search.svg';
 
 interface LocationProps {
   confirmLocation: (location: string) => void;
+  skippable?: boolean;
 }
 
-export default function Location({ confirmLocation }: LocationProps) {
+export default function Location({
+  confirmLocation,
+  skippable = true,
+}: LocationProps) {
   const countPerPage = 50;
 
   const [inputValue, setInputValue] = useState<string>('');
@@ -103,18 +107,21 @@ export default function Location({ confirmLocation }: LocationProps) {
         </h1>
       </div>
 
-      <LoginInput
-        placeholder="도로명, 지번 검색"
-        value={inputValue}
-        icon={searchIcon}
-        onChange={handleInputChange}
-        onSubmit={handleSubmit}
-        caption={
-          addresses.length > 0 || errorMessage !== ''
-            ? `${addressCount.toLocaleString()}건의 검색 결과`
-            : undefined
-        }
-      />
+      <div className={styles.inputContainer}>
+        <TextInput
+          placeholder="도로명, 지번 검색"
+          value={inputValue}
+          icon={searchIcon}
+          onChange={handleInputChange}
+          onSubmit={handleSubmit}
+          caption={
+            addresses.length > 0 || errorMessage !== ''
+              ? `${addressCount.toLocaleString()}건의 검색 결과`
+              : undefined
+          }
+        />
+      </div>
+
       <AddressContainer
         errorMessage={errorMessage}
         addresses={addresses}
@@ -126,7 +133,7 @@ export default function Location({ confirmLocation }: LocationProps) {
           onClick={handleSubmit}
           text="확인"
           onAnchorClick={() => {}}
-          anchorText="나중에 설정하기"
+          anchorText={skippable ? '나중에 설정하기' : undefined}
           disabled={inputValue === ''}
         />
       )}

@@ -4,6 +4,11 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 .imgBtn {
@@ -19,4 +24,5 @@ body {
 .top {
   position: sticky;
   top: 0;
+  z-index: 100;
 }

@@ -1,0 +1,82 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 20px;
+}
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0 20px 0;
+  position: relative;
+  > img {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    border: 2.805px solid #eaeaea;
+    filter: brightness(60%);
+  }
+  > p {
+    position: absolute;
+    color: #fff;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 300;
+  }
+}
+
+.birthGenderContainer {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+}
+
+.genderBtnContainer {
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+  gap: 8px;
+}
+
+.inputImg {
+  display: none;
+}
+
+.inputContainer {
+  width: 100%;
+}
+
+.inputContainer > .title {
+  color: var(--gray-color-gray050_text, #4b5259);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0 0 8px 8px;
+}
+
+.filterContainers {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px 8px;
+  flex-wrap: wrap;
+}
+
+.blank {
+  height: 100%;
+}

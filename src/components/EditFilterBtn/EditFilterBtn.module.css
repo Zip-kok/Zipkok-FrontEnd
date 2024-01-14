@@ -1,23 +1,21 @@
-.EditFilterBtn{
+.EditFilterBtn {
   display: flex;
   width: auto;
   height: auto;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  border: 1px solid var(--gray-color-gray020_border, #C8CBD1);
+  border: 1px solid var(--gray-color-gray020_border, #c8cbd1);
   background-color: #fff;
   font-family: Pretendard;
   font-size: 14px;
   font-weight: 400;
   padding: 6px 12px;
-  margin-bottom: 12px;
 }
 .selected {
-  border: 1px solid var(--gray-color-gray100, #00000A);
-  background: var(--gray-color-gray080_text, #1B1D1F);
-  color: var(--gray-color-white, #FFF);
-
+  border: 1px solid var(--gray-color-gray100, #00000a);
+  background: var(--gray-color-gray080_text, #1b1d1f);
+  color: var(--gray-color-white, #fff);
 }
 .notSelected {
 }

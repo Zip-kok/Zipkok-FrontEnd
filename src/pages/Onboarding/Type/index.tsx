@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './Type.module.css';
 
+import useRadioBtn from '../../../hooks/useRadioBtn';
 import BottomBtn from '../../../components/BottomBtn';
 
 import apartmentIcon from '../../../assets/img/apartment.svg';
@@ -16,11 +17,51 @@ interface TypeProps {
 }
 
 export default function Type({ confirmHouseType }: TypeProps) {
-  const [houseType, setHouseType] = React.useState<HouseType>(null);
+  const houseTypeOptions = [
+    {
+      value: '아파트' as HouseType,
+      content: (
+        <>
+          <img src={apartmentIcon}></img>
+          <span>아파트</span>
+        </>
+      ),
+    },
+    {
+      value: '원룸' as HouseType,
+      content: (
+        <>
+          <img src={oneroomIcon}></img>
+          <span>원룸</span>
+        </>
+      ),
+    },
+    {
+      value: '빌라/투룸' as HouseType,
+      content: (
+        <>
+          <img src={tworoomIcon}></img>
+          <span>빌라/투룸</span>
+        </>
+      ),
+    },
+    {
+      value: '오피스텔' as HouseType,
+      content: (
+        <>
+          <img src={officetelIcon}></img>
+          <span>오피스텔</span>
+        </>
+      ),
+    },
+  ];
+  const [RadioBtnContainer, houseType] = useRadioBtn<HouseType>(
+    houseTypeOptions,
+    'icon',
+  );
 
   function handleSubmit() {
-    if (houseType === null) return;
-    confirmHouseType(houseType);
+    if (houseType !== undefined) confirmHouseType(houseType);
   }
 
   return (
@@ -33,44 +74,8 @@ export default function Type({ confirmHouseType }: TypeProps) {
         </h1>
       </div>
 
-      <div className={styles.typeBtnContainer}>
-        <button
-          className={`${styles.typeBtn} ${
-            houseType === '아파트' ? styles.selected : ''
-          }`}
-          onClick={() => setHouseType('아파트')}
-        >
-          <img src={apartmentIcon}></img>
-          <span>아파트</span>
-        </button>
-        <button
-          className={`${styles.typeBtn} ${
-            houseType === '원룸' ? styles.selected : ''
-          }`}
-          onClick={() => setHouseType('원룸')}
-        >
-          <img src={oneroomIcon}></img>
-          <span>원룸</span>
-        </button>
-        <button
-          className={`${styles.typeBtn} ${
-            houseType === '빌라/투룸' ? styles.selected : ''
-          }`}
-          onClick={() => setHouseType('빌라/투룸')}
-        >
-          <img src={tworoomIcon}></img>
-          <span>빌라/투룸</span>
-        </button>
-        <button
-          className={`${styles.typeBtn} ${
-            houseType === '오피스텔' ? styles.selected : ''
-          }`}
-          onClick={() => setHouseType('오피스텔')}
-        >
-          <img src={officetelIcon}></img>
-          <span>오피스텔</span>
-        </button>
-      </div>
+      <RadioBtnContainer className={styles.typeBtnContainer} />
+
       <BottomBtn
         onClick={handleSubmit}
         text="확인"

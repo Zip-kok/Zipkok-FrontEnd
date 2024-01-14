@@ -10,7 +10,7 @@ export default function Root() {
   const [showNaviBar] = useNaviStore((state) => [state.showNaviBar]);
 
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${showNaviBar ? styles.padded : ''}`}>
       <div className={styles.content}>
         <Outlet />
       </div>

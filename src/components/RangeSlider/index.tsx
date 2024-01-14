@@ -56,7 +56,7 @@ export default function RangeSlider({
     return `calc((${value} / 100 * (100% - 24px) + 12px)`;
   }
 
-// min max 전환 함수
+  // min max 전환 함수
   function handleSliderChange(index: number) {
     console.assert(index === 1 || index === 2, 'index must be 1 or 2');
 

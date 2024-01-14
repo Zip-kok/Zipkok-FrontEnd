@@ -27,13 +27,11 @@ const Mypage = () => {
     setShowNaviBar(true);
   }, []);
 
-
   const navigate = useNavigate();
 
   const handleProfileEditClick = () => {
-    navigate('./ProfileEdit')
-  }
-
+    navigate('./ProfileEdit');
+  };
 
   const handleKeepClick = () => {
     navigate('./likedProperties');
@@ -57,8 +55,7 @@ const Mypage = () => {
         onBack={() => {
           navigate(-1);
         }}
-      >
-      </Header>
+      ></Header>
 
       <div className={styles.body}>
         <div className={styles.profile}>

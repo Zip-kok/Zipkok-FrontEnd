@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   background: white;
+  z-index: 100;
 }
 
 .container.full {
