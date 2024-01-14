@@ -27,8 +27,11 @@ export const Kok = () => {
 
   return (
     <div className={styles.root}>
-      <Header title="콕리스트" titleIcon={checkIcon} />
-      <div>
+      <div className="top">
+        <Header title="콕리스트" titleIcon={checkIcon} />
+      </div>
+
+      <div className={styles.propertyContainer}>
         {properties.map((property) => (
           <PropertyItem
             key={property.id}
@@ -45,14 +48,13 @@ export const Kok = () => {
           />
         ))}
       </div>
-      <div className={styles.bottomBtnContainer}>
-        <BottomBtn
-          text="새 콕리스트 작성"
-          onClick={handleClick}
-          icon={<PenIcon />}
-          style={{ backgroundColor: 'transparent' }}
-        />
-      </div>
+
+      <BottomBtn
+        text="새 콕리스트 작성"
+        onClick={handleClick}
+        icon={<PenIcon />}
+        style={{ backgroundColor: 'transparent' }}
+      />
     </div>
   );
 };

@@ -22,7 +22,7 @@ export default function Btn({
       disabled={disabled}
       onClick={onClick}
     >
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {icon}
       <span>{text}</span>
     </button>
   );
