@@ -1,9 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import LoginInput from '../../components/LoginInput';
+import TextInput from '../../components/TextInput';
+import { TextInputStyle } from '../../components/TextInput';
 
 export default function useBirthInput(
   placeholder?: string,
   handleSubmit?: () => void,
+  style: TextInputStyle = 'underline',
 ) {
   const [birth, setBirth] = useState<Date>();
   const [isValid, setIsValid] = useState<boolean>(false);
@@ -30,9 +32,10 @@ export default function useBirthInput(
 
   const BirthInput = useCallback(
     () => (
-      <LoginInput
+      <TextInput
         placeholder={placeholder}
         numberOnly
+        style={style}
         maxLength={6}
         onChange={handleChange}
         onSubmit={handleSubmit}

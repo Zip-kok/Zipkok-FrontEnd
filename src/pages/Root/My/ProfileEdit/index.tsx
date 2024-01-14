@@ -38,7 +38,11 @@ const ProfileEdit = () => {
 
   const [imgSrc, setImgSrc] = useState('');
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput();
+  const [BirthInput, birth, isBirthValid, birthWarningMsg] = useBirthInput(
+    '6자리 숫자로 입력해주세요.',
+    () => {},
+    'roundedBox',
+  );
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 

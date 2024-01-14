@@ -5,7 +5,7 @@ import styles from './Birth.module.css';
 import useBirthInput from '../../../hooks/useBirthInput';
 
 import BottomBtn from '../../../components/BottomBtn';
-import LoginInput from '../../../components/LoginInput';
+import TextInput from '../../../components/TextInput';
 
 interface BirthProps {
   onConfirm: (birth: Date) => void;

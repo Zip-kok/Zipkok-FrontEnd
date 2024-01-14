@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from './Location.module.css';
 
 import searchAddress from './searchAddress';
-import LoginInput from '../../../components/LoginInput';
+import TextInput from '../../../components/TextInput';
 import BottomBtn from '../../../components/BottomBtn';
 import AddressContainer from '../../../components/AddressContainer';
 import Address from '../../../types/Address';
@@ -103,7 +103,7 @@ export default function Location({ confirmLocation }: LocationProps) {
         </h1>
       </div>
 
-      <LoginInput
+      <TextInput
         placeholder="도로명, 지번 검색"
         value={inputValue}
         icon={searchIcon}

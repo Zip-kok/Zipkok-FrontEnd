@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
 import deleteIcon from '../../assets/img/delete.svg';
-import styles from './LoginInput.module.css';
+import styles from './TextInput.module.css';
 
-interface LoginInputProps {
+export type TextInputStyle = 'underline' | 'roundedBox';
+
+interface TextInputProps {
   value?: string;
   placeholder?: string;
   icon?: string;
   numberOnly?: boolean;
+  style?: TextInputStyle;
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
   onFocus?: () => void;
@@ -16,18 +19,19 @@ interface LoginInputProps {
   ref?: React.Ref<HTMLInputElement>;
 }
 
-export default function LoginInput({
+export default function TextInput({
   value,
   placeholder,
   icon,
   numberOnly,
+  style = 'underline',
   onChange,
   onSubmit,
   onFocus,
   onBlur,
   caption,
   maxLength = 524288,
-}: LoginInputProps) {
+}: TextInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
@@ -64,7 +68,14 @@ export default function LoginInput({
 
   return (
     <div className={styles.container}>
-      <div className={styles.textBox}>
+      <div
+        className={`${styles.textBox} ${
+          {
+            underline: styles.underline,
+            roundedBox: styles.roundedBox,
+          }[style]
+        }`}
+      >
         <input
           type={numberOnly ? 'number' : 'text'}
           onChange={handleChange}
