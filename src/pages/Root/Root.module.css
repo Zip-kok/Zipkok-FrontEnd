@@ -1,9 +1,12 @@
+.root {
+  height: 100%;
+}
+
 .root.padded {
   /* 내비게이션 바 가림 방지 */
-  padding-bottom: 64px;
+  height: calc(100% - 64px);
 }
 
 .content {
   height: 100%;
-  width: 100%;
 }

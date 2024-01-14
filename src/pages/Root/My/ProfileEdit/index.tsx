@@ -185,7 +185,7 @@ const ProfileEdit = () => {
             defaultValue="서울특별시 성북구 정릉동"
             icon={searchIcon}
             style="roundedBox"
-            onClick={() => {}}
+            onClick={() => navigate('/my/profileEdit/locationEdit')}
             readOnly
           />
         </div>

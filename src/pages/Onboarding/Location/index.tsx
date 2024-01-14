@@ -12,9 +12,13 @@ import searchIcon from '../../../assets/img/search.svg';
 
 interface LocationProps {
   confirmLocation: (location: string) => void;
+  skippable?: boolean;
 }
 
-export default function Location({ confirmLocation }: LocationProps) {
+export default function Location({
+  confirmLocation,
+  skippable = true,
+}: LocationProps) {
   const countPerPage = 50;
 
   const [inputValue, setInputValue] = useState<string>('');
@@ -129,7 +133,7 @@ export default function Location({ confirmLocation }: LocationProps) {
           onClick={handleSubmit}
           text="확인"
           onAnchorClick={() => {}}
-          anchorText="나중에 설정하기"
+          anchorText={skippable ? '나중에 설정하기' : undefined}
           disabled={inputValue === ''}
         />
       )}
