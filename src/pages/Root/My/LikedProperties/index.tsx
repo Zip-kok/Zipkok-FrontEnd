@@ -1,10 +1,10 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import styles from './LikedProperties.module.css';
-import Header from '../../../../components/Header';
-import properties from '../../../../models/properties';
-import PropertyItem from '../../../../components/PropertyItem';
+import styles from "./LikedProperties.module.css";
+import Header from "../../../../components/Header";
+import properties from "../../../../models/properties";
+import PropertyItem from "../../../../components/PropertyItem";
 
 const LikedProperties = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const LikedProperties = () => {
               address={property.address}
               propertyName={property.propertyName}
               imageUrl={property.imageUrl}
-              showListIcon={false}
+              kokList={property.kokList}
             />
           ))}
       </div>

@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from './PropertyItem.module.css';
+import React from "react";
+import styles from "./PropertyItem.module.css";
 
-import heartIcon from '../../assets/img/kokList/white-heart.svg';
-import listIcon from '../../assets/img/kokList/list.svg';
-import propertyImg_null from '../../assets/img/kokList/propertyImg_null.svg';
-import heartFillIcon from '../../assets/img/kokList/heart_fill.svg';
+import heartIcon from "../../assets/img/kokList/white-heart.svg";
+import listIcon from "../../assets/img/kokList/list.svg";
+import propertyImg_null from "../../assets/img/kokList/propertyImg_null.svg";
+import heartFillIcon from "../../assets/img/kokList/heart_fill.svg";
 
 interface PropertyItemProps {
   id: number;
@@ -16,7 +16,7 @@ interface PropertyItemProps {
   address: string;
   propertyName: string;
   imageUrl: string | null;
-  showListIcon: boolean;
+  kokList: boolean;
 }
 export default function PropertyItem({
   id,
@@ -28,16 +28,16 @@ export default function PropertyItem({
   address,
   propertyName,
   imageUrl,
-  showListIcon,
+  kokList,
 }: PropertyItemProps) {
   return (
     <div className={styles.root}>
       <div className={styles.item}>
         <div
           style={{
-            position: 'relative',
-            justifyContent: 'center',
-            alignContent: 'center',
+            position: "relative",
+            justifyContent: "center",
+            alignContent: "center",
           }}
         >
           {/* 이미지 유무 */}
@@ -54,7 +54,7 @@ export default function PropertyItem({
         {/* 매물에 대한 상세 내용 */}
         <div className={styles.detail}>
           <div className={styles.price}>
-            {priceType === '월세'
+            {priceType === "월세"
               ? `${price.toLocaleString()} / ${maintenanceFee?.toLocaleString()}`
               : `${price.toLocaleString()}`}
           </div>
@@ -67,10 +67,10 @@ export default function PropertyItem({
           </div>
         </div>
 
-        {showListIcon && (
-          <button className={styles.listBtn}>
+        {kokList && (
+          <span className={styles.listBtn}>
             <img src={listIcon} alt="listIcon" />
-          </button>
+          </span>
         )}
       </div>
     </div>

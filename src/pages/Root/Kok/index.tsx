@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import useNaviStore from '../../../contexts/naviStore';
+import useNaviStore from "../../../contexts/naviStore";
 
-import styles from './Kok.module.css';
-import checkIcon from '../../../assets/img/kokList/check.svg';
-import Header from '../../../components/Header';
-import PtopertyItem from '../../../components/PropertyItem';
-import BottomBtn from '../../../components/BottomBtn';
-import { ReactComponent as PenIcon } from '../../../assets/img/kokList/pen.svg';
+import styles from "./Kok.module.css";
+import checkIcon from "../../../assets/img/kokList/check.svg";
+import Header from "../../../components/Header";
+import PtopertyItem from "../../../components/PropertyItem";
+import BottomBtn from "../../../components/BottomBtn";
+import { ReactComponent as PenIcon } from "../../../assets/img/kokList/pen.svg";
 
-import properties from '../../../models/properties';
-import PropertyItem from '../../../components/PropertyItem';
+import properties from "../../../models/properties";
+import PropertyItem from "../../../components/PropertyItem";
 
 export const Kok = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export const Kok = () => {
   // 하단 내비게이션 바 설정
   const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
-    setNaviMenu('kok');
+    setNaviMenu("kok");
     setShowNaviBar(true);
   }, []);
 
@@ -44,7 +44,7 @@ export const Kok = () => {
             address={property.address}
             propertyName={property.propertyName}
             imageUrl={property.imageUrl}
-            showListIcon={true}
+            kokList={property.kokList}
           />
         ))}
       </div>
@@ -53,7 +53,7 @@ export const Kok = () => {
         text="새 콕리스트 작성"
         onClick={handleClick}
         icon={<PenIcon />}
-        style={{ backgroundColor: 'transparent' }}
+        style={{ backgroundColor: "transparent" }}
       />
     </div>
   );
