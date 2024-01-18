@@ -24,6 +24,8 @@ import PropertyList from './Root/Kok/newKok/PropertyList';
 import CustomProperty from './Root/Kok/newKok/CustomProperty';
 import WriteKok from './Root/Kok/WriteKok';
 
+import Test from './Test';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -95,6 +97,7 @@ const router = createBrowserRouter([
     path: 'onboarding',
     element: <Onboarding />,
   },
+  { path: 'test', element: <Test /> },
 ]);
 
 export default router;
