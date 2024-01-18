@@ -40,7 +40,9 @@ export default function PropertyList() {
           <IconTextBtn
             image={mapIcon}
             text="지도에서 위치 보기"
-            onClick={() => {}}
+            onClick={() => {
+              navigate('./map');
+            }}
             gap="8px"
             height="36px"
           />
