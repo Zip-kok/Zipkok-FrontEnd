@@ -93,6 +93,7 @@ export default function Onboarding() {
               <img src={leftArrowIcon}></img>
             </button>
           </div>
+
           <div className={styles.progressBar}>
             <div
               className={styles.progress}

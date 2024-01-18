@@ -9,6 +9,7 @@ import AddressContainer from '../../../components/AddressContainer';
 import Address from '../../../types/Address';
 
 import searchIcon from '../../../assets/img/search.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface LocationProps {
   confirmLocation: (location: string) => void;
@@ -39,6 +40,11 @@ export default function Location({
     setAddresses([]);
     setSelectedAddress(address);
   }
+
+  const navigate = useNavigate();
+  const handleSkipBtnClick = () => {
+    navigate('/');
+  };
 
   function loadMoreAddresses() {
     if (selectedAddress || isLoading) return;
@@ -132,7 +138,7 @@ export default function Location({
         <BottomBtn
           onClick={handleSubmit}
           text="확인"
-          onAnchorClick={() => {}}
+          onAnchorClick={() => navigate('/')}
           anchorText={skippable ? '나중에 설정하기' : undefined}
           disabled={inputValue === ''}
         />

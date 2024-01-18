@@ -11,12 +11,14 @@ import tworoomIcon from '../../../assets/img/tworoom.svg';
 import officetelIcon from '../../../assets/img/officetel.svg';
 
 import { HouseType } from '../';
+import { useNavigate } from 'react-router-dom';
 
 interface TypeProps {
   confirmHouseType: (houseType: HouseType) => void;
 }
 
 export default function Type({ confirmHouseType }: TypeProps) {
+  const navigate = useNavigate();
   const houseTypeOptions = [
     {
       value: '아파트' as HouseType,
@@ -79,7 +81,7 @@ export default function Type({ confirmHouseType }: TypeProps) {
       <BottomBtn
         onClick={handleSubmit}
         text="확인"
-        onAnchorClick={() => {}}
+        onAnchorClick={() => navigate('/')}
         anchorText="나중에 설정하기"
         disabled={houseType === null}
       />

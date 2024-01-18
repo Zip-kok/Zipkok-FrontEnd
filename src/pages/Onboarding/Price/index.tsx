@@ -48,9 +48,6 @@ export default function Price({ confirmPrice }: PriceProps) {
   };
 
   const navigate = useNavigate();
-  const handleSkipBtnClick = () => {
-    navigate('/');
-  };
 
   return (
     <div className={styles.root}>
@@ -101,7 +98,7 @@ export default function Price({ confirmPrice }: PriceProps) {
       <BottomBtn
         onClick={handleConfirmClick}
         text="확인"
-        onAnchorClick={handleSkipBtnClick}
+        onAnchorClick={() => navigate('/')}
         anchorText="나중에 설정하기"
         disabled={priceType === null}
       />
