@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useNaviStore from '../../../../../contexts/naviStore';
 
+import BottomBtn from '../../../../../components/BottomBtn';
 import TextInput from '../../../../../components/TextInput';
 import Header from '../../../../../components/Header';
 import PropertyItem from '../../../../../components/PropertyItem';
@@ -22,7 +23,7 @@ export default function PropertyList() {
   const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('kok');
-    setShowNaviBar(true);
+    setShowNaviBar(false);
   }, []);
 
   return (
@@ -63,6 +64,12 @@ export default function PropertyList() {
           />
         ))}
       </div>
+
+      <BottomBtn
+        text="매물 직접 등록하기"
+        onClick={() => {}}
+        style={{ backgroundColor: 'transparent' }}
+      />
     </div>
   );
 }
