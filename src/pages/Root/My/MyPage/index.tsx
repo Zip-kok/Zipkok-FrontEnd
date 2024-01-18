@@ -6,7 +6,7 @@ import styles from './Mypage.module.css';
 import useNaviStore from '../../../../contexts/naviStore';
 
 import Header from '../../../../components/Header';
-import IconTextBtn from '../../../../components/IconTextBtn';
+import IconBtn from '../../../../components/IconBtn';
 
 import my from '../../../../assets/img/mypage/my.svg';
 import edit from '../../../../assets/img/mypage/edit.svg';
@@ -77,40 +77,40 @@ const Mypage = () => {
         </button>
 
         <div className={styles.bodyBtns}>
-          <IconTextBtn
+          <IconBtn
             image={heart}
             text="찜한 매물"
             onClick={handleKeepClick}
           />
-          <IconTextBtn
+          <IconBtn
             image={pen}
             text="리스트 항목 수정"
             onClick={handleListEditClick}
           />
-          <IconTextBtn image={pin} text="나의 핀" onClick={handlePinClick} />
+          <IconBtn image={pin} text="나의 핀" onClick={handlePinClick} />
         </div>
         <div className={styles.btnList}>
-          <IconTextBtn
+          <IconBtn
             image={location_Pin}
             text="최근 본 매물"
             onClick={handleRecentClick}
           />
-          <IconTextBtn
+          <IconBtn
             image={notice}
             text="공지사항"
             onClick={handleNoticeClick}
           />
-          <IconTextBtn
+          <IconBtn
             image={inquiry}
             text="문의하기"
             onClick={handleInquiryClick}
           />
-          <IconTextBtn
+          <IconBtn
             image={logout}
             text="로그아웃"
             onClick={handleLogoutClick}
           />
-          <IconTextBtn image={quit} text="회원탈퇴" onClick={handleQuitClick} />
+          <IconBtn image={quit} text="회원탈퇴" onClick={handleQuitClick} />
         </div>
       </div>
     </div>

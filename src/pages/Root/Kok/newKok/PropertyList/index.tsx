@@ -6,7 +6,7 @@ import useNaviStore from '../../../../../contexts/naviStore';
 import TextInput from '../../../../../components/TextInput';
 import Header from '../../../../../components/Header';
 import PropertyItem from '../../../../../components/PropertyItem';
-import IconTextBtn from '../../../../../components/IconTextBtn';
+import IconTextBtn from '../../../../../components/IconBtn';
 
 import mapIcon from '../../../../../assets/img/map.svg';
 import searchIcon from '../../../../../assets/img/search.svg';

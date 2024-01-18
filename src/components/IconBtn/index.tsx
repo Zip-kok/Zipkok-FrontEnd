@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface IconTextBtnProps {
+interface IconBtnProps {
   image: string;
   text: string;
   onClick: () => void;
 }
 
-const IconTextBtn: React.FC<IconTextBtnProps> = ({ image, text, onClick }) => {
+const IconBtn: React.FC<IconBtnProps> = ({ image, text, onClick }) => {
   return (
     <button onClick={onClick}>
       <img src={image} />
@@ -15,4 +15,4 @@ const IconTextBtn: React.FC<IconTextBtnProps> = ({ image, text, onClick }) => {
   );
 };
 
-export default IconTextBtn;
+export default IconBtn;
