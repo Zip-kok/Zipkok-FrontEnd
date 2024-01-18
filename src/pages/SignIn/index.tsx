@@ -8,6 +8,7 @@ import Gender from './Gender';
 import NickName from './NickName';
 
 import leftArrowIcon from '../../assets/img/left_arrow.svg';
+import { useNavigate } from 'react-router-dom';
 
 // nickname: 회원가입_01_닉네임
 // gender: 회원가입_02_성별
@@ -18,6 +19,7 @@ export type Gender = '남자' | '여자' | '비공개';
 
 export default function SignIn() {
   const [step, setStep] = useState<Step>('nickname');
+  const navigate = useNavigate();
   const steps: Record<Step, JSX.Element> = {
     // nickname
     nickname: (
@@ -52,14 +54,14 @@ export default function SignIn() {
 
   // 상단 바 및 뒤로 가기 버튼을 표시할지 여부
   function topBarEnabled(step: Step) {
-    if (step === 'complete') {
+    if (step === 'complete' || step === 'nickname') {
       return false;
     } else {
       return true;
     }
   }
 
-  // 뒤로 가기 버튼을 눌렀을 때
+  // 뒤로 가기 버튼을 눌렀을  때
   function handleBackClick() {
     if (step === 'gender') {
       setStep('nickname');
