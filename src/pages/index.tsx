@@ -11,19 +11,59 @@ import { Kok } from './Root/Kok';
 import { Home } from './Root/Home';
 import My from './Root/My';
 
+// 마이
 import MyPage from './Root/My/MyPage';
 import KokEdit from './Root/My/KokEdit';
-
 import ProfileEdit from './Root/My/ProfileEdit';
 import LocationEdit from './Root/My/ProfileEdit/LocationEdit';
 import LikedProperties from './Root/My/LikedProperties';
+
+// 콕리스트
+import KokItem from './Root/Kok/KokItem';
+import PropertyList from './Root/Kok/newKok/PropertyList';
+import CustomProperty from './Root/Kok/newKok/CustomProperty';
+import WriteKok from './Root/Kok/WriteKok';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     children: [
-      { path: 'kok', element: <Kok /> },
+      {
+        path: 'kok',
+        children: [
+          { index: true, element: <Kok /> },
+          {
+            path: 'kokItem/:kokId',
+            children: [
+              // 콕리스트_작성한리스트 확인 (5가지 항목)
+              { index: true, element: <KokItem /> },
+              // 새콕리스트 작성_체크 (=수정하기 화면 동일)
+              { path: 'edit', element: <WriteKok /> },
+            ],
+          },
+          {
+            path: 'newKok',
+            children: [
+              {
+                // 콕리스트 작성_매물리스트
+                path: 'propertyList',
+                element: <PropertyList />,
+              },
+              {
+                // 콕리스트 작성_매물선택_직접등록
+                path: 'customProperty',
+                element: <CustomProperty />,
+              },
+              {
+                // 새콕리스트 작성_체크 (=수정하기 화면 동일)
+                path: 'write',
+                element: <WriteKok />,
+              },
+            ],
+          },
+        ],
+      },
       { path: 'home', element: <Home /> },
       {
         path: 'my',
