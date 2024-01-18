@@ -10,6 +10,7 @@ interface IconBtnProps {
   onClick: () => void;
   layout?: IconBtnLayout;
   padding?: string;
+  height?: string;
   gap?: string;
   color?: string;
   fontFamily?: string;
@@ -24,6 +25,7 @@ const IconBtn: React.FC<IconBtnProps> = ({
   onClick,
   layout = 'horizontal',
   padding = '0',
+  height = 'auto',
   gap = '8px',
   color = '#000000',
   fontFamily = 'Pretendard',
@@ -34,6 +36,7 @@ const IconBtn: React.FC<IconBtnProps> = ({
   const style = {
     flexDirection: layout === 'horizontal' ? 'row' : 'column',
     padding,
+    height,
     gap,
     color,
     fontFamily,

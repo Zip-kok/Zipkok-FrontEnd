@@ -41,6 +41,8 @@ export default function PropertyList() {
           image={mapIcon}
           text="지도에서 위치 보기"
           onClick={() => {}}
+          gap="8px"
+          height="36px"
         />
       </div>
 
@@ -60,7 +62,6 @@ export default function PropertyList() {
             kokList={property.kokList}
           />
         ))}
-        di
       </div>
     </div>
   );
