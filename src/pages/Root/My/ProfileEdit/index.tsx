@@ -138,7 +138,7 @@ const ProfileEdit = () => {
             src={imgSrc || 'https://picpac.kr/common/img/default_profile.png'}
             onClick={handleImgClick}
           />
-          <p>수정하기</p>
+          <p onClick={handleImgClick}>수정하기</p>
         </div>
 
         {/* 닉네임 */}
