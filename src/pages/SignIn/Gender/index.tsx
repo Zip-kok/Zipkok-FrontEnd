@@ -50,7 +50,8 @@ export default function Gender({ onConfirm }: GenderProps) {
       <BottomBtn
         onClick={handleSubmit}
         text="확인"
-        disabled={gender === null}
+        disabled={gender === undefined}
+        occupySpace
       />
     </div>
   );

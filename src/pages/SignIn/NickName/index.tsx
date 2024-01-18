@@ -89,6 +89,7 @@ export default function NickName({ onConfirm }: NickNameProps) {
         onClick={handleSubmit}
         text="확인"
         disabled={!isNicknameValid || !isNotNicknameExist}
+        occupySpace
       />
     </div>
   );

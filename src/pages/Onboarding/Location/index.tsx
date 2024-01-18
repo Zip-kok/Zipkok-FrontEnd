@@ -141,6 +141,7 @@ export default function Location({
           onAnchorClick={() => navigate('/')}
           anchorText={skippable ? '나중에 설정하기' : undefined}
           disabled={inputValue === ''}
+          occupySpace
         />
       )}
     </div>

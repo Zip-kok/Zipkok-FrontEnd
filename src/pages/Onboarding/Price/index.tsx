@@ -100,7 +100,8 @@ export default function Price({ confirmPrice }: PriceProps) {
         text="확인"
         onAnchorClick={() => navigate('/')}
         anchorText="나중에 설정하기"
-        disabled={priceType === null}
+        disabled={priceType === undefined}
+        occupySpace
       />
     </div>
   );
