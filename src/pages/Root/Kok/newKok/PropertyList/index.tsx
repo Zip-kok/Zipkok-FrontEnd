@@ -30,21 +30,21 @@ export default function PropertyList() {
     <div className={styles.root}>
       <div className="top">
         <Header title="콕리스트" backBtnEnabled onBack={() => navigate(-1)} />
-      </div>
 
-      <div className={styles.searchBox}>
-        <TextInput
-          placeholder="도로명, 지번 검색"
-          icon={searchIcon}
-          style="underline"
-        />
-        <IconTextBtn
-          image={mapIcon}
-          text="지도에서 위치 보기"
-          onClick={() => {}}
-          gap="8px"
-          height="36px"
-        />
+        <div className={styles.searchBox}>
+          <TextInput
+            placeholder="도로명, 지번 검색"
+            icon={searchIcon}
+            style="underline"
+          />
+          <IconTextBtn
+            image={mapIcon}
+            text="지도에서 위치 보기"
+            onClick={() => {}}
+            gap="8px"
+            height="36px"
+          />
+        </div>
       </div>
 
       <div className={styles.propertyContainer}>
