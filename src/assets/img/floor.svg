@@ -1,0 +1,9 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon_24_floor">
+<path id="Line 94" d="M2.5 21.5L21.5 21.5" stroke="#1B1D1F" stroke-linecap="round"/>
+<path id="Line 96" d="M20 22L20 8.56155C20 7.64382 19.3754 6.84385 18.4851 6.62127L6.48507 3.62127C5.22278 3.30569 4 4.26041 4 5.56155L4 21.5" stroke="#1B1D1F" stroke-linejoin="round"/>
+<line id="Line 97" x1="4" y1="10.5" x2="20" y2="10.5" stroke="#1B1D1F"/>
+<line id="Line 98" x1="4" y1="17.5" x2="20" y2="17.5" stroke="#1B1D1F"/>
+<path id="Vector 561" d="M10 14L11.5 15.5L14.5 12.5" stroke="#1B1D1F" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
