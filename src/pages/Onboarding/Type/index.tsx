@@ -83,7 +83,8 @@ export default function Type({ confirmHouseType }: TypeProps) {
         text="확인"
         onAnchorClick={() => navigate('/')}
         anchorText="나중에 설정하기"
-        disabled={houseType === null}
+        disabled={houseType === undefined}
+        occupySpace
       />
     </div>
   );

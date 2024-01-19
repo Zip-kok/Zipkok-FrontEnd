@@ -6,6 +6,7 @@ import Btn from '../Btn';
 interface BottomBtnProps {
   onClick: () => void;
   text: string;
+  occupySpace?: boolean;
   onAnchorClick?: () => void;
   icon?: React.ReactNode;
   anchorText?: string;
@@ -16,6 +17,7 @@ interface BottomBtnProps {
 export default function BottomBtn({
   onClick,
   text,
+  occupySpace = false,
   onAnchorClick,
   anchorText = '',
   icon,
@@ -32,7 +34,9 @@ export default function BottomBtn({
   return (
     <div
       style={style}
-      className={`${styles.container} ${isKeyboardOpen ? styles.full : ''}`}
+      className={`${styles.container} ${
+        occupySpace ? styles.occupySpace : ''
+      } ${isKeyboardOpen ? styles.full : ''}`}
     >
       {anchorText !== '' && (
         <a className={styles.anchor} onClick={onAnchorClick}>

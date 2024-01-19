@@ -43,7 +43,12 @@ const Birth = ({ onConfirm }: BirthProps) => {
         />
       </div>
       <div className={styles.blank}></div>
-      <BottomBtn onClick={handleSubmit} text="확인" disabled={!isBirthValid} />
+      <BottomBtn
+        onClick={handleSubmit}
+        text="확인"
+        disabled={!isBirthValid}
+        occupySpace
+      />
     </div>
   );
 };

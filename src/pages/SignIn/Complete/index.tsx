@@ -20,6 +20,7 @@ export default function Complete() {
         text="키워드 설정하러 가기"
         onAnchorClick={() => navigate('/')}
         anchorText="나중에 설정하기"
+        occupySpace
       />
     </div>
   );
