@@ -25,12 +25,12 @@ export default function CustomProperty() {
   const [monthlyPrice, setMonthlyPrice] = useState(0); // 월세
   const [price, setPrice] = useState(0); // 매매가
   const [maintenanceFee, setMaintenanceFee] = useState(0); // 관리비
-  const [detailAddress, setDetailAddress] = useState(''); // 상세 주소
+  const [detailAddress, setDetailAddress] = useState('201호'); // 상세 주소
   const [area, setArea] = useState(0); // 넓이
   const [floor, setFloor] = useState(0); // 층고
 
   function canConfirm() {
-    return memo.length > 0 && address.length > 0 && detailAddress.length > 0;
+    return address.length > 0 && detailAddress.length > 0;
   }
 
   // 하단 내비게이션 바 설정
@@ -200,7 +200,7 @@ export default function CustomProperty() {
           />
           <TextInput
             placeholder="상세 주소 입력"
-            defaultValue="201호"
+            value={detailAddress}
             style="roundedBox"
             onChange={(e) => setDetailAddress(e.currentTarget.value)}
           />
