@@ -1,0 +1,85 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  padding: 38px 20px 28px 20px;
+}
+
+.header > h1 {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.018px;
+  margin: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+  padding-bottom: 120px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 0 20px;
+}
+
+.inputTitle {
+  margin: 0;
+  padding-left: 1px;
+  color: var(--gray-color-gray050_text, #4b5259);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.filterContainers {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px 8px;
+  flex-wrap: wrap;
+}
+
+.monthlyPriceContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.monthlyPriceContainer > p {
+  color: var(--gray-color-gray050_text, #4b5259);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 9px;
+}
+
+.priceInputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.priceInputContainer > p {
+  color: var(--gray-color-gray050_text, #4b5259);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  width: 50%;
+}
