@@ -23,7 +23,9 @@ export const Kok = () => {
     setShowNaviBar(true);
   }, []);
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    navigate('./')
+  };
 
   return (
     <div className={styles.root}>

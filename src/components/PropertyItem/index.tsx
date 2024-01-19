@@ -17,6 +17,7 @@ interface PropertyItemProps {
   propertyName: string;
   imageUrl: string | null;
   kokList: boolean;
+  onClick?: () => void;
 }
 export default function PropertyItem({
   id,
@@ -29,9 +30,10 @@ export default function PropertyItem({
   propertyName,
   imageUrl,
   kokList,
+  onClick,
 }: PropertyItemProps) {
   return (
-    <div className={styles.root}>
+    <div className={styles.root} onClick={onClick}>
       <div className={styles.item}>
         <div
           style={{

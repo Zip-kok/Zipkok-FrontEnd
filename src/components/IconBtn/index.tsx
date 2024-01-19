@@ -7,7 +7,7 @@ type IconBtnLayout = 'vertical' | 'horizontal';
 interface IconBtnProps {
   image: string;
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   layout?: IconBtnLayout;
   padding?: string;
   height?: string;
