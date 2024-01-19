@@ -8,6 +8,7 @@ import Header from '../../../../../components/Header';
 import TextInput from '../../../../../components/TextInput';
 
 import useRadioBtn from '../../../../../hooks/useRadioBtn';
+import useAddressStore from '../../../../../contexts/addressStore';
 import useNaviStore from '../../../../../contexts/naviStore';
 
 import searchIcon from '../../../../../assets/img/search.svg';
@@ -15,6 +16,8 @@ import searchIcon from '../../../../../assets/img/search.svg';
 import { HouseType, PriceType } from '../../../../Onboarding';
 
 export default function CustomProperty() {
+  const address = useAddressStore((store) => store.address);
+
   const navigate = useNavigate();
 
   const [memo, setMemo] = useState(''); // 매물 메모
@@ -22,7 +25,6 @@ export default function CustomProperty() {
   const [monthlyPrice, setMonthlyPrice] = useState(0); // 월세
   const [price, setPrice] = useState(0); // 매매가
   const [maintenanceFee, setMaintenanceFee] = useState(0); // 관리비
-  const [address, setAddress] = useState(''); // 주소
   const [detailAddress, setDetailAddress] = useState(''); // 상세 주소
   const [area, setArea] = useState(0); // 넓이
   const [floor, setFloor] = useState(0); // 층고
@@ -190,10 +192,10 @@ export default function CustomProperty() {
 
           <TextInput
             placeholder="주소 검색"
-            defaultValue="성북구 정릉동 77"
+            defaultValue={address}
             icon={searchIcon}
             style="roundedBox"
-            onClick={() => {}}
+            onClick={() => navigate('./locationEdit')}
             readOnly
           />
           <TextInput

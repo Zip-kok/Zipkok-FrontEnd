@@ -6,7 +6,7 @@ export interface AddressStore {
 }
 
 const initialState: AddressStore = {
-  address: '',
+  address: '서울특별시 광진구 능동로 120 (화양동)',
   setAddress: () => {},
 };
 

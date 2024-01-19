@@ -11,11 +11,12 @@ import { Kok } from './Root/Kok';
 import { Home } from './Root/Home';
 import My from './Root/My';
 
+import AddressSearch from '../components/AddressSearch';
+
 // 마이
 import MyPage from './Root/My/MyPage';
 import KokEdit from './Root/My/KokEdit';
 import ProfileEdit from './Root/My/ProfileEdit';
-import LocationEdit from './Root/My/ProfileEdit/LocationEdit';
 import LikedProperties from './Root/My/LikedProperties';
 
 // 콕리스트
@@ -55,9 +56,15 @@ const router = createBrowserRouter([
                 ],
               },
               {
-                // 콕리스트 작성_매물선택_직접등록
                 path: 'customProperty',
-                element: <CustomProperty />,
+                children: [
+                  // 콕리스트 작성_매물선택_직접등록
+                  { index: true, element: <CustomProperty /> },
+                  {
+                    path: 'locationEdit',
+                    element: <AddressSearch title="매물 직접 등록하기" />,
+                  },
+                ],
               },
               {
                 // 새콕리스트 작성_체크 (=수정하기 화면 동일)
@@ -79,7 +86,10 @@ const router = createBrowserRouter([
             path: 'profileEdit',
             children: [
               { index: true, element: <ProfileEdit /> },
-              { path: 'locationEdit', element: <LocationEdit /> },
+              {
+                path: 'locationEdit',
+                element: <AddressSearch title="프로필 수정하기" />,
+              },
             ],
           },
           { path: 'likedProperties', element: <LikedProperties /> },
