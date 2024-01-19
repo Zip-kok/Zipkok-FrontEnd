@@ -241,7 +241,7 @@ const ProfileEdit = () => {
 
       <div className={styles.blank}></div>
 
-      <BottomBtn text="수정 완료" onClick={handleConfirmClick} />
+      <BottomBtn text="수정 완료" onClick={handleConfirmClick} occupySpace />
     </div>
   );
 };
