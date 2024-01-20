@@ -21,6 +21,7 @@ import LikedProperties from './Root/My/LikedProperties';
 
 // 콕리스트
 import KokItem from './Root/Kok/KokItem';
+import NewKok from './Root/Kok/newKok';
 import PropertyList from './Root/Kok/newKok/PropertyList';
 import PropertyListOnMap from './Root/Kok/newKok/PropertyList/OnMap';
 import CustomProperty from './Root/Kok/newKok/CustomProperty';
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'newKok',
+            element: <NewKok />,
             children: [
               {
                 // 콕리스트 작성_매물리스트

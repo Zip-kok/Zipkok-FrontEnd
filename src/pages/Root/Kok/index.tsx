@@ -23,8 +23,6 @@ export const Kok = () => {
     setShowNaviBar(true);
   }, []);
 
-  const handleClick = () => {};
-
   return (
     <div className={styles.root}>
       <div className="top">
@@ -51,7 +49,7 @@ export const Kok = () => {
 
       <BottomBtn
         text="새 콕리스트 작성"
-        onClick={handleClick}
+        onClick={() => navigate('./newKok/propertyList')}
         icon={<PenIcon />}
         style={{ bottom: '64px' }}
       />

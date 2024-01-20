@@ -67,14 +67,6 @@ export default function CustomProperty() {
 
   return (
     <div className={styles.root}>
-      <div className="top">
-        <Header
-          title="매물 직접 등록하기"
-          backBtnEnabled
-          onBack={() => navigate(-1)}
-        />
-      </div>
-
       {/* 등록 전 */}
       {!isConfirming && (
         <BeforeConfirm
