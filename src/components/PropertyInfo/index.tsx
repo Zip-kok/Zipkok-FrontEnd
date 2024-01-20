@@ -44,6 +44,10 @@ export default function PropertyInfo({
   maintanenceFee,
   detailAddress,
 }: PropertyInfoProps) {
+  function pyeongToSquareMeter(pyeong: number) {
+    return pyeong * 3.305785;
+  }
+
   return (
     <div className={styles.container}>
       {/* 썸네일 */}
@@ -52,7 +56,7 @@ export default function PropertyInfo({
       </div>
 
       {/* 주소 */}
-      <div className={styles.address}>{address}</div>
+      <div className={styles.address}>{`${address} ${detailAddress}`}</div>
 
       {/* 가격 */}
       <div className={styles.priceContainer}>
@@ -88,21 +92,32 @@ export default function PropertyInfo({
         </div>
 
         <div className={styles.details}>
-          <div className={styles.detail}>
-            <img src={areaIcon} />
-            <span>{area}평</span>
-          </div>
+          {area && (
+            <div className={styles.detail}>
+              <img src={areaIcon} />
+              <span>{`${pyeongToSquareMeter(area).toFixed(
+                1,
+              )}㎡ (${area}평)`}</span>
+            </div>
+          )}
           <div className={styles.detail}>
             <img src={houseTypeIcon} />
             <span>{houseType}</span>
           </div>
-          <div className={styles.detail}>
-            <img src={floorIcon} />
-            <span>{floor}층</span>
-          </div>
+          {floor && (
+            <div className={styles.detail}>
+              <img src={floorIcon} />
+              <span>{floor}층</span>
+            </div>
+          )}
           <div className={styles.detail}>
             <img src={maintanenceFeeIcon} />
-            <span>관리비 {maintanenceFee?.toLocaleString()}만원</span>
+            <span>
+              관리비
+              {maintanenceFee === 0
+                ? ` 없음`
+                : ` ${maintanenceFee?.toLocaleString()}만원`}
+            </span>
           </div>
         </div>
       </div>

@@ -124,7 +124,6 @@ export default function CustomProperty() {
                 <TextInput
                   style="roundedBox"
                   placeholder="1000"
-                  defaultValue="1000"
                   numberOnly
                   value={deposit.toString()}
                   onChange={(e) => setDeposit(e.currentTarget.valueAsNumber)}
@@ -133,7 +132,6 @@ export default function CustomProperty() {
                 <TextInput
                   style="roundedBox"
                   placeholder="50"
-                  defaultValue="50"
                   numberOnly
                   value={monthlyPrice.toString()}
                   onChange={(e) =>
@@ -152,7 +150,6 @@ export default function CustomProperty() {
                 <TextInput
                   style="roundedBox"
                   placeholder="1000"
-                  defaultValue="1000"
                   numberOnly
                   value={deposit.toString()}
                   onChange={(e) => setDeposit(e.currentTarget.valueAsNumber)}
@@ -170,7 +167,6 @@ export default function CustomProperty() {
                 <TextInput
                   style="roundedBox"
                   placeholder="1000"
-                  defaultValue="1000"
                   numberOnly
                   value={price.toString()}
                   onChange={(e) => setPrice(e.currentTarget.valueAsNumber)}
@@ -188,7 +184,6 @@ export default function CustomProperty() {
             <TextInput
               style="roundedBox"
               placeholder="3.5"
-              defaultValue="3.5"
               numberOnly
               value={maintanenceFee.toString()}
               onChange={(e) => setMaintanenceFee(e.currentTarget.valueAsNumber)}
