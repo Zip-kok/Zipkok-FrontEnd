@@ -23,9 +23,9 @@ interface PropertyInfoProps {
   monthlyPrice?: number;
   price?: number;
   memo: string;
-  area: number;
+  area?: number;
   houseType: HouseType;
-  floor: number;
+  floor?: number;
   maintanenceFee?: number;
   detailAddress?: string;
 }

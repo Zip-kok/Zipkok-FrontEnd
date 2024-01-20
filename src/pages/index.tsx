@@ -25,6 +25,7 @@ import NewKok from './Root/Kok/newKok';
 import PropertyList from './Root/Kok/newKok/PropertyList';
 import PropertyListOnMap from './Root/Kok/newKok/PropertyList/OnMap';
 import CustomProperty from './Root/Kok/newKok/CustomProperty';
+import CustomPropertyConfirm from './Root/Kok/newKok/CustomProperty/Confirm';
 import WriteKok from './Root/Kok/WriteKok';
 
 const router = createBrowserRouter([
@@ -64,7 +65,11 @@ const router = createBrowserRouter([
                   { index: true, element: <CustomProperty /> },
                   {
                     path: 'locationEdit',
-                    element: <AddressSearch title="매물 직접 등록하기" />,
+                    element: <AddressSearch headerDisabled />,
+                  },
+                  {
+                    path: 'confirm',
+                    element: <CustomPropertyConfirm />,
                   },
                 ],
               },

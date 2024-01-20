@@ -9,18 +9,25 @@ import Header from '../Header';
 import Location from '../../pages/Onboarding/Location';
 
 interface AddressSearchProps {
-  title: string;
+  title?: string;
+  headerDisabled?: boolean;
 }
 
-export default function AddressSearch({ title }: AddressSearchProps) {
+export default function AddressSearch({
+  title = '',
+  headerDisabled = false,
+}: AddressSearchProps) {
   const { address, setAddress } = useAddressStore((state) => state);
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="top">
-        <Header title={title} backBtnEnabled onBack={() => navigate(-1)} />
-      </div>
+      {!headerDisabled && (
+        <div className="top">
+          <Header title={title} backBtnEnabled onBack={() => navigate(-1)} />
+        </div>
+      )}
+
       <div className={styles.content}>
         <Location
           defaultAddress={address}
