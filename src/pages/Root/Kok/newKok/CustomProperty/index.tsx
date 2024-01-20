@@ -45,17 +45,40 @@ export default function CustomProperty() {
     '월세',
   );
 
-  const [memo, setMemo] = useState(''); // 매물 메모
-  const [deposit, setDeposit] = useState(1000); // 보증금
-  const [monthlyPrice, setMonthlyPrice] = useState(50); // 월세
-  const [price, setPrice] = useState(1000); // 매매가
-  const [maintanenceFee, setMaintanenceFee] = useState(5); // 관리비
-  const [detailAddress, setDetailAddress] = useState(''); // 상세 주소
-  const [area, setArea] = useState<number>(); // 넓이
-  const [floor, setFloor] = useState<number>(); // 층고
+  const [memo, setMemo] = useState(customKokStore.memo); // 매물 메모
+  const [deposit, setDeposit] = useState(customKokStore.deposit); // 보증금
+  const [monthlyPrice, setMonthlyPrice] = useState(customKokStore.monthlyPrice); // 월세
+  const [price, setPrice] = useState(customKokStore.price); // 매매가
+  const [maintanenceFee, setMaintanenceFee] = useState(
+    customKokStore.maintanenceFee,
+  ); // 관리비
+  const [detailAddress, setDetailAddress] = useState(
+    customKokStore.detailAddress,
+  ); // 상세 주소
+  const [area, setArea] = useState(customKokStore.area); // 넓이
+  const [floor, setFloor] = useState(customKokStore.floor); // 층고
+
+  function canConfirm() {
+    if (!address) return false;
+    if (maintanenceFee === undefined) return false;
+
+    switch (priceType) {
+      case '월세':
+        if (deposit === undefined || monthlyPrice === undefined) return false;
+        break;
+      case '전세':
+        if (deposit === undefined) return false;
+        break;
+      case '매매':
+        if (price === undefined) return false;
+        break;
+    }
+
+    return true;
+  }
 
   function handleConfirm() {
-    if (address.length > 0 && houseType && priceType) {
+    if (canConfirm()) {
       customKokStore.setAddress(address);
       customKokStore.setMemo(memo);
       customKokStore.setDeposit(deposit);
@@ -65,8 +88,8 @@ export default function CustomProperty() {
       customKokStore.setDetailAddress(detailAddress);
       customKokStore.setArea(area);
       customKokStore.setFloor(floor);
-      customKokStore.setHouseType(houseType);
-      customKokStore.setPriceType(priceType);
+      customKokStore.setHouseType(houseType as HouseType);
+      customKokStore.setPriceType(priceType as PriceType);
 
       navigate('./confirm');
     }
@@ -125,7 +148,7 @@ export default function CustomProperty() {
                   style="roundedBox"
                   placeholder="1000"
                   numberOnly
-                  value={deposit.toString()}
+                  defaultValue={deposit?.toString()}
                   onChange={(e) => setDeposit(e.currentTarget.valueAsNumber)}
                 />
                 <p>/</p>
@@ -133,7 +156,7 @@ export default function CustomProperty() {
                   style="roundedBox"
                   placeholder="50"
                   numberOnly
-                  value={monthlyPrice.toString()}
+                  defaultValue={monthlyPrice?.toString()}
                   onChange={(e) =>
                     setMonthlyPrice(e.currentTarget.valueAsNumber)
                   }
@@ -151,7 +174,7 @@ export default function CustomProperty() {
                   style="roundedBox"
                   placeholder="1000"
                   numberOnly
-                  value={deposit.toString()}
+                  defaultValue={deposit?.toString()}
                   onChange={(e) => setDeposit(e.currentTarget.valueAsNumber)}
                 />
                 <p>만원</p>
@@ -168,7 +191,7 @@ export default function CustomProperty() {
                   style="roundedBox"
                   placeholder="1000"
                   numberOnly
-                  value={price.toString()}
+                  defaultValue={price?.toString()}
                   onChange={(e) => setPrice(e.currentTarget.valueAsNumber)}
                 />
                 <p>만원</p>
@@ -185,7 +208,7 @@ export default function CustomProperty() {
               style="roundedBox"
               placeholder="3.5"
               numberOnly
-              value={maintanenceFee.toString()}
+              defaultValue={maintanenceFee?.toString()}
               onChange={(e) => setMaintanenceFee(e.currentTarget.valueAsNumber)}
             />
             <p>만원</p>
@@ -206,7 +229,7 @@ export default function CustomProperty() {
           />
           <TextInput
             placeholder="상세 주소 입력"
-            value={detailAddress}
+            defaultValue={detailAddress}
             style="roundedBox"
             onChange={(e) => setDetailAddress(e.currentTarget.value)}
           />
@@ -220,7 +243,7 @@ export default function CustomProperty() {
               style="roundedBox"
               placeholder="5"
               numberOnly
-              value={area?.toString() ?? ''}
+              defaultValue={area?.toString()}
               onChange={(e) => setArea(e.currentTarget.valueAsNumber)}
             />
             <p>평</p>
@@ -235,7 +258,7 @@ export default function CustomProperty() {
               style="roundedBox"
               placeholder="1"
               numberOnly
-              value={floor?.toString() ?? ''}
+              defaultValue={floor?.toString()}
               onChange={(e) => setFloor(e.currentTarget.valueAsNumber)}
             />
             <p>층</p>
@@ -245,7 +268,7 @@ export default function CustomProperty() {
 
       <BottomBtn
         text="등록하기"
-        disabled={!(address.length > 0 && houseType && priceType)}
+        disabled={!canConfirm()}
         onClick={handleConfirm}
       />
     </div>

@@ -22,7 +22,7 @@ interface PropertyInfoProps {
   deposit?: number;
   monthlyPrice?: number;
   price?: number;
-  memo: string;
+  memo?: string;
   area?: number;
   houseType: HouseType;
   floor?: number;
@@ -56,7 +56,9 @@ export default function PropertyInfo({
       </div>
 
       {/* 주소 */}
-      <div className={styles.address}>{`${address} ${detailAddress}`}</div>
+      <div className={styles.address}>{`${address} ${
+        detailAddress ? detailAddress : ''
+      }`}</div>
 
       {/* 가격 */}
       <div className={styles.priceContainer}>
@@ -92,7 +94,7 @@ export default function PropertyInfo({
         </div>
 
         <div className={styles.details}>
-          {area && (
+          {area !== undefined && (
             <div className={styles.detail}>
               <img src={areaIcon} />
               <span>{`${pyeongToSquareMeter(area).toFixed(
@@ -104,7 +106,7 @@ export default function PropertyInfo({
             <img src={houseTypeIcon} />
             <span>{houseType}</span>
           </div>
-          {floor && (
+          {floor !== undefined && (
             <div className={styles.detail}>
               <img src={floorIcon} />
               <span>{floor}층</span>

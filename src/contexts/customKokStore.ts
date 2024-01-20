@@ -4,25 +4,25 @@ import { HouseType, PriceType } from '../pages/Onboarding';
 export interface CustomKokStore {
   picture?: string;
   address: string;
-  memo: string;
-  deposit: number;
-  monthlyPrice: number;
-  price: number;
-  maintanenceFee: number;
-  detailAddress: string;
+  memo?: string;
+  deposit?: number;
+  monthlyPrice?: number;
+  price?: number;
+  maintanenceFee?: number;
+  detailAddress?: string;
   area?: number;
   floor?: number;
   houseType: HouseType;
   priceType: PriceType;
 
-  setPicture: (picture: string) => void;
+  setPicture: (picture?: string) => void;
   setAddress: (address: string) => void;
-  setMemo: (memo: string) => void;
-  setDeposit: (deposit: number) => void;
-  setMonthlyPrice: (monthlyPrice: number) => void;
-  setPrice: (price: number) => void;
-  setMaintanenceFee: (maintanenceFee: number) => void;
-  setDetailAddress: (detailAddress: string) => void;
+  setMemo: (memo?: string) => void;
+  setDeposit: (deposit?: number) => void;
+  setMonthlyPrice: (monthlyPrice?: number) => void;
+  setPrice: (price?: number) => void;
+  setMaintanenceFee: (maintanenceFee?: number) => void;
+  setDetailAddress: (detailAddress?: string) => void;
   setArea: (area?: number) => void;
   setFloor: (floor?: number) => void;
   setHouseType: (houseType: HouseType) => void;
@@ -31,12 +31,12 @@ export interface CustomKokStore {
 
 const initialState: CustomKokStore = {
   address: '',
-  memo: '',
-  deposit: 0,
-  monthlyPrice: 0,
-  price: 0,
-  maintanenceFee: 0,
-  detailAddress: '',
+  memo: undefined,
+  deposit: undefined,
+  monthlyPrice: undefined,
+  price: undefined,
+  maintanenceFee: undefined,
+  detailAddress: undefined,
   area: undefined,
   floor: undefined,
   houseType: '원룸',
