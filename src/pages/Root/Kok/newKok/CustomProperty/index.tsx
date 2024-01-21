@@ -128,8 +128,9 @@ export default function CustomProperty() {
           <TextInput
             style="roundedBox"
             placeholder="매물에 대한 메모를 작성해주세요. (최대 30자)"
-            value={memo}
+            defaultValue={memo}
             onChange={(e) => setMemo(e.currentTarget.value)}
+            maxLength={30}
           />
         </div>
 
