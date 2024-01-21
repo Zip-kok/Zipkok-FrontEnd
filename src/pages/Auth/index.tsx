@@ -39,9 +39,13 @@ export default function Auth() {
         else if (res.code === 5001) {
           navigate('/signin');
         }
+        // 에러 발생 시
+        else {
+          throw new Error(res.message);
+        }
       })
       .catch((err) => {
-        alert(err);
+        alert(err.message);
         navigate('/login');
       });
   }, []);
