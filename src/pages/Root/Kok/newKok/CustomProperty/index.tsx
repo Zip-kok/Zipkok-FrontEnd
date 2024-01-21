@@ -6,6 +6,7 @@ import styles from './CustomProperty.module.css';
 import BottomBtn from '../../../../../components/BottomBtn';
 import TextInput from '../../../../../components/TextInput';
 
+import useHistoryState from '../../../../../hooks/useHistoryState';
 import useRadioBtn from '../../../../../hooks/useRadioBtn';
 import useAddressStore from '../../../../../contexts/addressStore';
 import useNaviStore from '../../../../../contexts/naviStore';
@@ -45,18 +46,26 @@ export default function CustomProperty() {
     '월세',
   );
 
-  const [memo, setMemo] = useState(customKokStore.memo); // 매물 메모
-  const [deposit, setDeposit] = useState(customKokStore.deposit); // 보증금
-  const [monthlyPrice, setMonthlyPrice] = useState(customKokStore.monthlyPrice); // 월세
-  const [price, setPrice] = useState(customKokStore.price); // 매매가
-  const [maintanenceFee, setMaintanenceFee] = useState(
+  const [memo, setMemo] = useHistoryState('memo', customKokStore.memo); // 매물 메모
+  const [deposit, setDeposit] = useHistoryState(
+    'deposit',
+    customKokStore.deposit,
+  ); // 보증금
+  const [monthlyPrice, setMonthlyPrice] = useHistoryState(
+    'monthlyPrice',
+    customKokStore.monthlyPrice,
+  ); // 월세
+  const [price, setPrice] = useHistoryState('price', customKokStore.price); // 매매가
+  const [maintanenceFee, setMaintanenceFee] = useHistoryState(
+    'maintanenceFee',
     customKokStore.maintanenceFee,
   ); // 관리비
-  const [detailAddress, setDetailAddress] = useState(
+  const [detailAddress, setDetailAddress] = useHistoryState(
+    'detailAddress',
     customKokStore.detailAddress,
   ); // 상세 주소
-  const [area, setArea] = useState(customKokStore.area); // 넓이
-  const [floor, setFloor] = useState(customKokStore.floor); // 층고
+  const [area, setArea] = useHistoryState('area', customKokStore.area); // 넓이
+  const [floor, setFloor] = useHistoryState('floor', customKokStore.floor); // 층고
 
   function canConfirm() {
     if (!address) return false;
