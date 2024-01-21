@@ -57,7 +57,7 @@ export default function KokItem() {
 
   return (
     <div className={styles.root}>
-      <TopMenu />
+      <TopMenu className={styles.top} />
       <Content />
     </div>
   );
