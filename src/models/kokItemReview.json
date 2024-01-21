@@ -1,0 +1,12 @@
+{
+	"code" : 7008,
+	"message" : "콕 후기 정보 조회 성공",
+	"result" : {
+		"impressions" : ["깨끗해요", "조용해요", "현관보안"],
+		"facilityStarCount" : 3,
+		"infraStarCount" : 2,
+		"structureStarCount" : 1,
+		"vibeStarCount" :4,
+		"reviewText" : "바퀴벌레랑 눈마주침\n1월2일 입주 가능, 채광 구림"
+	}
+}

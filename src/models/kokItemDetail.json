@@ -1,0 +1,29 @@
+{
+	"code" : 7003,
+	"message" : "콕 세부정보 조회 성공",
+	"result" : {
+		"kokId" : 1,
+		"imageInfo" : {
+			"imageNumber" : 9,
+			"imageUrls" : [
+			"url1asdfsadfsadf",
+			"url2sadfsadfsadf",
+			"url3eiubidiufjwq"
+			],
+		},	
+		"address" : "자양로 23나길 24",
+		"detailAddress" : "506호",
+		"transactionType" : "월세",
+		"deposit" : 1000,
+		"price" : 50,
+		"detail" : "국민대 리모델링 부리식 풀옵션 2층 엘레베이터\n북한산보국문역 도보 3분\n국민대",
+		"area_size" : 37.4,
+		"pyeongsu" : 11,
+		"realEstateType" : "투룸",
+		"floorNum" : 6,
+		"administrativeFee" : 5,
+		"latitude" : 32.3235235,
+		"longitude" : 351.1234235236,
+		"isZimmed" : false
+	}
+}
