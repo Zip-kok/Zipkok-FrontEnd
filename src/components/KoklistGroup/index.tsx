@@ -16,14 +16,12 @@ interface KoklistGroupProps {
   title: string;
   koklists: Koklist[];
   selected: boolean;
-  setKoklists?: (koklists: Koklist[]) => void;
 }
 
 export default function KoklistGroup({
   title,
   koklists,
   selected,
-  setKoklists,
 }: KoklistGroupProps) {
   const [isSelected, setIsSelected] = useState(selected);
 

@@ -70,11 +70,21 @@ export default function NearHome({ pictures }: NearHomeProps) {
         <KoklistGroup
           title="공동현관"
           koklists={[
-            { name: '공동현관 CCTV가 있는가1', checked: true },
-            { name: '공동현관 CCTV가 있는가2', checked: false },
-            { name: 'ddddddddd', checked: true },
+            { name: '공동현관 CCTV가 있는가 1', checked: true },
+            { name: '공동현관 CCTV가 있는가 2', checked: false },
+            { name: '공동현관 CCTV가 있는가 3', checked: true },
           ]}
           selected
+        />
+
+        <KoklistGroup
+          title="복도 및 계단"
+          koklists={[
+            { name: '공동현관 CCTV가 있는가 1', checked: true },
+            { name: '공동현관 CCTV가 있는가 2', checked: false },
+            { name: '공동현관 CCTV가 있는가 3', checked: true },
+          ]}
+          selected={false}
         />
       </div>
     </div>
