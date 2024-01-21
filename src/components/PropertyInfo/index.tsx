@@ -7,8 +7,8 @@ import IconBtn from '../IconBtn';
 import defaultThumbnail from '../../assets/img/defaultThumbnail.png';
 import mapImg from '../../assets/img/kokList/map.png';
 import linkIcon from '../../assets/img/link.svg';
-import areaIcon from '../../assets/img/structure.svg';
-import houseTypeIcon from '../../assets/img/size.svg';
+import houseTypeIcon from '../../assets/img/structure.svg';
+import areaIcon from '../../assets/img/size.svg';
 import floorIcon from '../../assets/img/floor.svg';
 import maintanenceFeeIcon from '../../assets/img/money.svg';
 
