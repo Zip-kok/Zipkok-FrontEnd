@@ -66,3 +66,23 @@ h4{
   width: 360px;
   height: 200px;
 }
+
+.TagCtn{
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tagBtn {
+  justify-content: center;
+  border-radius: 500px;
+  padding: 6px 12px;
+  border: 1px solid var(--gray-color-gray100, #00000A);
+  background: var(--gray-color-gray080_text, #1B1D1F);
+  color: var(--gray-color-white, #FFF);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.optionsCtn{}
