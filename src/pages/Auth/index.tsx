@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import Cookies from 'js-cookie';
+
+import useEmailStore from '../../contexts/emailStore';
 
 export default function Auth() {
   const location = useLocation();
   const navigate = useNavigate();
+  const setEmail = useEmailStore((store) => store.setEmail);
 
   function millisecondsToDays(ms: number) {
     return ms / 1000 / 60 / 60 / 24;
@@ -37,6 +39,7 @@ export default function Auth() {
         }
         // 회원이 아닌 경우
         else if (res.code === 5001) {
+          setEmail(res.result.email);
           navigate('/signin');
         }
         // 에러 발생 시
