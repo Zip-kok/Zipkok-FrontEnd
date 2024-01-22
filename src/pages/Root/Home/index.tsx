@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useNaviStore from '../../../contexts/naviStore';
+import useNaviStore from 'contexts/naviStore';
 
 import styles from './Home.module.css';
 

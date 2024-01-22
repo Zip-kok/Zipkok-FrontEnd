@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './KokEdit.module.css';
 
-import useCheckList from '../../../../hooks/useCheckList';
+import useCheckList from 'hooks/useCheckList';
 
 const Contract = () => {
   const [checkListContainer, checkList, setCheckList] = useCheckList([

@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './AddressSearch.module.css';
 
-import useAddressStore from '../../contexts/addressStore';
+import useAddressStore from 'contexts/addressStore';
 
 import Header from '../Header';
-import Location from '../../pages/Onboarding/Location';
+import Location from 'pages/Onboarding/Location';
 
 interface AddressSearchProps {
   title?: string;

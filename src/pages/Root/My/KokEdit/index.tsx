@@ -7,10 +7,10 @@ import NearHome from './NearHome';
 import InsideHome from './InsideHome';
 import Contract from './Contract';
 
-import Header from '../../../../components/Header';
-import useMenu from '../../../../hooks/useMenu';
+import Header from 'components/Header';
+import useMenu from 'hooks/useMenu';
 
-import useNaviStore from '../../../../contexts/naviStore';
+import useNaviStore from 'contexts/naviStore';
 
 const KokEdit = () => {
   const navigate = useNavigate();

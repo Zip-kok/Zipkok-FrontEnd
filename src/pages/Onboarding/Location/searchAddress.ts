@@ -1,4 +1,4 @@
-import { JUSO_KEY } from '../../../keys';
+import { JUSO_KEY } from 'keys';
 
 export default async function searchAddress(
   query: string,

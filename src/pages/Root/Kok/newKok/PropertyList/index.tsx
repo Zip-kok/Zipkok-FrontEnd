@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useNaviStore from '../../../../../contexts/naviStore';
+import useNaviStore from 'contexts/naviStore';
 
-import BottomBtn from '../../../../../components/BottomBtn';
-import TextInput from '../../../../../components/TextInput';
-import Header from '../../../../../components/Header';
-import PropertyItem from '../../../../../components/PropertyItem';
-import IconTextBtn from '../../../../../components/IconBtn';
+import BottomBtn from 'components/BottomBtn';
+import TextInput from 'components/TextInput';
+import PropertyItem from 'components/PropertyItem';
+import IconTextBtn from 'components/IconBtn';
 
-import mapIcon from '../../../../../assets/img/map.svg';
-import searchIcon from '../../../../../assets/img/search.svg';
+import mapIcon from 'assets/img/map.svg';
+import searchIcon from 'assets/img/search.svg';
 
 import styles from './PropertyList.module.css';
 
-import properties from '../../../../../models/properties';
+import properties from 'models/properties';
 
 export default function PropertyList() {
   const navigate = useNavigate();
@@ -65,7 +64,7 @@ export default function PropertyList() {
 
       <BottomBtn
         text="매물 직접 등록하기"
-        onClick={() => navigate('../customProperty')}
+        onClick={() => navigate('customProperty')}
         style={{ backgroundColor: 'transparent' }}
       />
     </div>

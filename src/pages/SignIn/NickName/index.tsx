@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import styles from './NickName.module.css';
 
-import BottomBtn from '../../../components/BottomBtn';
-import TextInput from '../../../components/TextInput';
+import BottomBtn from 'components/BottomBtn';
+import TextInput from 'components/TextInput';
 
 interface NickNameProps {
   onConfirm: (nickname: string) => void;

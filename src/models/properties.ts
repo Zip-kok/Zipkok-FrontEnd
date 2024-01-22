@@ -1,4 +1,4 @@
-import img from "../assets/img/kokList/propertyImg.svg";
+import img from "assets/img/kokList/propertyImg.svg";
 
 const properties = [
   {

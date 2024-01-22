@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './CheckList.module.css';
 
-import onIcon from '../../assets/img/checkList/on.svg';
-import offIcon from '../../assets/img/checkList/off.svg';
+import onIcon from 'assets/img/checkList/on.svg';
+import offIcon from 'assets/img/checkList/off.svg';
 
 interface CheckListProps {
   name: string;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import defaultIcon from '../../assets/img/checkbox_default.svg';
-import checkIcon from '../../assets/img/checkbox_selected.svg';
+import defaultIcon from 'assets/img/checkbox_default.svg';
+import checkIcon from 'assets/img/checkbox_selected.svg';
 
 interface CheckboxProps {
   checked: boolean;

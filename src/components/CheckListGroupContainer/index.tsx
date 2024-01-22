@@ -3,8 +3,8 @@ import { ReactSortable } from 'react-sortablejs';
 
 import styles from './CheckListGroupContainer.module.css';
 
-import CheckList from '../../components/CheckList';
-import CheckListGroup, { handleClass } from '../../components/CheckListGroup';
+import CheckList from 'components/CheckList';
+import CheckListGroup, { handleClass } from 'components/CheckListGroup';
 
 export interface CheckListGroupContainerProps {
   checkListGroups: CheckListGroup[];

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import styles from './KoklistGroup.module.css';
 
-import defaultIcon from '../../assets/img/check_default.svg';
-import selectIcon from '../../assets/img/check_selected.svg';
-import cameraIcon from '../../assets/img/camera.svg';
+import defaultIcon from 'assets/img/check_default.svg';
+import selectIcon from 'assets/img/check_selected.svg';
+import cameraIcon from 'assets/img/camera.svg';
 import Checkbox from '../CheckBox';
 
 interface Koklist {

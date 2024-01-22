@@ -2,7 +2,7 @@ import React from 'react';
 import Lottie from 'lottie-react';
 
 import styles from './CompleteAnim.module.css';
-import checkLottie from '../../assets/Lottie/checkLottie.json';
+import checkLottie from 'assets/Lottie/checkLottie.json';
 
 interface CompleteProps {
   title: string;

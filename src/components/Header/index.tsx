@@ -1,6 +1,6 @@
 import React from 'react';
 
-import backIcon from '../../assets/img/left_arrow.svg';
+import backIcon from 'assets/img/left_arrow.svg';
 
 import styles from './Header.module.css';
 

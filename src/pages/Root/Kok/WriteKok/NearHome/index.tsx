@@ -2,12 +2,12 @@ import React from 'react';
 
 import styles from './NearHome.module.css';
 
-import Highlight from '../../../../../components/Highlight';
+import Highlight from 'components/Highlight';
 
-import deleteBtnIcon from '../../../../../assets/img/delete.svg';
-import cameraIcon from '../../../../../assets/img/camera.svg';
+import deleteBtnIcon from 'assets/img/delete.svg';
+import cameraIcon from 'assets/img/camera.svg';
 import { Kok } from '../..';
-import KoklistGroup from '../../../../../components/KoklistGroup';
+import KoklistGroup from 'components/KoklistGroup';
 
 interface Picture {
   id: number;

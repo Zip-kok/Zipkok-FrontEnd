@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import useEmailStore from '../../contexts/emailStore';
+import useEmailStore from 'contexts/emailStore';
 
 export default function Auth() {
   const location = useLocation();

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Splash.module.css';
 
-import zipkokIcon from '../../assets/img/login/zipkokIcon_red.svg';
+import zipkokIcon from 'assets/img/login/zipkokIcon_red.svg';
 
 export default function Splash() {
   return (

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 import styles from './SignIn.module.css';
 
-import useEmailStore from '../../contexts/emailStore';
+import useEmailStore from 'contexts/emailStore';
 
 import Birth from './Birth';
 import Complete from './Complete';
 import Gender from './Gender';
 import NickName from './NickName';
 
-import leftArrowIcon from '../../assets/img/left_arrow.svg';
+import leftArrowIcon from 'assets/img/left_arrow.svg';
 import { useNavigate } from 'react-router-dom';
 
 // nickname: 회원가입_01_닉네임

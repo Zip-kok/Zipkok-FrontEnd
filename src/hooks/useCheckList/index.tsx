@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import CheckListGroupContainer from '../../components/CheckListGroupContainer';
-import type { CheckListGroup } from '../../components/CheckListGroupContainer';
+import CheckListGroupContainer from 'components/CheckListGroupContainer';
+import type { CheckListGroup } from 'components/CheckListGroupContainer';
 
 export default function useCheckList(checkListGroups: CheckListGroup[]) {
   const [checkList, setCheckList] = useState<CheckListGroup[]>(checkListGroups);

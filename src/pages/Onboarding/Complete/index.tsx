@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './Complete.module.css';
 
-import CompleteAnim from '../../../components/CompleteAnim';
-import BottomBtn from '../../../components/BottomBtn';
+import CompleteAnim from 'components/CompleteAnim';
+import BottomBtn from 'components/BottomBtn';
 
 export default function Complete() {
   const navigate = useNavigate();

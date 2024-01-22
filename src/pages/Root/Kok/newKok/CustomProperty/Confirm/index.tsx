@@ -1,8 +1,8 @@
 import React from 'react';
 
-import PropertyInfo from '../../../../../../components/PropertyInfo';
+import PropertyInfo from 'components/PropertyInfo';
 
-import useCustomKokStore from '../../../../../../contexts/customKokStore';
+import useCustomKokStore from 'contexts/customKokStore';
 
 export default function Confirm() {
   const customKokStore = useCustomKokStore();

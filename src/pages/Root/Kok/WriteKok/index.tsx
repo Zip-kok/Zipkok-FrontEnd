@@ -5,13 +5,13 @@ import NearHome from './NearHome';
 import InsideHome from './InsideHome';
 import Contract from './Contract';
 
-import useMenu from '../../../../hooks/useMenu';
-import useNaviStore from '../../../../contexts/naviStore';
+import useMenu from 'hooks/useMenu';
+import useNaviStore from 'contexts/naviStore';
 
 import styles from './WriteKok.module.css';
 
 // for test
-import propertyImg from '../../../../assets/img/defaultThumbnail.png';
+import propertyImg from 'assets/img/defaultThumbnail.png';
 
 export default function KokItem() {
   // 상단 메뉴 설정

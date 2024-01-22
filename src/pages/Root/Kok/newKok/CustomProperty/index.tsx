@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './CustomProperty.module.css';
 
-import BottomBtn from '../../../../../components/BottomBtn';
-import TextInput from '../../../../../components/TextInput';
+import BottomBtn from 'components/BottomBtn';
+import TextInput from 'components/TextInput';
 
-import useHistoryState from '../../../../../hooks/useHistoryState';
-import useRadioBtn from '../../../../../hooks/useRadioBtn';
-import useAddressStore from '../../../../../contexts/addressStore';
-import useNaviStore from '../../../../../contexts/naviStore';
-import useCustomKokStore from '../../../../../contexts/customKokStore';
+import useHistoryState from 'hooks/useHistoryState';
+import useRadioBtn from 'hooks/useRadioBtn';
+import useAddressStore from 'contexts/addressStore';
+import useNaviStore from 'contexts/naviStore';
+import useCustomKokStore from 'contexts/customKokStore';
 
-import searchIcon from '../../../../../assets/img/search.svg';
+import searchIcon from 'assets/img/search.svg';
 
 import { HouseType, PriceType } from '../../../../Onboarding';
 

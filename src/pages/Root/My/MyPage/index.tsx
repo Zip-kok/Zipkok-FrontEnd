@@ -3,21 +3,21 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './Mypage.module.css';
 
-import useNaviStore from '../../../../contexts/naviStore';
+import useNaviStore from 'contexts/naviStore';
 
-import Header from '../../../../components/Header';
-import IconBtn from '../../../../components/IconBtn';
+import Header from 'components/Header';
+import IconBtn from 'components/IconBtn';
 
-import my from '../../../../assets/img/mypage/my.svg';
-import edit from '../../../../assets/img/mypage/edit.svg';
-import heart from '../../../../assets/img/mypage/heart.svg';
-import pen from '../../../../assets/img/mypage/pen.svg';
-import pin from '../../../../assets/img/mypage/pin.svg';
-import location_Pin from '../../../../assets/img/mypage/location_pin.svg';
-import notice from '../../../../assets/img/mypage/notice.svg';
-import inquiry from '../../../../assets/img/mypage/inquiry.svg';
-import logout from '../../../../assets/img/mypage/logout.svg';
-import quit from '../../../../assets/img/mypage/quit.svg';
+import my from 'assets/img/mypage/my.svg';
+import edit from 'assets/img/mypage/edit.svg';
+import heart from 'assets/img/mypage/heart.svg';
+import pen from 'assets/img/mypage/pen.svg';
+import pin from 'assets/img/mypage/pin.svg';
+import location_Pin from 'assets/img/mypage/location_pin.svg';
+import notice from 'assets/img/mypage/notice.svg';
+import inquiry from 'assets/img/mypage/inquiry.svg';
+import logout from 'assets/img/mypage/logout.svg';
+import quit from 'assets/img/mypage/quit.svg';
 
 const Mypage = () => {
   // 하단 내비게이션 바 설정

@@ -4,15 +4,15 @@ import styles from './PropertyInfo.module.css';
 
 import IconBtn from '../IconBtn';
 
-import defaultThumbnail from '../../assets/img/defaultThumbnail.png';
-import mapImg from '../../assets/img/kokList/map.png';
-import linkIcon from '../../assets/img/link.svg';
-import houseTypeIcon from '../../assets/img/structure.svg';
-import areaIcon from '../../assets/img/size.svg';
-import floorIcon from '../../assets/img/floor.svg';
-import maintanenceFeeIcon from '../../assets/img/money.svg';
+import defaultThumbnail from 'assets/img/defaultThumbnail.png';
+import mapImg from 'assets/img/kokList/map.png';
+import linkIcon from 'assets/img/link.svg';
+import houseTypeIcon from 'assets/img/structure.svg';
+import areaIcon from 'assets/img/size.svg';
+import floorIcon from 'assets/img/floor.svg';
+import maintanenceFeeIcon from 'assets/img/money.svg';
 
-import { PriceType, HouseType } from '../../pages/Onboarding';
+import { PriceType, HouseType } from 'pages/Onboarding';
 import BottomBtn from '../BottomBtn';
 
 interface PropertyInfoProps {

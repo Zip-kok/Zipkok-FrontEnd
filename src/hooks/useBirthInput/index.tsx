@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import TextInput from '../../components/TextInput';
-import { TextInputStyle } from '../../components/TextInput';
+import TextInput from 'components/TextInput';
+import { TextInputStyle } from 'components/TextInput';
 
 export default function useBirthInput() {
   const [birth, setBirth] = useState<Date>();

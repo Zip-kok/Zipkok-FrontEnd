@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import styles from './Location.module.css';
 
 import searchAddress from './searchAddress';
-import TextInput from '../../../components/TextInput';
-import BottomBtn from '../../../components/BottomBtn';
-import AddressContainer from '../../../components/AddressContainer';
-import Address from '../../../types/Address';
+import TextInput from 'components/TextInput';
+import BottomBtn from 'components/BottomBtn';
+import AddressContainer from 'components/AddressContainer';
+import Address from 'types/Address';
 
-import searchIcon from '../../../assets/img/search.svg';
+import searchIcon from 'assets/img/search.svg';
 import { useNavigate } from 'react-router-dom';
 
 interface LocationProps {

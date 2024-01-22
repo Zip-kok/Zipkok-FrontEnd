@@ -1,5 +1,5 @@
 import React from 'react';
-import RangeSlider from '../../../../components/RangeSlider';
+import RangeSlider from 'components/RangeSlider';
 import getPriceLabelString from './getPriceLabelString';
 import styles from './priceSlider.module.css';
 

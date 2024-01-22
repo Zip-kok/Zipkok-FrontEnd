@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './ProfileEdit.module.css';
 
-import useRadioBtn from '../../../../hooks/useRadioBtn';
-import useBirthInput from '../../../../hooks/useBirthInput';
-import useNaviStore from '../../../../contexts/naviStore';
-import useAddressStore from '../../../../contexts/addressStore';
+import useRadioBtn from 'hooks/useRadioBtn';
+import useBirthInput from 'hooks/useBirthInput';
+import useNaviStore from 'contexts/naviStore';
+import useAddressStore from 'contexts/addressStore';
 
-import searchIcon from '../../../../assets/img/search.svg';
-import TextInput from '../../../../components/TextInput';
-import Header from '../../../../components/Header';
-import BottomBtn from '../../../../components/BottomBtn';
+import searchIcon from 'assets/img/search.svg';
+import TextInput from 'components/TextInput';
+import Header from 'components/Header';
+import BottomBtn from 'components/BottomBtn';
 import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
 import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
 import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';
