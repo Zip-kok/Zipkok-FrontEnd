@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <rect x="2.5" y="2.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+  <rect x="19.5" y="2.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+  <rect x="19.5" y="19.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+  <rect x="2.5" y="19.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+  <line x1="3.5" y1="4" x2="3.5" y2="19" stroke="#1B1D1F"/>
+  <line x1="20.5" y1="4" x2="20.5" y2="19" stroke="#1B1D1F"/>
+  <line x1="20" y1="20.5" x2="4" y2="20.5" stroke="#1B1D1F"/>
+  <line x1="20" y1="3.5" x2="4" y2="3.5" stroke="#1B1D1F"/>
+  <path d="M6 6L18 18M6 6V10M6 6H10M18 18V14M18 18H14" stroke="#1B1D1F" stroke-linejoin="round"/>
+  <path d="M18 6L6 18M18 6H14M18 6V10M6 18V14M6 18H10" stroke="#1B1D1F" stroke-linejoin="round"/>
+  <circle cx="14" cy="6" r="0.5" fill="#1B1D1F"/>
+  <circle cx="10" cy="6" r="0.5" fill="#1B1D1F"/>
+  <circle cx="14" cy="18" r="0.5" fill="#1B1D1F"/>
+  <circle cx="10" cy="18" r="0.5" fill="#1B1D1F"/>
+  <circle cx="6" cy="14" r="0.5" fill="#1B1D1F"/>
+  <circle cx="18" cy="14" r="0.5" fill="#1B1D1F"/>
+  <circle cx="6" cy="10" r="0.5" fill="#1B1D1F"/>
+  <circle cx="18" cy="10" r="0.5" fill="#1B1D1F"/>
+</svg>

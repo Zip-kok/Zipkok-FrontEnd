@@ -1,0 +1,29 @@
+{
+	"code" : 7003,
+	"message" : "콕 세부정보 조회 성공",
+	"result" : {
+		"kokId" : 1,
+		"imageInfo" : {
+			"imageNumber" : 9,
+			"imageUrls" : [
+			"https://img.freepik.com/free-photo/3d-rendering-luxury-and-modern-living-room-with-leather-sofa-and-lamp_105762-2236.jpg?size=626&ext=jpg&ga=GA1.1.1412446893.1705276800&semt=sph",
+			"https://post-phinf.pstatic.net/MjAxOTEyMjhfMTI5/MDAxNTc3NTIwMzk2NDQy.LZLVfIna55irF0Npqh3H2Xr8GbBKvOZT1PvStTNTc_Ug.2RRvPE1dOTOCnFLNMMmuTPc_7_Qj7RCriPW9LIyH9r4g.JPEG/image_687682861577519240793.jpg?type=w800_q75",
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUv5isbxaUyLPKOQsVs8V6sxEp1WFK1v7u1rSVpIxv_g&s"
+		]
+		},	
+		"address" : "자양로 23나길 24",
+		"detailAddress" : "506호",
+		"transactionType" : "월세",
+		"deposit" : 1000,
+		"price" : 50,
+		"detail" : "국민대 리모델링 부리식 풀옵션 2층 엘레베이터\n북한산보국문역 도보 3분\n국민대ㅁㄴㄹㄴㅁㄻㄻㄴㄻㄴㄻㄴㄹㄴㅁㄹㄹㄴㄻㄹㄴㄻㄹㄴㅁㄻㄴㄹㅇㅁㄻㄴㄻㄴㄹㄴㄻㄴㄹㄴㅁㄻㅇㄴㄻㄴㄹㄴㅇㄹㄴㄹㅇㄴ",
+		"area_size" : 37.4,
+		"pyeongsu" : 11,
+		"realEstateType" : "투룸",
+		"floorNum" : 6,
+		"administrativeFee" : 5,
+		"latitude" : 32.3235235,
+		"longitude" : 351.1234235236,
+		"isZimmed" : true
+	}
+}
