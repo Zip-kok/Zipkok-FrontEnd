@@ -14,6 +14,7 @@ import Contract from './Contract';
 import ReView from './ReView';
 
 import data from '../../../../models/kokItemDetail.json'
+import BottomBtn from '../../../../components/BottomBtn';
 
 const KokItem = () => {
   const navigate = useNavigate();
@@ -22,9 +23,12 @@ const KokItem = () => {
   const { setNaviMenu, setShowNaviBar } = useNaviStore();
   useEffect(() => {
     setNaviMenu('kok');
-    setShowNaviBar(true);
+    setShowNaviBar(false);
   }, []);
 
+  const handleEditClick = () => {
+    navigate('../../kok')
+  }
   const {code,message,result} = data;
 
   // 더 보기 구현
@@ -92,9 +96,12 @@ const KokItem = () => {
         </div>
       </div>
     </div>
-
     <MidMenu />
     <Content />
+    <BottomBtn
+      text='콕리스트 수정하기'
+      onClick={handleEditClick}
+    />
   </div>
 )}
 
