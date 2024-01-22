@@ -76,7 +76,8 @@ const KokItem = () => {
   <div className={styles.root}>
     <Header title="성북구 정릉동" 
     backBtnEnabled
-    heartBtnEnabled={result.isZimmed}
+    heartBtnEnabled={true}
+    heartBtnFill={result.isZimmed}
     shareBtnEnabled
     onBack={() => navigate(-1)}
     />  
