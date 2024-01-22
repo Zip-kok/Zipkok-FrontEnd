@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './KokItem.module.css';
 import data from 'models/kokItemInner.json';
-import OptionsComponent from 'components/Options';
+import { OptionsComponent } from 'components';
 
 const insideHome = () => {
   const { furnitureOptions, direction, options } = data.result;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './KokEdit.module.css';
 
-import Highlight from 'components/Highlight';
+import { Highlight } from 'components';
 import useCheckList from 'hooks/useCheckList';
 
 const NearHome = () => {

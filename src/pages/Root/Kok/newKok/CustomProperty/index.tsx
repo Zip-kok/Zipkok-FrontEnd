@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './CustomProperty.module.css';
 
-import BottomBtn from 'components/BottomBtn';
-import TextInput from 'components/TextInput';
+import { BottomBtn, TextInput } from 'components';
 
 import useHistoryState from 'hooks/useHistoryState';
 import useRadioBtn from 'hooks/useRadioBtn';

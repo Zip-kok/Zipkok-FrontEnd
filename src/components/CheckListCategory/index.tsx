@@ -1,23 +1,23 @@
 import React, { memo } from 'react';
-import styles from './CheckListGroup.module.css';
+import styles from './CheckListCategory.module.css';
 
 import onIcon from 'assets/img/checkList/on.svg';
 import offIcon from 'assets/img/checkList/off.svg';
 import dragIcon from 'assets/img/checkList/drag.svg';
 
-export interface CheckListGroupProps {
+export interface CheckListCategoryProps {
   name: string;
   enabled: boolean;
   children: React.ReactNode;
   onClick: () => void;
 }
 
-export default function CheckListGroup({
+export default function CheckListCategory({
   name,
   enabled = true,
   children,
   onClick,
-}: CheckListGroupProps) {
+}: CheckListCategoryProps) {
   return (
     <div className={styles.container}>
       <div className={`${styles.header} ${!enabled ? styles.disabled : ''}`}>
@@ -27,7 +27,7 @@ export default function CheckListGroup({
           </button>
           <span>{name}</span>
         </div>
-        <div className={styles.drag}>
+        <div className={'drag'}>
           <img src={dragIcon} draggable={false}></img>
         </div>
       </div>
@@ -35,4 +35,3 @@ export default function CheckListGroup({
     </div>
   );
 }
-export const handleClass = styles.drag;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PropertyInfo from 'components/PropertyInfo';
+import { PropertyInfo } from 'components';
 
 import useCustomKokStore from 'contexts/customKokStore';
 

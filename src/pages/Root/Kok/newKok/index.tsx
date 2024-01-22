@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 
 import styles from './NewKok.module.css';
 
-import Header from 'components/Header';
+import { Header } from 'components';
 
 /*
 newKok/propertyList: 콕리스트 작성_매물리스트

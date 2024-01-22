@@ -7,7 +7,7 @@ import useRadioBtn from 'hooks/useRadioBtn';
 import Monthly from './priceSlider/Monthly';
 import Jeonse from './priceSlider/Jeonse';
 import Purchase from './priceSlider/Purchase';
-import BottomBtn from 'components/BottomBtn';
+import { BottomBtn } from 'components';
 
 import { PriceType, PriceRange } from '../';
 

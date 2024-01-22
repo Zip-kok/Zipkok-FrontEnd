@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import useNaviStore from 'contexts/naviStore';
-import NaviBar from 'components/NaviBar';
+import { NaviBar } from 'components';
 
 import styles from './Root.module.css';
 

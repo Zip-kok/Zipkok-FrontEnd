@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-import CheckListGroupContainer from 'components/CheckListGroupContainer';
-import type { CheckListGroup } from 'components/CheckListGroupContainer';
+import { CheckListCategoryContainer } from 'components';
+import type { CheckListGroup } from 'types/CheckList';
 
 export default function useCheckList(checkListGroups: CheckListGroup[]) {
   const [checkList, setCheckList] = useState<CheckListGroup[]>(checkListGroups);
 
   const container = (
-    <CheckListGroupContainer
+    <CheckListCategoryContainer
       checkListGroups={checkList}
       setCheckListGroups={setCheckList}
     />

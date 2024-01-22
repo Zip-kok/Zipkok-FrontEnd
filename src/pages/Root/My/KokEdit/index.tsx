@@ -7,7 +7,7 @@ import NearHome from './NearHome';
 import InsideHome from './InsideHome';
 import Contract from './Contract';
 
-import Header from 'components/Header';
+import { Header } from 'components';
 import useMenu from 'hooks/useMenu';
 
 import useNaviStore from 'contexts/naviStore';

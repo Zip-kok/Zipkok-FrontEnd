@@ -9,9 +9,7 @@ import useNaviStore from 'contexts/naviStore';
 import useAddressStore from 'contexts/addressStore';
 
 import searchIcon from 'assets/img/search.svg';
-import TextInput from 'components/TextInput';
-import Header from 'components/Header';
-import BottomBtn from 'components/BottomBtn';
+import { TextInput, Header, BottomBtn } from 'components';
 import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
 import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
 import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';

@@ -12,7 +12,7 @@ import { Kok } from './Root/Kok';
 import { Home } from './Root/Home';
 import My from './Root/My';
 
-import AddressSearch from 'components/AddressSearch';
+import { AddressSearch } from 'components';
 
 // 마이
 import MyPage from './Root/My/MyPage';

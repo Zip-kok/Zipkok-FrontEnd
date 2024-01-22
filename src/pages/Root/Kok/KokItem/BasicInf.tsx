@@ -1,14 +1,12 @@
 import React from 'react';
 
 import styles from './KokItem.module.css';
-import IconBtn from 'components/IconBtn';
+import { IconBtn, IconText } from 'components';
 import link from 'assets/img/link.svg';
 import structure from 'assets/img/kokItem/structure.svg';
 import size from 'assets/img/kokItem/size.svg';
 import floor from 'assets/img/kokItem/floor.svg';
 import money from 'assets/img/kokItem/money.svg';
-
-import IconText from 'components/IconText';
 import data from 'models/kokItemDetail.json';
 
 const BasicInf = () => {

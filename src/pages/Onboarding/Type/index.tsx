@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Type.module.css';
 
 import useRadioBtn from 'hooks/useRadioBtn';
-import BottomBtn from 'components/BottomBtn';
+import { BottomBtn } from 'components';
 
 import apartmentIcon from 'assets/img/apartment.svg';
 import oneroomIcon from 'assets/img/oneroom.svg';

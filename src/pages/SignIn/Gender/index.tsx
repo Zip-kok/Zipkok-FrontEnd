@@ -4,7 +4,7 @@ import styles from './Gender.module.css';
 
 import useRadioBtn from 'hooks/useRadioBtn';
 
-import BottomBtn from 'components/BottomBtn';
+import { BottomBtn } from 'components';
 
 import { Gender as GenderType } from '../';
 

@@ -9,7 +9,7 @@ interface CompleteProps {
   subtitle?: string;
 }
 
-export default function Complete({ title, subtitle }: CompleteProps) {
+export default function CompleteAnim({ title, subtitle }: CompleteProps) {
   return (
     <div className={styles.container}>
       <Lottie

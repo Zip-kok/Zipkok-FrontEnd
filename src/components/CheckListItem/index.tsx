@@ -1,20 +1,20 @@
 import React from 'react';
-import styles from './CheckList.module.css';
+import styles from './CheckListItem.module.css';
 
 import onIcon from 'assets/img/checkList/on.svg';
 import offIcon from 'assets/img/checkList/off.svg';
 
-interface CheckListProps {
+interface CheckListItemProps {
   name: string;
   enabled: boolean;
   onClick: () => void;
 }
 
-export default function CheckList({
+export default function CheckListItem({
   name,
   enabled = true,
   onClick,
-}: CheckListProps) {
+}: CheckListItemProps) {
   return (
     <div className={`${styles.container} ${!enabled ? styles.disabled : ''}`}>
       <button className="imgBtn" onClick={onClick}>

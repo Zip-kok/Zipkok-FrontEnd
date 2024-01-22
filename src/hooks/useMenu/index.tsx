@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import TopMenu from 'components/TopMenu';
+import { TopMenu } from 'components';
 
 export interface Menu {
   name: string;

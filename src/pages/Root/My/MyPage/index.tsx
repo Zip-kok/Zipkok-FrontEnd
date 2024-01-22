@@ -5,8 +5,7 @@ import styles from './Mypage.module.css';
 
 import useNaviStore from 'contexts/naviStore';
 
-import Header from 'components/Header';
-import IconBtn from 'components/IconBtn';
+import { Header, IconBtn } from 'components';
 
 import my from 'assets/img/mypage/my.svg';
 import edit from 'assets/img/mypage/edit.svg';

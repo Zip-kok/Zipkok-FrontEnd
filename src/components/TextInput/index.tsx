@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import deleteIcon from 'assets/img/delete.svg';
 import styles from './TextInput.module.css';
 
-export type TextInputStyle = 'underline' | 'roundedBox';
+import { TextInputStyle } from 'types/TextInput';
 
 interface TextInputProps {
   value?: string;

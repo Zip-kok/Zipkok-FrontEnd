@@ -1,32 +1,20 @@
 import React from 'react';
 import { ReactSortable } from 'react-sortablejs';
 
-import styles from './CheckListGroupContainer.module.css';
+import styles from './CheckListCategoryContainer.module.css';
 
-import CheckList from 'components/CheckList';
-import CheckListGroup, { handleClass } from 'components/CheckListGroup';
+import { CheckListItem, CheckListCategory } from 'components';
+import type { CheckListGroup } from 'types/CheckList';
 
-export interface CheckListGroupContainerProps {
+interface CheckListCategoryContainerProps {
   checkListGroups: CheckListGroup[];
   setCheckListGroups: React.Dispatch<React.SetStateAction<CheckListGroup[]>>;
 }
 
-export interface CheckListItem {
-  name: string;
-  enabled: boolean;
-}
-
-export interface CheckListGroup {
-  id: number;
-  name: string;
-  enabled: boolean;
-  items: CheckListItem[];
-}
-
-export default function CheckListGroupContainer({
+export default function CheckListCategoryContainer({
   checkListGroups,
   setCheckListGroups,
-}: CheckListGroupContainerProps) {
+}: CheckListCategoryContainerProps) {
   const handleContainerClick = (index: number) => {
     setCheckListGroups((prev) => {
       const newCheckList = [...prev];
@@ -59,24 +47,24 @@ export default function CheckListGroupContainer({
       delayOnTouchOnly
       touchStartThreshold={4}
       animation={150}
-      handle={`.${handleClass}`}
+      handle={'.drag'}
     >
       {checkListGroups.map((group, groupIndex) => (
-        <CheckListGroup
+        <CheckListCategory
           name={group.name}
           enabled={group.enabled}
           onClick={() => handleContainerClick(groupIndex)}
           key={`${group.id}`}
         >
           {group.items.map((item, itemIndex) => (
-            <CheckList
+            <CheckListItem
               name={item.name}
               enabled={item.enabled}
               key={item.name}
               onClick={() => handleItemClick(groupIndex, itemIndex)}
             />
           ))}
-        </CheckListGroup>
+        </CheckListCategory>
       ))}
     </ReactSortable>
   );

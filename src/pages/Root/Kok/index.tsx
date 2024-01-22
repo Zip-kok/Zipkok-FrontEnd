@@ -5,12 +5,10 @@ import useNaviStore from 'contexts/naviStore';
 
 import styles from './Kok.module.css';
 import checkIcon from 'assets/img/kokList/check.svg';
-import Header from 'components/Header';
-import BottomBtn from 'components/BottomBtn';
+import { Header, BottomBtn, PropertyItem } from 'components';
 import { ReactComponent as PenIcon } from 'assets/img/kokList/pen.svg';
 
 import properties from 'models/properties';
-import PropertyItem from 'components/PropertyItem';
 
 export const Kok = () => {
   const navigate = useNavigate();

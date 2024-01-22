@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useNaviStore from 'contexts/naviStore';
 
-import BottomBtn from 'components/BottomBtn';
-import TextInput from 'components/TextInput';
-import PropertyItem from 'components/PropertyItem';
-import IconTextBtn from 'components/IconBtn';
+import { BottomBtn, TextInput, PropertyItem, IconBtn } from 'components';
 
 import mapIcon from 'assets/img/map.svg';
 import searchIcon from 'assets/img/search.svg';
@@ -33,7 +30,7 @@ export default function PropertyList() {
           icon={searchIcon}
           style="underline"
         />
-        <IconTextBtn
+        <IconBtn
           image={mapIcon}
           text="지도에서 위치 보기"
           onClick={() => {

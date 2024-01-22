@@ -7,7 +7,7 @@ interface EditFilterBtnProps {
   onClick: () => void;
 }
 
-const EditGenderBtn: React.FC<EditFilterBtnProps> = ({
+const EditFilterBtn: React.FC<EditFilterBtnProps> = ({
   text,
   isSelected,
   onClick,
@@ -24,4 +24,4 @@ const EditGenderBtn: React.FC<EditFilterBtnProps> = ({
   );
 };
 
-export default EditGenderBtn;
+export default EditFilterBtn;
