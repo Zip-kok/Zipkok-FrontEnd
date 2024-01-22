@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { CheckListCategoryContainer } from 'components';
 import type { CheckListGroup } from 'types/CheckList';
@@ -6,15 +6,18 @@ import type { CheckListGroup } from 'types/CheckList';
 export default function useCheckList(checkListGroups: CheckListGroup[]) {
   const [checkList, setCheckList] = useState<CheckListGroup[]>(checkListGroups);
 
-  const container = (
-    <CheckListCategoryContainer
-      checkListGroups={checkList}
-      setCheckListGroups={setCheckList}
-    />
+  const Container = useCallback(
+    () => (
+      <CheckListCategoryContainer
+        checkListGroups={checkList}
+        setCheckListGroups={setCheckList}
+      />
+    ),
+    [],
   );
 
-  return [container, checkList, setCheckList] as [
-    typeof container,
+  return [Container, checkList, setCheckList] as [
+    typeof Container,
     CheckListGroup[],
     React.Dispatch<React.SetStateAction<CheckListGroup[]>>,
   ];

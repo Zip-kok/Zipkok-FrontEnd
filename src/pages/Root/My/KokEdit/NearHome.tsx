@@ -6,7 +6,7 @@ import { Highlight } from 'components';
 import useCheckList from 'hooks/useCheckList';
 
 const NearHome = () => {
-  const [checkListContainer, checkList, setCheckList] = useCheckList([
+  const [CheckListContainer, checkList, setCheckList] = useCheckList([
     {
       id: 0,
       name: '편의성',
@@ -70,7 +70,9 @@ const NearHome = () => {
         </div>
       </div>
 
-      <div className={styles.checkListGroupContainer}>{checkListContainer}</div>
+      <div className={styles.checkListGroupContainer}>
+        <CheckListContainer />
+      </div>
     </div>
   );
 };
