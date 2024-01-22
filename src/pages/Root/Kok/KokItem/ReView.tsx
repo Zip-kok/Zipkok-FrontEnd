@@ -25,7 +25,7 @@ const ReView = () => {
       </div>
       
       <div className={styles.reviewTextCtn}>
-        <input type="text" placeholder={reviewText} />
+        <textarea defaultValue={reviewText} />
       </div>
 
       <div className={styles.blank}/>
