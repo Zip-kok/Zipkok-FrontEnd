@@ -1,9 +1,9 @@
 import React from 'react';
 
-import backIcon from '../../assets/img/left_arrow.svg';
-import share from '../../assets/img/share.svg';
-import heart from '../../assets/img/mypage/heart.svg';
-import heart_fill from '../../assets/img/kokItem/kokItem_FillHeart.svg';
+import backIcon from 'assets/img/left_arrow.svg';
+import share from 'assets/img/share.svg';
+import heart from 'assets/img/mypage/heart.svg';
+import heart_fill from 'assets/img/kokItem/kokItem_FillHeart.svg';
 
 import styles from './Header.module.css';
 

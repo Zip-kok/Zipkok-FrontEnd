@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './KokItem.module.css';
-import data from '../../../../models/kokItemReview.json';
+import data from 'models/kokItemReview.json';
 
 const ReView = () => {
   const {

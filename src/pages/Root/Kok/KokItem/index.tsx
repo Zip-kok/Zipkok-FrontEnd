@@ -7,19 +7,19 @@ import { Pagination } from 'swiper/modules';
 
 import useNaviStore from 'contexts/naviStore';
 
-import Header from '../../../../components/Header';
+import Header from 'components/Header';
 
 import styles from './KokItem.module.css';
-import useMenu from '../../../../hooks/useMenu';
+import useMenu from 'hooks/useMenu';
 import BasicInf from './BasicInf';
 import NearHome from './NearHome';
 import InsideHome from './InsideHome';
 import Contract from './Contract';
 import ReView from './ReView';
 
-import data from '../../../../models/kokItemDetail.json';
-import BottomBtn from '../../../../components/BottomBtn';
-import SwiperCom from '../../../../components/Swiper';
+import data from 'models/kokItemDetail.json';
+import BottomBtn from 'components/BottomBtn';
+import SwiperCom from 'components/Swiper';
 
 const KokItem = () => {
   const navigate = useNavigate();
