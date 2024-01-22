@@ -9,8 +9,12 @@ import floor from '../../../../assets/img/kokItem/floor.svg'
 import money from '../../../../assets/img/kokItem/money.svg'
 
 import IconText from '../../../../components/IconText'
+import data from '../../../../models/kokItemDetail.json'
 
 const BasicInf = () => {
+
+  const {code, message, result} = data;
+
   return (
     <div>
       <div className={styles.body}>
@@ -24,10 +28,10 @@ const BasicInf = () => {
           />
         </div>
         <div className={styles.infCtn}>
-          <IconText img={structure} text="37.4m"/>
-          <IconText img={size} text="투룸"/>
-          <IconText img={floor} text="6층"/>
-          <IconText img={money} text="관리비 5만원"/>
+          <IconText img={structure} text={data.result.area_size+"m^2"} sizeText={"("+data.result.pyeongsu+")평"}/>
+          <IconText img={size} text={data.result.realEstateType}/>
+          <IconText img={floor} text={data.result.floorNum+"층"}/>
+          <IconText img={money} text={"관리비 "+data.result.administrativeFee+"만원"}/>
         </div>
         <div className={styles.blank}/>
         <h4>위치</h4>

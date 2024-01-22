@@ -151,3 +151,12 @@ h4{
   box-sizing: border-box;
   font-family: Pretendard;
 }
+
+.moreViewCtn{
+  display: flex;
+  flex-direction: column;
+}
+
+.moreViewBtn{
+  color:#fa4549;
+}

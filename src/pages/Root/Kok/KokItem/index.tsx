@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import useNaviStore from '../../../../contexts/naviStore';
@@ -13,7 +13,9 @@ import InsideHome from './InsideHome';
 import Contract from './Contract';
 import ReView from './ReView';
 
-export default function KokItem() {
+import data from '../../../../models/kokItemDetail.json'
+
+const KokItem = () => {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
@@ -22,6 +24,24 @@ export default function KokItem() {
     setNaviMenu('kok');
     setShowNaviBar(true);
   }, []);
+
+  const {code,message,result} = data;
+
+  // 더 보기 구현
+  const [isShowMore, setIsShowMore] = useState<boolean>(false);
+
+  const textLimit = useRef<number>(75); 
+
+  const commenter = useMemo(() => { 		
+
+    const shortReview: string = result.detail.slice(0, textLimit.current); 
+
+    if (result.detail.length > textLimit.current) { 	
+      if (isShowMore) { return result.detail; } 	
+      return shortReview;			
+    }
+    return result.detail; 		
+  }, [isShowMore, result.detail]); 	
 
   const { kokId } = useParams<{ kokId: string }>();
 
@@ -52,21 +72,24 @@ export default function KokItem() {
   <div className={styles.root}>
     <Header title="성북구 정릉동" 
     backBtnEnabled
-    heartBtnEnabled
+    heartBtnEnabled={result.isZimmed}
     shareBtnEnabled
     onBack={() => navigate(-1)}
     />  
     <img></img>
 
     <div className={styles.body}>
-      <div className={styles.address}>서울시 관악구 신림동 123-123</div>
+      <div className={styles.address}>{result.address}</div>
       <div className={styles.priceContainer}>
-        <div className={styles.priceType}>월세</div>
-        <div className={styles.priceInf}>1000/50</div>
+        <div className={styles.priceType}>{result.transactionType}</div>
+        <div className={styles.priceInf}>{result.deposit+" / "}{result.price}</div>
       </div>
-      <div>국민대 리모델링 분리식 풀옵션 2층 엘레베이터
-        <br />북한신보국문역 도보 3분<br />
-        국민대 리모델링 분리식 풀옵션 2층 엘레베이터....
+      <div className={styles.moreViewCtn}>
+        <div>{commenter}</div>
+        <div className={styles.moreViewBtn}onClick={() => setIsShowMore(!isShowMore)}>
+          {(result.detail.length > textLimit.current) &&
+          (isShowMore ? '닫기' : '더보기')}
+        </div>
       </div>
     </div>
 
@@ -74,3 +97,5 @@ export default function KokItem() {
     <Content />
   </div>
 )}
+
+export default KokItem;
