@@ -6,6 +6,7 @@ import Root from './Root';
 import Login from './Login';
 import Onboarding from './Onboarding';
 import SignIn from './SignIn';
+import Auth from './Auth';
 
 import { Kok } from './Root/Kok';
 import { Home } from './Root/Home';
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
   {
     path: 'onboarding',
     element: <Onboarding />,
+  },
+  {
+    path: 'auth',
+    element: <Auth />,
   },
 ]);
 
