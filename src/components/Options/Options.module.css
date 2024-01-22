@@ -1,0 +1,71 @@
+.root {
+  font-family: Pretendard;
+  font-style: normal;
+}
+
+.optionTitle {
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: 0.018px;
+  align-items: center;
+  gap: 5px;
+  margin: 30px 0 20px 0;
+}
+
+.checkCtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.checkBtn {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.checkBtn:checked + .checkLabel:after {
+  opacity: 1;
+}
+
+.checkLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.checkLabel:before {
+  content: "";
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: #Efeff2;
+  border: 2px solid #c8c8d1;
+  border-radius: 0.35rem;
+}
+
+.checkLabel:after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid #c8c8d1;
+  border-radius: 0.35rem;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='red' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+  background-size: 100% 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-color: #Efeff2; /* Adjust this as needed */
+}
+
+.checkText {
+  margin-left: 0.5rem;
+}

@@ -1,0 +1,20 @@
+{
+	"code" : 7006,
+	"message" : "콕 집 내부 정보 조회 성공",
+	"result" : {
+		"furnitureOptions" : [ "전자레인지", "인덕션", "에어컨", "세탁기", "침대", "책상" ],
+		"direction" : "북동향",
+		"options" : [
+			{
+				"option" : "화장실",
+				"orderNumber" : 1,
+				"detailOptions" : [ "공동현관 CCTV가 있는가" ]
+			},
+			{
+				"option" : "에어컨",
+				"orderNumber" : 2,
+				"detailOptions" : [ "공동현관 CCTV가 있는가", "공동현관 CCTV가 있는가" ]
+			}
+		]
+	}
+}
