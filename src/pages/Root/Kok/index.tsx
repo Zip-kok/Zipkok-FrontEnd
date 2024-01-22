@@ -23,11 +23,11 @@ export const Kok = () => {
   }, []);
 
   const handleClick = () => {
-    navigate('./')
+    navigate('./');
   };
 
   const handlePropertyClick = (propertyId: number) => {
-    navigate(`./kokitem/${propertyId}`)
+    navigate(`./kokitem/${propertyId}`);
   };
 
   return (
@@ -50,7 +50,7 @@ export const Kok = () => {
             propertyName={property.propertyName}
             imageUrl={property.imageUrl}
             kokList={property.kokList}
-            onClick={() => handlePropertyClick (property.id)}
+            onClick={() => handlePropertyClick(property.id)}
           />
         ))}
       </div>

@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import {useNavigate } from 'react-router-dom';
-import {Swiper,SwiperSlide}from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/pagination'
-import {Pagination} from 'swiper/modules'
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 
 import useNaviStore from 'contexts/naviStore';
 
@@ -17,7 +17,7 @@ import InsideHome from './InsideHome';
 import Contract from './Contract';
 import ReView from './ReView';
 
-import data from '../../../../models/kokItemDetail.json'
+import data from '../../../../models/kokItemDetail.json';
 import BottomBtn from '../../../../components/BottomBtn';
 import SwiperCom from '../../../../components/Swiper';
 
@@ -32,22 +32,27 @@ const KokItem = () => {
   }, []);
 
   const handleEditClick = () => {
-    navigate('../../kok')
-  }
-  const {code,message,result} = data;
+    navigate('../../kok');
+  };
+  const { code, message, result } = data;
 
   // 더 보기 구현
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
-  const textLimit = useRef<number>(75); {/* 더보기 글자수 제한*/}
-  const commenter = useMemo(() => { 		
-    const shortReview: string = result.detail.slice(0, textLimit.current); 
+  const textLimit = useRef<number>(75);
+  {
+    /* 더보기 글자수 제한*/
+  }
+  const commenter = useMemo(() => {
+    const shortReview: string = result.detail.slice(0, textLimit.current);
 
-    if (result.detail.length > textLimit.current) { 	
-      if (isShowMore) { return result.detail; } 	
-      return shortReview;			
+    if (result.detail.length > textLimit.current) {
+      if (isShowMore) {
+        return result.detail;
+      }
+      return shortReview;
     }
-    return result.detail; 		
-  }, [isShowMore, result.detail]); 	
+    return result.detail;
+  }, [isShowMore, result.detail]);
 
   const [MidMenu, Content, menuIndex] = useMenu([
     {
@@ -70,38 +75,43 @@ const KokItem = () => {
       name: '후기',
       element: <ReView />,
     },
-  ])
+  ]);
 
   return (
-  <div className={styles.root}>
-    <Header title="성북구 정릉동" 
-    backBtnEnabled
-    heartBtnEnabled={result.isZimmed}
-    shareBtnEnabled
-    onBack={() => navigate(-1)}
-    />  
-    <SwiperCom imageUrls={result.imageInfo.imageUrls} />
-    <div className={styles.body}>
-      <div className={styles.address}>{result.address}</div>
-      <div className={styles.priceContainer}>
-        <div className={styles.priceType}>{result.transactionType}</div>
-        <div className={styles.priceInf}>{result.deposit+" / "}{result.price}</div>
-      </div>
-      <div className={styles.moreViewCtn}>
-        <div>{commenter}</div>
-        <div className={styles.moreViewBtn}onClick={() => setIsShowMore(!isShowMore)}>
-          {(result.detail.length > textLimit.current) &&
-          (isShowMore ? '닫기' : '더보기')}
+    <div className={styles.root}>
+      <Header
+        title="성북구 정릉동"
+        backBtnEnabled
+        heartBtnEnabled={result.isZimmed}
+        shareBtnEnabled
+        onBack={() => navigate(-1)}
+      />
+      <SwiperCom imageUrls={result.imageInfo.imageUrls} />
+      <div className={styles.body}>
+        <div className={styles.address}>{result.address}</div>
+        <div className={styles.priceContainer}>
+          <div className={styles.priceType}>{result.transactionType}</div>
+          <div className={styles.priceInf}>
+            {result.deposit + ' / '}
+            {result.price}
+          </div>
+        </div>
+        <div className={styles.moreViewCtn}>
+          <div>{commenter}</div>
+          <div
+            className={styles.moreViewBtn}
+            onClick={() => setIsShowMore(!isShowMore)}
+          >
+            {result.detail.length > textLimit.current &&
+              (isShowMore ? '닫기' : '더보기')}
+          </div>
         </div>
       </div>
+      <MidMenu />
+      <Content />
+      <BottomBtn text="콕리스트 수정하기" onClick={handleEditClick} />
     </div>
-    <MidMenu />
-    <Content />
-    <BottomBtn
-      text='콕리스트 수정하기'
-      onClick={handleEditClick}
-    />
-  </div>
-)}
+  );
+};
 
 export default KokItem;

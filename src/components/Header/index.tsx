@@ -1,9 +1,9 @@
 import React from 'react';
 
 import backIcon from '../../assets/img/left_arrow.svg';
-import share from '../../assets/img/share.svg'
-import heart from '../../assets/img/mypage/heart.svg'
-import heart_fill from '../../assets/img/kokItem/kokItem_FillHeart.svg'
+import share from '../../assets/img/share.svg';
+import heart from '../../assets/img/mypage/heart.svg';
+import heart_fill from '../../assets/img/kokItem/kokItem_FillHeart.svg';
 
 import styles from './Header.module.css';
 
@@ -50,14 +50,9 @@ const Header = ({
 
       <span className={styles.btnContainer}>
         <span>
-          
           <button className="imgBtn" onClick={heartBtnClick}>
-            {heartBtnEnabled ? (
-            <img src={heart_fill}/>) : (
-            <img src={heart} />
-            )}
+            {heartBtnEnabled ? <img src={heart_fill} /> : <img src={heart} />}
           </button>
-          
         </span>
         <span>
           {shareBtnEnabled && (

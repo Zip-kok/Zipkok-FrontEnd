@@ -1,12 +1,11 @@
-import React from 'react'
-import styles from './KokItem.module.css'
-import data from '../../../../models/kokItemContract.json'
+import React from 'react';
+import styles from './KokItem.module.css';
+import data from '../../../../models/kokItemContract.json';
 import OptionsComponent from '../../../../components/Options';
 import SwiperCom from '../../../../components/Swiper';
 
 const Contract = () => {
-
-  const {options,imageInfo} = data.result;
+  const { options, imageInfo } = data.result;
 
   return (
     <div>
@@ -17,10 +16,10 @@ const Contract = () => {
           <SwiperCom imageUrls={imageInfo.imageUrls}></SwiperCom>
         </div>
       </div>
-      <div className={styles.blank}/>
-      <div className={styles.blank}/>
+      <div className={styles.blank} />
+      <div className={styles.blank} />
     </div>
-  )
-}
+  );
+};
 
 export default Contract;

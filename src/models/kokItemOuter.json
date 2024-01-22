@@ -1,19 +1,19 @@
 {
-	"code" : 7005,
-	"message" : "콕 집 주변 정보 조회 성공",
-	"result" : {
-		"highlights" : [ "CCTV", "주차장", "현관보안" ],
-		"options" : [
-			{
-				"option" : "공동현관",
-				"orderNumber" : 1,
-				"detailOptions" : [ "공동현관 CCTV가 있는가", "공동현관 CCTV가 있는가" ]
-			},
-			{
-				"option" : "복도 및 계단",
-				"orderNumber" : 2,
-				"detailOptions" : [ "공동현관 CCTV가 있는가" ]
-			}
-		]
-	}
+  "code": 7005,
+  "message": "콕 집 주변 정보 조회 성공",
+  "result": {
+    "highlights": ["CCTV", "주차장", "현관보안"],
+    "options": [
+      {
+        "option": "공동현관",
+        "orderNumber": 1,
+        "detailOptions": ["공동현관 CCTV가 있는가", "공동현관 CCTV가 있는가"]
+      },
+      {
+        "option": "복도 및 계단",
+        "orderNumber": 2,
+        "detailOptions": ["공동현관 CCTV가 있는가"]
+      }
+    ]
+  }
 }
