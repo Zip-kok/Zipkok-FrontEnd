@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './KokItem.module.css'
 import data from '../../../../models/kokItemContract.json'
 import OptionsComponent from '../../../../components/Options';
+import SwiperCom from '../../../../components/Swiper';
 
 const Contract = () => {
 
@@ -13,7 +14,7 @@ const Contract = () => {
         <OptionsComponent optionData={options} />
         <div className={styles.ContractCtn}>
           <h4>계약서 사진</h4>
-          <img src={imageInfo.imageUrls[0]} />
+          <SwiperCom imageUrls={imageInfo.imageUrls}></SwiperCom>
         </div>
       </div>
       <div className={styles.blank}/>
