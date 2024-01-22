@@ -1,5 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
+import {Swiper,SwiperSlide}from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination'
+import {Pagination} from 'swiper/modules'
 
 import useNaviStore from '../../../../contexts/naviStore';
 
@@ -15,6 +19,7 @@ import ReView from './ReView';
 
 import data from '../../../../models/kokItemDetail.json'
 import BottomBtn from '../../../../components/BottomBtn';
+import SwiperCom from '../../../../components/Swiper';
 
 const KokItem = () => {
   const navigate = useNavigate();
@@ -33,11 +38,8 @@ const KokItem = () => {
 
   // 더 보기 구현
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
-
-  const textLimit = useRef<number>(75); 
-
+  const textLimit = useRef<number>(75); {/* 더보기 글자수 제한*/}
   const commenter = useMemo(() => { 		
-
     const shortReview: string = result.detail.slice(0, textLimit.current); 
 
     if (result.detail.length > textLimit.current) { 	
@@ -46,8 +48,6 @@ const KokItem = () => {
     }
     return result.detail; 		
   }, [isShowMore, result.detail]); 	
-
-  const { kokId } = useParams<{ kokId: string }>();
 
   const [MidMenu, Content, menuIndex] = useMenu([
     {
@@ -80,8 +80,7 @@ const KokItem = () => {
     shareBtnEnabled
     onBack={() => navigate(-1)}
     />  
-    <img></img>
-
+    <SwiperCom imageUrls={result.imageInfo.imageUrls} />
     <div className={styles.body}>
       <div className={styles.address}>{result.address}</div>
       <div className={styles.priceContainer}>
