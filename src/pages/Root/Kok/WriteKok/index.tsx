@@ -33,7 +33,17 @@ export default function KokItem() {
 
     {
       name: '집 내부',
-      element: <InsideHome />,
+      element: (
+        <InsideHome
+          pictures={[
+            { id: 0, src: propertyImg },
+            { id: 1, src: propertyImg },
+            { id: 2, src: propertyImg },
+            { id: 3, src: propertyImg },
+            { id: 4, src: propertyImg },
+          ]}
+        />
+      ),
     },
 
     {

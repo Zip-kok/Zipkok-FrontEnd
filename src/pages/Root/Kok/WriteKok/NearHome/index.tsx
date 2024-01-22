@@ -6,7 +6,6 @@ import Highlight from '../../../../../components/Highlight';
 
 import deleteBtnIcon from '../../../../../assets/img/delete.svg';
 import cameraIcon from '../../../../../assets/img/camera.svg';
-import { Kok } from '../..';
 import KoklistGroup from '../../../../../components/KoklistGroup';
 
 interface Picture {
