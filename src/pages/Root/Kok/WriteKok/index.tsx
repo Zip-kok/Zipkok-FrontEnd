@@ -11,7 +11,7 @@ import useNaviStore from '../../../../contexts/naviStore';
 import styles from './WriteKok.module.css';
 
 // for test
-import propertyImg from '../../../../assets/img/defaultThumbnail.png';
+import propertyImg from '../../../../assets/img/common/defaultThumbnail.png';
 
 export default function KokItem() {
   // 상단 메뉴 설정

@@ -7,7 +7,7 @@ import BottomBtn from '../../../../../../components/BottomBtn';
 import Header from '../../../../../../components/Header';
 import PropertyItem from '../../../../../../components/PropertyItem';
 import properties from '../../../../../../models/properties';
-import mapImg from '../../../../../../assets/img/kokList/map.png';
+import mapImg from '../../../../../../assets/img/common/map.png';
 
 import styles from './OnMap.module.css';
 

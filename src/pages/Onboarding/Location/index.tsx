@@ -8,7 +8,7 @@ import BottomBtn from '../../../components/BottomBtn';
 import AddressContainer from '../../../components/AddressContainer';
 import Address from '../../../types/Address';
 
-import searchIcon from '../../../assets/img/search.svg';
+import searchIcon from '../../../assets/img/line(1)/search.svg';
 import { useNavigate } from 'react-router-dom';
 
 interface LocationProps {

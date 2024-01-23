@@ -5,10 +5,10 @@ import styles from './Type.module.css';
 import useRadioBtn from '../../../hooks/useRadioBtn';
 import BottomBtn from '../../../components/BottomBtn';
 
-import apartmentIcon from '../../../assets/img/apartment.svg';
-import oneroomIcon from '../../../assets/img/oneroom.svg';
-import tworoomIcon from '../../../assets/img/tworoom.svg';
-import officetelIcon from '../../../assets/img/officetel.svg';
+import apartmentIcon from '../../../assets/img/login/apartment.svg';
+import oneroomIcon from '../../../assets/img/login/oneroom.svg';
+import tworoomIcon from '../../../assets/img/login/tworoom.svg';
+import officetelIcon from '../../../assets/img/login/officetel.svg';
 
 import { HouseType } from '../';
 import { useNavigate } from 'react-router-dom';

@@ -10,7 +10,7 @@ import PropertyItem from '../../../../../components/PropertyItem';
 import IconTextBtn from '../../../../../components/IconBtn';
 
 import mapIcon from '../../../../../assets/img/map.svg';
-import searchIcon from '../../../../../assets/img/search.svg';
+import searchIcon from '../../../../../assets/img/line(1)/search.svg';
 
 import styles from './PropertyList.module.css';
 

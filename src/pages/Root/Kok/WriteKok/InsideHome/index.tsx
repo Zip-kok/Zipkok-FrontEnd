@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './InsideHome.module.css';
 
-import compassIcon from '../../../../../assets/img/compass.svg';
+import compassIcon from '../../../../../assets/img/commom/compass.svg';
 import deleteBtnIcon from '../../../../../assets/img/delete.svg';
 import cameraIcon from '../../../../../assets/img/line(1)/camera.svg';
 import KoklistGroup from '../../../../../components/KoklistGroup';

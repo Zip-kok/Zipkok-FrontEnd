@@ -18,7 +18,8 @@
     appearance: none;
     width: 24px;
     height: 24px;
-    background: url('../../assets/img/slider_thumb.svg') center center no-repeat;
+    background: url('../../assets/img/common/slider_thumb.svg') center center
+      no-repeat;
     background-size: cover;
     border: none;
     cursor: pointer;

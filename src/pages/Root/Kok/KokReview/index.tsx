@@ -7,7 +7,7 @@ import BottomBtn from '../../../../components/BottomBtn';
 import StarRating from '../../../../components/StarRating';
 
 import starRed from '../../../../assets/img/kokList/star_red.svg';
-import starWhite from '../../../../assets/img/kokList/star_white.svg';
+import starWhite from '../../../../assets/img/line(1)/star_white.svg';
 
 import data from '../../../../models/kokItemDetail.json';
 import SwiperCom from '../../../../components/Swiper';
