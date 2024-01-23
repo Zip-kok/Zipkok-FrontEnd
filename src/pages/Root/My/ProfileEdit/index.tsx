@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProfileEdit.module.css';
 
 import useRadioBtn from '../../../../hooks/useRadioBtn';
-import useNaviStore from '../../../../contexts/naviStore';
 import useBirthInput from '../../../../hooks/useBirthInput';
+import useNaviStore from '../../../../contexts/naviStore';
+import useAddressStore from '../../../../contexts/addressStore';
 
 import searchIcon from '../../../../assets/img/search.svg';
 import TextInput from '../../../../components/TextInput';
@@ -70,6 +71,8 @@ const ProfileEdit = () => {
     setNaviMenu('my');
     setShowNaviBar(false);
   }, []);
+
+  const address = useAddressStore((state) => state.address);
 
   const defaultValues: Record<PriceType, PriceRange[]> = {
     월세: [
@@ -182,7 +185,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>희망 거주지역</p>
           <TextInput
-            defaultValue="서울특별시 성북구 정릉동"
+            defaultValue={address}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('/my/profileEdit/locationEdit')}

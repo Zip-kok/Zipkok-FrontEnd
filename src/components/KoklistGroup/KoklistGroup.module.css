@@ -1,0 +1,42 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+}
+
+.leftHeader > span {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.018px;
+}
+
+.koklists {
+  display: flex;
+  flex-direction: column;
+  padding-top: 4px;
+}
+
+.koklist {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 6px;
+  height: 44px;
+}
+
+.koklist > span {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+}

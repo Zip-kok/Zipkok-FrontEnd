@@ -30,7 +30,7 @@ const Mypage = () => {
   const navigate = useNavigate();
 
   const handleProfileEditClick = () => {
-    navigate('./ProfileEdit');
+    navigate('./profileEdit');
   };
 
   const handleKeepClick = () => {

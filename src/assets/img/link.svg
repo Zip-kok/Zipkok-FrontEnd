@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-  <path d="M10 6L6 10" stroke="#4B5259" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M7 5L8.5 3.5C9.60457 2.39543 11.3954 2.39543 12.5 3.5V3.5C13.6046 4.60457 13.6046 6.39543 12.5 7.5L10.5 9.5" stroke="#4B5259" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M9 11L7.5 12.5C6.39543 13.6046 4.60457 13.6046 3.5 12.5V12.5C2.39543 11.3954 2.39543 9.60457 3.5 8.5L5 7" stroke="#4B5259" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon_16_link">
+<path id="Vector 586" d="M10 6L6 10" stroke="#4B5259" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 585" d="M7 5L8.5 3.5C9.60457 2.39543 11.3954 2.39543 12.5 3.5V3.5C13.6046 4.60457 13.6046 6.39543 12.5 7.5L10.5 9.5" stroke="#4B5259" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 587" d="M9 11L7.5 12.5C6.39543 13.6046 4.60457 13.6046 3.5 12.5V12.5C2.39543 11.3954 2.39543 9.60457 3.5 8.5L5 7" stroke="#4B5259" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
 </svg>

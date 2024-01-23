@@ -41,6 +41,7 @@ export default function TextInput({
   readOnly,
 }: TextInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isFocused, setIsFocused] = React.useState(false);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     if (numberOnly) {
@@ -74,6 +75,16 @@ export default function TextInput({
     }
   }
 
+  function handleFocus() {
+    setIsFocused(true);
+    onFocus && onFocus();
+  }
+
+  function handleBlur() {
+    setIsFocused(false);
+    onBlur && onBlur();
+  }
+
   return (
     <div className={styles.container}>
       <div
@@ -93,8 +104,8 @@ export default function TextInput({
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           value={value}
           placeholder={placeholder}
           ref={inputRef}
@@ -102,7 +113,10 @@ export default function TextInput({
           readOnly={readOnly}
         ></input>
 
-        {inputRef.current && inputRef.current.value !== '' && !readOnly ? (
+        {isFocused &&
+        inputRef.current &&
+        inputRef.current.value !== '' &&
+        !readOnly ? (
           <button className="imgBtn" onClick={handleDeleteClick}>
             <img src={deleteIcon}></img>
           </button>

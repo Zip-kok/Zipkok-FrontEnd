@@ -24,10 +24,6 @@ export default function OnMap() {
 
   return (
     <div className={styles.root}>
-      <div className="top">
-        <Header title="콕리스트" backBtnEnabled onBack={() => navigate(-1)} />
-      </div>
-
       <div className={styles.map}>
         <img src={mapImg} />
       </div>

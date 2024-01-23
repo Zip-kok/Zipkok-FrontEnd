@@ -14,15 +14,17 @@ import { useNavigate } from 'react-router-dom';
 interface LocationProps {
   confirmLocation: (location: string) => void;
   skippable?: boolean;
+  defaultAddress?: string;
 }
 
 export default function Location({
   confirmLocation,
   skippable = true,
+  defaultAddress = '',
 }: LocationProps) {
   const countPerPage = 50;
 
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(defaultAddress);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [query, setQuery] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
