@@ -1,0 +1,27 @@
+{
+	"code" : 7007,
+	"message" : "콕 중개 계약 정보 조회 성공",
+	"result" : {
+		"options" : [
+			{
+				"option" : "중개 체크리스트",
+				"orderNumber" : 1,
+				"detailOptions" : [ "이름이 뭐예요?", "What's your name?", "전화번호 뭐예요?", "What's your name?" ]
+			},
+			{
+				"option" : "계약 체크리스트",
+				"orderNumber" : 5,
+				"detailOptions" : [ "공동현관 CCTV가 있는가", "주차장이 있는가", "택배보관함이 있는가" ]
+			}
+		],
+		"imageInfo" : {
+			"imageNumber" : 9,
+			"imageUrls" : [
+			"https://i.namu.wiki/i/qvi-XCLsfGYswBxmGLNmA-u372hv_FHrm5M9LfHpo8ENhoTjAKZEecXmgaxlCpl5Lnup8gGxPofNvjAo9A9w7A.webp",
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUDYOMjwJIVrlAh4NMvTGUAvmHHpl03tyubg3lfX5aSQ&s",
+			"https://cdn.imweb.me/upload/S202107197538e6f23f3a6/bd41c3e484669.png"
+			]
+		}
+	}	
+	
+}

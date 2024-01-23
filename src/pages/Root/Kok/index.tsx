@@ -23,6 +23,14 @@ export const Kok = () => {
     setShowNaviBar(true);
   }, []);
 
+  const handleClick = () => {
+    navigate('./')
+  };
+
+  const handlePropertyClick = (propertyId: number) => {
+    navigate(`./kokitem/${propertyId}`)
+  };
+
   return (
     <div className={styles.root}>
       <div className="top">
@@ -43,6 +51,7 @@ export const Kok = () => {
             propertyName={property.propertyName}
             imageUrl={property.imageUrl}
             kokList={property.kokList}
+            onClick={() => handlePropertyClick (property.id)}
           />
         ))}
       </div>

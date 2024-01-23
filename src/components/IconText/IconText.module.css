@@ -1,0 +1,18 @@
+.root{
+  display: flex;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  gap:12px;
+  align-items: center;
+}
+
+img{
+  width: 24px;
+  height: 24px;
+}
+
+p{
+  margin: 0;
+}
