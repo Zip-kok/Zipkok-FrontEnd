@@ -13,6 +13,7 @@ interface HeaderProps {
   backBtnEnabled?: boolean;
   onBack?: () => void;
   heartBtnEnabled?: boolean;
+  heartBtnFill?: boolean;
   heartBtnClick?: () => void;
   shareBtnEnabled?: boolean;
   shareBtnClick?: () => void;
@@ -23,7 +24,8 @@ const Header = ({
   titleIcon,
   backBtnEnabled = false,
   onBack,
-  heartBtnEnabled,
+  heartBtnEnabled = false,
+  heartBtnFill = false,
   heartBtnClick,
   shareBtnEnabled = false,
   shareBtnClick,
@@ -50,9 +52,15 @@ const Header = ({
 
       <span className={styles.btnContainer}>
         <span>
-          <button className="imgBtn" onClick={heartBtnClick}>
-            {heartBtnEnabled ? <img src={heart_fill} /> : <img src={heart} />}
-          </button>
+        {heartBtnEnabled && (
+            <button className="imgBtn" onClick={heartBtnClick}>
+              {heartBtnFill ? (
+                <img src={heart_fill} />
+              ) : (
+                <img src={heart}/>
+              )}
+            </button>
+          )}
         </span>
         <span>
           {shareBtnEnabled && (

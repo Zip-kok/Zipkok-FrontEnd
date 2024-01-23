@@ -76,40 +76,38 @@ const KokItem = () => {
   ]);
 
   return (
-    <div className={styles.root}>
-      <Header
-        title="성북구 정릉동"
-        backBtnEnabled
-        heartBtnEnabled={result.isZimmed}
-        shareBtnEnabled
-        onBack={() => navigate(-1)}
-      />
-      <SwiperCom imageUrls={result.imageInfo.imageUrls} />
-      <div className={styles.body}>
-        <div className={styles.address}>{result.address}</div>
-        <div className={styles.priceContainer}>
-          <div className={styles.priceType}>{result.transactionType}</div>
-          <div className={styles.priceInf}>
-            {result.deposit + ' / '}
-            {result.price}
-          </div>
-        </div>
-        <div className={styles.moreViewCtn}>
-          <div>{commenter}</div>
-          <div
-            className={styles.moreViewBtn}
-            onClick={() => setIsShowMore(!isShowMore)}
-          >
-            {result.detail.length > textLimit.current &&
-              (isShowMore ? '닫기' : '더보기')}
-          </div>
+  <div className={styles.root}>
+    <div className='top'>
+    <Header title="성북구 정릉동" 
+      backBtnEnabled
+      heartBtnEnabled={true}
+      heartBtnFill={result.isZimmed}
+      shareBtnEnabled
+      onBack={() => navigate(-1)}
+      />  
+    </div>
+    <SwiperCom imageUrls={result.imageInfo.imageUrls} />
+    <div className={styles.body}>
+      <div className={styles.address}>{result.address}</div>
+      <div className={styles.priceContainer}>
+        <div className={styles.priceType}>{result.transactionType}</div>
+        <div className={styles.priceInf}>{result.deposit+" / "}{result.price}</div>
+      </div>
+      <div className={styles.moreViewCtn}>
+        <div>{commenter}</div>
+        <div className={styles.moreViewBtn}onClick={() => setIsShowMore(!isShowMore)}>
+          {(result.detail.length > textLimit.current) &&
+          (isShowMore ? '닫기' : '더보기')}
         </div>
       </div>
-      <MidMenu />
-      <Content />
-      <BottomBtn text="콕리스트 수정하기" onClick={handleEditClick} />
     </div>
-  );
-};
+    <MidMenu />
+    <Content />
+    <BottomBtn
+      text='콕리스트 수정하기'
+      onClick={handleEditClick}
+    />
+  </div>
+)}
 
 export default KokItem;
