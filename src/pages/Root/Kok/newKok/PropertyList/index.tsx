@@ -9,13 +9,8 @@ import Header from '../../../../../components/Header';
 import PropertyItem from '../../../../../components/PropertyItem';
 import IconTextBtn from '../../../../../components/IconBtn';
 
-<<<<<<< HEAD
-import mapIcon from '../../../../../assets/img/map.svg';
-import searchIcon from '../../../../../assets/img/line(1)/search.svg';
-=======
 import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
->>>>>>> d1903252d87d93a3f9cf3a5e6dd5318242628f87
 
 import styles from './PropertyList.module.css';
 

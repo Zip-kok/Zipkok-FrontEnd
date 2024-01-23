@@ -8,7 +8,7 @@ import checkIcon from 'assets/img/line(2)/check.svg';
 import Header from '../../../components/Header';
 import PtopertyItem from '../../../components/PropertyItem';
 import BottomBtn from '../../../components/BottomBtn';
-import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen.svg';
+import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen_white.svg';
 
 import properties from '../../../models/properties';
 import PropertyItem from '../../../components/PropertyItem';
@@ -24,11 +24,11 @@ export const Kok = () => {
   }, []);
 
   const handleClick = () => {
-    navigate('./')
+    navigate('./');
   };
 
   const handlePropertyClick = (propertyId: number) => {
-    navigate(`./kokitem/${propertyId}`)
+    navigate(`./kokitem/${propertyId}`);
   };
 
   return (
@@ -51,7 +51,7 @@ export const Kok = () => {
             propertyName={property.propertyName}
             imageUrl={property.imageUrl}
             kokList={property.kokList}
-            onClick={() => handlePropertyClick (property.id)}
+            onClick={() => handlePropertyClick(property.id)}
           />
         ))}
       </div>
