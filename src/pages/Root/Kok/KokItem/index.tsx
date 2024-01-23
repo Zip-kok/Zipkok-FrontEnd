@@ -74,13 +74,15 @@ const KokItem = () => {
 
   return (
   <div className={styles.root}>
+    <div className='top'>
     <Header title="성북구 정릉동" 
-    backBtnEnabled
-    heartBtnEnabled={true}
-    heartBtnFill={result.isZimmed}
-    shareBtnEnabled
-    onBack={() => navigate(-1)}
-    />  
+      backBtnEnabled
+      heartBtnEnabled={true}
+      heartBtnFill={result.isZimmed}
+      shareBtnEnabled
+      onBack={() => navigate(-1)}
+      />  
+    </div>
     <SwiperCom imageUrls={result.imageInfo.imageUrls} />
     <div className={styles.body}>
       <div className={styles.address}>{result.address}</div>

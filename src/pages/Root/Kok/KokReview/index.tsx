@@ -9,6 +9,9 @@ import StarRating from '../../../../components/StarRating';
 import starRed from '../../../../assets/img/kokList/star_red.svg';
 import starWhite from '../../../../assets/img/kokList/star_white.svg';
 
+import data from '../../../../models/kokItemDetail.json';
+import SwiperCom from '../../../../components/Swiper';
+
 const Tags = [
   { name: '깔끔해요', selected: false },
   { name: '조용해요', selected: false },
@@ -43,12 +46,16 @@ export default function KokItem() {
       }),
     );
   };
+  const { code, message, result } = data;
+
   return (
     <div className={styles.root}>
       <div className="top">
         <Header title="발품 후기" backBtnEnabled onBack={() => navigate(-1)} />
       </div>
-      <div className={styles.image}></div>
+      <div className={styles.image}>
+        <SwiperCom imageUrls={result.imageInfo.imageUrls}></SwiperCom>
+      </div>
       <div className={styles.reviews}>
         <div className={styles.review}>
           <h1 style={{ marginBottom: '17px', marginTop: '25px' }}>
