@@ -14,9 +14,9 @@ const Contract = () => {
         <OptionsComponent optionData={options} />
         <div className={styles.ContractCtn}>
           <h4>계약서 사진</h4>
-          <SwiperCom imageUrls={imageInfo.imageUrls}></SwiperCom>
         </div>
       </div>
+      <SwiperCom imageUrls={imageInfo.imageUrls}></SwiperCom>
       <div className={styles.blank}/>
       <div className={styles.blank}/>
     </div>
