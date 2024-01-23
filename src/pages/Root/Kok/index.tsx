@@ -58,7 +58,7 @@ export const Kok = () => {
 
       <BottomBtn
         text="새 콕리스트 작성"
-        onClick={handleClick}
+        onClick={() => navigate('./newKok/propertyList')}
         icon={<PenIcon />}
         style={{ bottom: '64px' }}
       />

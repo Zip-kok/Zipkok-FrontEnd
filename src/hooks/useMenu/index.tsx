@@ -17,8 +17,12 @@ export default function useMenu(
 
   const [index, setIndex] = useState(defaultMenuIndex);
 
+  interface TopMenuProps {
+    className?: string;
+  }
+
   const menuCallback = useCallback(
-    () => (
+    ({ className }: TopMenuProps) => (
       <TopMenu
         menus={menus.map((menu, index) => ({
           name: menu.name,
@@ -26,16 +30,20 @@ export default function useMenu(
         }))}
         selectedIndex={index}
         height={height}
+        className={className}
       />
     ),
     [index],
   );
 
-  const contentCallback = useCallback(() => menus[index].element, [index]);
+  const contentCallback = useCallback(
+    () => <>{menus[index].element}</>,
+    [index],
+  );
 
   return [menuCallback, contentCallback, index] as [
-    () => JSX.Element,
-    () => JSX.Element,
+    typeof menuCallback,
+    typeof contentCallback,
     number,
   ];
 }

@@ -1,0 +1,22 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon_24_size">
+<rect id="Rectangle 23949" x="2.5" y="2.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+<rect id="Rectangle 23950" x="19.5" y="2.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+<rect id="Rectangle 23951" x="19.5" y="19.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+<rect id="Rectangle 23952" x="2.5" y="19.5" width="2" height="2" rx="1" stroke="#1B1D1F"/>
+<line id="Line 90" x1="3.5" y1="4" x2="3.5" y2="19" stroke="#1B1D1F"/>
+<line id="Line 91" x1="20.5" y1="4" x2="20.5" y2="19" stroke="#1B1D1F"/>
+<line id="Line 92" x1="20" y1="20.5" x2="4" y2="20.5" stroke="#1B1D1F"/>
+<line id="Line 93" x1="20" y1="3.5" x2="4" y2="3.5" stroke="#1B1D1F"/>
+<path id="Vector 582" d="M6 6L18 18M6 6V10M6 6H10M18 18V14M18 18H14" stroke="#1B1D1F" stroke-linejoin="round"/>
+<path id="Vector 583" d="M18 6L6 18M18 6H14M18 6V10M6 18V14M6 18H10" stroke="#1B1D1F" stroke-linejoin="round"/>
+<circle id="Ellipse 2547" cx="14" cy="6" r="0.5" fill="#1B1D1F"/>
+<circle id="Ellipse 2548" cx="10" cy="6" r="0.5" fill="#1B1D1F"/>
+<circle id="Ellipse 2549" cx="14" cy="18" r="0.5" fill="#1B1D1F"/>
+<circle id="Ellipse 2550" cx="10" cy="18" r="0.5" fill="#1B1D1F"/>
+<circle id="Ellipse 2552" cx="6" cy="14" r="0.5" fill="#1B1D1F"/>
+<circle id="Ellipse 2554" cx="18" cy="14" r="0.5" fill="#1B1D1F"/>
+<circle id="Ellipse 2553" cx="6" cy="10" r="0.5" fill="#1B1D1F"/>
+<circle id="Ellipse 2555" cx="18" cy="10" r="0.5" fill="#1B1D1F"/>
+</g>
+</svg>

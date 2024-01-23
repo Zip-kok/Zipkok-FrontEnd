@@ -4,8 +4,6 @@
   flex-direction: column;
 }
 
-.top {
-  position: sticky;
-  top: 56px;
-  z-index: 1;
+.content {
+  height: calc(100% - 56px);
 }

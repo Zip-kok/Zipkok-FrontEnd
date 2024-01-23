@@ -28,25 +28,21 @@ export default function PropertyList() {
 
   return (
     <div className={styles.root}>
-      <div className="top">
-        <Header title="콕리스트" backBtnEnabled onBack={() => navigate(-1)} />
-
-        <div className={styles.searchBox}>
-          <TextInput
-            placeholder="도로명, 지번 검색"
-            icon={searchIcon}
-            style="underline"
-          />
-          <IconTextBtn
-            image={mapIcon}
-            text="지도에서 위치 보기"
-            onClick={() => {
-              navigate('./map');
-            }}
-            gap="8px"
-            height="36px"
-          />
-        </div>
+      <div className={styles.searchBox}>
+        <TextInput
+          placeholder="도로명, 지번 검색"
+          icon={searchIcon}
+          style="underline"
+        />
+        <IconTextBtn
+          image={mapIcon}
+          text="지도에서 위치 보기"
+          onClick={() => {
+            navigate('./map');
+          }}
+          gap="8px"
+          height="36px"
+        />
       </div>
 
       <div className={styles.propertyContainer}>
@@ -69,7 +65,7 @@ export default function PropertyList() {
 
       <BottomBtn
         text="매물 직접 등록하기"
-        onClick={() => {}}
+        onClick={() => navigate('../customProperty')}
         style={{ backgroundColor: 'transparent' }}
       />
     </div>
