@@ -8,7 +8,7 @@ import useBirthInput from '../../../../hooks/useBirthInput';
 import useNaviStore from '../../../../contexts/naviStore';
 import useAddressStore from '../../../../contexts/addressStore';
 
-import searchIcon from '../../../../assets/img/search.svg';
+import searchIcon from 'assets/img/line(2)/search.svg';
 import TextInput from '../../../../components/TextInput';
 import Header from '../../../../components/Header';
 import BottomBtn from '../../../../components/BottomBtn';

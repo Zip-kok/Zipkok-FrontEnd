@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import deleteIcon from '../../assets/img/delete.svg';
+import deleteIcon from 'assets/img/fill/delete.svg';
 import styles from './TextInput.module.css';
 
 export type TextInputStyle = 'underline' | 'roundedBox';
