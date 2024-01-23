@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import styles from './SignIn.module.css';
 
+import { signIn } from 'apis';
 import useEmailStore from 'contexts/emailStore';
 
 import Birth from './Birth';
@@ -65,20 +66,7 @@ export default function SignIn() {
 
   // 서버에 최종 데이터 전송
   function handleFinalSubmit() {
-    const res = fetch('https://zipkok.store/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        nickname,
-        oauthProvider: 'KAKAO',
-        email,
-        gender,
-        brith: birth.toISOString().slice(2, 10).replace(/-/g, ''),
-      }),
-    })
-      .then((res) => res.json())
+    signIn(nickname, 'KAKAO', email, gender, birth)
       .then((res) => {
         switch (res.code) {
           // 성공적으로 회원가입 성공
