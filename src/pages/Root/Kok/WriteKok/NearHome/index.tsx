@@ -5,7 +5,7 @@ import styles from './NearHome.module.css';
 import Highlight from '../../../../../components/Highlight';
 
 import deleteBtnIcon from '../../../../../assets/img/delete.svg';
-import cameraIcon from '../../../../../assets/img/camera.svg';
+import cameraIcon from '../../../../../assets/img/line(1)/camera.svg';
 import KoklistGroup from '../../../../../components/KoklistGroup';
 
 interface Picture {
