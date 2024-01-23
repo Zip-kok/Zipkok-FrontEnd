@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Options.module.css';
-import checkImg from 'assets/img/colorCheck.svg';
+import checkImg from '../../assets/img/check/check_selected.svg';
 
 interface OptionsComponentProps {
   optionData: {
