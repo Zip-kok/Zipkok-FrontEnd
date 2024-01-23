@@ -1,9 +1,9 @@
 import React from 'react';
 
-import backIcon from '../../assets/img/line(2)/left_arrow.svg';
-import share from '../../assets/img/line(2)/share.svg';
-import heart from '../../assets/img/mypage/line(2)/heart.svg';
-import heart_fill from '../../assets/img/fill/heart_selected.svg';
+import backIcon from 'assets/img/line(2)/left_arrow.svg';
+import share from 'assets/img/line(2)/share.svg';
+import heart from 'assets/img/line(2)/heart.svg';
+import heart_fill from 'assets/img/fill/heart_selected.svg';
 
 import styles from './Header.module.css';
 

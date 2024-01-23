@@ -8,7 +8,7 @@ import useBirthInput from 'hooks/useBirthInput';
 import useNaviStore from 'contexts/naviStore';
 import useAddressStore from 'contexts/addressStore';
 
-import searchIcon from 'assets/img/search.svg';
+import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, Header, BottomBtn } from 'components';
 import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
 import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';

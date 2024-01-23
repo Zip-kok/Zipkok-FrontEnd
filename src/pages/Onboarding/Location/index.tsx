@@ -6,7 +6,7 @@ import searchAddress from './searchAddress';
 import { TextInput, BottomBtn, AddressContainer } from 'components';
 import Address from 'types/Address';
 
-import searchIcon from 'assets/img/search.svg';
+import searchIcon from 'assets/img/line(2)/search.svg';
 import { useNavigate } from 'react-router-dom';
 
 interface LocationProps {

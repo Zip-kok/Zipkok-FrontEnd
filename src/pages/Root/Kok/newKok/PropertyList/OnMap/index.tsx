@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import useNaviStore from 'contexts/naviStore';
 
-import { BottomBtn, PropertyItem } from 'components';
+import BottomBtn from 'components/BottomBtn';
+import PropertyItem from 'components/PropertyItem';
 import properties from 'models/properties';
-import mapImg from 'assets/img/kokList/map.png';
+import mapImg from 'assets/img/common/map.png';
 
 import styles from './OnMap.module.css';
 

@@ -5,8 +5,8 @@ import useNaviStore from 'contexts/naviStore';
 
 import { BottomBtn, TextInput, PropertyItem, IconBtn } from 'components';
 
-import mapIcon from 'assets/img/map.svg';
-import searchIcon from 'assets/img/search.svg';
+import mapIcon from 'assets/img/line(2)/map.svg';
+import searchIcon from 'assets/img/line(2)/search.svg';
 
 import styles from './PropertyList.module.css';
 

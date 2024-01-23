@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import styles from './CheckListCategory.module.css';
 
-import onIcon from 'assets/img/checkList/on.svg';
-import offIcon from 'assets/img/checkList/off.svg';
-import dragIcon from 'assets/img/checkList/drag.svg';
+import onIcon from 'assets/img/fill/on.svg';
+import offIcon from 'assets/img/fill/off.svg';
+import dragIcon from 'assets/img/line(1)/drag.svg';
 
 export interface CheckListCategoryProps {
   name: string;

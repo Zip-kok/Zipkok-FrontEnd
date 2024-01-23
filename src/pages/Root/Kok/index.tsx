@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import useNaviStore from 'contexts/naviStore';
 
 import styles from './Kok.module.css';
-import checkIcon from 'assets/img/kokList/check.svg';
+import checkIcon from 'assets/img/line(2)/check.svg';
+import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen_white.svg';
 import { Header, BottomBtn, PropertyItem } from 'components';
-import { ReactComponent as PenIcon } from 'assets/img/kokList/pen.svg';
-
 import properties from 'models/properties';
 
 export const Kok = () => {

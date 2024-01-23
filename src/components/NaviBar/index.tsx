@@ -4,12 +4,12 @@ import styles from './NaviBar.module.css';
 
 import useNaviStore from 'contexts/naviStore';
 
-import koklistSelected from 'assets/img/navi/koklist_selected.svg';
-import koklistDefault from 'assets/img/navi/koklist_default.svg';
-import homeSelected from 'assets/img/navi/home_selected.svg';
-import homeDefault from 'assets/img/navi/home_default.svg';
-import mySelected from 'assets/img/navi/my_selected.svg';
-import myDefault from 'assets/img/navi/my_default.svg';
+import koklistSelected from 'assets/img/fill/koklist_selected.svg';
+import koklistDefault from 'assets/img/line(2)/koklist_default.svg';
+import homeSelected from 'assets/img/fill/home_selected.svg';
+import homeDefault from 'assets/img/line(2)/home_default.svg';
+import mySelected from 'assets/img/fill/my_selected.svg';
+import myDefault from 'assets/img/line(2)/my_default.svg';
 
 import NaviMenu from 'types/NaviMenu';
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './KokItem.module.css';
 import IconBtn from '../../../../components/IconBtn';
-import link from '../../../../assets/img/link.svg';
+import link from '../../../../assets/img/line(1)/link.svg';
 import structure from '../../../../assets/img/line(1)/structure.svg';
 import size from '../../../../assets/img/line(1)/size.svg';
 import floor from '../../../../assets/img/line(1)/floor.svg';
