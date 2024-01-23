@@ -12,7 +12,11 @@ import useAddressStore from '../../../../../contexts/addressStore';
 import useNaviStore from '../../../../../contexts/naviStore';
 import useCustomKokStore from '../../../../../contexts/customKokStore';
 
+<<<<<<< HEAD
 import searchIcon from '../../../../../assets/img/line(1)/search.svg';
+=======
+import searchIcon from 'assets/img/line(2)/search.svg';
+>>>>>>> d1903252d87d93a3f9cf3a5e6dd5318242628f87
 
 import { HouseType, PriceType } from '../../../../Onboarding';
 

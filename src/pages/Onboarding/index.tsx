@@ -7,7 +7,7 @@ import Price from './Price';
 import Complete from './Complete';
 import Type from './Type';
 
-import leftArrowIcon from '../../assets/img/left_arrow.svg';
+import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 
 // location: 온보딩_01_거주지역
 // type: 온보딩_02_매물종류

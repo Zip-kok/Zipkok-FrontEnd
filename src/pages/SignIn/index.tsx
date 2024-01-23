@@ -7,7 +7,7 @@ import Complete from './Complete';
 import Gender from './Gender';
 import NickName from './NickName';
 
-import leftArrowIcon from '../../assets/img/left_arrow.svg';
+import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import { useNavigate } from 'react-router-dom';
 
 // nickname: 회원가입_01_닉네임

@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './PropertyItem.module.css';
 
-import heartIcon from '../../assets/img/kokList/heart_white.svg';
-import listIcon from '../../assets/img/kokList/list.svg';
-import propertyImg_null from '../../assets/img/common/propertyImg_null.svg';
-import heartFillIcon from '../../assets/img/kokList/heart_fill.svg';
+import heartIcon from 'assets/img/line(2)/heart_white.svg';
+import listIcon from 'assets/img/line(2)/list.svg';
+import propertyImg_null from '../../assets/img/kokList/propertyImg_null.svg';
+import heartFillIcon from 'assets/img/fill/heart_fill.svg';
 
 interface PropertyItemProps {
   id: number;
