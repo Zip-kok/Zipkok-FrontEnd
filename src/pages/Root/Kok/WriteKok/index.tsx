@@ -12,6 +12,7 @@ import styles from './WriteKok.module.css';
 
 // for test
 import propertyImg from 'assets/img/common/defaultThumbnail.png';
+import { BottomBtn } from 'components';
 
 export default function KokItem() {
   // 상단 메뉴 설정
@@ -48,7 +49,17 @@ export default function KokItem() {
 
     {
       name: '중개 / 계약',
-      element: <Contract />,
+      element: (
+        <Contract
+          pictures={[
+            { id: 0, src: propertyImg },
+            { id: 1, src: propertyImg },
+            { id: 2, src: propertyImg },
+            { id: 3, src: propertyImg },
+            { id: 4, src: propertyImg },
+          ]}
+        />
+      ),
     },
   ]);
 
@@ -69,6 +80,7 @@ export default function KokItem() {
     <div className={styles.root}>
       <TopMenu className={styles.top} />
       <Content />
+      <BottomBtn text="저장하기" onClick={() => {}} />
     </div>
   );
 }

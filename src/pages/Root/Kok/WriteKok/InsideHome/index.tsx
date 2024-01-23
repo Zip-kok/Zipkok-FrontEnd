@@ -22,7 +22,7 @@ export default function InsideHome({ pictures }: InsideHomeProps) {
     <div className={styles.root}>
       {/* 사진 */}
       <div className={styles.pictureContainer}>
-        <p>집 내부의 사진을 찍어주세요.</p>
+        <p>집 내부의 사진을 찍어주세요</p>
 
         <div className={styles.pictures}>
           {/* 최대 사진 개수 이하인 경우에만 */}
