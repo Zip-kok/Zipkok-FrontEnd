@@ -5,8 +5,8 @@ import styles from './InsideHome.module.css';
 import compassIcon from '../../../../../assets/img/compass.svg';
 import deleteBtnIcon from '../../../../../assets/img/delete.svg';
 import cameraIcon from '../../../../../assets/img/camera.svg';
-import KoklistGroup from '../../../../../components/KoklistGroup';
-import TextInput from '../../../../../components/TextInput';
+import KoklistGroup from 'components/KoklistGroup';
+import TextInput from 'components/TextInput';
 
 interface Picture {
   id: number;

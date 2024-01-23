@@ -15,8 +15,8 @@ const Contract = () => {
         </div>
       </div>
       <SwiperCom imageUrls={imageInfo.imageUrls}></SwiperCom>
-      <div className={styles.blank}/>
-      <div className={styles.blank}/>
+      <div className={styles.blank} />
+      <div className={styles.blank} />
     </div>
   );
 };

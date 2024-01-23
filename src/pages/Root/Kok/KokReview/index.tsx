@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import styles from './KokReview.module.css';
-import Header from '../../../../components/Header';
-import BottomBtn from '../../../../components/BottomBtn';
-import StarRating from '../../../../components/StarRating';
+import Header from 'components/Header';
+import BottomBtn from 'components/BottomBtn';
+import StarRating from 'components/StarRating';
 
 import starRed from '../../../../assets/img/kokList/star_red.svg';
 import starWhite from '../../../../assets/img/kokList/star_white.svg';
 
 import data from '../../../../models/kokItemDetail.json';
-import SwiperCom from '../../../../components/Swiper';
+import SwiperCom from 'components/Swiper';
 
 const Tags = [
   { name: '깔끔해요', selected: false },

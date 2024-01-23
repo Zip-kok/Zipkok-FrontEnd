@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './Compass.module.css';
-import Header from '../../components/Header';
-import BottomBtn from '../../components/BottomBtn';
+import Header from 'components/Header';
+import BottomBtn from 'components/BottomBtn';
 
 interface CustomDeviceOrientationEvent extends DeviceOrientationEvent {
   webkitCompassHeading?: number;
