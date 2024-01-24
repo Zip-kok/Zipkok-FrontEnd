@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { onBoarding } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 
 import Complete from './Complete';

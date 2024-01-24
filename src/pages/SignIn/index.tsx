@@ -11,10 +11,6 @@ import Gender from './Gender';
 import NickName from './NickName';
 import styles from './SignIn.module.css';
 
-// nickname: 회원가입_01_닉네임
-// gender: 회원가입_02_성별
-// birth: 회원가입_03_생년월일
-// complete: 회원가입_04_완료
 type Step = 'nickname' | 'gender' | 'birth' | 'complete';
 export type Gender = '남자' | '여자' | '비공개';
 

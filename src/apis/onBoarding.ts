@@ -1,5 +1,6 @@
 import { url } from 'constants/api';
 
+import type { HouseType } from 'types/HouseType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 /**
@@ -9,7 +10,7 @@ export async function onBoarding(
   address: string,
   latitude: number,
   longitude: number,
-  realEastateType: string,
+  houseType: HouseType,
   mpriceMin: number,
   mpriceMax: number,
   mdepositMin: number,
@@ -19,6 +20,22 @@ export async function onBoarding(
   purchaseMin: number,
   purchaseMax: number,
 ) {
+  let realEastateType: string;
+  switch (houseType) {
+    case '빌라/투룸':
+      realEastateType = 'TWOROOM';
+      break;
+    case '아파트':
+      realEastateType = 'APARTMENT';
+      break;
+    case '오피스텔':
+      realEastateType = 'OFFICETELL';
+      break;
+    case '원룸':
+      realEastateType = 'ONEROOM';
+      break;
+  }
+
   const params = {
     address,
     latitude,
