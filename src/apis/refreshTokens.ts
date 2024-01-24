@@ -1,5 +1,3 @@
-import { url } from 'constants/api';
-
 import { StatusCode } from 'types/StatusCode';
 
 import api from './';

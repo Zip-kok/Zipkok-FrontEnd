@@ -1,5 +1,3 @@
-import { url } from 'constants/api';
-
 import api from './';
 
 import type { Address } from 'types/Address';
