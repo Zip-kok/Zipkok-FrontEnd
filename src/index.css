@@ -40,3 +40,25 @@ body {
 .scroll ::-webkit-scrollbar-track {
   background: transparent; /*스크롤바 뒷 배경 색상*/
 }
+
+.swiper-pagination-fraction {
+  color: var(--gray-color-white, #fff);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  left: calc(50% - 32px);
+}
+
+.swiper-pagination-horizontal {
+  width: 64px;
+  height: 24px;
+  background: var(--gray-color-gray100, #00000a);
+  flex-shrink: 0;
+  border-radius: 39px;
+  opacity: 0.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
