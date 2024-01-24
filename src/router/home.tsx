@@ -1,5 +1,5 @@
-import Home from 'pages/Root/Home';
+import Home from 'pages/Main/Home';
 
-const HomeRoute = { path: 'home', element: <Home /> };
+const HomeRoute = { index: true, element: <Home /> };
 
 export default HomeRoute;

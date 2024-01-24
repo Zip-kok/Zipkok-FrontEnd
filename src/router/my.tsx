@@ -1,9 +1,9 @@
-import My from 'pages/Root/My';
-import KokEdit from 'pages/Root/My/KokEdit';
-import LikedProperties from 'pages/Root/My/LikedProperties';
-import MyPage from 'pages/Root/My/MyPage';
-import ProfileEdit from 'pages/Root/My/ProfileEdit';
-import LocationEdit from 'pages/Root/My/ProfileEdit/LocationEdit';
+import My from 'pages/Main/My';
+import KokEdit from 'pages/Main/My/KokEdit';
+import LikedProperties from 'pages/Main/My/LikedProperties';
+import MyPage from 'pages/Main/My/MyPage';
+import ProfileEdit from 'pages/Main/My/ProfileEdit';
+import LocationEdit from 'pages/Main/My/ProfileEdit/LocationEdit';
 
 const MyRoute = {
   path: 'my',

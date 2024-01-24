@@ -2,9 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import Auth from 'pages/Auth';
 import Login from 'pages/Login';
+import Main from 'pages/Main';
+import KokReview from 'pages/Main/Kok/KokReview';
 import Onboarding from 'pages/Onboarding';
-import Root from 'pages/Root';
-import KokReview from 'pages/Root/Kok/KokReview';
 import SignIn from 'pages/SignIn';
 import Test from 'pages/Test';
 
@@ -15,7 +15,7 @@ import MyRoute from './my';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <Main />,
     children: [KokRoute, HomeRoute, MyRoute],
   },
   {
@@ -31,7 +31,6 @@ const router = createBrowserRouter([
     element: <Onboarding />,
   },
   { path: 'test', element: <Test /> },
-  { path: 'kokReview', element: <KokReview /> },
   { path: 'auth', element: <Auth /> },
 ]);
 

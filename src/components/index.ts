@@ -20,6 +20,7 @@ import PropertyItem from './PropertyItem';
 import RadioBtn from './RadioBtn';
 import RangeSlider from './RangeSlider';
 import Splash from './Splash';
+import StarRating from './StarRating';
 import SwiperCom from './Swiper';
 import TextInput from './TextInput';
 import TopMenu from './TopMenu';
@@ -50,4 +51,5 @@ export {
   SwiperCom,
   TextInput,
   TopMenu,
+  StarRating,
 };
