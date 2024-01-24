@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { searchAddress } from 'apis';
+import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn, AddressContainer } from 'components';
 import { Address } from 'types/Address';
 import { StatusCode } from 'types/StatusCode';
