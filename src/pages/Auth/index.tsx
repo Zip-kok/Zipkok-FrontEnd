@@ -3,17 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { kakaoLogin } from 'apis';
 import useEmailStore from 'contexts/emailStore';
-import Cookies from 'js-cookie';
-import { StatusCode } from 'types/StatusCode';
+import storeToken from 'utils/storeToken';
 
 export default function Auth() {
   const location = useLocation();
   const navigate = useNavigate();
   const setEmail = useEmailStore((store) => store.setEmail);
-
-  function millisecondsToDays(ms: number) {
-    return ms / 1000 / 60 / 60 / 24;
-  }
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
@@ -23,21 +18,18 @@ export default function Auth() {
         .then((res) => {
           // 회원인 경우
           if (res.result.isMember) {
-            const authTokens = res.result.authTokens;
-
-            // expiresIn의 단위는 ms
-            // 토큰 저장
-            Cookies.set('accessToken', authTokens.accessToken, {
-              expires: millisecondsToDays(authTokens.expiresIn),
-              secure: true,
-              sameSite: 'none',
-            });
-            Cookies.set('refreshToken', authTokens.refreshToken, {
-              expires: millisecondsToDays(authTokens.refreshTokenExpiresIn),
-              secure: true,
-              sameSite: 'none',
-            });
-
+            const {
+              accessToken,
+              refreshToken,
+              expiresIn,
+              refreshTokenExpiresIn,
+            } = res.result.authTokens;
+            storeToken(
+              accessToken,
+              refreshToken,
+              expiresIn,
+              refreshTokenExpiresIn,
+            );
             navigate('/');
           }
           // 회원이 아닌 경우
