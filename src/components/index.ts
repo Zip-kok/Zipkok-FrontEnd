@@ -1,6 +1,4 @@
-import AddressBtn from './AddressBtn';
-import AddressContainer from './AddressContainer';
-import AddressSearch from './AddressSearch';
+import AddressSearchPage from './AddressSearchPage';
 import BottomBtn from './BottomBtn';
 import Btn from './Btn';
 import CheckBox from './CheckBox';
@@ -27,9 +25,7 @@ import TextInput from './TextInput';
 import TopMenu from './TopMenu';
 
 export {
-  AddressBtn,
-  AddressContainer,
-  AddressSearch,
+  AddressSearchPage,
   BottomBtn,
   Btn,
   CheckBox,

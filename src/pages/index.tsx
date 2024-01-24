@@ -1,8 +1,6 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AddressSearch } from 'components';
-
 import Auth from './Auth';
 import Compass from './Compass';
 import Login from './Login';
@@ -63,7 +61,7 @@ const router = createBrowserRouter([
                   { index: true, element: <CustomProperty /> },
                   {
                     path: 'locationEdit',
-                    element: <AddressSearch headerDisabled />,
+                    element: <></>,
                   },
                   {
                     path: 'confirm',
@@ -93,7 +91,7 @@ const router = createBrowserRouter([
               { index: true, element: <ProfileEdit /> },
               {
                 path: 'locationEdit',
-                element: <AddressSearch title="프로필 수정하기" />,
+                element: <></>,
               },
             ],
           },
