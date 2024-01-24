@@ -5,6 +5,7 @@ import styles from './Location.module.css';
 import { searchAddress } from 'apis';
 import { TextInput, BottomBtn, AddressContainer } from 'components';
 import { Address } from 'types/Address';
+import { StatusCode } from 'types/StatusCode';
 
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { useNavigate } from 'react-router-dom';
@@ -90,7 +91,7 @@ export default function Location({
       setAddressCount(count);
 
       if (count === 0) {
-        if (data.code === 9000)
+        if (data.code === StatusCode.ADDRESS_SEARCH_FAILURE)
           setErrorMessage(
             '일치하는 검색 결과가 없어요.\n주소를 다시 확인해주세요.',
           );
