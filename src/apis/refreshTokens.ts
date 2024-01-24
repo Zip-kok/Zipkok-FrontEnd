@@ -22,30 +22,30 @@ interface RefreshTokensResult {
  * `POST /auth/refreshToken`에 요청을 보내 액세스 토큰과 리프레시 토큰을 갱신합니다.
  */
 export async function refreshTokens(refreshToken: string) {
-  const params = {
+  const path = '/auth/refreshToken';
+  const method = 'POST';
+  const body = {
     refreshToken,
   };
-  const paramStr = JSON.stringify(params);
+  const authRequired = false;
 
-  const res = await fetch(`${url}/auth/refreshToken?`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: paramStr,
-  });
-  const data = (await res.json()) as ZipkokResponse<
-    RefreshTokensResult | undefined
-  >;
+  const res = await api<ZipkokResponse<RefreshTokensResult | undefined>>(
+    path,
+    method,
+    authRequired,
+    undefined,
+    body,
+    undefined,
+  );
 
-  if (data.code === StatusCode.TOKEN_REFRESH_SUCCESS) {
-    const result = data as ZipkokResponseWithCode<
+  if (res.code === StatusCode.TOKEN_REFRESH_SUCCESS) {
+    const result = res as ZipkokResponseWithCode<
       RefreshTokensResult,
       StatusCode.TOKEN_REFRESH_SUCCESS
     >;
     return result;
   } else {
-    return data as ZipkokResponseWithCode<
+    return res as ZipkokResponseWithCode<
       undefined,
       StatusCode.INVALID_REFRESH_TOKEN
     >;
