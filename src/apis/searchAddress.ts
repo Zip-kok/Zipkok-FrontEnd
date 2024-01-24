@@ -1,7 +1,9 @@
 import { url } from 'constants/api';
 
-import { Address } from 'types/Address';
-import { ZipkokResponse } from 'types/ZipkokResponse';
+import api from './';
+
+import type { Address } from 'types/Address';
+import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 interface SearchAddressResult {
   documents: Address[];

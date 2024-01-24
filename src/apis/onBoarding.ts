@@ -1,5 +1,7 @@
 import { url } from 'constants/api';
 
+import api from './';
+
 import type { HouseType } from 'types/HouseType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 

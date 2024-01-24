@@ -7,7 +7,7 @@ import storeToken from 'utils/storeToken';
  * 쿠키에 저장된 리프레시 토큰을 이용해 새 토큰을 발급받아 쿠키에 저장합니다.
  * @returns 새 토큰 발급 성공 여부
  */
-export default async function refreshTokens() {
+export default async function storeNewTokensToCookie() {
   const refreshToken = Cookies.get('refreshToken');
   if (!refreshToken) return false;
 

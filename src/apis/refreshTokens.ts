@@ -1,7 +1,13 @@
 import { url } from 'constants/api';
 
 import { StatusCode } from 'types/StatusCode';
-import { ZipkokResponse, ZipkokResponseWithCode } from 'types/ZipkokResponse';
+
+import api from './';
+
+import type {
+  ZipkokResponse,
+  ZipkokResponseWithCode,
+} from 'types/ZipkokResponse';
 
 interface RefreshTokensResult {
   authTokens: {

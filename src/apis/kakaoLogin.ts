@@ -2,6 +2,8 @@ import { url } from 'constants/api';
 
 import { ZipkokResponse } from 'types/ZipkokResponse';
 
+import api from './';
+
 interface KakaoLoginResult {
   isMember: boolean;
 }

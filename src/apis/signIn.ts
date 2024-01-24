@@ -1,5 +1,7 @@
 import { url } from 'constants/api';
 
+import api from './';
+
 import type { Gender } from 'pages/SignIn';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
