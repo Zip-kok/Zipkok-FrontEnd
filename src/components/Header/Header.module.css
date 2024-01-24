@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,8 +13,12 @@
 .titleContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding-left: 30px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 100;
 }
 
 .titleContainer > span {
@@ -28,9 +33,11 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  z-index: 101;
 }
 
 .shareBtn {
   width: 20px;
   height: 20px;
+  z-index: 101;
 }

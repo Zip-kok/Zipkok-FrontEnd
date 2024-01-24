@@ -1,6 +1,4 @@
-import AddressBtn from './AddressBtn';
-import AddressContainer from './AddressContainer';
-import AddressSearch from './AddressSearch';
+import AddressSearchPage from './AddressSearchPage';
 import BottomBtn from './BottomBtn';
 import Btn from './Btn';
 import CheckBox from './CheckBox';
@@ -22,14 +20,13 @@ import PropertyItem from './PropertyItem';
 import RadioBtn from './RadioBtn';
 import RangeSlider from './RangeSlider';
 import Splash from './Splash';
+import StarRating from './StarRating';
 import SwiperCom from './Swiper';
 import TextInput from './TextInput';
 import TopMenu from './TopMenu';
 
 export {
-  AddressBtn,
-  AddressContainer,
-  AddressSearch,
+  AddressSearchPage,
   BottomBtn,
   Btn,
   CheckBox,
@@ -54,4 +51,5 @@ export {
   SwiperCom,
   TextInput,
   TopMenu,
+  StarRating,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import heart_fill from 'assets/img/fill/heart_selected.svg';
 import heart from 'assets/img/line(2)/heart.svg';
@@ -11,7 +12,6 @@ interface HeaderProps {
   title: string;
   titleIcon?: string;
   backBtnEnabled?: boolean;
-  onBack?: () => void;
   heartBtnEnabled?: boolean;
   heartBtnFill?: boolean;
   heartBtnClick?: () => void;
@@ -23,23 +23,19 @@ const Header = ({
   title,
   titleIcon,
   backBtnEnabled = false,
-  onBack,
   heartBtnEnabled = false,
   heartBtnFill = false,
   heartBtnClick,
   shareBtnEnabled = false,
   shareBtnClick,
 }: HeaderProps) => {
-  console.assert(
-    !backBtnEnabled || onBack,
-    'onBack must be provided if backBtnEnabled is true',
-  );
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
-      <span>
+      <span className={styles.btnContainer}>
         {backBtnEnabled && (
-          <button className="imgBtn" onClick={onBack}>
+          <button className="imgBtn" onClick={() => navigate(-1)}>
             <img src={backIcon}></img>
           </button>
         )}

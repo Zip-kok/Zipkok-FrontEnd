@@ -1,7 +1,7 @@
-import { url } from 'constants/api';
+import api from './';
 
-import { ZipkokResponse } from 'types/ZipkokResponse';
-import { Address } from 'types/Address';
+import type { Address } from 'types/Address';
+import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 interface SearchAddressResult {
   documents: Address[];
@@ -17,14 +17,23 @@ interface SearchAddressResult {
  * `GET /address`로 주소 검색을 요청합니다.
  */
 export async function searchAddress(query: string, page = 1, size = 50) {
+  const path = '/address';
+  const method = 'GET';
   const params = {
     query: query,
     page: page.toString(),
     size: size.toString(),
   };
-  const paramStr = new URLSearchParams(params).toString();
+  const authRequired = false;
 
-  const res = await fetch(`${url}/address?${paramStr}`);
-  const data = (await res.json()) as ZipkokResponse<SearchAddressResult>;
-  return data;
+  const res = await api<ZipkokResponse<SearchAddressResult>>(
+    path,
+    method,
+    authRequired,
+    params,
+    undefined,
+    undefined,
+  );
+
+  return res;
 }

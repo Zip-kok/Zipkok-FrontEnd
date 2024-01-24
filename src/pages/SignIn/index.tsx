@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { signIn } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useEmailStore from 'contexts/emailStore';
+import { StatusCode } from 'types/StatusCode';
 
 import Birth from './Birth';
 import Complete from './Complete';
@@ -11,10 +12,6 @@ import Gender from './Gender';
 import NickName from './NickName';
 import styles from './SignIn.module.css';
 
-// nickname: 회원가입_01_닉네임
-// gender: 회원가입_02_성별
-// birth: 회원가입_03_생년월일
-// complete: 회원가입_04_완료
 type Step = 'nickname' | 'gender' | 'birth' | 'complete';
 export type Gender = '남자' | '여자' | '비공개';
 
@@ -53,7 +50,7 @@ export default function SignIn() {
       <Birth
         onConfirm={(birth: Date) => {
           setBirth(birth);
-          handleFinalSubmit();
+          handleFinalSubmit(nickname, gender, birth);
         }}
       />
     ),
@@ -63,38 +60,41 @@ export default function SignIn() {
   };
 
   // 서버에 최종 데이터 전송
-  function handleFinalSubmit() {
-    signIn(nickname, 'KAKAO', email, gender, birth)
-      .then((res) => {
-        switch (res.code) {
-          // 성공적으로 회원가입 성공
-          case 5002:
-            setStep('complete');
-            break;
-          // 닉네임이 없거나 잘못된 형식
-          case 5008:
-            alert(res.message);
-            setStep('nickname');
-            break;
-          // 성별이 없거나 잘못된 형식
-          case 5009:
-            alert(res.message);
-            setStep('gender');
-            break;
-          // 생년월일이 없거나 잘못된 형식
-          case 5010:
-            alert(res.message);
-            setStep('birth');
-            break;
-          default:
-            alert(res.message);
-            break;
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  }
+  const handleFinalSubmit = useCallback(
+    (nickname: string, gender: Gender, birth: Date) => {
+      signIn(nickname, 'KAKAO', email, gender, birth)
+        .then((res) => {
+          switch (res.code) {
+            // 성공적으로 회원가입 성공
+            case StatusCode.REGISTRATION_SUCCESS:
+              setStep('complete');
+              break;
+            // 닉네임이 없거나 잘못된 형식
+            case StatusCode.INVALID_NICKNAME_FORMAT:
+              alert(res.message);
+              setStep('nickname');
+              break;
+            // 성별이 없거나 잘못된 형식
+            case StatusCode.INVALID_GENDER_FORMAT:
+              alert(res.message);
+              setStep('gender');
+              break;
+            // 생년월일이 없거나 잘못된 형식
+            case StatusCode.INVALID_BIRTHDAY_FORMAT:
+              alert(res.message);
+              setStep('birth');
+              break;
+            default:
+              alert(res.message);
+              break;
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    },
+    [],
+  );
 
   // 상단 바 및 뒤로 가기 버튼을 표시할지 여부
   function topBarEnabled(step: Step) {

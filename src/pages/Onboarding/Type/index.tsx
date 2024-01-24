@@ -9,7 +9,8 @@ import { BottomBtn } from 'components';
 import useRadioBtn from 'hooks/useRadioBtn';
 
 import styles from './Type.module.css';
-import { HouseType } from '../';
+
+import type { HouseType } from 'types/HouseType';
 
 interface TypeProps {
   confirmHouseType: (houseType: HouseType) => void;
