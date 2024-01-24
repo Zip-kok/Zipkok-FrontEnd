@@ -117,6 +117,7 @@ const router = createBrowserRouter([
   { path: 'test', element: <Test /> },
   { path: 'compass', element: <Compass /> },
   { path: 'kokReview', element: <KokReview /> },
+  { path: 'auth', element: <Auth /> },
 ]);
 
 export default router;
