@@ -1,13 +1,10 @@
 import { url } from 'constants/api';
 
 import { ZipkokResponse } from 'types/ZipkokResponse';
+import { Address } from 'types/Address';
 
 interface SearchAddressResult {
-  documents: {
-    address_name: string;
-    x: number;
-    y: number;
-  }[];
+  documents: Address[];
   meta: {
     end: boolean;
     is_end: boolean;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './AddressContainer.module.css';
-import Address from 'types/Address';
+import { Address } from 'types/Address';
 import AddressBtn from '../AddressBtn';
 
 interface AddressContainerProps {
@@ -30,7 +30,7 @@ export default function AddressContainer({
       ) : (
         addresses.map((address) => (
           <AddressBtn
-            key={address.bdMgtSn}
+            key={address.address_name}
             address={address}
             onClick={() => onClick(address)}
           />

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import styles from './Location.module.css';
 
-import searchAddress from './searchAddress';
+import { searchAddress } from 'apis';
 import { TextInput, BottomBtn, AddressContainer } from 'components';
-import Address from 'types/Address';
+import { Address } from 'types/Address';
 
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ export default function Location({
   }
 
   function handleAddressClick(address: Address) {
-    setInputValue(address.roadAddr);
+    setInputValue(address.address_name);
     setAddresses([]);
     setSelectedAddress(address);
   }
@@ -61,7 +61,7 @@ export default function Location({
           setAddresses([]);
         } else {
           setErrorMessage('');
-          setAddresses((prev) => [...prev, ...(data.juso as Address[])]);
+          setAddresses((prev) => [...prev, ...data.result.documents]);
         }
         setIsLoading(false);
       });
@@ -71,7 +71,7 @@ export default function Location({
   async function handleSubmit() {
     if (inputValue === '') return;
     if (selectedAddress) {
-      confirmLocation(selectedAddress.roadAddr);
+      confirmLocation(selectedAddress.address_name);
     } else {
       const query = inputValue.replace(/\s/g, '');
 
@@ -86,19 +86,19 @@ export default function Location({
         return;
       }
 
-      const count = data.common.totalCount;
-      setAddressCount(parseInt(count));
+      const count = data.result.meta.total_count;
+      setAddressCount(count);
 
-      if (count === '0') {
-        if (data.common.errorMessage === '정상')
+      if (count === 0) {
+        if (data.code === 9000)
           setErrorMessage(
             '일치하는 검색 결과가 없어요.\n주소를 다시 확인해주세요.',
           );
-        else setErrorMessage(data.common.errorMessage);
+        else setErrorMessage(data.message);
         setAddresses([]);
       } else {
         setErrorMessage('');
-        setAddresses(data.juso as Address[]);
+        setAddresses(data.result.documents);
       }
     }
   }
