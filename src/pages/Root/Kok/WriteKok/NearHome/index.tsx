@@ -1,11 +1,10 @@
 import React from 'react';
 
-import styles from './NearHome.module.css';
-
-import { Highlight, KoklistGroup } from 'components';
-
 import deleteBtnIcon from 'assets/img/fill/delete.svg';
 import cameraIcon from 'assets/img/line(1)/camera.svg';
+import { Highlight, KoklistGroup } from 'components';
+
+import styles from './NearHome.module.css';
 
 interface Picture {
   id: number;

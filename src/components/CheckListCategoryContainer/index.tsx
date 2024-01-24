@@ -1,9 +1,10 @@
 import React from 'react';
 import { ReactSortable } from 'react-sortablejs';
 
+import { CheckListItem, CheckListCategory } from 'components';
+
 import styles from './CheckListCategoryContainer.module.css';
 
-import { CheckListItem, CheckListCategory } from 'components';
 import type { CheckListGroup } from 'types/CheckList';
 
 interface CheckListCategoryContainerProps {

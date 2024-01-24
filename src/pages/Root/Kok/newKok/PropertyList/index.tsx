@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useNaviStore from 'contexts/naviStore';
-
-import { BottomBtn, TextInput, PropertyItem, IconBtn } from 'components';
-
 import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
+import { BottomBtn, TextInput, PropertyItem, IconBtn } from 'components';
+import useNaviStore from 'contexts/naviStore';
+import properties from 'models/properties';
 
 import styles from './PropertyList.module.css';
-
-import properties from 'models/properties';
 
 export default function PropertyList() {
   const navigate = useNavigate();

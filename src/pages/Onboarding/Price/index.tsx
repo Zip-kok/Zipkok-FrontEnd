@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './Price.module.css';
-
-import useRadioBtn from 'hooks/useRadioBtn';
-import Monthly from './priceSlider/Monthly';
-import Jeonse from './priceSlider/Jeonse';
-import Purchase from './priceSlider/Purchase';
 import { BottomBtn } from 'components';
+import useRadioBtn from 'hooks/useRadioBtn';
 
+import styles from './Price.module.css';
+import Jeonse from './priceSlider/Jeonse';
+import Monthly from './priceSlider/Monthly';
+import Purchase from './priceSlider/Purchase';
 import { PriceType, PriceRange } from '../';
 
 interface PriceProps {

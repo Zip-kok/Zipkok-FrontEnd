@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './KokEdit.module.css';
-
-import NearHome from './NearHome';
-import InsideHome from './InsideHome';
-import Contract from './Contract';
-
 import { Header } from 'components';
+import useNaviStore from 'contexts/naviStore';
 import useMenu from 'hooks/useMenu';
 
-import useNaviStore from 'contexts/naviStore';
+import Contract from './Contract';
+import InsideHome from './InsideHome';
+import styles from './KokEdit.module.css';
+import NearHome from './NearHome';
 
 const KokEdit = () => {
   const navigate = useNavigate();

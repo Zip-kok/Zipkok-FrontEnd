@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './AddressContainer.module.css';
+
 import { Address } from 'types/Address';
+
+import styles from './AddressContainer.module.css';
 import AddressBtn from '../AddressBtn';
 
 interface AddressContainerProps {

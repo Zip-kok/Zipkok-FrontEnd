@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './AddressSearch.module.css';
-
 import useAddressStore from 'contexts/addressStore';
-
-import Header from '../Header';
 import Location from 'pages/Onboarding/Location';
+
+import styles from './AddressSearch.module.css';
+import Header from '../Header';
 
 interface AddressSearchProps {
   title?: string;

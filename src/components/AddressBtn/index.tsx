@@ -1,7 +1,9 @@
 import React from 'react';
+
+import searchArrowIcon from 'assets/img/line(1)/search_arrow.svg';
+import { Address } from 'types/Address';
+
 import styles from './AddressBtn.module.css';
-import { Address } from '../../types/Address';
-import searchArrowIcon from '../../assets/img/line(1)/search_arrow.svg';
 
 interface AddressBtnProps {
   address: Address;

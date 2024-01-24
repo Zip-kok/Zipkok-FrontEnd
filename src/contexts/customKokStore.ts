@@ -1,5 +1,5 @@
-import { create } from 'zustand';
 import { HouseType, PriceType } from 'pages/Onboarding';
+import { create } from 'zustand';
 
 export interface CustomKokStore {
   picture?: string;

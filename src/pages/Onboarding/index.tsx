@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import styles from './Onboarding.module.css';
-
-import Location from './Location';
-import Price from './Price';
-import Complete from './Complete';
-import Type from './Type';
-
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
+
+import Complete from './Complete';
+import Location from './Location';
+import styles from './Onboarding.module.css';
+import Price from './Price';
+import Type from './Type';
 
 // location: 온보딩_01_거주지역
 // type: 온보딩_02_매물종류
