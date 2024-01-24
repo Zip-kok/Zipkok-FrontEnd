@@ -10,6 +10,7 @@ import styles from './Onboarding.module.css';
 import Price from './Price';
 import Type from './Type';
 
+import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 
@@ -19,7 +20,7 @@ export type PriceRange = [number, number];
 export default function Onboarding() {
   const [step, setStep] = useState<Step>('location');
 
-  const [location, setLocation] = useState<string>('');
+  const [location, setLocation] = useState<Address>();
   const [houseType, setHouseType] = useState<HouseType>('원룸');
   const [priceType, setPriceType] = useState<PriceType>('월세');
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
@@ -28,7 +29,7 @@ export default function Onboarding() {
     // location
     location: (
       <Location
-        confirmLocation={(location: string) => {
+        confirmLocation={(location: Address) => {
           setLocation(location);
           setStep('type');
         }}
@@ -88,11 +89,13 @@ export default function Onboarding() {
         break;
     }
 
+    if (location === undefined) return;
+
     // TODO: add lat, lng
     onBoarding(
-      location,
-      0,
-      0,
+      location.address_name,
+      location.y,
+      location.x,
       houseType,
       mpriceMin,
       mpriceMax,

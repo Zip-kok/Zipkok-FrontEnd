@@ -31,7 +31,7 @@ export default function AddressSearch({
         <Location
           defaultAddress={address}
           confirmLocation={(location) => {
-            setAddress(location);
+            setAddress(location.address_name);
             navigate(-1);
           }}
           skippable={false}

@@ -10,7 +10,7 @@ import { StatusCode } from 'types/StatusCode';
 import styles from './Location.module.css';
 
 interface LocationProps {
-  confirmLocation: (location: string) => void;
+  confirmLocation: (location: Address) => void;
   skippable?: boolean;
   defaultAddress?: string;
 }
@@ -71,7 +71,7 @@ export default function Location({
   async function handleSubmit() {
     if (inputValue === '') return;
     if (selectedAddress) {
-      confirmLocation(selectedAddress.address_name);
+      confirmLocation(selectedAddress);
     } else {
       const query = inputValue.replace(/\s/g, '');
 
