@@ -1,19 +1,17 @@
 import React from 'react';
 
-import styles from './PropertyInfo.module.css';
-
-import IconBtn from '../IconBtn';
-
 import defaultThumbnail from 'assets/img/common/defaultThumbnail.png';
 import mapImg from 'assets/img/common/map.png';
-import linkIcon from 'assets/img/line(1)/link.svg';
-import houseTypeIcon from 'assets/img/line(1)/structure.svg';
-import areaIcon from 'assets/img/line(1)/size.svg';
 import floorIcon from 'assets/img/line(1)/floor.svg';
+import linkIcon from 'assets/img/line(1)/link.svg';
 import maintanenceFeeIcon from 'assets/img/line(1)/money.svg';
-
+import areaIcon from 'assets/img/line(1)/size.svg';
+import houseTypeIcon from 'assets/img/line(1)/structure.svg';
 import { PriceType, HouseType } from 'pages/Onboarding';
+
+import styles from './PropertyInfo.module.css';
 import BottomBtn from '../BottomBtn';
+import IconBtn from '../IconBtn';
 
 interface PropertyInfoProps {
   picture?: string;

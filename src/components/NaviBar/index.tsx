@@ -1,17 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './NaviBar.module.css';
 
-import useNaviStore from 'contexts/naviStore';
-
-import koklistSelected from 'assets/img/fill/koklist_selected.svg';
-import koklistDefault from 'assets/img/line(2)/koklist_default.svg';
 import homeSelected from 'assets/img/fill/home_selected.svg';
-import homeDefault from 'assets/img/line(2)/home_default.svg';
+import koklistSelected from 'assets/img/fill/koklist_selected.svg';
 import mySelected from 'assets/img/fill/my_selected.svg';
+import homeDefault from 'assets/img/line(2)/home_default.svg';
+import koklistDefault from 'assets/img/line(2)/koklist_default.svg';
 import myDefault from 'assets/img/line(2)/my_default.svg';
-
+import useNaviStore from 'contexts/naviStore';
 import NaviMenu from 'types/NaviMenu';
+
+import styles from './NaviBar.module.css';
 
 const NaviBar = () => {
   const navigate = useNavigate();

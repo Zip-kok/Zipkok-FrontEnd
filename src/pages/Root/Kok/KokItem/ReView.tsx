@@ -1,7 +1,9 @@
 import React from 'react';
+
+import StarRating from 'components/StarRating';
+
 import styles from './KokItem.module.css';
 import data from '../../../../models/kokItemReview.json';
-import StarRating from 'components/StarRating';
 
 const ReView = () => {
   const {

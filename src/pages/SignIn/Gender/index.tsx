@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import styles from './Gender.module.css';
-
+import { BottomBtn } from 'components';
 import useRadioBtn from 'hooks/useRadioBtn';
 
-import { BottomBtn } from 'components';
-
+import styles from './Gender.module.css';
 import { Gender as GenderType } from '../';
 
 interface GenderProps {

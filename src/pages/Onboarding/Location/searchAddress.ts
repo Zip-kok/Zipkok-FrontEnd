@@ -2,7 +2,7 @@ import { JUSO_KEY } from 'keys';
 
 export default async function searchAddress(
   query: string,
-  page: number = 1,
+  page = 1,
   countPerPage = 50,
 ) {
   const url = 'https://www.juso.go.kr/addrlink/addrLinkApi.do';

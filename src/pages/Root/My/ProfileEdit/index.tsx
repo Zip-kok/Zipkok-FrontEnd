@@ -1,22 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './ProfileEdit.module.css';
-
-import useRadioBtn from 'hooks/useRadioBtn';
-import useBirthInput from 'hooks/useBirthInput';
-import useNaviStore from 'contexts/naviStore';
-import useAddressStore from 'contexts/addressStore';
-
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, Header, BottomBtn } from 'components';
-import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
-import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
-import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';
+import useAddressStore from 'contexts/addressStore';
+import useNaviStore from 'contexts/naviStore';
+import useBirthInput from 'hooks/useBirthInput';
+import useRadioBtn from 'hooks/useRadioBtn';
 
-import { Gender } from '../../../SignIn';
+import styles from './ProfileEdit.module.css';
 import { HouseType } from '../../../Onboarding';
 import { PriceType } from '../../../Onboarding';
+import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
+import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
+import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';
+import { Gender } from '../../../SignIn';
 
 type PriceRange = [number, number];
 

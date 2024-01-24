@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
-import deleteIcon from 'assets/img/fill/delete.svg';
-import styles from './TextInput.module.css';
 
+import deleteIcon from 'assets/img/fill/delete.svg';
 import { TextInputStyle } from 'types/TextInput';
+
+import styles from './TextInput.module.css';
 
 interface TextInputProps {
   value?: string;

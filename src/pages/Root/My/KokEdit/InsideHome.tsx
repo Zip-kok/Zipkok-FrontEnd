@@ -1,8 +1,8 @@
 import React from 'react';
 
-import styles from './KokEdit.module.css';
-
 import useCheckList from 'hooks/useCheckList';
+
+import styles from './KokEdit.module.css';
 
 const InsideHome = () => {
   const [CheckListContainer, checkList, setCheckList] = useCheckList([

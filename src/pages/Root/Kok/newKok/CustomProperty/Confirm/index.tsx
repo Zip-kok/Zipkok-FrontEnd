@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { PropertyInfo } from 'components';
-
 import useCustomKokStore from 'contexts/customKokStore';
 
 export default function Confirm() {

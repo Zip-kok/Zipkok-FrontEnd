@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { RangeSlider } from 'components';
+
 import getPriceLabelString from './getPriceLabelString';
 import styles from './priceSlider.module.css';
-
 import { PriceRange } from '../../';
 
 interface JeonseProps {

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import useDetectKeyboardOpen from 'use-detect-keyboard-open';
+
 import styles from './BottomBtn.module.css';
 import Btn from '../Btn';
 
