@@ -13,7 +13,9 @@ interface SignInResult {
   };
 }
 
-// POST /user
+/**
+ * `POST /user`으로 회원가입을 요청합니다.
+ */
 export async function signIn(
   nickname: string,
   oauthProvider = 'KAKAO',
