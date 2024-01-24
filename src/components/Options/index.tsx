@@ -37,19 +37,21 @@ const OptionsComponent: React.FC<OptionsComponentProps> = ({ optionData }) => {
     <div className={styles.root}>
       {optionData.map((check) => (
         <div key={check.orderNumber}>
-          <p className={styles.optionTitle}>
+          <div className={styles.optionTitle}>
             <img src={checkImg} />
             {check.option}
-          </p>
+          </div>
 
-          <p className={styles.checkCtn}>
+          <div className={styles.checkCtn}>
             {check.detailOptions.map((detailCheck, index) => (
               <span key={index}>
                 <input
                   type="checkbox"
                   id={`checkBtn${check.orderNumber}.${index}`}
                   className={styles.checkBtn}
-                  checked={checkboxStates[`${check.orderNumber}.${index}`]}
+                  checked={
+                    checkboxStates[`${check.orderNumber}.${index}`] || false
+                  }
                   onChange={() =>
                     handleCheckboxChange(check.orderNumber, index)
                   }
@@ -62,7 +64,7 @@ const OptionsComponent: React.FC<OptionsComponentProps> = ({ optionData }) => {
                 </label>
               </span>
             ))}
-          </p>
+          </div>
         </div>
       ))}
     </div>
