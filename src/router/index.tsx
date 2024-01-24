@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Auth from 'pages/Auth';
-import Compass from 'pages/Compass';
 import Login from 'pages/Login';
 import Onboarding from 'pages/Onboarding';
 import Root from 'pages/Root';
@@ -32,7 +31,6 @@ const router = createBrowserRouter([
     element: <Onboarding />,
   },
   { path: 'test', element: <Test /> },
-  { path: 'compass', element: <Compass /> },
   { path: 'kokReview', element: <KokReview /> },
   { path: 'auth', element: <Auth /> },
 ]);
