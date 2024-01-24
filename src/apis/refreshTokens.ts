@@ -1,9 +1,9 @@
 import { url } from 'constants/api';
 
-import { ZipkokResponse } from 'types/ZipkokResponse';
+import { StatusCode } from 'types/StatusCode';
+import { ZipkokResponse, ZipkokResponseWithCode } from 'types/ZipkokResponse';
 
 interface RefreshTokensResult {
-  isMember: boolean;
   authTokens: {
     accessToken: string;
     refreshToken: string;
@@ -28,6 +28,20 @@ export async function refreshTokens(refreshToken: string) {
     },
     body: paramStr,
   });
-  const data = (await res.json()) as ZipkokResponse<RefreshTokensResult>;
-  return data;
+  const data = (await res.json()) as ZipkokResponse<
+    RefreshTokensResult | undefined
+  >;
+
+  if (data.code === StatusCode.TOKEN_REFRESH_SUCCESS) {
+    const result = data as ZipkokResponseWithCode<
+      RefreshTokensResult,
+      StatusCode.TOKEN_REFRESH_SUCCESS
+    >;
+    return result;
+  } else {
+    return data as ZipkokResponseWithCode<
+      undefined,
+      StatusCode.INVALID_REFRESH_TOKEN
+    >;
+  }
 }
