@@ -14,6 +14,7 @@ export interface CustomKokStore {
   floor?: number;
   houseType: HouseType;
   priceType: PriceType;
+  nickName?: string;
 
   setPicture: (picture?: string) => void;
   setAddress: (address: string) => void;
@@ -27,6 +28,7 @@ export interface CustomKokStore {
   setFloor: (floor?: number) => void;
   setHouseType: (houseType: HouseType) => void;
   setPriceType: (priceType: PriceType) => void;
+  setNickName: (nickName?: string) => void;
 }
 
 const initialState: CustomKokStore = {
@@ -41,6 +43,7 @@ const initialState: CustomKokStore = {
   floor: undefined,
   houseType: '원룸',
   priceType: '월세',
+  nickName: undefined,
 
   setPicture: () => {},
   setAddress: () => {},
@@ -54,6 +57,7 @@ const initialState: CustomKokStore = {
   setFloor: () => {},
   setHouseType: () => {},
   setPriceType: () => {},
+  setNickName: () => {},
 };
 
 const useCustomKokStore = create<CustomKokStore>((set) => ({
@@ -70,6 +74,7 @@ const useCustomKokStore = create<CustomKokStore>((set) => ({
   setFloor: (floor) => set({ floor }),
   setHouseType: (houseType) => set({ houseType }),
   setPriceType: (priceType) => set({ priceType }),
+  setNickName: (nickName) => set({ nickName }),
 }));
 
 export default useCustomKokStore;

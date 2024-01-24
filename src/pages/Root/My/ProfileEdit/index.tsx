@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, Header, BottomBtn } from 'components';
 import useAddressStore from 'contexts/addressStore';
+import useCustomKokStore from 'contexts/customKokStore';
 import useNaviStore from 'contexts/naviStore';
 import useBirthInput from 'hooks/useBirthInput';
+import useHistoryState from 'hooks/useHistoryState';
 import useRadioBtn from 'hooks/useRadioBtn';
 
 import styles from './ProfileEdit.module.css';
@@ -42,6 +44,13 @@ const ProfileEdit = () => {
     houseTypeOptions,
     'tag',
     '원룸',
+  );
+
+  // history
+  const customKokStore = useCustomKokStore();
+  const [nickName, setNickName] = useHistoryState(
+    'nickName',
+    customKokStore.nickName,
   );
 
   // 가격 타입 라디오 버튼
@@ -145,7 +154,7 @@ const ProfileEdit = () => {
           <p className={styles.title}>닉네임</p>
           <TextInput
             placeholder="최대 12자"
-            defaultValue="보리는 강아지 내가 주인"
+            value={nickName}
             maxLength={12}
             style="roundedBox"
             captionStyle={{
@@ -153,6 +162,7 @@ const ProfileEdit = () => {
               fontSize: '14px',
               fontWeight: '400',
             }}
+            onChange={(e) => setNickName(e.currentTarget.value)}
           />
         </div>
 
