@@ -22,7 +22,7 @@ interface KaKaoLoginResultForNonMember extends KakaoLoginResult {
 }
 
 /**
- * `GET /oauth/kakao/callback`으로 카카오 로그인을 요청하고 토근을 받아옵니다.
+ * `GET /oauth/kakao/callback`으로 카카오 로그인을 요청하고 토큰을 받아옵니다.
  */
 export async function kakaoLogin(code: string) {
   const path = '/oauth/kakao/callback';
