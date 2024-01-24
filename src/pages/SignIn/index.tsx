@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { signIn } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useEmailStore from 'contexts/emailStore';
+import { StatusCode } from 'types/StatusCode';
 
 import Birth from './Birth';
 import Complete from './Complete';
@@ -64,21 +65,21 @@ export default function SignIn() {
       .then((res) => {
         switch (res.code) {
           // 성공적으로 회원가입 성공
-          case 5002:
+          case StatusCode.REGISTRATION_SUCCESS:
             setStep('complete');
             break;
           // 닉네임이 없거나 잘못된 형식
-          case 5008:
+          case StatusCode.INVALID_NICKNAME_FORMAT:
             alert(res.message);
             setStep('nickname');
             break;
           // 성별이 없거나 잘못된 형식
-          case 5009:
+          case StatusCode.INVALID_GENDER_FORMAT:
             alert(res.message);
             setStep('gender');
             break;
           // 생년월일이 없거나 잘못된 형식
-          case 5010:
+          case StatusCode.INVALID_BIRTHDAY_FORMAT:
             alert(res.message);
             setStep('birth');
             break;
