@@ -38,7 +38,9 @@ export async function onBoarding(
       break;
   }
 
-  const params = {
+  const path = '/user';
+  const method = 'PATCH';
+  const body = {
     address,
     latitude,
     longitude,
@@ -52,15 +54,16 @@ export async function onBoarding(
     purchaseMin,
     purchaseMax,
   };
-  const paramStr = JSON.stringify(params);
+  const authRequired = true;
 
-  const res = await fetch(`${url}/user`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: paramStr,
-  });
-  const data = (await res.json()) as ZipkokResponse<undefined>;
-  return data;
+  const res = await api<ZipkokResponse<undefined>>(
+    path,
+    method,
+    authRequired,
+    undefined,
+    body,
+    undefined,
+  );
+
+  return res;
 }

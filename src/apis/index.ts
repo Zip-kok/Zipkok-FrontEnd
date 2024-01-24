@@ -25,10 +25,10 @@ export { searchAddress, signIn, kakaoLogin, refreshTokens, onBoarding };
 export default async function api<T>(
   path: string,
   method = 'GET',
+  authRequired: boolean,
   params?: any,
   body?: any,
   headers?: any,
-  authRequired = true,
 ) {
   // access token 만료 시
   if (authRequired && Cookies.get('accessToken') === undefined) {

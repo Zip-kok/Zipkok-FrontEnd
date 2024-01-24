@@ -27,15 +27,23 @@ interface KaKaoLoginResultForNonMember extends KakaoLoginResult {
  * `GET /oauth/kakao/callback`으로 카카오 로그인을 요청하고 토근을 받아옵니다.
  */
 export async function kakaoLogin(code: string) {
+  const path = '/oauth/kakao/callback';
+  const method = 'GET';
   const params = {
     code,
   };
-  const paramStr = new URLSearchParams(params).toString();
+  const authRequired = false;
 
-  const res = await fetch(`${url}/oauth/kakao/callback?${paramStr}`);
-  const data = (await res.json()) as ZipkokResponse<KakaoLoginResult>;
+  const res = await api<ZipkokResponse<KakaoLoginResult>>(
+    path,
+    method,
+    authRequired,
+    params,
+    undefined,
+    undefined,
+  );
 
-  if (data.result.isMember)
-    return data as ZipkokResponse<KaKaoLoginResultForMember>;
-  else return data as ZipkokResponse<KaKaoLoginResultForNonMember>;
+  if (res.result.isMember)
+    return res as ZipkokResponse<KaKaoLoginResultForMember>;
+  else return res as ZipkokResponse<KaKaoLoginResultForNonMember>;
 }
