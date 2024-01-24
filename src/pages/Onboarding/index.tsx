@@ -8,13 +8,10 @@ import styles from './Onboarding.module.css';
 import Price from './Price';
 import Type from './Type';
 
-// location: 온보딩_01_거주지역
-// type: 온보딩_02_매물종류
-// price: 온보딩_03_가격범위
-// complete: 온보딩_04_완료
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
+
 type Step = 'location' | 'type' | 'price' | 'complete';
-export type HouseType = '아파트' | '원룸' | '빌라/투룸' | '오피스텔';
-export type PriceType = '월세' | '전세' | '매매';
 export type PriceRange = [number, number];
 
 export default function Onboarding() {

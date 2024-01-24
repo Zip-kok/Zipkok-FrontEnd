@@ -8,7 +8,10 @@ import styles from './Price.module.css';
 import Jeonse from './priceSlider/Jeonse';
 import Monthly from './priceSlider/Monthly';
 import Purchase from './priceSlider/Purchase';
-import { PriceType, PriceRange } from '../';
+
+import type { PriceType } from 'types/PriceType';
+
+type PriceRange = [number, number];
 
 interface PriceProps {
   confirmPrice: (priceType: PriceType, priceRanges: PriceRange[]) => void;

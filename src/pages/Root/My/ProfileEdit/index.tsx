@@ -9,12 +9,13 @@ import useBirthInput from 'hooks/useBirthInput';
 import useRadioBtn from 'hooks/useRadioBtn';
 
 import styles from './ProfileEdit.module.css';
-import { HouseType } from '../../../Onboarding';
-import { PriceType } from '../../../Onboarding';
 import Jeonse from '../../../Onboarding/Price/priceSlider/Jeonse';
 import Monthly from '../../../Onboarding/Price/priceSlider/Monthly';
 import Purchase from '../../../Onboarding/Price/priceSlider/Purchase';
 import { Gender } from '../../../SignIn';
+
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 
 type PriceRange = [number, number];
 

@@ -10,7 +10,9 @@ import useHistoryState from 'hooks/useHistoryState';
 import useRadioBtn from 'hooks/useRadioBtn';
 
 import styles from './CustomProperty.module.css';
-import { HouseType, PriceType } from '../../../../Onboarding';
+
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 
 export default function CustomProperty() {
   const { address, setAddress } = useAddressStore();
