@@ -7,14 +7,14 @@ import mySelected from 'assets/img/fill/my_selected.svg';
 import homeDefault from 'assets/img/line(2)/home_default.svg';
 import koklistDefault from 'assets/img/line(2)/koklist_default.svg';
 import myDefault from 'assets/img/line(2)/my_default.svg';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import NaviMenu from 'types/NaviMenu';
 
 import styles from './NaviBar.module.css';
 
 const NaviBar = () => {
   const navigate = useNavigate();
-  const { naviMenu } = useNaviStore();
+  const { naviMenu } = useUIStore();
 
   const handleClick = (menu: NaviMenu) => {
     navigate(`/${menu}`);

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Header } from 'components';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 
 import Contract from './Contract';
@@ -14,7 +14,7 @@ const KokEdit = () => {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('my');
     setShowNaviBar(false);

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, Header, BottomBtn } from 'components';
 import useAddressStore from 'contexts/addressStore';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import useBirthInput from 'hooks/useBirthInput';
 import useRadioBtn from 'hooks/useRadioBtn';
 
@@ -63,7 +63,7 @@ const ProfileEdit = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('my');
     setShowNaviBar(false);

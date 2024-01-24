@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import mapImg from 'assets/img/common/map.png';
 import BottomBtn from 'components/BottomBtn';
 import PropertyItem from 'components/PropertyItem';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import properties from 'models/properties';
 
 import styles from './OnMap.module.css';
@@ -14,7 +14,7 @@ export default function OnMap() {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('kok');
     setShowNaviBar(false);

@@ -5,7 +5,7 @@ import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn, TextInput } from 'components';
 import useAddressStore from 'contexts/addressStore';
 import useCustomKokStore from 'contexts/customKokStore';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import useHistoryState from 'hooks/useHistoryState';
 import useRadioBtn from 'hooks/useRadioBtn';
 
@@ -103,7 +103,7 @@ export default function CustomProperty() {
   }
 
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('kok');
     setShowNaviBar(false);

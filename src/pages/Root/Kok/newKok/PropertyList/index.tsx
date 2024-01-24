@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn, TextInput, PropertyItem, IconBtn } from 'components';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import properties from 'models/properties';
 
 import styles from './PropertyList.module.css';
@@ -13,7 +13,7 @@ export default function PropertyList() {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('kok');
     setShowNaviBar(false);

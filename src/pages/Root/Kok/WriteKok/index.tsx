@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import propertyImg from 'assets/img/common/defaultThumbnail.png';
 import { BottomBtn } from 'components';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 
 import Contract from './Contract';
@@ -65,7 +65,7 @@ export default function KokItem() {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('kok');
     setShowNaviBar(false);

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Header, BottomBtn, SwiperCom } from 'components';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 import data from 'models/kokItemDetail.json';
 import 'swiper/css';
@@ -19,7 +19,7 @@ const KokItem = () => {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('kok');
     setShowNaviBar(false);

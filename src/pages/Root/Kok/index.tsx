@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import checkIcon from 'assets/img/line(2)/check.svg';
 import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen_white.svg';
 import { Header, BottomBtn, PropertyItem } from 'components';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 import properties from 'models/properties';
 
 import styles from './Kok.module.css';
@@ -13,7 +13,7 @@ export default function Kok() {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('kok');
     setShowNaviBar(true);

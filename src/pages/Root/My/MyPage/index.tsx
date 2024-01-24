@@ -12,13 +12,13 @@ import pen from 'assets/img/line(2)/pen.svg';
 import pin from 'assets/img/line(2)/pin.svg';
 import quit from 'assets/img/line(2)/quit.svg';
 import { Header, IconBtn } from 'components';
-import useNaviStore from 'contexts/naviStore';
+import useUIStore from 'contexts/uiStore';
 
 import styles from './Mypage.module.css';
 
 const Mypage = () => {
   // 하단 내비게이션 바 설정
-  const { setNaviMenu, setShowNaviBar } = useNaviStore();
+  const { setNaviMenu, setShowNaviBar } = useUIStore();
   useEffect(() => {
     setNaviMenu('my');
     setShowNaviBar(true);
