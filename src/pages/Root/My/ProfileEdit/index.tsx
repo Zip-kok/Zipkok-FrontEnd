@@ -182,7 +182,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>희망 거주지역</p>
           <TextInput
-            defaultValue={address}
+            defaultValue={address.address_name}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('/my/profileEdit/locationEdit')}

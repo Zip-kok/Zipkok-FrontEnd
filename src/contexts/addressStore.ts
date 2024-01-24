@@ -1,12 +1,18 @@
 import { create } from 'zustand';
 
+import type { Address } from 'types/Address';
+
 export interface AddressStore {
-  address: string;
-  setAddress: (address: string) => void;
+  address: Address;
+  setAddress: (address: Address) => void;
 }
 
 const initialState: AddressStore = {
-  address: '',
+  address: {
+    address_name: '',
+    x: 0,
+    y: 0,
+  },
   setAddress: () => {},
 };
 

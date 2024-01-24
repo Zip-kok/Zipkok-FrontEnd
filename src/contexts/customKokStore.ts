@@ -1,11 +1,12 @@
 import { create } from 'zustand';
 
+import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 
 export interface CustomKokStore {
   picture?: string;
-  address: string;
+  address: Address;
   memo?: string;
   deposit?: number;
   monthlyPrice?: number;
@@ -18,7 +19,7 @@ export interface CustomKokStore {
   priceType: PriceType;
 
   setPicture: (picture?: string) => void;
-  setAddress: (address: string) => void;
+  setAddress: (address: Address) => void;
   setMemo: (memo?: string) => void;
   setDeposit: (deposit?: number) => void;
   setMonthlyPrice: (monthlyPrice?: number) => void;
@@ -32,7 +33,11 @@ export interface CustomKokStore {
 }
 
 const initialState: CustomKokStore = {
-  address: '',
+  address: {
+    address_name: '',
+    x: 0,
+    y: 0,
+  },
   memo: undefined,
   deposit: undefined,
   monthlyPrice: undefined,

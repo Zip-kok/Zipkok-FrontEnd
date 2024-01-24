@@ -12,12 +12,13 @@ import styles from './PropertyInfo.module.css';
 import BottomBtn from '../BottomBtn';
 import IconBtn from '../IconBtn';
 
+import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 
 interface PropertyInfoProps {
   picture?: string;
-  address: string;
+  address: Address;
   priceType: PriceType;
   deposit?: number;
   monthlyPrice?: number;

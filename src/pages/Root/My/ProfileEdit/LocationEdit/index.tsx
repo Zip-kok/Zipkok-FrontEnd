@@ -1,16 +1,15 @@
 import React from 'react';
 
 import { AddressSearchPage } from 'components';
+import useAddressStore from 'contexts/addressStore';
 import { Address } from 'types/Address';
 
-interface LocationEditProps {
-  confirmLocation: (location: Address) => void;
-}
+export default function LocationEdit() {
+  const setAddress = useAddressStore((state) => state.setAddress);
 
-export default function LocationEdit({ confirmLocation }: LocationEditProps) {
   return (
     <AddressSearchPage
-      confirmLocation={confirmLocation}
+      confirmLocation={(address) => setAddress(address)}
       skippable={true}
       defaultAddress=""
     />

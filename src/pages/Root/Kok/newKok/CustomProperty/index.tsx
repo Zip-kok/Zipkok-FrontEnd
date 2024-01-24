@@ -229,7 +229,7 @@ export default function CustomProperty() {
 
           <TextInput
             placeholder="주소 검색"
-            value={address}
+            value={address.address_name}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('./locationEdit')}
