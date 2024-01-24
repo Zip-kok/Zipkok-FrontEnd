@@ -1,7 +1,7 @@
 import { url } from 'constants/api';
 
-import { ZipkokResponse } from 'types/ZipkokResponse';
 import { Address } from 'types/Address';
+import { ZipkokResponse } from 'types/ZipkokResponse';
 
 interface SearchAddressResult {
   documents: Address[];
