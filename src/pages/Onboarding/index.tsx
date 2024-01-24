@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { onBoarding } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
@@ -20,7 +20,11 @@ export type PriceRange = [number, number];
 export default function Onboarding() {
   const [step, setStep] = useState<Step>('location');
 
-  const [location, setLocation] = useState<Address>();
+  const [location, setLocation] = useState<Address>({
+    address_name: '',
+    x: 0,
+    y: 0,
+  });
   const [houseType, setHouseType] = useState<HouseType>('원룸');
   const [priceType, setPriceType] = useState<PriceType>('월세');
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
@@ -52,7 +56,7 @@ export default function Onboarding() {
         confirmPrice={(priceType: PriceType, priceRanges: PriceRange[]) => {
           setPriceType(priceType);
           setPriceRanges(priceRanges);
-          handleFinalSubmit();
+          handleFinalSubmit(location, houseType, priceType, priceRanges);
         }}
       />
     ),
@@ -62,82 +66,88 @@ export default function Onboarding() {
   };
 
   // 서버에 최종 데이터 전송
-  function handleFinalSubmit() {
-    let mpriceMin = 0,
-      mpriceMax = 0,
-      mdepositMin = 0,
-      mdepositMax = 0,
-      ydepositMin = 0,
-      ydepositMax = 0,
-      purchaseMin = 0,
-      purchaseMax = 0;
+  const handleFinalSubmit = useCallback(
+    (
+      location: Address,
+      houseType: HouseType,
+      priceType: PriceType,
+      priceRanges: PriceRange[],
+    ) => {
+      let mpriceMin = 0,
+        mpriceMax = 0,
+        mdepositMin = 0,
+        mdepositMax = 0,
+        ydepositMin = 0,
+        ydepositMax = 0,
+        purchaseMin = 0,
+        purchaseMax = 0;
 
-    switch (priceType) {
-      case '월세':
-        mdepositMin = priceRanges[0][0];
-        mdepositMax = priceRanges[0][1];
-        mpriceMin = priceRanges[1][0];
-        mpriceMax = priceRanges[1][1];
-        break;
-      case '전세':
-        ydepositMin = priceRanges[0][0];
-        ydepositMax = priceRanges[0][1];
-        break;
-      case '매매':
-        purchaseMin = priceRanges[0][0];
-        purchaseMax = priceRanges[0][1];
-        break;
-    }
+      switch (priceType) {
+        case '월세':
+          mdepositMin = priceRanges[0][0];
+          mdepositMax = priceRanges[0][1];
+          mpriceMin = priceRanges[1][0];
+          mpriceMax = priceRanges[1][1];
+          break;
+        case '전세':
+          ydepositMin = priceRanges[0][0];
+          ydepositMax = priceRanges[0][1];
+          break;
+        case '매매':
+          purchaseMin = priceRanges[0][0];
+          purchaseMax = priceRanges[0][1];
+          break;
+      }
 
-    if (location === undefined) return;
-
-    // TODO: add lat, lng
-    onBoarding(
-      location.address_name,
-      location.y,
-      location.x,
-      houseType,
-      mpriceMin,
-      mpriceMax,
-      mdepositMin,
-      mdepositMax,
-      ydepositMin,
-      ydepositMax,
-      purchaseMin,
-      purchaseMax,
-    )
-      .then((res) => {
-        switch (res.code) {
-          // 회원정보 등록/수정 성공
-          case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
-            setStep('complete');
-            break;
-          // 주소가 없거나 최대 입력 범위 초과
-          case StatusCode.ADDRESS_OVER_LENGTH:
-            setStep('location');
-            break;
-          // 위도, 경도가 없거나 범위 초과
-          case StatusCode.INVALID_LAT_LNG:
-            setStep('location');
-            break;
-          // 최소 가격이 없거나 0 이하
-          case StatusCode.INVALID_MIN_PRICE:
-            setStep('price');
-            break;
-          // 최대 가격이 없거나 0 이하
-          case StatusCode.INVALID_MAX_PRICE:
-            setStep('price');
-            break;
-          // 관심매물유형 오류
-          case StatusCode.INVALID_INTEREST_TYPE:
-            setStep('type');
-            break;
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  }
+      // TODO: add lat, lng
+      onBoarding(
+        location.address_name,
+        location.y,
+        location.x,
+        houseType,
+        mpriceMin,
+        mpriceMax,
+        mdepositMin,
+        mdepositMax,
+        ydepositMin,
+        ydepositMax,
+        purchaseMin,
+        purchaseMax,
+      )
+        .then((res) => {
+          switch (res.code) {
+            // 회원정보 등록/수정 성공
+            case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
+              setStep('complete');
+              break;
+            // 주소가 없거나 최대 입력 범위 초과
+            case StatusCode.ADDRESS_OVER_LENGTH:
+              setStep('location');
+              break;
+            // 위도, 경도가 없거나 범위 초과
+            case StatusCode.INVALID_LAT_LNG:
+              setStep('location');
+              break;
+            // 최소 가격이 없거나 0 이하
+            case StatusCode.INVALID_MIN_PRICE:
+              setStep('price');
+              break;
+            // 최대 가격이 없거나 0 이하
+            case StatusCode.INVALID_MAX_PRICE:
+              setStep('price');
+              break;
+            // 관심매물유형 오류
+            case StatusCode.INVALID_INTEREST_TYPE:
+              setStep('type');
+              break;
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    },
+    [],
+  );
 
   // 프로그레스바 가로 길이를 계산하기 위한 값
   const progresses: Record<Step, number> = {

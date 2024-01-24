@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { signIn } from 'apis';
@@ -50,7 +50,7 @@ export default function SignIn() {
       <Birth
         onConfirm={(birth: Date) => {
           setBirth(birth);
-          handleFinalSubmit();
+          handleFinalSubmit(nickname, gender, birth);
         }}
       />
     ),
@@ -60,38 +60,41 @@ export default function SignIn() {
   };
 
   // 서버에 최종 데이터 전송
-  function handleFinalSubmit() {
-    signIn(nickname, 'KAKAO', email, gender, birth)
-      .then((res) => {
-        switch (res.code) {
-          // 성공적으로 회원가입 성공
-          case StatusCode.REGISTRATION_SUCCESS:
-            setStep('complete');
-            break;
-          // 닉네임이 없거나 잘못된 형식
-          case StatusCode.INVALID_NICKNAME_FORMAT:
-            alert(res.message);
-            setStep('nickname');
-            break;
-          // 성별이 없거나 잘못된 형식
-          case StatusCode.INVALID_GENDER_FORMAT:
-            alert(res.message);
-            setStep('gender');
-            break;
-          // 생년월일이 없거나 잘못된 형식
-          case StatusCode.INVALID_BIRTHDAY_FORMAT:
-            alert(res.message);
-            setStep('birth');
-            break;
-          default:
-            alert(res.message);
-            break;
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  }
+  const handleFinalSubmit = useCallback(
+    (nickname: string, gender: Gender, birth: Date) => {
+      signIn(nickname, 'KAKAO', email, gender, birth)
+        .then((res) => {
+          switch (res.code) {
+            // 성공적으로 회원가입 성공
+            case StatusCode.REGISTRATION_SUCCESS:
+              setStep('complete');
+              break;
+            // 닉네임이 없거나 잘못된 형식
+            case StatusCode.INVALID_NICKNAME_FORMAT:
+              alert(res.message);
+              setStep('nickname');
+              break;
+            // 성별이 없거나 잘못된 형식
+            case StatusCode.INVALID_GENDER_FORMAT:
+              alert(res.message);
+              setStep('gender');
+              break;
+            // 생년월일이 없거나 잘못된 형식
+            case StatusCode.INVALID_BIRTHDAY_FORMAT:
+              alert(res.message);
+              setStep('birth');
+              break;
+            default:
+              alert(res.message);
+              break;
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    },
+    [],
+  );
 
   // 상단 바 및 뒤로 가기 버튼을 표시할지 여부
   function topBarEnabled(step: Step) {
