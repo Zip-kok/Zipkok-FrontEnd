@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 import useEmailStore from 'contexts/emailStore';
+import Cookies from 'js-cookie';
 
 export default function Auth() {
   const location = useLocation();

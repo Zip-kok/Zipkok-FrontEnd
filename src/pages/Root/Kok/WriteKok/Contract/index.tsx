@@ -1,9 +1,10 @@
 import React from 'react';
 
-import styles from './Contract.module.css';
-import KoklistGroup from 'components/KoklistGroup';
 import deleteBtnIcon from 'assets/img/fill/delete.svg';
 import cameraIcon from 'assets/img/line(1)/camera.svg';
+import KoklistGroup from 'components/KoklistGroup';
+
+import styles from './Contract.module.css';
 
 interface Picture {
   id: number;

@@ -1,23 +1,19 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
-
-import useNaviStore from 'contexts/naviStore';
 
 import { Header, BottomBtn, SwiperCom } from 'components';
-
-import styles from './KokItem.module.css';
+import useNaviStore from 'contexts/naviStore';
 import useMenu from 'hooks/useMenu';
-import BasicInf from './BasicInf';
-import NearHome from './NearHome';
-import InsideHome from './InsideHome';
-import Contract from './Contract';
-import ReView from './ReView';
-
 import data from 'models/kokItemDetail.json';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import BasicInf from './BasicInf';
+import Contract from './Contract';
+import InsideHome from './InsideHome';
+import styles from './KokItem.module.css';
+import NearHome from './NearHome';
+import ReView from './ReView';
 
 const KokItem = () => {
   const navigate = useNavigate();
@@ -76,38 +72,43 @@ const KokItem = () => {
   ]);
 
   return (
-  <div className={styles.root}>
-    <div className='top'>
-    <Header title="성북구 정릉동" 
-      backBtnEnabled
-      heartBtnEnabled={true}
-      heartBtnFill={result.isZimmed}
-      shareBtnEnabled
-      onBack={() => navigate(-1)}
-      />  
-    </div>
-    <SwiperCom imageUrls={result.imageInfo.imageUrls} />
-    <div className={styles.body}>
-      <div className={styles.address}>{result.address}</div>
-      <div className={styles.priceContainer}>
-        <div className={styles.priceType}>{result.transactionType}</div>
-        <div className={styles.priceInf}>{result.deposit+" / "}{result.price}</div>
+    <div className={styles.root}>
+      <div className="top">
+        <Header
+          title="성북구 정릉동"
+          backBtnEnabled
+          heartBtnEnabled={true}
+          heartBtnFill={result.isZimmed}
+          shareBtnEnabled
+          onBack={() => navigate(-1)}
+        />
       </div>
-      <div className={styles.moreViewCtn}>
-        <div>{commenter}</div>
-        <div className={styles.moreViewBtn}onClick={() => setIsShowMore(!isShowMore)}>
-          {(result.detail.length > textLimit.current) &&
-          (isShowMore ? '닫기' : '더보기')}
+      <SwiperCom imageUrls={result.imageInfo.imageUrls} />
+      <div className={styles.body}>
+        <div className={styles.address}>{result.address}</div>
+        <div className={styles.priceContainer}>
+          <div className={styles.priceType}>{result.transactionType}</div>
+          <div className={styles.priceInf}>
+            {result.deposit + ' / '}
+            {result.price}
+          </div>
+        </div>
+        <div className={styles.moreViewCtn}>
+          <div>{commenter}</div>
+          <div
+            className={styles.moreViewBtn}
+            onClick={() => setIsShowMore(!isShowMore)}
+          >
+            {result.detail.length > textLimit.current &&
+              (isShowMore ? '닫기' : '더보기')}
+          </div>
         </div>
       </div>
+      <MidMenu />
+      <Content />
+      <BottomBtn text="콕리스트 수정하기" onClick={handleEditClick} />
     </div>
-    <MidMenu />
-    <Content />
-    <BottomBtn
-      text='콕리스트 수정하기'
-      onClick={handleEditClick}
-    />
-  </div>
-)}
+  );
+};
 
 export default KokItem;

@@ -1,5 +1,5 @@
-import { create } from 'zustand';
 import NaviMenu from 'types/NaviMenu';
+import { create } from 'zustand';
 
 export interface NaviStore {
   showNaviBar: boolean;

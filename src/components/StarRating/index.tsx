@@ -1,7 +1,9 @@
 // StarRatingWithLabel.tsx
 import React, { useState } from 'react';
-import starWhite from 'assets/img/line(1)/star_white.svg';
+
 import starRed from 'assets/img/fill/star_red.svg';
+import starWhite from 'assets/img/line(1)/star_white.svg';
+
 import styles from './StarRating.module.css';
 
 interface StarRatingProps {

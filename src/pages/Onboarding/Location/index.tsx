@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import styles from './Location.module.css';
-
-import searchAddress from './searchAddress';
+import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn, AddressContainer } from 'components';
 import Address from 'types/Address';
 
-import searchIcon from 'assets/img/line(2)/search.svg';
-import { useNavigate } from 'react-router-dom';
+import styles from './Location.module.css';
+import searchAddress from './searchAddress';
 
 interface LocationProps {
   confirmLocation: (location: string) => void;

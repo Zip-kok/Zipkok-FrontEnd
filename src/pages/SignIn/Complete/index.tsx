@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './Complete.module.css';
-
 import { CompleteAnim, BottomBtn } from 'components';
+
+import styles from './Complete.module.css';
 
 export default function Complete() {
   const navigate = useNavigate();

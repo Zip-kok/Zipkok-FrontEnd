@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 
 import getScaler from './getScaler';
 import getUnscaler from './getUnscaler';
-
 import styles from './RangeSlider.module.css';
 
 export type ScaleMethod = 'linear' | 'square' | 'logarithmic' | 'exponential';

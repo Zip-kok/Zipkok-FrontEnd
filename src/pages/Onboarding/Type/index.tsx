@@ -1,17 +1,15 @@
 import React from 'react';
-
-import styles from './Type.module.css';
-
-import useRadioBtn from 'hooks/useRadioBtn';
-import { BottomBtn } from 'components';
+import { useNavigate } from 'react-router-dom';
 
 import apartmentIcon from 'assets/img/login/apartment.svg';
+import officetelIcon from 'assets/img/login/officetel.svg';
 import oneroomIcon from 'assets/img/login/oneroom.svg';
 import tworoomIcon from 'assets/img/login/tworoom.svg';
-import officetelIcon from 'assets/img/login/officetel.svg';
+import { BottomBtn } from 'components';
+import useRadioBtn from 'hooks/useRadioBtn';
 
+import styles from './Type.module.css';
 import { HouseType } from '../';
-import { useNavigate } from 'react-router-dom';
 
 interface TypeProps {
   confirmHouseType: (houseType: HouseType) => void;

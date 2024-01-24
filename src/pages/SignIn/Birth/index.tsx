@@ -1,10 +1,9 @@
 import React, { FormEvent, useState } from 'react';
 
-import styles from './Birth.module.css';
-
+import { BottomBtn } from 'components';
 import useBirthInput from 'hooks/useBirthInput';
 
-import { BottomBtn } from 'components';
+import styles from './Birth.module.css';
 
 interface BirthProps {
   onConfirm: (birth: Date) => void;

@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import NearHome from './NearHome';
-import InsideHome from './InsideHome';
-import Contract from './Contract';
-
-import useMenu from 'hooks/useMenu';
+import propertyImg from 'assets/img/common/defaultThumbnail.png';
+import { BottomBtn } from 'components';
 import useNaviStore from 'contexts/naviStore';
+import useMenu from 'hooks/useMenu';
 
+import Contract from './Contract';
+import InsideHome from './InsideHome';
+import NearHome from './NearHome';
 import styles from './WriteKok.module.css';
 
 // for test
-import propertyImg from 'assets/img/common/defaultThumbnail.png';
-import { BottomBtn } from 'components';
 
 export default function KokItem() {
   // 상단 메뉴 설정

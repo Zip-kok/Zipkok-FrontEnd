@@ -1,22 +1,20 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './Mypage.module.css';
-
-import useNaviStore from 'contexts/naviStore';
-
-import { Header, IconBtn } from 'components';
-
-import my from 'assets/img/line(2)/my.svg';
 import edit from 'assets/img/line(2)/edit.svg';
 import heart from 'assets/img/line(2)/heart.svg';
+import inquiry from 'assets/img/line(2)/inquiry.svg';
+import location_Pin from 'assets/img/line(2)/location_pin.svg';
+import logout from 'assets/img/line(2)/logout.svg';
+import my from 'assets/img/line(2)/my.svg';
+import notice from 'assets/img/line(2)/notice.svg';
 import pen from 'assets/img/line(2)/pen.svg';
 import pin from 'assets/img/line(2)/pin.svg';
-import location_Pin from 'assets/img/line(2)/location_pin.svg';
-import notice from 'assets/img/line(2)/notice.svg';
-import inquiry from 'assets/img/line(2)/inquiry.svg';
-import logout from 'assets/img/line(2)/logout.svg';
 import quit from 'assets/img/line(2)/quit.svg';
+import { Header, IconBtn } from 'components';
+import useNaviStore from 'contexts/naviStore';
+
+import styles from './Mypage.module.css';
 
 const Mypage = () => {
   // 하단 내비게이션 바 설정

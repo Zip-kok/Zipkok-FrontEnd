@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './KokItem.module.css';
-import data from 'models/kokItemContract.json';
+
 import { OptionsComponent, SwiperCom } from 'components';
+import data from 'models/kokItemContract.json';
+
+import styles from './KokItem.module.css';
 
 const Contract = () => {
   const { options, imageInfo } = data.result;

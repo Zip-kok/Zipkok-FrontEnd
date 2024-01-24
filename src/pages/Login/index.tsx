@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './Login.module.css';
-
 import kakaoIcon from 'assets/img/login/kakaoIcon.svg';
 import zipkokIcon from 'assets/img/login/zipkokIcon_white.svg';
 import { Splash } from 'components';
+
+import styles from './Login.module.css';
 
 export default function Login() {
   const [showSplash, setShowSplash] = useState(true);

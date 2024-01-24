@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { CheckListCategoryContainer } from 'components';
+
 import type { CheckListGroup } from 'types/CheckList';
 
 export default function useCheckList(checkListGroups: CheckListGroup[]) {

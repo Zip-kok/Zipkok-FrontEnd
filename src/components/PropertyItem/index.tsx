@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './PropertyItem.module.css';
 
-import heartIcon from 'assets/img/line(2)/heart_white.svg';
-import listIcon from 'assets/img/line(2)/list.svg';
 import propertyImg_null from 'assets/img/common/propertyImg_null.svg';
 import heartFillIcon from 'assets/img/fill/heart_fill.svg';
+import heartIcon from 'assets/img/line(2)/heart_white.svg';
+import listIcon from 'assets/img/line(2)/list.svg';
+
+import styles from './PropertyItem.module.css';
 
 interface PropertyItemProps {
   id: number;

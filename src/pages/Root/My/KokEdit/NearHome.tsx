@@ -1,9 +1,9 @@
 import React from 'react';
 
-import styles from './KokEdit.module.css';
-
 import { Highlight } from 'components';
 import useCheckList from 'hooks/useCheckList';
+
+import styles from './KokEdit.module.css';
 
 const NearHome = () => {
   const [CheckListContainer, checkList, setCheckList] = useCheckList([

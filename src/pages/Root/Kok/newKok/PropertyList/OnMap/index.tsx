@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useNaviStore from 'contexts/naviStore';
-
+import mapImg from 'assets/img/common/map.png';
 import BottomBtn from 'components/BottomBtn';
 import PropertyItem from 'components/PropertyItem';
+import useNaviStore from 'contexts/naviStore';
 import properties from 'models/properties';
-import mapImg from 'assets/img/common/map.png';
 
 import styles from './OnMap.module.css';
 

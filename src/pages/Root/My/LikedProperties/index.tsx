@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './LikedProperties.module.css';
 import { Header, PropertyItem } from 'components';
 import properties from 'models/properties';
+
+import styles from './LikedProperties.module.css';
 
 const LikedProperties = () => {
   const navigate = useNavigate();

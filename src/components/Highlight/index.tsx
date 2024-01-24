@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import styles from './Highlight.module.css';
-
-import plusIcon from 'assets/img/fill/plus.svg';
 import minusIcon from 'assets/img/fill/minus.svg';
+import plusIcon from 'assets/img/fill/plus.svg';
+
+import styles from './Highlight.module.css';
 
 interface HighlightProps {
   text: string;
