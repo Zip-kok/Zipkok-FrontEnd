@@ -9,7 +9,7 @@ import properties from 'models/properties';
 
 import styles from './Kok.module.css';
 
-export const Kok = () => {
+export default function Kok() {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
@@ -60,4 +60,4 @@ export const Kok = () => {
       />
     </div>
   );
-};
+}

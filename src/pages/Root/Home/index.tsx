@@ -5,7 +5,7 @@ import useNaviStore from 'contexts/naviStore';
 
 import styles from './Home.module.css';
 
-export const Home = () => {
+export default function Home() {
   const navigate = useNavigate();
 
   // 하단 내비게이션 바 설정
@@ -16,4 +16,4 @@ export const Home = () => {
   }, []);
 
   return <div className={styles.root}>홈</div>;
-};
+}
