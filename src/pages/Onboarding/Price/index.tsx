@@ -15,9 +15,10 @@ type PriceRange = [number, number];
 
 interface PriceProps {
   confirmPrice: (priceType: PriceType, priceRanges: PriceRange[]) => void;
+  handleSkip: () => void;
 }
 
-export default function Price({ confirmPrice }: PriceProps) {
+export default function Price({ confirmPrice, handleSkip }: PriceProps) {
   const priceTypeOptions = [
     {
       value: '월세' as PriceType,
@@ -100,7 +101,7 @@ export default function Price({ confirmPrice }: PriceProps) {
       <BottomBtn
         onClick={handleConfirmClick}
         text="확인"
-        onAnchorClick={() => navigate('/')}
+        onAnchorClick={handleSkip}
         anchorText="나중에 설정하기"
         disabled={priceType === undefined}
         occupySpace

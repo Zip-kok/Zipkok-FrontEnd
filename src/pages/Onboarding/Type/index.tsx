@@ -14,9 +14,10 @@ import type { HouseType } from 'types/HouseType';
 
 interface TypeProps {
   confirmHouseType: (houseType: HouseType) => void;
+  handleSkip: () => void;
 }
 
-export default function Type({ confirmHouseType }: TypeProps) {
+export default function Type({ confirmHouseType, handleSkip }: TypeProps) {
   const navigate = useNavigate();
   const houseTypeOptions: { value: HouseType; content: JSX.Element }[] = [
     {
@@ -80,7 +81,7 @@ export default function Type({ confirmHouseType }: TypeProps) {
       <BottomBtn
         onClick={handleSubmit}
         text="확인"
-        onAnchorClick={() => navigate('/')}
+        onAnchorClick={handleSkip}
         anchorText="나중에 설정하기"
         disabled={houseType === undefined}
         occupySpace

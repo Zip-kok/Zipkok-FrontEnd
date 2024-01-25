@@ -1,7 +1,9 @@
 import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { onBoarding } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
+import useModalStore from 'contexts/modalStore';
 import { StatusCode } from 'types/StatusCode';
 
 import Complete from './Complete';
@@ -18,6 +20,27 @@ type Step = 'location' | 'type' | 'price' | 'complete';
 export type PriceRange = [number, number];
 
 export default function Onboarding() {
+  const navigate = useNavigate();
+  const modalStore = useModalStore();
+
+  function handleSkip() {
+    modalStore.setModal({
+      enabled: true,
+      title: '홈 화면으로 이동하시겠어요?',
+      description:
+        '마이페이지 > 프로필 수정하기에서 이어서 설정할 수 있습니다.',
+      secondaryButton: '계속하기',
+      onSecondaryButtonClick: () => {
+        modalStore.setModal({ enabled: false });
+      },
+      primaryButton: '이동하기',
+      onPrimaryButtonClick: () => {
+        modalStore.setModal({ enabled: false });
+        navigate('/');
+      },
+    });
+  }
+
   const [step, setStep] = useState<Step>('location');
 
   const [location, setLocation] = useState<Address>({
@@ -26,8 +49,8 @@ export default function Onboarding() {
     y: 0,
   });
   const [houseType, setHouseType] = useState<HouseType>('원룸');
-  const [priceType, setPriceType] = useState<PriceType>('월세');
-  const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
+  const [, setPriceType] = useState<PriceType>('월세');
+  const [, setPriceRanges] = useState<PriceRange[]>([]);
 
   const steps: Record<Step, JSX.Element> = {
     // location
@@ -37,6 +60,7 @@ export default function Onboarding() {
           setLocation(location);
           setStep('type');
         }}
+        handleSkip={handleSkip}
       />
     ),
 
@@ -47,6 +71,7 @@ export default function Onboarding() {
           setHouseType(houseType);
           setStep('price');
         }}
+        handleSkip={handleSkip}
       />
     ),
 
@@ -58,6 +83,7 @@ export default function Onboarding() {
           setPriceRanges(priceRanges);
           handleFinalSubmit(location, houseType, priceType, priceRanges);
         }}
+        handleSkip={handleSkip}
       />
     ),
 
