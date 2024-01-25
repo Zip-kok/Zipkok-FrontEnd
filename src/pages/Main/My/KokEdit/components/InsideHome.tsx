@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import useCheckList from 'hooks/useCheckList';
+import { CheckListCategoryContainer } from 'components';
 
 import styles from '../KokEdit.module.css';
 
 const InsideHome = () => {
-  const [CheckListContainer, checkList, setCheckList] = useCheckList([
+  const [checklists, setChecklists] = useState([
     {
       id: 0,
       name: '현관 / 보안',
@@ -73,7 +73,10 @@ const InsideHome = () => {
   return (
     <div className={styles.root}>
       <div className={styles.checkListGroupContainer}>
-        <CheckListContainer />
+        <CheckListCategoryContainer
+          checkListGroups={checklists}
+          setCheckListGroups={setChecklists}
+        />
       </div>
     </div>
   );
