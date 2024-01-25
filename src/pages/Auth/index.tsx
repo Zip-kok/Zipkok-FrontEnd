@@ -34,7 +34,7 @@ export default function Auth() {
           }
           // 회원이 아닌 경우
           else if (res.result.isMember === false) {
-            setEmail(res.result.email as string);
+            setEmail(res.result.email);
             navigate('/signin');
           }
           // 에러 발생 시
