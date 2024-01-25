@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-import { CheckListCategoryContainer } from 'components';
-
+import CheckListCategoryContainer from './CheckListCategoryContainer';
 import styles from '../KokEdit.module.css';
 
 const InsideHome = () => {

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import { Highlight, CheckListCategoryContainer } from 'components';
+import { Highlight } from 'components';
 
+import CheckListCategoryContainer from './CheckListCategoryContainer';
 import styles from '../KokEdit.module.css';
 
 const NearHome = () => {

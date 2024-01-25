@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import { CheckListCategoryContainer } from 'components';
-
+import CheckListCategory from './CheckListCategory';
+import CheckListCategoryContainer from './CheckListCategoryContainer';
+import CheckListItem from './CheckListItem';
 import styles from '../KokEdit.module.css';
 
 const Contract = () => {
