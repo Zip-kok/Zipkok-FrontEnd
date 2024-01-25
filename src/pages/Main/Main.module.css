@@ -7,14 +7,19 @@
 .header {
   position: sticky;
   top: 0;
+  z-index: 100;
 }
 
 .body {
   flex-grow: 1;
-  overflow-y: auto;
+}
+
+.body.padded {
+  padding-bottom: 64px;
 }
 
 .footer {
-  position: sticky;
+  width: 100%;
+  position: fixed;
   bottom: 0;
 }

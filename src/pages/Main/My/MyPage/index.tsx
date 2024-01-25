@@ -12,12 +12,15 @@ import pen from 'assets/img/line(2)/pen.svg';
 import pin from 'assets/img/line(2)/pin.svg';
 import quit from 'assets/img/line(2)/quit.svg';
 import { IconBtn } from 'components';
+import useModalStore from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 
 import styles from './Mypage.module.css';
 
 const Mypage = () => {
   const ui = useUIStore();
+  const modalStore = useModalStore();
+
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
@@ -45,7 +48,22 @@ const Mypage = () => {
   const handleRecentClick = () => {};
   const handleNoticeClick = () => {};
   const handleInquiryClick = () => {};
-  const handleLogoutClick = () => {};
+  const handleLogoutClick = () => {
+    modalStore.setModal({
+      enabled: true,
+      title: '로그아웃하시겠어요?',
+      description: undefined,
+      secondaryButton: '취소',
+      onSecondaryButtonClick: () => {
+        modalStore.setModal({ enabled: false });
+      },
+      primaryButton: '로그아웃하기',
+      onPrimaryButtonClick: () => {
+        // TOOD: logout
+        modalStore.setModal({ enabled: false });
+      },
+    });
+  };
   const handleQuitClick = () => {};
 
   return (

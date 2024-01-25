@@ -2,9 +2,6 @@ import AddressSearchPage from './AddressSearchPage';
 import BottomBtn from './BottomBtn';
 import Btn from './Btn';
 import CheckBox from './CheckBox';
-import CheckListCategory from './CheckListCategory';
-import CheckListCategoryContainer from './CheckListCategoryContainer';
-import CheckListItem from './CheckListItem';
 import CompleteAnim from './CompleteAnim';
 import EditFilterBtn from './EditFilterBtn';
 import EditGenderBtn from './EditGenderBtn';
@@ -13,6 +10,7 @@ import Highlight from './Highlight';
 import IconBtn from './IconBtn';
 import IconText from './IconText';
 import KoklistGroup from './KoklistGroup';
+import Modal from './Modal';
 import NaviBar from './NaviBar';
 import OptionsComponent from './Options';
 import PropertyInfo from './PropertyInfo';
@@ -30,9 +28,6 @@ export {
   BottomBtn,
   Btn,
   CheckBox,
-  CheckListItem,
-  CheckListCategory,
-  CheckListCategoryContainer,
   CompleteAnim,
   EditFilterBtn,
   EditGenderBtn,
@@ -52,4 +47,5 @@ export {
   TextInput,
   TopMenu,
   StarRating,
+  Modal,
 };

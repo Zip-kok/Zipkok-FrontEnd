@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import useCheckList from 'hooks/useCheckList';
-
+import CheckListCategory from './CheckListCategory';
+import CheckListCategoryContainer from './CheckListCategoryContainer';
+import CheckListItem from './CheckListItem';
 import styles from '../KokEdit.module.css';
 
 const Contract = () => {
-  const [CheckListContainer, checkList, setCheckList] = useCheckList([
+  const [checklists, setChecklists] = useState([
     {
       id: 0,
       name: '집주인/매물 관련 질문체크',
@@ -46,7 +47,10 @@ const Contract = () => {
   return (
     <div className={styles.root}>
       <div className={styles.checkListGroupContainer}>
-        <CheckListContainer />
+        <CheckListCategoryContainer
+          checkListGroups={checklists}
+          setCheckListGroups={setChecklists}
+        />
       </div>
     </div>
   );

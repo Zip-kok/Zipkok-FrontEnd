@@ -9,7 +9,7 @@ const insideHome = () => {
   const { furnitureOptions, direction, options } = data.result;
 
   return (
-    <div className={styles.body}>
+    <div className={styles.content}>
       <div className={styles.furnitureCtn}>
         {furnitureOptions.map((tag, index) => (
           <p className={styles.furniture} key={index}>

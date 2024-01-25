@@ -14,13 +14,14 @@ import type { HouseType } from 'types/HouseType';
 
 interface TypeProps {
   confirmHouseType: (houseType: HouseType) => void;
+  handleSkip: () => void;
 }
 
-export default function Type({ confirmHouseType }: TypeProps) {
+export default function Type({ confirmHouseType, handleSkip }: TypeProps) {
   const navigate = useNavigate();
-  const houseTypeOptions = [
+  const houseTypeOptions: { value: HouseType; content: JSX.Element }[] = [
     {
-      value: '아파트' as HouseType,
+      value: '아파트',
       content: (
         <>
           <img src={apartmentIcon}></img>
@@ -29,7 +30,7 @@ export default function Type({ confirmHouseType }: TypeProps) {
       ),
     },
     {
-      value: '원룸' as HouseType,
+      value: '원룸',
       content: (
         <>
           <img src={oneroomIcon}></img>
@@ -38,7 +39,7 @@ export default function Type({ confirmHouseType }: TypeProps) {
       ),
     },
     {
-      value: '빌라/투룸' as HouseType,
+      value: '빌라/투룸',
       content: (
         <>
           <img src={tworoomIcon}></img>
@@ -47,7 +48,7 @@ export default function Type({ confirmHouseType }: TypeProps) {
       ),
     },
     {
-      value: '오피스텔' as HouseType,
+      value: '오피스텔',
       content: (
         <>
           <img src={officetelIcon}></img>
@@ -80,7 +81,7 @@ export default function Type({ confirmHouseType }: TypeProps) {
       <BottomBtn
         onClick={handleSubmit}
         text="확인"
-        onAnchorClick={() => navigate('/')}
+        onAnchorClick={handleSkip}
         anchorText="나중에 설정하기"
         disabled={houseType === undefined}
         occupySpace
