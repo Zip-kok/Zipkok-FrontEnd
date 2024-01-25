@@ -16,7 +16,7 @@ interface SearchAddressResult {
 /**
  * `GET /address`로 주소 검색을 요청합니다.
  */
-export async function searchAddress(query: string, page = 1, size = 50) {
+export async function searchAddress(query: string, page = 1, size = 30) {
   const path = '/address';
   const method = 'GET';
   const params = {
