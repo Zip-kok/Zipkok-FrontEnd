@@ -6,7 +6,7 @@
   transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 8px;
-  padding: 30px 26px 16px 26px;
+  padding: 36px 25px 13px 25px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -63,12 +63,11 @@
 
 .secondary {
   background: none;
-  color: white;
 }
 
 .secondary:focus,
 .secondary:active {
-  color: var(--gray-color-gray050_text, #4b5259);
+  background: var(--gray-color-gray010, #efeff2);
 }
 
 .primary {
@@ -78,5 +77,5 @@
 
 .primary:focus,
 .primary:active {
-  color: var(--primary-color-primary_pressed, #ff2d2a);
+  background: var(--primary-color-primary_pressed, #ff2d2a);
 }

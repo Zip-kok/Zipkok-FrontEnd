@@ -24,20 +24,17 @@ export default function Onboarding() {
   const modalStore = useModalStore();
 
   function handleSkip() {
-    modalStore.open({
-      title: '홈 화면으로 이동하시겠어요?',
-      description:
-        '마이페이지 > 프로필 수정하기에서 이어서 설정할 수 있습니다.',
-      primaryButton: '이동하기',
-      secondaryButton: '계속하기',
-      onPrimaryButtonClick: () => {
-        modalStore.close();
-        navigate('/');
-      },
-      onSecondaryButtonClick: () => {
-        modalStore.close();
-      },
-    });
+    modalStore
+      .open({
+        title: '홈 화면으로 이동하시겠어요?',
+        description:
+          '마이페이지 > 프로필 수정하기에서 이어서 설정할 수 있습니다.',
+        primaryButton: '이동하기',
+        secondaryButton: '계속하기',
+      })
+      .then((res) => {
+        if (res === 'primary') navigate('/');
+      });
   }
 
   const [step, setStep] = useState<Step>('location');
@@ -177,7 +174,7 @@ export default function Onboarding() {
             if (isDefinedError) {
               modalStore
                 .open({
-                  title: '오류가 발생했어요.',
+                  title: '올바르지 않은 값이 있어요.',
                   description: res.message,
                   primaryButton: '다시 설정하기',
                   secondaryButton: '나중에 설정하기',
@@ -202,7 +199,7 @@ export default function Onboarding() {
         .catch((err) => {
           modalStore
             .open({
-              title: '서버에 연결할 수 없어요.',
+              title: '오류가 발생했어요.',
               description: err.message,
               primaryButton: '나중에 설정하기',
             })

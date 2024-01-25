@@ -6,8 +6,6 @@ interface OpenModalProps {
   primaryButton: string;
   secondaryButton?: string;
   description?: string;
-  onPrimaryButtonClick?: () => void;
-  onSecondaryButtonClick?: () => void;
 }
 
 type ModalResult = 'secondary' | 'primary' | 'close';
@@ -24,12 +22,11 @@ export interface ModalStore {
   close: () => void;
 }
 
-const initialState: ModalStore = {
+const initialState: Omit<ModalStore, 'open'> = {
   enabled: false,
   title: '',
   primaryButton: '확인',
   onPrimaryButtonClick: () => {},
-  open: () => Promise.resolve('primary'),
   close: () => {},
 };
 
@@ -50,13 +47,15 @@ const useModalStore = create<ModalStore>((set) => ({
         secondaryButton,
         description,
         onPrimaryButtonClick: () => {
+          set({ ...initialState });
           resolve('primary');
         },
         onSecondaryButtonClick: () => {
+          set({ ...initialState });
           resolve('secondary');
         },
         close: () => {
-          set(initialState);
+          set({ ...initialState });
           resolve('close');
         },
       });
