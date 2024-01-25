@@ -9,8 +9,8 @@ const Contract = () => {
   const { options, imageInfo } = data.result;
 
   return (
-    <div>
-      <div className={styles.body}>
+    <>
+      <div className={styles.content}>
         <OptionsComponent optionData={options} />
         <div className={styles.ContractCtn}>
           <h4>계약서 사진</h4>
@@ -19,7 +19,7 @@ const Contract = () => {
       <SwiperCom imageUrls={imageInfo.imageUrls}></SwiperCom>
       <div className={styles.blank} />
       <div className={styles.blank} />
-    </div>
+    </>
   );
 };
 

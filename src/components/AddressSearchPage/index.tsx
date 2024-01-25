@@ -13,12 +13,14 @@ import { AddressContainer } from './components';
 interface AddressSearchPageProps {
   confirmLocation: (location: Address) => void;
   skippable?: boolean;
+  onSkip?: () => void;
   defaultAddress?: string;
 }
 
 export default function AddressSearchPage({
   confirmLocation,
   skippable = true,
+  onSkip = () => navigate('/'),
   defaultAddress = '',
 }: AddressSearchPageProps) {
   const countPerPage = 50;
@@ -136,7 +138,7 @@ export default function AddressSearchPage({
         <BottomBtn
           onClick={handleSubmit}
           text="확인"
-          onAnchorClick={() => navigate('/')}
+          onAnchorClick={onSkip}
           anchorText={skippable ? '나중에 설정하기' : undefined}
           disabled={inputValue === ''}
           occupySpace

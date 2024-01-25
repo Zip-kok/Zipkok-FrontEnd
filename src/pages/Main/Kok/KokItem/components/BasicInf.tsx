@@ -15,8 +15,8 @@ const BasicInf = () => {
   const { code, message, result } = data;
 
   return (
-    <div>
-      <div className={styles.body}>
+    <>
+      <div className={styles.content}>
         <div className={styles.titleCtn}>
           <h4>기본정보</h4>
           <IconBtn
@@ -46,7 +46,7 @@ const BasicInf = () => {
       <img className={styles.map} />
       <div className={styles.blank} />
       <div className={styles.blank} />
-    </div>
+    </>
   );
 };
 

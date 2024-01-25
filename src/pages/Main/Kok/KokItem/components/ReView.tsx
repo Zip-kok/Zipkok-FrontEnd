@@ -16,7 +16,7 @@ const ReView = () => {
   } = data.result;
 
   return (
-    <div className={styles.body}>
+    <div className={styles.content}>
       <div className={styles.TagCtn}>
         {impressions.map((tag, index) => (
           <p className={styles.tag} key={index}>

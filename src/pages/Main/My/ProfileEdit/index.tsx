@@ -32,10 +32,10 @@ const ProfileEdit = () => {
   }, []);
 
   // 성별 라디오 버튼
-  const genderOptions = [
-    { value: '남자' as Gender, content: '남' },
-    { value: '여자' as Gender, content: '여' },
-    { value: '비공개' as Gender, content: '비공개' },
+  const genderOptions: { value: Gender; content: string }[] = [
+    { value: '남자', content: '남' },
+    { value: '여자', content: '여' },
+    { value: '비공개', content: '비공개' },
   ];
   const [GenderRadioBtnContainer, gender] = useRadioBtn<Gender>(
     genderOptions,
@@ -44,11 +44,11 @@ const ProfileEdit = () => {
   );
 
   // 집 형태 라디오 버튼
-  const houseTypeOptions = [
-    { value: '원룸' as HouseType, content: '원룸' },
-    { value: '오피스텔' as HouseType, content: '오피스텔' },
-    { value: '아파트' as HouseType, content: '아파트' },
-    { value: '빌라/투룸' as HouseType, content: '빌라/투룸' },
+  const houseTypeOptions: { value: HouseType; content: string }[] = [
+    { value: '원룸', content: '원룸' },
+    { value: '오피스텔', content: '오피스텔' },
+    { value: '아파트', content: '아파트' },
+    { value: '빌라/투룸', content: '빌라/투룸' },
   ];
   const [HouseTypeRadioBtnContainer, houseType] = useRadioBtn<HouseType>(
     houseTypeOptions,
@@ -57,10 +57,10 @@ const ProfileEdit = () => {
   );
 
   // 가격 타입 라디오 버튼
-  const priceTypeOptions = [
-    { value: '월세' as PriceType, content: '월세' },
-    { value: '전세' as PriceType, content: '전세' },
-    { value: '매매' as PriceType, content: '매매' },
+  const priceTypeOptions: { value: PriceType; content: string }[] = [
+    { value: '월세', content: '월세' },
+    { value: '전세', content: '전세' },
+    { value: '매매', content: '매매' },
   ];
   const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
     priceTypeOptions,

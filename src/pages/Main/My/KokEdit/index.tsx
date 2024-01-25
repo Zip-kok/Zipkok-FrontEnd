@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 
@@ -44,7 +43,9 @@ const KokEdit = () => {
 
   return (
     <div className={styles.root}>
-      <TopMenu />
+      <div className={styles.menu}>
+        <TopMenu />
+      </div>
       <div className={styles.blank}></div>
       <Content />
     </div>

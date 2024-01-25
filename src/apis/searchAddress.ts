@@ -6,7 +6,6 @@ import type { ZipkokResponse } from 'types/ZipkokResponse';
 interface SearchAddressResult {
   documents: Address[];
   meta: {
-    end: boolean;
     is_end: boolean;
     pageable_count: number;
     total_count: number;
