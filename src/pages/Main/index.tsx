@@ -23,7 +23,7 @@ export default function Main() {
       </div>
 
       {/* content */}
-      <div className={styles.body}>
+      <div className={`${styles.body} ${ui.naviEnabled ? styles.padded : ''}`}>
         <Outlet />
       </div>
 

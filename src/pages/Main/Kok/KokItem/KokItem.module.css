@@ -151,3 +151,16 @@ h4 {
 .moreViewBtn {
   color: #fa4549;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+}
+
+.menu {
+  position: sticky;
+  top: 56px;
+  z-index: 100;
+}

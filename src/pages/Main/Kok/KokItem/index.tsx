@@ -20,7 +20,7 @@ const KokItem = () => {
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
-      title: '성북구 정릉동',
+      headerTitle: '성북구 정릉동',
       headerIcon: undefined,
       headerBackButtonEnabled: true,
       naviEnabled: false,
@@ -98,7 +98,9 @@ const KokItem = () => {
           </div>
         </div>
       </div>
-      <MidMenu />
+      <div className={styles.menu}>
+        <MidMenu />
+      </div>
       <Content />
       <BottomBtn text="콕리스트 수정하기" onClick={handleEditClick} />
     </div>
