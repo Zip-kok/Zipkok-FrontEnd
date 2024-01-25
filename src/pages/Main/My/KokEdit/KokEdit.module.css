@@ -30,3 +30,8 @@
 .checkListGroupContainer {
   padding: 0 20px;
 }
+
+.menu {
+  position: sticky;
+  top: 56px;
+}

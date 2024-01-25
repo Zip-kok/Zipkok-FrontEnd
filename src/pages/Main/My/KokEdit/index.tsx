@@ -44,7 +44,9 @@ const KokEdit = () => {
 
   return (
     <div className={styles.root}>
-      <TopMenu />
+      <div className={styles.menu}>
+        <TopMenu />
+      </div>
       <div className={styles.blank}></div>
       <Content />
     </div>
