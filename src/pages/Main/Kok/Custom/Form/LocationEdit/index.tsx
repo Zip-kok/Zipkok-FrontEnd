@@ -1,16 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { AddressSearchPage } from 'components';
 import useAddressStore from 'contexts/addressStore';
-import { Address } from 'types/Address';
 
 export default function LocationEdit() {
+  const navigate = useNavigate();
   const { setAddress } = useAddressStore();
 
   return (
     <AddressSearchPage
-      confirmLocation={(address) => setAddress(address)}
-      skippable={true}
+      confirmLocation={(address) => {
+        setAddress(address);
+        navigate(-1);
+      }}
+      skippable={false}
       defaultAddress=""
     />
   );
