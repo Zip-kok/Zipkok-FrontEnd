@@ -6,6 +6,7 @@ import CustomFormLocationEdit from 'pages/Main/Kok/Custom/Form/LocationEdit';
 import KokItem from 'pages/Main/Kok/KokItem';
 import Koklist from 'pages/Main/Kok/Koklist';
 import KokReview from 'pages/Main/Kok/KokReview';
+import Complete from 'pages/Main/Kok/KokReview/Complete';
 import NewKok from 'pages/Main/Kok/New';
 import PropertyList from 'pages/Main/Kok/New/PropertyList';
 import PropertyMap from 'pages/Main/Kok/New/PropertyMap';
@@ -17,6 +18,7 @@ const KokRoute = {
   children: [
     { index: true, element: <Koklist /> },
     {
+      //직접 매물 등록하기
       path: 'custom',
       element: <Custom />,
       children: [
@@ -56,7 +58,16 @@ const KokRoute = {
         {
           // 새콕리스트 작성_후기
           path: 'review',
-          element: <KokReview />,
+          children: [
+            {
+              index: true,
+              element: <KokReview />,
+            },
+            {
+              path: 'complete',
+              element: <Complete />,
+            },
+          ],
         },
       ],
     },

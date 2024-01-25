@@ -58,48 +58,71 @@ export default function KokReview() {
 
   return (
     <div className={styles.root}>
-      <div className={styles.image}>
-        <SwiperCom imageUrls={result.imageInfo.imageUrls}></SwiperCom>
-      </div>
       <div className={styles.reviews}>
-        <div className={styles.review}>
-          <h1 style={{ marginBottom: '17px', marginTop: '25px' }}>
-            집의 첫인상이 어땠나요?
-          </h1>
-          <div>
-            <div className={styles.tags}>
-              {tags.map((tag, index) => (
-                <button
-                  key={index}
-                  className={tag.selected ? styles.tagSelected : styles.tag}
-                  onClick={() => handleTagClick(index)}
-                >
-                  {tag.name}
-                </button>
-              ))}
+        <div className={styles.image}>
+          <SwiperCom imageUrls={result.imageInfo.imageUrls}></SwiperCom>
+        </div>
+        <div>
+          <div className={styles.review}>
+            <h1
+              className={styles.textLabel}
+              style={{ marginBottom: '17px', marginTop: '25px' }}
+            >
+              집의 첫인상이 어땠나요?
+            </h1>
+            <div>
+              <div className={styles.tags}>
+                {tags.map((tag, index) => (
+                  <button
+                    key={index}
+                    className={tag.selected ? styles.tagSelected : styles.tag}
+                    onClick={() => handleTagClick(index)}
+                  >
+                    {tag.name}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.review}>
-          <h1 style={{ marginBottom: '28px', marginTop: '45px' }}>
-            매물은 어떠셨나요?
-          </h1>
-          <StarRating label="시설" onRating={(rating) => console.log(rating)} />
-          <StarRating
-            label="인프라"
-            onRating={(rating) => console.log(rating)}
-          />
-          <StarRating label="구조" onRating={(rating) => console.log(rating)} />
-          <StarRating
-            label="분위기"
-            onRating={(rating) => console.log(rating)}
-          />
-        </div>
-        <div className={styles.review}>
-          <textarea placeholder="매물에 대한 후기를 자유롭게 남겨보세요."></textarea>
+          <div className={styles.review}>
+            <h1
+              className={styles.textLabel}
+              style={{ marginBottom: '28px', marginTop: '45px' }}
+            >
+              매물은 어떠셨나요?
+            </h1>
+            <StarRating
+              label="시설"
+              onRating={(rating) => console.log(rating)}
+            />
+            <StarRating
+              label="인프라"
+              onRating={(rating) => console.log(rating)}
+            />
+            <StarRating
+              label="구조"
+              onRating={(rating) => console.log(rating)}
+            />
+            <StarRating
+              label="분위기"
+              onRating={(rating) => console.log(rating)}
+            />
+          </div>
+          <div className={styles.review}>
+            <textarea placeholder="매물에 대한 후기를 자유롭게 남겨보세요."></textarea>
+          </div>
+          <button
+            className={styles.skip}
+            onClick={() => navigate('/kok/new/review/complete')}
+          >
+            건너뛰기
+          </button>
         </div>
       </div>
-      <BottomBtn text="저장하기" onClick={() => {}} />
+      <BottomBtn
+        text="저장하기"
+        onClick={() => navigate('/kok/new/review/complete')}
+      />
     </div>
   );
 }

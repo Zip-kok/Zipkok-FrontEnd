@@ -26,20 +26,6 @@ body {
   z-index: 100;
 }
 
-.scroll::-webkit-scrollbar {
-  width: 6px; /* 스크롤바의 너비 */
-}
-
-.scroll::-webkit-scrollbar-thumb {
-  height: 35px; /* 스크롤바의 길이 */
-  background: #d6cac9; /* 스크롤바의 색상 */
-  border-radius: 10px;
-}
-
-.scroll ::-webkit-scrollbar-track {
-  background: transparent; /*스크롤바 뒷 배경 색상*/
-}
-
 .swiper-pagination-fraction {
   color: var(--gray-color-white, #fff);
   font-family: Pretendard;
