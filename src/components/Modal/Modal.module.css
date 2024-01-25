@@ -49,24 +49,34 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 12px;
+}
 
-  > button {
-    width: 100%;
-    height: 36px;
-    border-radius: 8px;
-    font-family: Pretendard;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-  }
+.button {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
 }
 
 .secondary {
   background: none;
+  color: white;
+}
+
+.secondary:focus,
+.secondary:active {
   color: var(--gray-color-gray050_text, #4b5259);
 }
 
 .primary {
   background: var(--primary-color-primary_default, #fa4549);
   color: white;
+}
+
+.primary:focus,
+.primary:active {
+  color: var(--primary-color-primary_pressed, #ff2d2a);
 }
