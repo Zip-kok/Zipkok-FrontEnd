@@ -31,7 +31,7 @@ function ModalOverlay() {
   const modalStore = useModalStore();
 
   function handleOverlayClick() {
-    modalStore.setModal({ enabled: false });
+    modalStore.close();
   }
 
   const style = {

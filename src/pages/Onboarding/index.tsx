@@ -24,19 +24,18 @@ export default function Onboarding() {
   const modalStore = useModalStore();
 
   function handleSkip() {
-    modalStore.setModal({
-      enabled: true,
+    modalStore.open({
       title: '홈 화면으로 이동하시겠어요?',
       description:
         '마이페이지 > 프로필 수정하기에서 이어서 설정할 수 있습니다.',
-      secondaryButton: '계속하기',
-      onSecondaryButtonClick: () => {
-        modalStore.setModal({ enabled: false });
-      },
       primaryButton: '이동하기',
+      secondaryButton: '계속하기',
       onPrimaryButtonClick: () => {
-        modalStore.setModal({ enabled: false });
+        modalStore.close();
         navigate('/');
+      },
+      onSecondaryButtonClick: () => {
+        modalStore.close();
       },
     });
   }
@@ -176,50 +175,40 @@ export default function Onboarding() {
             }
 
             if (isDefinedError) {
-              modalStore.setModal({
-                enabled: true,
-                title: '오류가 발생했어요.',
-                description: res.message,
-                secondaryButton: '나중에 설정하기',
-                onSecondaryButtonClick: () => {
-                  modalStore.setModal({ enabled: false });
-                  navigate('/');
-                },
-                primaryButton: '다시 설정하기',
-                onPrimaryButtonClick: () => {
-                  modalStore.setModal({ enabled: false });
-                  setStep(errorStep);
-                },
-              });
+              modalStore
+                .open({
+                  title: '오류가 발생했어요.',
+                  description: res.message,
+                  primaryButton: '다시 설정하기',
+                  secondaryButton: '나중에 설정하기',
+                })
+                .then((res) => {
+                  if (res === 'primary') setStep(errorStep);
+                  else navigate('/');
+                });
             } else {
-              modalStore.setModal({
-                enabled: true,
-                title: '오류가 발생했어요.',
-                description: res.message,
-                secondaryButton: undefined,
-                onSecondaryButtonClick: undefined,
-                primaryButton: '나중에 설정하기',
-                onPrimaryButtonClick: () => {
-                  modalStore.setModal({ enabled: false });
-                  navigate('/');
-                },
-              });
+              modalStore
+                .open({
+                  title: '오류가 발생했어요.',
+                  description: res.message,
+                  primaryButton: '나중에 설정하기',
+                })
+                .then((res) => {
+                  if (res === 'primary') navigate('/');
+                });
             }
           }
         })
         .catch((err) => {
-          modalStore.setModal({
-            enabled: true,
-            title: '서버에 연결할 수 없어요.',
-            description: err.message,
-            secondaryButton: undefined,
-            onSecondaryButtonClick: undefined,
-            primaryButton: '나중에 설정하기',
-            onPrimaryButtonClick: () => {
-              modalStore.setModal({ enabled: false });
-              navigate('/');
-            },
-          });
+          modalStore
+            .open({
+              title: '서버에 연결할 수 없어요.',
+              description: err.message,
+              primaryButton: '나중에 설정하기',
+            })
+            .then((res) => {
+              if (res === 'primary') navigate('/');
+            });
         });
     },
     [],

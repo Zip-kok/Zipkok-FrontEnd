@@ -1,6 +1,17 @@
 import MenuPath from 'types/MenuPath';
 import { create } from 'zustand';
 
+interface OpenModalProps {
+  title: string;
+  primaryButton: string;
+  secondaryButton?: string;
+  description?: string;
+  onPrimaryButtonClick?: () => void;
+  onSecondaryButtonClick?: () => void;
+}
+
+type ModalResult = 'secondary' | 'primary' | 'close';
+
 export interface ModalStore {
   enabled: boolean;
   title: string;
@@ -9,13 +20,8 @@ export interface ModalStore {
   primaryButton: string;
   onSecondaryButtonClick?: () => void;
   onPrimaryButtonClick: () => void;
-  setModal: (
-    partial:
-      | ModalStore
-      | Partial<ModalStore>
-      | ((state: ModalStore) => ModalStore | Partial<ModalStore>),
-    replace?: boolean | undefined,
-  ) => void;
+  open: (props: OpenModalProps) => Promise<ModalResult>;
+  close: () => void;
 }
 
 const initialState: ModalStore = {
@@ -23,12 +29,39 @@ const initialState: ModalStore = {
   title: '',
   primaryButton: '확인',
   onPrimaryButtonClick: () => {},
-  setModal: () => {},
+  open: () => Promise.resolve('primary'),
+  close: () => {},
 };
 
 const useModalStore = create<ModalStore>((set) => ({
   ...initialState,
-  setModal: set,
+
+  open: ({
+    title,
+    primaryButton,
+    secondaryButton,
+    description,
+  }: OpenModalProps) => {
+    return new Promise<ModalResult>((resolve) => {
+      set({
+        enabled: true,
+        title,
+        primaryButton,
+        secondaryButton,
+        description,
+        onPrimaryButtonClick: () => {
+          resolve('primary');
+        },
+        onSecondaryButtonClick: () => {
+          resolve('secondary');
+        },
+        close: () => {
+          set(initialState);
+          resolve('close');
+        },
+      });
+    });
+  },
 }));
 
 export default useModalStore;

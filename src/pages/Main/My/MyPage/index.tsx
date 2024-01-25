@@ -49,20 +49,17 @@ const Mypage = () => {
   const handleNoticeClick = () => {};
   const handleInquiryClick = () => {};
   const handleLogoutClick = () => {
-    modalStore.setModal({
-      enabled: true,
-      title: '로그아웃하시겠어요?',
-      description: undefined,
-      secondaryButton: '취소',
-      onSecondaryButtonClick: () => {
-        modalStore.setModal({ enabled: false });
-      },
-      primaryButton: '로그아웃하기',
-      onPrimaryButtonClick: () => {
-        // TOOD: logout
-        modalStore.setModal({ enabled: false });
-      },
-    });
+    modalStore
+      .open({
+        title: '로그아웃하시겠어요?',
+        primaryButton: '로그아웃',
+        secondaryButton: '취소',
+      })
+      .then((res) => {
+        if (res === 'primary') {
+          // TOOD: logout
+        }
+      });
   };
   const handleQuitClick = () => {};
 
