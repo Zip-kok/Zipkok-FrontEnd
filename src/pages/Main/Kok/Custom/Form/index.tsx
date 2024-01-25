@@ -206,7 +206,7 @@ export default function CustomProperty() {
           <div className={styles.priceInputContainer}>
             <TextInput
               style="roundedBox"
-              placeholder="3.5"
+              placeholder="5"
               numberOnly
               defaultValue={maintanenceFee?.toString()}
               onChange={(e) => setMaintanenceFee(e.currentTarget.valueAsNumber)}
