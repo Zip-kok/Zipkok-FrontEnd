@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { BottomBtn } from 'components';
@@ -33,9 +33,14 @@ export default function Price({ confirmPrice, handleSkip }: PriceProps) {
       content: '매매',
     },
   ];
+
   const [RadioBtnContainer, priceType] =
     useRadioBtn<PriceType>(priceTypeOptions);
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
+
+  useEffect(() => {
+    if (priceType !== undefined) setPriceRanges(defaultValues[priceType]);
+  }, [priceType]);
 
   const defaultValues: Record<PriceType, PriceRange[]> = {
     월세: [
