@@ -1,0 +1,55 @@
+.root {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 102;
+}
+
+.blank {
+  background-color: black;
+  width: 100%;
+  height: 93%;
+  top: 56px;
+  z-index: 101;
+  position: absolute;
+}
+
+.closeBtn {
+  position: absolute;
+  background: none;
+  border: none;
+  color: white;
+  right: 0;
+  padding: 20px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.swiper {
+  width: 360px;
+  height: 280px;
+  flex-direction: row;
+  margin-top: 150px;
+}
+
+.swiperSlide {
+  display: flex;
+  > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.swiper2 {
+  margin-top: 180px;
+  height: 10%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.unselected {
+  opacity: 0.4;
+}
