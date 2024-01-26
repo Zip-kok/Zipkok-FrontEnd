@@ -3,8 +3,14 @@ import api from './';
 import type { Address } from 'types/Address';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
-interface SearchAddressResult {
-  documents: Address[];
+interface RawAddress {
+  address_name: string;
+  x: string;
+  y: string;
+}
+
+interface SearchAddressResult<T> {
+  documents: T[];
   meta: {
     is_end: boolean;
     pageable_count: number;
@@ -25,7 +31,7 @@ export async function searchAddress(query: string, page = 1, size = 30) {
   };
   const authRequired = false;
 
-  const res = await api<ZipkokResponse<SearchAddressResult>>(
+  const res = await api<ZipkokResponse<SearchAddressResult<RawAddress>>>(
     path,
     method,
     authRequired,
@@ -34,5 +40,15 @@ export async function searchAddress(query: string, page = 1, size = 30) {
     undefined,
   );
 
-  return res;
+  return {
+    ...res,
+    result: {
+      ...res.result,
+      documents: res.result.documents.map((address) => ({
+        ...address,
+        x: Number(address.x),
+        y: Number(address.y),
+      })),
+    },
+  } as ZipkokResponse<SearchAddressResult<Address>>;
 }
