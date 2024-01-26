@@ -29,8 +29,10 @@ export default async function api<T>(
   body?: any,
   headers?: any,
 ) {
+  const accessToken = Cookies.get('accessToken');
+
   // access token 만료 시
-  if (authRequired && Cookies.get('accessToken') === undefined) {
+  if (authRequired && accessToken === undefined) {
     const authorized = await storeNewTokensToCookie();
     if (!authorized) throw new Error('로그인이 필요합니다.');
   }
@@ -40,6 +42,7 @@ export default async function api<T>(
     method,
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
       ...headers,
     },
     body: JSON.stringify(body),
