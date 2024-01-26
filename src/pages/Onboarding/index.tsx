@@ -24,21 +24,17 @@ export default function Onboarding() {
   const modalStore = useModalStore();
 
   function handleSkip() {
-    modalStore.setModal({
-      enabled: true,
-      title: '홈 화면으로 이동하시겠어요?',
-      description:
-        '마이페이지 > 프로필 수정하기에서 이어서 설정할 수 있습니다.',
-      secondaryButton: '계속하기',
-      onSecondaryButtonClick: () => {
-        modalStore.setModal({ enabled: false });
-      },
-      primaryButton: '이동하기',
-      onPrimaryButtonClick: () => {
-        modalStore.setModal({ enabled: false });
-        navigate('/');
-      },
-    });
+    modalStore
+      .open({
+        title: '홈 화면으로 이동하시겠어요?',
+        description:
+          '마이페이지 > 프로필 수정하기에서 이어서 설정할 수 있습니다.',
+        primaryButton: '이동하기',
+        secondaryButton: '계속하기',
+      })
+      .then((res) => {
+        if (res === 'primary') navigate('/');
+      });
   }
 
   const [step, setStep] = useState<Step>('location');
@@ -141,35 +137,75 @@ export default function Onboarding() {
         purchaseMax,
       )
         .then((res) => {
-          switch (res.code) {
-            // 회원정보 등록/수정 성공
-            case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
-              setStep('complete');
-              break;
-            // 주소가 없거나 최대 입력 범위 초과
-            case StatusCode.ADDRESS_OVER_LENGTH:
-              setStep('location');
-              break;
-            // 위도, 경도가 없거나 범위 초과
-            case StatusCode.INVALID_LAT_LNG:
-              setStep('location');
-              break;
-            // 최소 가격이 없거나 0 이하
-            case StatusCode.INVALID_MIN_PRICE:
-              setStep('price');
-              break;
-            // 최대 가격이 없거나 0 이하
-            case StatusCode.INVALID_MAX_PRICE:
-              setStep('price');
-              break;
-            // 관심매물유형 오류
-            case StatusCode.INVALID_INTEREST_TYPE:
-              setStep('type');
-              break;
+          // 회원정보 등록/수정 성공
+          if (res.code === StatusCode.MEMBER_INFO_UPDATE_SUCCESS) {
+            setStep('complete');
+          } else {
+            let isDefinedError = false;
+            let errorStep: Step;
+            switch (res.code) {
+              // 주소가 없거나 최대 입력 범위 초과
+              case StatusCode.ADDRESS_OVER_LENGTH:
+                isDefinedError = true;
+                errorStep = 'location';
+                break;
+              // 위도, 경도가 없거나 범위 초과
+              case StatusCode.INVALID_LAT_LNG:
+                isDefinedError = true;
+                errorStep = 'location';
+                break;
+              // 최소 가격이 없거나 0 이하
+              case StatusCode.INVALID_MIN_PRICE:
+                isDefinedError = true;
+                errorStep = 'price';
+                break;
+              // 최대 가격이 없거나 0 이하
+              case StatusCode.INVALID_MAX_PRICE:
+                isDefinedError = true;
+                errorStep = 'price';
+                break;
+              // 관심매물유형 오류
+              case StatusCode.INVALID_INTEREST_TYPE:
+                isDefinedError = true;
+                errorStep = 'type';
+                break;
+            }
+
+            if (isDefinedError) {
+              modalStore
+                .open({
+                  title: '올바르지 않은 값이 있어요.',
+                  description: res.message,
+                  primaryButton: '다시 설정하기',
+                  secondaryButton: '나중에 설정하기',
+                })
+                .then((res) => {
+                  if (res === 'primary') setStep(errorStep);
+                  else navigate('/');
+                });
+            } else {
+              modalStore
+                .open({
+                  title: '오류가 발생했어요.',
+                  description: res.message,
+                  primaryButton: '나중에 설정하기',
+                })
+                .then((res) => {
+                  if (res === 'primary') navigate('/');
+                });
+            }
           }
         })
         .catch((err) => {
-          alert(err.message);
+          modalStore
+            .open({
+              title: '오류가 발생했어요.',
+              description: err.message,
+              primaryButton: '나중에 설정하기',
+            })
+            .then((res) => {
+              if (res === 'primary') navigate('/');
+            });
         });
     },
     [],
