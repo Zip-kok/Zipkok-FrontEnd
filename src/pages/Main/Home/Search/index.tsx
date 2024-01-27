@@ -87,6 +87,7 @@ export default function Home() {
               {recentSearch.map((history) => (
                 <RecentAddress
                   history={history}
+                  onClick={handleAddressClick}
                   setRecentSearch={setRecentSearch}
                   key={history.id}
                 />
@@ -113,10 +114,15 @@ export default function Home() {
 
 interface RecentAddressProps {
   history: AddressHistory;
+  onClick: (address: Address) => void;
   setRecentSearch: React.Dispatch<React.SetStateAction<AddressHistory[]>>;
 }
 
-function RecentAddress({ history, setRecentSearch }: RecentAddressProps) {
+function RecentAddress({
+  history,
+  onClick,
+  setRecentSearch,
+}: RecentAddressProps) {
   function handleDelete() {
     const recentSearch = JSON.parse(
       localStorage.getItem('recentSearch') || '[]',
@@ -131,7 +137,10 @@ function RecentAddress({ history, setRecentSearch }: RecentAddressProps) {
 
   return (
     <div className={styles.recent}>
-      <button className={styles.recentButton}>
+      <button
+        className={styles.recentButton}
+        onClick={() => onClick(history.address)}
+      >
         {history.address.address_name}
       </button>
       <div className={styles.recentRight}>
