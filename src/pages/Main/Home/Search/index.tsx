@@ -76,6 +76,14 @@ export default function Home() {
           <>
             <div className={styles.title}>최근 검색</div>
             <div className={styles.addressContainer}>
+              {recentSearch.length === 0 && (
+                <div className={styles.message}>
+                  최근 검색 결과가 없어요.
+                  <br />
+                  주소를 입력해서 검색해주세요.
+                </div>
+              )}
+
               {recentSearch.map((history) => (
                 <RecentAddress
                   history={history}

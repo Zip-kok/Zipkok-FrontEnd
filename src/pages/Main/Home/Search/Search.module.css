@@ -69,3 +69,15 @@
   word-wrap: break-word;
   white-space: nowrap;
 }
+
+.message {
+  margin-top: 50%;
+  color: var(--gray-color-gray050_text, #4b5259);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 22.4px */
+  letter-spacing: 0.014px;
+}
