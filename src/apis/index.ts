@@ -29,20 +29,26 @@ export default async function api<T>(
   body?: any,
   headers?: any,
 ) {
-  const accessToken = Cookies.get('accessToken');
+  let accessToken = Cookies.get('accessToken');
 
   // access token 만료 시
   if (authRequired && accessToken === undefined) {
-    const authorized = await storeNewTokensToCookie();
-    if (!authorized) throw new Error('로그인이 필요합니다.');
+    accessToken = await storeNewTokensToCookie().then((res) => {
+      if (res === null) throw new Error('로그인이 필요합니다.');
+      return res.accessToken;
+    });
   }
+
+  const authHeader = authRequired
+    ? { Authorization: `Bearer ${accessToken}` }
+    : {};
 
   const paramStr = params ? new URLSearchParams(params).toString() : '';
   const res = await fetch(`${url}${path}?${paramStr}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+      ...authHeader,
       ...headers,
     },
     body: JSON.stringify(body),
