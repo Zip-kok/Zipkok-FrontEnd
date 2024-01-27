@@ -47,16 +47,23 @@ export default function TextInput({
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     if (numberOnly) {
       const value = e.currentTarget.value;
-      if (value.length > maxLength) {
-        inputRef.current!.value = value.slice(0, maxLength);
-      }
+      if (value.length > maxLength)
+        e.currentTarget.value = value.slice(0, maxLength);
+
+      if (parseInt(value) < 0) e.currentTarget.value = '0';
     }
     onChange && onChange(e);
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (!numberOnly) return;
-    if (e.key === 'e' || e.key === '.' || e.key === '-' || e.key === '+')
+    if (
+      e.key === 'e' ||
+      e.key === 'E' ||
+      e.key === '.' ||
+      e.key === '-' ||
+      e.key === '+'
+    )
       e.preventDefault();
   }
 
@@ -76,18 +83,28 @@ export default function TextInput({
     }
   }
 
-  function handleFocus() {
-    setIsFocused(true);
+  function handleInputFocus() {
     onFocus && onFocus();
   }
 
-  function handleBlur() {
-    setIsFocused(false);
+  function handleInputBlur() {
     onBlur && onBlur();
   }
 
+  function handleBoxFocus() {
+    setIsFocused(true);
+  }
+
+  function handleBoxBlur() {
+    setIsFocused(false);
+  }
+
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onFocus={handleBoxFocus}
+      onBlur={handleBoxBlur}
+    >
       <div
         className={`${styles.textBox} ${
           readOnly && onClick ? styles.clickable : ''
@@ -105,8 +122,8 @@ export default function TextInput({
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           value={value}
           placeholder={placeholder}
           ref={inputRef}
