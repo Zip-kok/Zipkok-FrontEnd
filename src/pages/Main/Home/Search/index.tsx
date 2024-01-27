@@ -20,9 +20,9 @@ export default function Home() {
   const [searched, setSearched] = useState(false);
 
   const ui = useUIStore();
-  const recentSearch = JSON.parse(
-    localStorage.getItem('recentSearch') || '[]',
-  ) as AddressHistory[];
+  const [recentSearch, setRecentSearch] = useState<AddressHistory[]>(
+    JSON.parse(localStorage.getItem('recentSearch') || '[]'),
+  );
 
   useEffect(() => {
     ui.setUI((state) => ({
@@ -77,7 +77,11 @@ export default function Home() {
             <div className={styles.title}>최근 검색</div>
             <div className={styles.addressContainer}>
               {recentSearch.map((history) => (
-                <RecentAddress history={history} key={history.id} />
+                <RecentAddress
+                  history={history}
+                  setRecentSearch={setRecentSearch}
+                  key={history.id}
+                />
               ))}
             </div>
           </>
@@ -99,7 +103,24 @@ export default function Home() {
   );
 }
 
-function RecentAddress({ history }: { history: AddressHistory }) {
+interface RecentAddressProps {
+  history: AddressHistory;
+  setRecentSearch: React.Dispatch<React.SetStateAction<AddressHistory[]>>;
+}
+
+function RecentAddress({ history, setRecentSearch }: RecentAddressProps) {
+  function handleDelete() {
+    const recentSearch = JSON.parse(
+      localStorage.getItem('recentSearch') || '[]',
+    ) as AddressHistory[];
+
+    localStorage.setItem(
+      'recentSearch',
+      JSON.stringify(recentSearch.filter((item) => item.id !== history.id)),
+    );
+    setRecentSearch(recentSearch.filter((item) => item.id !== history.id));
+  }
+
   return (
     <div className={styles.recent}>
       <button className={styles.recentButton}>
@@ -107,7 +128,7 @@ function RecentAddress({ history }: { history: AddressHistory }) {
       </button>
       <div className={styles.recentRight}>
         <span>{history.date}</span>
-        <button className="imgBtn">
+        <button className="imgBtn" onClick={handleDelete}>
           <img src={deleteIcon}></img>
         </button>
       </div>
