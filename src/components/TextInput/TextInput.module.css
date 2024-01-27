@@ -41,6 +41,13 @@
   }
 }
 
+.textBox > input::placeholder {
+  color: var(--gray-color-gray030_text, #9fa4a9);
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .textBox > button {
   width: 32px;
   height: 32px;
@@ -63,10 +70,6 @@
   letter-spacing: 0.018px;
 }
 
-.textBox.underline > input::placeholder {
-  color: var(--gray-color-gray030_text, #9fa4a9);
-}
-
 /* roundedBox style */
 
 .textBox.roundedBox {
@@ -81,6 +84,20 @@
   color: var(--gray-color-gray080_text, #1b1d1f);
   font-family: Pretendard;
   font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* none style */
+
+.textBox.none {
+  box-sizing: border-box;
+}
+
+.textBox.none > input {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
 }

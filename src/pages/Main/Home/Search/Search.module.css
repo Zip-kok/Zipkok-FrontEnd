@@ -3,6 +3,7 @@
   flex-direction: row;
   padding: 12px 16px;
   gap: 16px;
+  align-items: center;
 }
 
 .title {

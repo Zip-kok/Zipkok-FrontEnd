@@ -112,6 +112,7 @@ export default function TextInput({
           {
             underline: styles.underline,
             roundedBox: styles.roundedBox,
+            none: styles.none,
           }[style]
         }`}
       >

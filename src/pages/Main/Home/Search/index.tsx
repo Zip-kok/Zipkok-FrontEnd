@@ -28,7 +28,7 @@ export default function Home() {
           <img src={backIcon}></img>
         </button>
         <TextInput
-          style="roundedBox"
+          style="none"
           placeholder="어느 지역의 매물을 찾고 계신가요?"
         ></TextInput>
       </div>
