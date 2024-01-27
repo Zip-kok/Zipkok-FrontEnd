@@ -47,3 +47,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.swiper > .swiper-slide {
+  opacity: 0.4;
+}
+
+.swiper > .swiper-slide-thumb-active {
+  opacity: 1;
+}

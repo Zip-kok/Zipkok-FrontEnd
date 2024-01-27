@@ -20,6 +20,7 @@ import RangeSlider from './RangeSlider';
 import Splash from './Splash';
 import StarRating from './StarRating';
 import SwiperCom from './Swiper';
+import Swiper_modal from './Swiper_modal';
 import TextInput from './TextInput';
 import TopMenu from './TopMenu';
 
@@ -44,6 +45,7 @@ export {
   RangeSlider,
   Splash,
   SwiperCom,
+  Swiper_modal,
   TextInput,
   TopMenu,
   StarRating,

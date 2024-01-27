@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BottomBtn, SwiperCom } from 'components';
+import { BottomBtn, SwiperCom, Swiper_modal } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 import data from 'models/kokItemDetail.json';
@@ -74,10 +74,22 @@ const KokItem = () => {
       element: <ReView />,
     },
   ]);
+  // 모달 구현
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const showModal = () => {
+    setModalOpen(true);
+  };
 
   return (
     <div className={styles.root}>
-      <SwiperCom imageUrls={result.imageInfo.imageUrls} />
+      <SwiperCom imageUrls={result.imageInfo.imageUrls} onClick={showModal} />
+      {modalOpen && (
+        <Swiper_modal
+          imageUrls={result.imageInfo.imageUrls}
+          setModalOpen={setModalOpen}
+        />
+      )}
       <div className={styles.body}>
         <div className={styles.address}>{result.address}</div>
         <div className={styles.priceContainer}>
