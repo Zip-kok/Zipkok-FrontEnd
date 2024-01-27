@@ -5,7 +5,7 @@ import { TextInputStyle } from 'types/TextInput';
 
 import styles from './TextInput.module.css';
 
-interface TextInputProps {
+export interface TextInputProps {
   value?: string;
   defaultValue?: string;
   placeholder?: string;
