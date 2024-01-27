@@ -25,11 +25,17 @@ export default function Modal({
       {description && <p className={styles.description}>{description}</p>}
       <div className={styles.buttonContainer}>
         {secondaryButton && (
-          <button className={styles.secondary} onClick={onSecondaryButtonClick}>
+          <button
+            className={`${styles.button} ${styles.secondary}`}
+            onClick={onSecondaryButtonClick}
+          >
             {secondaryButton}
           </button>
         )}
-        <button className={styles.primary} onClick={onPrimaryButtonClick}>
+        <button
+          className={`${styles.button} ${styles.primary}`}
+          onClick={onPrimaryButtonClick}
+        >
           {primaryButton}
         </button>
       </div>
