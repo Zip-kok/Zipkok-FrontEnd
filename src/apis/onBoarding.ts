@@ -20,19 +20,19 @@ export async function onBoarding(
   purchaseMin: number,
   purchaseMax: number,
 ) {
-  let realEastateType: string;
+  let realEstateType: string;
   switch (houseType) {
     case '빌라/투룸':
-      realEastateType = 'TWOROOM';
+      realEstateType = 'TWOROOM';
       break;
     case '아파트':
-      realEastateType = 'APARTMENT';
+      realEstateType = 'APARTMENT';
       break;
     case '오피스텔':
-      realEastateType = 'OFFICETELL';
+      realEstateType = 'OFFICETELL';
       break;
     case '원룸':
-      realEastateType = 'ONEROOM';
+      realEstateType = 'ONEROOM';
       break;
   }
 
@@ -42,15 +42,15 @@ export async function onBoarding(
     address,
     latitude,
     longitude,
-    realEastateType,
-    mpriceMin,
-    mpriceMax,
-    mdepositMin,
-    mdepositMax,
-    ydepositMin,
-    ydepositMax,
-    purchaseMin,
-    purchaseMax,
+    realEstateType,
+    mpriceMin: Math.floor(mpriceMin),
+    mpriceMax: Math.floor(mpriceMax),
+    mdepositMin: Math.floor(mdepositMin),
+    mdepositMax: Math.floor(mdepositMax),
+    ydepositMin: Math.floor(ydepositMin),
+    ydepositMax: Math.floor(ydepositMax),
+    purchaseMin: Math.floor(purchaseMin),
+    purchaseMax: Math.floor(purchaseMax),
   };
   const authRequired = true;
 
