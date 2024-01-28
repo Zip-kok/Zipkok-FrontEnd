@@ -1,23 +1,39 @@
-// StarRatingWithLabel.tsx
-import React, { useState } from 'react';
+//starRating
+import React, { useState, useEffect } from 'react';
 
 import starRed from 'assets/img/fill/star_red.svg';
 import starWhite from 'assets/img/line(1)/star_white.svg';
 
 import styles from './StarRating.module.css';
 
+// readOnly 모드일 때 starCount 설정 가능
 interface StarRatingProps {
   label: string;
   onRating: (rating: number) => void;
+  readOnly?: boolean;
+  starCount?: number;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({ label, onRating }) => {
-  const [rating, setRating] = useState<number>(0);
+const StarRating: React.FC<StarRatingProps> = ({
+  label,
+  onRating,
+  readOnly = false,
+  starCount = 0,
+}) => {
+  const [rating, setRating] = useState<number>(starCount);
+
+  useEffect(() => {
+    if (readOnly) {
+      setRating(starCount);
+    }
+  }, [readOnly, starCount]);
 
   const handleStarClick = (index: number): void => {
-    const newRating = index;
-    setRating(newRating);
-    onRating(newRating);
+    if (!readOnly) {
+      const newRating = index;
+      setRating(newRating);
+      onRating(newRating);
+    }
   };
 
   return (
@@ -31,6 +47,7 @@ const StarRating: React.FC<StarRatingProps> = ({ label, onRating }) => {
             src={index < rating ? starRed : starWhite}
             alt={`${index + 1} stars`}
             onClick={() => handleStarClick(index + 1)}
+            style={{ cursor: readOnly ? 'default' : 'pointer' }}
           />
         ))}
       </div>
