@@ -5,7 +5,7 @@ import { TextInputStyle } from 'types/TextInput';
 
 import styles from './TextInput.module.css';
 
-interface TextInputProps {
+export interface TextInputProps {
   value?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -112,6 +112,7 @@ export default function TextInput({
           {
             underline: styles.underline,
             roundedBox: styles.roundedBox,
+            none: styles.none,
           }[style]
         }`}
       >
