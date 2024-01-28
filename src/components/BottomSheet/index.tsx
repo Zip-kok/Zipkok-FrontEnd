@@ -7,5 +7,5 @@ interface BottomSheetProps {
 }
 
 export default function BottomSheet({ children }: BottomSheetProps) {
-  return <div>{children}</div>;
+  return <div className={styles.container}>{children}</div>;
 }
