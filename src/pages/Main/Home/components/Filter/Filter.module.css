@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+  color: var(--gray-color-gray100, #00000a);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.filterContainers {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px 8px;
+  flex-wrap: wrap;
+}
