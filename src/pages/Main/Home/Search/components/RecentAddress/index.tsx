@@ -9,7 +9,7 @@ import type { Address } from 'types/Address';
 
 interface RecentAddressProps {
   history: AddressHistory;
-  onClick: (address: Address) => void;
+  onClick: (history: AddressHistory) => void;
   setRecentSearch: React.Dispatch<React.SetStateAction<AddressHistory[]>>;
 }
 
@@ -32,10 +32,7 @@ export default function RecentAddress({
 
   return (
     <div className={styles.recent}>
-      <button
-        className={styles.recentButton}
-        onClick={() => onClick(history.address)}
-      >
+      <button className={styles.recentButton} onClick={() => onClick(history)}>
         {history.address.address_name}
       </button>
       <div className={styles.recentRight}>

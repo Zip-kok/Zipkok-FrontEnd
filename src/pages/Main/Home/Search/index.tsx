@@ -47,6 +47,22 @@ export default function Home() {
         ...recentSearch,
       ]),
     );
+
+    navigate(-1);
+  }
+
+  function handleRecentClick(history: AddressHistory) {
+    localStorage.setItem(
+      'recentSearch',
+      JSON.stringify([
+        {
+          ...history,
+          date: `${new Date().getMonth() + 1}. ${new Date().getDate()}.`,
+        },
+        ...recentSearch.filter((item) => item.id !== history.id),
+      ]),
+    );
+
     navigate(-1);
   }
 
@@ -87,7 +103,7 @@ export default function Home() {
               {recentSearch.map((history) => (
                 <RecentAddress
                   history={history}
-                  onClick={handleAddressClick}
+                  onClick={handleRecentClick}
                   setRecentSearch={setRecentSearch}
                   key={history.id}
                 />
