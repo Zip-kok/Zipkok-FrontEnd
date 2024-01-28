@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import deleteIcon from 'assets/img/line(1)/delete.svg';
 import backIcon from 'assets/img/line(2)/left_arrow.svg';
 import useUIStore from 'contexts/uiStore';
 import useAddressSearch from 'hooks/useAddressSearch';
 
+import RecentAddress from './components/RecentAddress';
 import styles from './Search.module.css';
 
 import type { Address } from 'types/Address';
 
-interface AddressHistory {
+export interface AddressHistory {
   id: number;
   address: Address;
   date: string;
@@ -107,47 +107,6 @@ export default function Home() {
             </div>
           </>
         )}
-      </div>
-    </div>
-  );
-}
-
-interface RecentAddressProps {
-  history: AddressHistory;
-  onClick: (address: Address) => void;
-  setRecentSearch: React.Dispatch<React.SetStateAction<AddressHistory[]>>;
-}
-
-function RecentAddress({
-  history,
-  onClick,
-  setRecentSearch,
-}: RecentAddressProps) {
-  function handleDelete() {
-    const recentSearch = JSON.parse(
-      localStorage.getItem('recentSearch') || '[]',
-    ) as AddressHistory[];
-
-    localStorage.setItem(
-      'recentSearch',
-      JSON.stringify(recentSearch.filter((item) => item.id !== history.id)),
-    );
-    setRecentSearch(recentSearch.filter((item) => item.id !== history.id));
-  }
-
-  return (
-    <div className={styles.recent}>
-      <button
-        className={styles.recentButton}
-        onClick={() => onClick(history.address)}
-      >
-        {history.address.address_name}
-      </button>
-      <div className={styles.recentRight}>
-        <span>{history.date}</span>
-        <button className="imgBtn" onClick={handleDelete}>
-          <img src={deleteIcon}></img>
-        </button>
       </div>
     </div>
   );
