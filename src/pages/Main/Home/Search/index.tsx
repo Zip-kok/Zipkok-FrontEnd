@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import backIcon from 'assets/img/line(2)/left_arrow.svg';
+import useAddressStore from 'contexts/addressStore';
 import useUIStore from 'contexts/uiStore';
 import useAddressSearch from 'hooks/useAddressSearch';
 
@@ -17,6 +18,8 @@ export interface AddressHistory {
 }
 
 export default function Home() {
+  const { setAddress } = useAddressStore();
+
   const [searched, setSearched] = useState(false);
 
   const ui = useUIStore();
@@ -48,6 +51,7 @@ export default function Home() {
       ]),
     );
 
+    setAddress(address);
     navigate(-1);
   }
 
@@ -63,6 +67,7 @@ export default function Home() {
       ]),
     );
 
+    setAddress(history.address);
     navigate(-1);
   }
 
