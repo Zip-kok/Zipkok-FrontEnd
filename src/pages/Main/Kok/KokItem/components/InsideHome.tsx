@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { OptionsComponent } from 'components';
+import Furnitures from 'components/Furnitures';
 import data from 'models/kokItemInner.json';
 
 import styles from '../KokItem.module.css';
@@ -8,22 +9,27 @@ import styles from '../KokItem.module.css';
 const insideHome = () => {
   const { furnitureOptions, direction, options } = data.result;
 
+  const filteredFurnitures = Furnitures.filter((furniture) =>
+    furnitureOptions.includes(furniture.name),
+  );
+
   return (
     <div className={styles.content}>
       <div className={styles.furnitureCtn}>
-        {furnitureOptions.map((tag, index) => (
+        {filteredFurnitures.map((tag, index) => (
           <p className={styles.furniture} key={index}>
-            {tag}
+            <img src={tag.img} />
+            {tag.name}
           </p>
         ))}
       </div>
       <div className={styles.directCtn}>
         <h4>집 방향</h4>
-        <input type="text" placeholder={direction} />
+        <input type="text" value={direction} readOnly={true} />
       </div>
 
       <div className={styles.optionsCtn}>
-        <OptionsComponent optionData={options} />
+        <OptionsComponent optionData={options} readOnly={true} />
       </div>
       <div className={styles.blank} />
       <div className={styles.blank} />

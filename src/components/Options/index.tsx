@@ -9,9 +9,13 @@ interface OptionsComponentProps {
     orderNumber: number;
     detailOptions: string[];
   }[];
+  readOnly?: boolean;
 }
 
-const OptionsComponent: React.FC<OptionsComponentProps> = ({ optionData }) => {
+const OptionsComponent: React.FC<OptionsComponentProps> = ({
+  optionData,
+  readOnly,
+}) => {
   // 각 체크박스의 상태를 저장하는 상태
   const [checkboxStates, setCheckboxStates] = useState<{
     [key: string]: boolean;
@@ -22,13 +26,17 @@ const OptionsComponent: React.FC<OptionsComponentProps> = ({ optionData }) => {
     const initialCheckboxStates: { [key: string]: boolean } = {};
     optionData.forEach((check) => {
       check.detailOptions.forEach((_, index) => {
-        initialCheckboxStates[`${check.orderNumber}.${index}`] = true;
+        initialCheckboxStates[`${check.orderNumber}.${index}`] =
+          readOnly || false;
       });
     });
     setCheckboxStates(initialCheckboxStates);
-  }, [optionData]);
+  }, [optionData, readOnly]);
 
   const handleCheckboxChange = (orderNumber: number, index: number) => {
+    if (readOnly) {
+      return;
+    }
     const key = `${orderNumber}.${index}`;
     setCheckboxStates((prev) => ({ ...prev, [key]: !prev[key] }));
   };
@@ -55,6 +63,7 @@ const OptionsComponent: React.FC<OptionsComponentProps> = ({ optionData }) => {
                   onChange={() =>
                     handleCheckboxChange(check.orderNumber, index)
                   }
+                  readOnly={readOnly}
                 />
                 <label
                   className={styles.checkLabel}

@@ -11,12 +11,13 @@ const Contract = () => {
   return (
     <>
       <div className={styles.content}>
-        <OptionsComponent optionData={options} />
+        <OptionsComponent optionData={options} readOnly={true} />
         <div className={styles.ContractCtn}>
           <h4>계약서 사진</h4>
         </div>
       </div>
       <SwiperCom imageUrls={imageInfo.imageUrls}></SwiperCom>
+      <div className={styles.blank} />
       <div className={styles.blank} />
       <div className={styles.blank} />
     </>

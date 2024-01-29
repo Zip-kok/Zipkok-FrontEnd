@@ -19,7 +19,7 @@ const NearHome = () => {
       </div>
 
       <div className={styles.optionsCtn}>
-        <OptionsComponent optionData={options} />
+        <OptionsComponent optionData={options} readOnly={true} />
       </div>
 
       <div className={styles.blank} />

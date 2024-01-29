@@ -46,6 +46,7 @@ const BasicInf = () => {
       <img className={styles.map} />
       <div className={styles.blank} />
       <div className={styles.blank} />
+      <div className={styles.blank} />
     </>
   );
 };
