@@ -25,7 +25,7 @@ const insideHome = () => {
       </div>
       <div className={styles.directCtn}>
         <h4>집 방향</h4>
-        <input type="text" placeholder={direction} />
+        <input type="text" value={direction} readOnly={true} />
       </div>
 
       <div className={styles.optionsCtn}>
