@@ -143,15 +143,6 @@ h4 {
   font-family: Pretendard;
 }
 
-.moreViewCtn {
-  display: flex;
-  flex-direction: column;
-}
-
-.moreViewBtn {
-  color: #fa4549;
-}
-
 .content {
   display: flex;
   flex-direction: column;
@@ -163,4 +154,29 @@ h4 {
   position: sticky;
   top: 56px;
   z-index: 100;
+}
+
+.detailCtn {
+  display: flex;
+  > div {
+    max-height: 100%;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  > .moreView {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  > button {
+    background-color: #fff;
+    border: none;
+    color: #fa4549;
+    writing-mode: horizontal-tb;
+    white-space: nowrap;
+    align-self: flex-end;
+  }
 }

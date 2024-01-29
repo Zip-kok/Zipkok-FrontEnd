@@ -26,7 +26,10 @@ const ReView = () => {
       </div>
       <div className={styles.starCtn}>
         <h3>매물은 어떠셨나요?</h3>
-        <StarRating label="시설" onRating={(rating) => console.log(rating)} />
+        <StarRating
+          label="시설"
+          onRating={(facilityStarCount) => facilityStarCount}
+        />
         <StarRating label="인프라" onRating={(rating) => console.log(rating)} />
         <StarRating label="구조" onRating={(rating) => console.log(rating)} />
         <StarRating label="분위기" onRating={(rating) => console.log(rating)} />

@@ -34,24 +34,6 @@ const KokItem = () => {
   };
   const { code, message, result } = data;
 
-  // 더 보기 구현
-  const [isShowMore, setIsShowMore] = useState<boolean>(false);
-  const textLimit = useRef<number>(75);
-  {
-    /* 더보기 글자수 제한*/
-  }
-  const commenter = useMemo(() => {
-    const shortReview: string = result.detail.slice(0, textLimit.current);
-
-    if (result.detail.length > textLimit.current) {
-      if (isShowMore) {
-        return result.detail;
-      }
-      return shortReview;
-    }
-    return result.detail;
-  }, [isShowMore, result.detail]);
-
   const [MidMenu, Content, menuIndex] = useMenu([
     {
       name: '기본정보',
@@ -81,6 +63,18 @@ const KokItem = () => {
     setModalOpen(true);
   };
 
+  //더보기 구현
+  const [moreView, setMoreView] = useState(false);
+  const charCount = result.detail.length;
+  const handleMoreBtn = () => {
+    setMoreView(!moreView);
+  };
+
+  const showMoreBtn = () => {
+    const lineCount = result.detail.split('\n').length;
+    return lineCount > 3 || charCount > 86;
+  };
+
   return (
     <div className={styles.root}>
       <SwiperCom imageUrls={result.imageInfo.imageUrls} onClick={showModal} />
@@ -99,15 +93,12 @@ const KokItem = () => {
             {result.price}
           </div>
         </div>
-        <div className={styles.moreViewCtn}>
-          <div>{commenter}</div>
-          <div
-            className={styles.moreViewBtn}
-            onClick={() => setIsShowMore(!isShowMore)}
-          >
-            {result.detail.length > textLimit.current &&
-              (isShowMore ? '닫기' : '더보기')}
-          </div>
+        <div className={styles.detailCtn}>
+          {/* styles.moreView 클래스를 가진 div의 내용을 shouldShowMoreButton의 결과에 따라 다르게 렌더링 */}
+          <div className={moreView ? '' : styles.moreView}>{result.detail}</div>
+          {showMoreBtn() && (
+            <button onClick={handleMoreBtn}>{moreView ? '' : '더보기'}</button>
+          )}
         </div>
       </div>
       <div className={styles.menu}>
