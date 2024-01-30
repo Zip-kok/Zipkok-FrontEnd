@@ -6,6 +6,7 @@ import useUIStore from 'contexts/uiStore';
 
 import { Filter } from './components';
 import styles from './Home.module.css';
+import KakaoMap from './KakaoMap';
 
 export default function Home() {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -50,6 +51,9 @@ export default function Home() {
 
       {/* 지도 */}
       <button onClick={handleFilterClick}>filter</button>
+      <div>
+        <KakaoMap />
+      </div>
     </div>
   );
 }
