@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import styles from './StaticMap.module.css';
+import spotPin from '../../assets/img/pinIcon/spotPin.svg';
 
 interface StaticMapProps {
   lat: number;
@@ -9,45 +10,34 @@ interface StaticMapProps {
 
 const StaticMap: React.FC<StaticMapProps> = ({ lat, lng }) => {
   useEffect(() => {
-    // Kakao Maps 라이브러리 로드 및 초기화
-    const loadKakaoMaps = () => {
-      window.kakao.maps.load(() => {
-        const markerPosition = new window.kakao.maps.LatLng(lat, lng);
-        const marker = {
-          position: markerPosition,
-        };
+    kakao.maps.load(() => {
+      const mapContainer = document.getElementById('staticMap') as HTMLElement;
 
-        const staticMapContainer = document.getElementById('staticMap');
+      const mapOption = {
+        center: new kakao.maps.LatLng(lat, lng),
+        level: 3,
+      };
 
-        if (staticMapContainer) {
-          const staticMapOption = {
-            center: new window.kakao.maps.LatLng(lat, lng),
-            level: 3,
-            marker: marker,
-          };
+      const map = new kakao.maps.Map(mapContainer, mapOption);
 
-          // 여기에 추가된 부분: 클래스 적용
-          staticMapContainer.classList.add(styles.staticMap);
+      const imageSrc = spotPin,
+        imageSize = new kakao.maps.Size(40, 40),
+        imageOption = { offset: new kakao.maps.Point(27, 27) };
 
-          const staticMap = new window.kakao.maps.StaticMap(
-            staticMapContainer,
-            staticMapOption,
-          );
-        }
+      const markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption,
+        ),
+        markerPosition = new kakao.maps.LatLng(lat, lng);
+
+      const marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage,
       });
-    };
 
-    // 이미 Kakao Maps 라이브러리가 로드되었을 경우
-    if (window.kakao && window.kakao.maps) {
-      loadKakaoMaps();
-    } else {
-      // Kakao Maps 라이브러리 로드
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY';
-      script.onload = loadKakaoMaps;
-      document.head.appendChild(script);
-    }
+      marker.setMap(map);
+    });
   }, [lat, lng]);
 
   return (
