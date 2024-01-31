@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Modal } from 'components';
+import { Modal } from 'contexts/modalStore';
 import useModal from 'contexts/modalStore';
 
 export default function Root() {

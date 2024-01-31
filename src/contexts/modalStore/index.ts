@@ -1,5 +1,6 @@
-import MenuPath from 'types/MenuPath';
 import { create } from 'zustand';
+
+import Modal from './components/Modal';
 
 interface OpenModalProps {
   title: string;
@@ -64,3 +65,4 @@ const useModal = create<ModalStore>((set) => ({
 }));
 
 export default useModal;
+export { Modal };
