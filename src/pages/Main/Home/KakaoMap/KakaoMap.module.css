@@ -1,0 +1,13 @@
+.root {
+  width: 100%;
+  position: relative;
+}
+.BtnCtn {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  padding: 10px;
+}
