@@ -13,19 +13,22 @@ import {
   SwiperCom,
   Swiper_modal,
 } from 'components';
+import StaticMap from 'components/StaticMap/index';
+import SwiperItem from 'components/SwiperItem';
 import useUIStore from 'contexts/uiStore';
 import data from 'models/HomeItem.json';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 import styles from './Item.module.css';
-import StaticMap from '../../../../components/StaticMap/index';
 const Item = () => {
   const navigate = useNavigate();
 
   const handleWriteClick = () => {
     navigate('../');
   };
+
+  const handleOtherItemClick = () => {};
   const { code, message, result } = data;
   //모달
   const [modalOpen, setModalOpen] = useState(false);
@@ -108,6 +111,12 @@ const Item = () => {
         <h4>위치</h4>
       </div>
       <StaticMap lat={result.latitude} lng={result.longitude}></StaticMap>
+
+      <h4>주변의 다른 매물</h4>
+      <SwiperItem
+        imageUrls={result.imageInfo.imageUrls}
+        onClick={handleOtherItemClick}
+      ></SwiperItem>
       <div className={styles.blank} />
       <div className={styles.blank} />
       <div className={styles.blank} />
