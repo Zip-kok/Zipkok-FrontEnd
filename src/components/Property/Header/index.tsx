@@ -65,7 +65,7 @@ export default function Header({
       </div>
 
       {/* 주소 */}
-      <div className={styles.address}>{`${address} ${
+      <div className={styles.address}>{`${address.address_name} ${
         detailAddress ? detailAddress : ''
       }`}</div>
 
@@ -86,12 +86,12 @@ export default function Header({
       {/* 메모 */}
       <div className={styles.memo}>
         <div className={isMemoExpanded ? '' : styles.expanded}>{memo}</div>
-        {isMemoLong() && (
+        {!isMemoExpanded && isMemoLong() && (
           <button
             className={styles.showMoreBtn}
             onClick={() => setIsMemoExpanded(true)}
           >
-            {isMemoExpanded ? '' : '더보기'}
+            더 보기
           </button>
         )}
       </div>
