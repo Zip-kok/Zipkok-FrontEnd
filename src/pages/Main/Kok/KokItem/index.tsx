@@ -1,26 +1,41 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BottomBtn, SwiperCom, Swiper_modal } from 'components';
+import { PropertyComponents as Property, BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 import data from 'models/kokItemDetail.json';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import BasicInf from './components/BasicInf';
 import Contract from './components/Contract';
 import InsideHome from './components/InsideHome';
 import NearHome from './components/NearHome';
 import ReView from './components/ReView';
 import styles from './KokItem.module.css';
 
+import type { Address } from 'types/Address';
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
+
 const KokItem = () => {
   const ui = useUIStore();
+  const { result } = data;
+
+  const getAddressObject = useCallback(
+    () =>
+      ({
+        address_name: result.address,
+        x: result.longitude,
+        y: result.latitude,
+      }) as Address,
+    [result],
+  );
+
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
-      headerTitle: '성북구 정릉동',
+      headerTitle: result.address,
       headerIcon: undefined,
       headerBackButtonEnabled: true,
       naviEnabled: false,
@@ -32,12 +47,19 @@ const KokItem = () => {
   const handleEditClick = () => {
     navigate('../../kok');
   };
-  const { code, message, result } = data;
 
   const [MidMenu, Content, menuIndex] = useMenu([
     {
       name: '기본정보',
-      element: <BasicInf />,
+      element: (
+        <Property.BasicInfo
+          area={result.area_size}
+          houseType={result.realEstateType as HouseType}
+          floor={result.floorNum}
+          maintanenceFee={result.administrativeFee}
+          address={getAddressObject()}
+        />
+      ),
     },
     {
       name: '집 주변',
@@ -56,54 +78,24 @@ const KokItem = () => {
       element: <ReView />,
     },
   ]);
-  // 모달 구현
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const showModal = () => {
-    setModalOpen(true);
-  };
-
-  //더보기 구현
-  const [moreView, setMoreView] = useState(false);
-  const charCount = result.detail.length;
-  const handleMoreBtn = () => {
-    setMoreView(!moreView);
-  };
-
-  const showMoreBtn = () => {
-    const lineCount = result.detail.split('\n').length;
-    return lineCount > 3 || charCount > 86;
-  };
 
   return (
     <div className={styles.root}>
-      <SwiperCom imageUrls={result.imageInfo.imageUrls} onClick={showModal} />
-      {modalOpen && (
-        <Swiper_modal
-          imageUrls={result.imageInfo.imageUrls}
-          setModalOpen={setModalOpen}
-        />
-      )}
-      <div className={styles.body}>
-        <div className={styles.address}>{result.address}</div>
-        <div className={styles.priceContainer}>
-          <div className={styles.priceType}>{result.transactionType}</div>
-          <div className={styles.priceInf}>
-            {result.deposit + ' / '}
-            {result.price}
-          </div>
-        </div>
-        <div className={styles.detailCtn}>
-          {/* styles.moreView 클래스를 가진 div의 내용을 shouldShowMoreButton의 결과에 따라 다르게 렌더링 */}
-          <div className={moreView ? '' : styles.moreView}>{result.detail}</div>
-          {showMoreBtn() && (
-            <button onClick={handleMoreBtn}>{moreView ? '' : '더보기'}</button>
-          )}
-        </div>
-      </div>
+      <Property.Header
+        pictures={result.imageInfo.imageUrls}
+        address={getAddressObject()}
+        detailAddress={result.detailAddress}
+        priceType={result.transactionType as PriceType}
+        memo={result.detail}
+        deposit={result.deposit}
+        monthlyPrice={result.price}
+        price={result.price}
+      />
+
       <div className={styles.menu}>
         <MidMenu />
       </div>
+
       <Content />
       <BottomBtn text="콕리스트 수정하기" onClick={handleEditClick} />
     </div>
