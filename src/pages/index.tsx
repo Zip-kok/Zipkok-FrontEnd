@@ -2,22 +2,22 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Modal } from 'components';
-import useModalStore from 'contexts/modalStore';
+import useModal from 'contexts/modalStore';
 
 export default function Root() {
-  const modalStore = useModalStore();
+  const modal = useModal();
   return (
     <>
       {/* modal */}
-      {modalStore.enabled && (
+      {modal.enabled && (
         <>
           <Modal
-            title={modalStore.title}
-            description={modalStore.description}
-            secondaryButton={modalStore.secondaryButton}
-            primaryButton={modalStore.primaryButton}
-            onPrimaryButtonClick={modalStore.onPrimaryButtonClick}
-            onSecondaryButtonClick={modalStore.onSecondaryButtonClick}
+            title={modal.title}
+            description={modal.description}
+            secondaryButton={modal.secondaryButton}
+            primaryButton={modal.primaryButton}
+            onPrimaryButtonClick={modal.onPrimaryButtonClick}
+            onSecondaryButtonClick={modal.onSecondaryButtonClick}
           />
           <ModalOverlay />
         </>
@@ -28,7 +28,7 @@ export default function Root() {
 }
 
 function ModalOverlay() {
-  const modalStore = useModalStore();
+  const modalStore = useModal();
 
   function handleOverlayClick() {
     modalStore.close();

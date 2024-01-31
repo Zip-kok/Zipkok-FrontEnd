@@ -30,7 +30,7 @@ const initialState: Omit<ModalStore, 'open'> = {
   close: () => {},
 };
 
-const useModalStore = create<ModalStore>((set) => ({
+const useModal = create<ModalStore>((set) => ({
   ...initialState,
 
   open: ({
@@ -63,4 +63,4 @@ const useModalStore = create<ModalStore>((set) => ({
   },
 }));
 
-export default useModalStore;
+export default useModal;

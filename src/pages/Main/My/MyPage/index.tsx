@@ -12,7 +12,7 @@ import pen from 'assets/img/line(2)/pen.svg';
 import pin from 'assets/img/line(2)/pin.svg';
 import quit from 'assets/img/line(2)/quit.svg';
 import { IconBtn } from 'components';
-import useModalStore from 'contexts/modalStore';
+import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import logout from 'utils/logout';
 
@@ -20,7 +20,7 @@ import styles from './Mypage.module.css';
 
 const Mypage = () => {
   const ui = useUIStore();
-  const modalStore = useModalStore();
+  const modal = useModal();
 
   useEffect(() => {
     ui.setUI((state) => ({
@@ -50,7 +50,7 @@ const Mypage = () => {
   const handleNoticeClick = () => {};
   const handleInquiryClick = () => {};
   const handleLogoutClick = () => {
-    modalStore
+    modal
       .open({
         title: '로그아웃하시겠어요?',
         primaryButton: '로그아웃',
