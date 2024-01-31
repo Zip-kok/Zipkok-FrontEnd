@@ -5,7 +5,7 @@ import edit from 'assets/img/line(2)/edit.svg';
 import heart from 'assets/img/line(2)/heart.svg';
 import inquiry from 'assets/img/line(2)/inquiry.svg';
 import location_Pin from 'assets/img/line(2)/location_pin.svg';
-import logout from 'assets/img/line(2)/logout.svg';
+import logoutIcon from 'assets/img/line(2)/logout.svg';
 import my from 'assets/img/line(2)/my.svg';
 import notice from 'assets/img/line(2)/notice.svg';
 import pen from 'assets/img/line(2)/pen.svg';
@@ -14,6 +14,7 @@ import quit from 'assets/img/line(2)/quit.svg';
 import { IconBtn } from 'components';
 import useModalStore from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
+import logout from 'utils/logout';
 
 import styles from './Mypage.module.css';
 
@@ -57,7 +58,8 @@ const Mypage = () => {
       })
       .then((res) => {
         if (res === 'primary') {
-          // TOOD: logout
+          logout();
+          navigate('/login');
         }
       });
   };
@@ -141,7 +143,7 @@ const Mypage = () => {
           fontWeight="400"
         />
         <IconBtn
-          image={logout}
+          image={logoutIcon}
           text="로그아웃"
           onClick={handleLogoutClick}
           gap="12px"
