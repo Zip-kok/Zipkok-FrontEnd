@@ -2,7 +2,7 @@ import api from './';
 
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
-interface RealEstate {
+export interface RealEstate {
   realEstateId: number;
   imageURL: string;
   deposit: number;
