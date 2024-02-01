@@ -9,8 +9,17 @@ import { onBoarding } from './onBoarding';
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
 import { signIn } from './signIn';
+import { zim } from './zim';
 
-export { searchAddress, signIn, kakaoLogin, refreshTokens, onBoarding, getZim };
+export {
+  searchAddress,
+  signIn,
+  kakaoLogin,
+  refreshTokens,
+  onBoarding,
+  getZim,
+  zim,
+};
 
 /**
  * 필요한 경우에 토큰 갱신을 먼저 수행하고 서버에 요청을 보냅니다.
