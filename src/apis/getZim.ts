@@ -1,5 +1,7 @@
 import api from './';
 
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface RealEstate {
@@ -9,6 +11,8 @@ export interface RealEstate {
   price: number;
   address: string;
   agent: string;
+  transactionType: PriceType;
+  realestateType: HouseType;
 }
 
 interface GetZimResult {

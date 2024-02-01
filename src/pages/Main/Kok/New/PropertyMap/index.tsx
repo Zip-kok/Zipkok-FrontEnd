@@ -37,7 +37,7 @@ export default function PropertyMap() {
           type={property.type}
           priceType={property.priceType}
           price={property.price}
-          maintenanceFee={property.maintenanceFee}
+          deposit={0}
           address={property.address}
           propertyName={property.propertyName}
           imageUrl={property.imageUrl}
