@@ -1,4 +1,4 @@
-//starRating
+//StarRating
 import React, { useState, useEffect } from 'react';
 
 import starRed from 'assets/img/fill/star_red.svg';
