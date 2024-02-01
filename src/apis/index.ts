@@ -3,6 +3,7 @@ import { url } from 'constants/api';
 import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
+import { deleteZim } from './deleteZim';
 import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { onBoarding } from './onBoarding';
@@ -19,6 +20,7 @@ export {
   onBoarding,
   getZim,
   zim,
+  deleteZim,
 };
 
 /**
