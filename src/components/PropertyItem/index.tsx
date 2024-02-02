@@ -4,6 +4,7 @@ import propertyImg_null from 'assets/img/common/propertyImg_null.svg';
 import heartFillIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart_white.svg';
 import listIcon from 'assets/img/line(2)/list.svg';
+import getPriceString from 'utils/getPriceString';
 
 import styles from './PropertyItem.module.css';
 
@@ -64,9 +65,9 @@ export default function PropertyItem({
           <div className={styles.price}>
             {
               {
-                월세: `${deposit?.toLocaleString()} / ${price?.toLocaleString()}`,
-                전세: `${deposit?.toLocaleString()}`,
-                매매: `${price?.toLocaleString()}`,
+                월세: `${getPriceString(deposit)} / ${getPriceString(price)}`,
+                전세: `${getPriceString(deposit)}`,
+                매매: `${getPriceString(price)}`,
               }[priceType]
             }
           </div>
