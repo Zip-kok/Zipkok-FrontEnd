@@ -2,9 +2,9 @@ import React from 'react';
 
 import { RangeSlider } from 'components';
 
-import getPriceLabelString from './getPriceLabelString';
 import styles from './priceSlider.module.css';
 import { PriceRange } from '../../';
+import getPriceString from '../../../../utils/getPriceString';
 
 interface PurchaseProps {
   onChange: (rangeStart: number, rangeEnd: number) => void;
@@ -23,7 +23,7 @@ export default function Purchase({ onChange, defaultValues }: PurchaseProps) {
           defaultRangeEnd={defaultValues[0][1]}
           onChange={onChange}
           markers={[100_000_000, 250_000_000]}
-          priceToString={getPriceLabelString}
+          priceToString={getPriceString}
           scaleMethod="square"
         />
       </div>
