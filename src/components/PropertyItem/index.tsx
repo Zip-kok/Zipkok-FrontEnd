@@ -12,8 +12,8 @@ interface PropertyItemProps {
   like: boolean;
   type: string;
   priceType: string;
+  deposit: number;
   price: number;
-  maintenanceFee: number | null;
   address: string;
   propertyName: string;
   imageUrl: string | null;
@@ -25,8 +25,8 @@ export default function PropertyItem({
   like,
   type,
   priceType,
+  deposit,
   price,
-  maintenanceFee,
   address,
   propertyName,
   imageUrl,
@@ -62,9 +62,13 @@ export default function PropertyItem({
         {/* 매물에 대한 상세 내용 */}
         <div className={styles.detail}>
           <div className={styles.price}>
-            {priceType === '월세'
-              ? `${price.toLocaleString()} / ${maintenanceFee?.toLocaleString()}`
-              : `${price.toLocaleString()}`}
+            {
+              {
+                월세: `${deposit?.toLocaleString()} / ${price?.toLocaleString()}`,
+                전세: `${deposit?.toLocaleString()}`,
+                매매: `${price?.toLocaleString()}`,
+              }[priceType]
+            }
           </div>
           <div className={styles.address}>{address}</div>
           <div className={styles.property}>{propertyName}</div>

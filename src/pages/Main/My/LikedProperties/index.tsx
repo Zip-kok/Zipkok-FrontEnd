@@ -33,10 +33,10 @@ const LikedProperties = () => {
           key={property.realEstateId}
           id={property.realEstateId}
           like={true}
-          type={''}
-          priceType={''}
+          type={property.realestateType}
+          priceType={property.transactionType}
           price={property.price}
-          maintenanceFee={0}
+          deposit={property.deposit}
           address={property.address}
           propertyName={property.agent}
           imageUrl={property.imageURL}
