@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import BottomSheet from 'components/BottomSheet';
 import useUIStore from 'contexts/uiStore';
 
+import HomeBottomSheet from './BottomSheet';
 import { Filter } from './components';
 import styles from './Home.module.css';
 import KakaoMap from './KakaoMap';
@@ -54,6 +55,7 @@ export default function Home() {
       <div>
         <KakaoMap />
       </div>
+      <HomeBottomSheet />
     </div>
   );
 }

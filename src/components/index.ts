@@ -1,5 +1,6 @@
 import AddressSearchPage from './AddressSearchPage';
 import BottomBtn from './BottomBtn';
+import BottomSheet from './BottomSheet';
 import Btn from './Btn';
 import CheckBox from './CheckBox';
 import CompleteAnim from './CompleteAnim';
@@ -32,6 +33,7 @@ export {
   CompleteAnim,
   EditFilterBtn,
   EditGenderBtn,
+  BottomSheet,
   Header,
   Highlight,
   IconBtn,
