@@ -6,7 +6,11 @@
   transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 8px;
-  padding: 36px 25px 13px 25px;
+  padding: 36px 36px 42px 36px;
+  width: 90%;
+  max-width: 300px;
+  min-height: 180px;
+  gap: 12px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,19 +22,6 @@
   font-size: 16px;
   font-weight: 600;
   margin: 0;
-  margin-bottom: 12px;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 691.2px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 90%;
-  }
 }
 
 .description {
@@ -40,25 +31,34 @@
   font-size: 12px;
   font-weight: 400;
   margin: 0;
-  margin-bottom: 32px;
 }
 
 .buttonContainer {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  height: 36px;
   width: 100%;
+  padding: 0 36px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 12px;
 }
 
 .button {
   width: 100%;
-  height: 36px;
+  height: 100%;
   border-radius: 8px;
   font-family: Pretendard;
   font-size: 14px;
   font-weight: 600;
   border: none;
+}
+
+.button:only-child {
+  width: 120px;
 }
 
 .secondary {
