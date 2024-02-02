@@ -1,8 +1,8 @@
 {
-  "code": 7003,
-  "message": "콕 세부정보 조회 성공",
+  "code": 8001,
+  "message": "매물 상세 정보를 성공적으로 가져왔습니다.",
   "result": {
-    "kokId": 1,
+    "realEstateId": 1,
     "imageInfo": {
       "imageNumber": 9,
       "imageUrls": [
@@ -11,19 +11,20 @@
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUv5isbxaUyLPKOQsVs8V6sxEp1WFK1v7u1rSVpIxv_g&s"
       ]
     },
-    "address": "자양로 23나길 24",
+    "address": "서울시 관악구 신림동 132-123",
     "detailAddress": "506호",
     "transactionType": "월세",
     "deposit": 1000,
     "price": 50,
     "detail": "국민대 리모델링 부리식 풀옵션 2층 엘레베이터 s북한산보국문역  3분 \n국민대ㅁㄴㄹㄴㅁㄻㄻㄴㄻㄴㄻㄴ\nㄹㄴㅁㄹㄹㄴㄻㄹㄴㄻㄹㄴ김두루미김두루미김김범김범수김김점범스",
-    "area_size": 37.4,
+    "areaSize": 37.4,
     "pyeongsu": 11,
     "realEstateType": "투룸",
     "floorNum": 6,
     "administrativeFee": 5,
     "latitude": 37.4599,
     "longitude": 126.952,
-    "isZimmed": true
+    "isZimmed": false,
+    "isKokked": false
   }
 }

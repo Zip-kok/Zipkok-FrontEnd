@@ -1,6 +1,8 @@
 import Home from 'pages/Main/Home';
 import Search from 'pages/Main/Home/Search';
 
+import Item from '../pages/Main/Home/Item/index';
+
 const HomeRoute = {
   children: [
     {
@@ -8,6 +10,7 @@ const HomeRoute = {
       element: <Home />,
     },
     { path: 'search', element: <Search /> },
+    { path: 'item', element: <Item /> },
   ],
 };
 

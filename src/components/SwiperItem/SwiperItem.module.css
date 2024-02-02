@@ -1,0 +1,34 @@
+.swiper {
+  width: 100%;
+  height: 180px;
+  flex-direction: row;
+}
+
+.swiperSlide {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  > img {
+    display: block;
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+}
+
+.priceInf {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.addressInf {
+  color: var(--gray-color-gray050_text, #4b5259);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
