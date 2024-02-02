@@ -1,6 +1,19 @@
 import api from './';
 
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
+
+export interface RawRealEstate {
+  realEstateId: number;
+  imageURL: string;
+  deposit: number;
+  price: number;
+  address: string;
+  agent: string;
+  transactionType: string;
+  realestateType: string;
+}
 
 export interface RealEstate {
   realEstateId: number;
@@ -9,10 +22,12 @@ export interface RealEstate {
   price: number;
   address: string;
   agent: string;
+  transactionType: PriceType;
+  realestateType: HouseType;
 }
 
-interface GetZimResult {
-  realEstateInfo: RealEstate[];
+interface GetZimResult<T> {
+  realEstateInfo: T[];
 }
 
 /**
@@ -24,7 +39,7 @@ export async function getZim() {
   const params = {};
   const authRequired = true;
 
-  const res = await api<ZipkokResponse<GetZimResult>>(
+  const res = await api<ZipkokResponse<GetZimResult<RawRealEstate>>>(
     path,
     method,
     authRequired,
@@ -33,5 +48,43 @@ export async function getZim() {
     undefined,
   );
 
-  return res;
+  function convertTransactionType(type: string): PriceType {
+    switch (type) {
+      case 'MONTHLY':
+        return '월세';
+      case 'YEARLY':
+        return '전세';
+      case 'PURCHASE':
+        return '매매';
+      default:
+        return '월세';
+    }
+  }
+
+  function convertHouseType(type: string): HouseType {
+    switch (type) {
+      case 'APARTMENT':
+        return '아파트';
+      case 'ONEROOM':
+        return '원룸';
+      case 'TWOROOM':
+        return '빌라/투룸';
+      case 'OFFICETELL':
+        return '오피스텔';
+      default:
+        return '아파트';
+    }
+  }
+
+  return {
+    ...res,
+    result: {
+      ...res.result,
+      realEstateInfo: res.result.realEstateInfo.map((realEstate) => ({
+        ...realEstate,
+        transactionType: convertTransactionType(realEstate.transactionType),
+        realestateType: convertHouseType(realEstate.realestateType),
+      })),
+    },
+  } as ZipkokResponse<GetZimResult<RealEstate>>;
 }
