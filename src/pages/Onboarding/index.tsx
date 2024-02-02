@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { onBoarding } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
-import useModalStore from 'contexts/modalStore';
+import useModal from 'contexts/modalStore';
 import { StatusCode } from 'types/StatusCode';
 
 import Complete from './Complete';
@@ -21,10 +21,10 @@ export type PriceRange = [number, number];
 
 export default function Onboarding() {
   const navigate = useNavigate();
-  const modalStore = useModalStore();
+  const modal = useModal();
 
   function handleSkip() {
-    modalStore
+    modal
       .open({
         title: '홈 화면으로 이동하시겠어요?',
         description:
@@ -172,7 +172,7 @@ export default function Onboarding() {
             }
 
             if (isDefinedError) {
-              modalStore
+              modal
                 .open({
                   title: '올바르지 않은 값이 있어요.',
                   description: res.message,
@@ -184,7 +184,7 @@ export default function Onboarding() {
                   else navigate('/');
                 });
             } else {
-              modalStore
+              modal
                 .open({
                   title: '오류가 발생했어요.',
                   description: res.message,
@@ -197,7 +197,7 @@ export default function Onboarding() {
           }
         })
         .catch((err) => {
-          modalStore
+          modal
             .open({
               title: '오류가 발생했어요.',
               description: err.message,

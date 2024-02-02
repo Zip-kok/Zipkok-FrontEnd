@@ -4,6 +4,7 @@ import propertyImg_null from 'assets/img/common/propertyImg_null.svg';
 import heartFillIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart_white.svg';
 import listIcon from 'assets/img/line(2)/list.svg';
+import getPriceString from 'utils/getPriceString';
 
 import styles from './PropertyItem.module.css';
 
@@ -12,8 +13,8 @@ interface PropertyItemProps {
   like: boolean;
   type: string;
   priceType: string;
+  deposit: number;
   price: number;
-  maintenanceFee: number | null;
   address: string;
   propertyName: string;
   imageUrl: string | null;
@@ -25,8 +26,8 @@ export default function PropertyItem({
   like,
   type,
   priceType,
+  deposit,
   price,
-  maintenanceFee,
   address,
   propertyName,
   imageUrl,
@@ -62,9 +63,13 @@ export default function PropertyItem({
         {/* 매물에 대한 상세 내용 */}
         <div className={styles.detail}>
           <div className={styles.price}>
-            {priceType === '월세'
-              ? `${price.toLocaleString()} / ${maintenanceFee?.toLocaleString()}`
-              : `${price.toLocaleString()}`}
+            {
+              {
+                월세: `${getPriceString(deposit)} / ${getPriceString(price)}`,
+                전세: `${getPriceString(deposit)}`,
+                매매: `${getPriceString(price)}`,
+              }[priceType]
+            }
           </div>
           <div className={styles.address}>{address}</div>
           <div className={styles.property}>{propertyName}</div>

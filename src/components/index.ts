@@ -10,7 +10,6 @@ import Highlight from './Highlight';
 import IconBtn from './IconBtn';
 import IconText from './IconText';
 import KoklistGroup from './KoklistGroup';
-import Modal from './Modal';
 import NaviBar from './NaviBar';
 import OptionsComponent from './Options';
 import PropertyInfo from './PropertyInfo';
