@@ -4,7 +4,7 @@ import getScaler from './getScaler';
 import getUnscaler from './getUnscaler';
 import styles from './RangeSlider.module.css';
 
-export type ScaleMethod = 'linear' | 'square' | 'logarithmic' | 'exponential';
+export type ScaleMethod = 'linear' | 'square';
 
 // markers: 분기점 배열
 // scaleMethod: 속도 조절 (square)
