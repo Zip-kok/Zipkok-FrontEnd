@@ -96,7 +96,16 @@ const KokItem = () => {
     },
     {
       name: '후기',
-      element: <ReView />,
+      element: (
+        <Property.Review
+          impressions={reviewDummy.result.impressions}
+          facilityStarCount={reviewDummy.result.facilityStarCount}
+          infraStarCount={reviewDummy.result.infraStarCount}
+          structureStarCount={reviewDummy.result.structureStarCount}
+          vibeStarCount={reviewDummy.result.vibeStarCount}
+          reviewText={reviewDummy.result.reviewText}
+        />
+      ),
     },
   ]);
 
