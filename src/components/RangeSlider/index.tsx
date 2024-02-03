@@ -59,9 +59,13 @@ export default function RangeSlider({
   function handleSliderChange(index: number) {
     console.assert(index === 1 || index === 2, 'index must be 1 or 2');
 
-    const value = (index === 1 ? slider1 : slider2).current!.valueAsNumber;
-    const oppositeValue = (index === 1 ? slider2 : slider1).current!
-      .valueAsNumber;
+    const value = (index === 1 ? slider1 : slider2).current?.valueAsNumber;
+    const oppositeValue = (index === 1 ? slider2 : slider1).current
+      ?.valueAsNumber;
+
+    if (value === undefined || oppositeValue === undefined) {
+      return;
+    }
 
     if (value > oppositeValue) {
       setVisualStart(oppositeValue);
