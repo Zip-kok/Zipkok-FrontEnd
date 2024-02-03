@@ -51,27 +51,28 @@
   font-weight: 700;
 }
 
+.memoContainer {
+  margin: 0 20px;
+}
+
 .memo {
   color: var(--gray-color-gray050_text, #4b5259);
   font-family: Pretendard;
   font-size: 14px;
   font-weight: 400;
-  margin: 0 20px;
+  margin: 0;
 }
 
 .memo:not(.expanded) {
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .showMoreBtn {
   background-color: #fff;
   border: none;
   color: #fa4549;
-  writing-mode: horizontal-tb;
-  white-space: nowrap;
-  align-self: flex-end;
+  padding: 0;
 }

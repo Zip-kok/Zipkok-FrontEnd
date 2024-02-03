@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -33,12 +33,29 @@ export default function Header({
 }: HeaderProps) {
   const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false);
   const [isMemoExpanded, setIsMemoExpanded] = useState(false);
+  const [isMemoClamped, setIsMemoClamped] = useState(false);
 
-  function isMemoLong() {
-    if (!memo) return false;
-    const lineCount = memo.split('\n').length;
-    return lineCount > 3 || memo.length > 86;
-  }
+  const memoRef = useRef<HTMLParagraphElement>(null);
+
+  // memo의 높이가 클램핑되는지 확인
+  useEffect(() => {
+    // ResizeObserver 인스턴스 생성
+    const observer = new ResizeObserver((entries) => {
+      if (isMemoExpanded) return;
+
+      const isClamped =
+        entries[0].target.scrollHeight > entries[0].contentRect.height;
+      setIsMemoClamped(isClamped);
+    });
+
+    // memoRef observe 시작
+    if (memoRef.current) observer.observe(memoRef.current);
+
+    // cleanup
+    return () => {
+      observer?.disconnect();
+    };
+  }, [memoRef, isMemoExpanded]);
 
   return (
     <>
@@ -84,14 +101,19 @@ export default function Header({
       </div>
 
       {/* 메모 */}
-      <div className={styles.memo}>
-        <div className={isMemoExpanded ? '' : styles.expanded}>{memo}</div>
-        {!isMemoExpanded && isMemoLong() && (
+      <div className={styles.memoContainer}>
+        <p
+          className={`${styles.memo} ${isMemoExpanded ? styles.expanded : ''}`}
+          ref={memoRef}
+        >
+          {memo}
+        </p>
+        {isMemoClamped && (
           <button
             className={styles.showMoreBtn}
-            onClick={() => setIsMemoExpanded(true)}
+            onClick={() => setIsMemoExpanded((prev) => !prev)}
           >
-            더 보기
+            {isMemoExpanded ? '접기' : '더보기'}
           </button>
         )}
       </div>
