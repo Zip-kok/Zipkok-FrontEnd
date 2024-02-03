@@ -127,6 +127,41 @@ export default function RangeSlider({
     }
   }
 
+  // 라벨의 zIndex 및 투명도 조정
+  function adjustLabelStyle(index: number) {
+    console.assert(index === 0 || index === 1, 'index must be 0 or 1');
+
+    if (startLabelRef.current === null || endLabelRef.current === null) return;
+
+    const startLabelBound = startLabelRef.current.getBoundingClientRect();
+    const endLabelBound = endLabelRef.current.getBoundingClientRect();
+
+    // zIndex 조정
+    if (index === 0) {
+      startLabelRef.current.style.setProperty('z-index', '1');
+      endLabelRef.current.style.setProperty('z-index', '0');
+    } else {
+      startLabelRef.current.style.setProperty('z-index', '0');
+      endLabelRef.current.style.setProperty('z-index', '1');
+    }
+
+    // 투명도 조정
+    const distance = endLabelBound.left - startLabelBound.right;
+    let opacity = distance / 100;
+    if (index === 0) {
+      opacity += startLabelBound.width / 100;
+      startLabelRef.current.style.removeProperty('opacity');
+      endLabelRef.current.style.setProperty('opacity', opacity.toString());
+    } else {
+      opacity += endLabelBound.width / 100;
+      endLabelRef.current.style.removeProperty('opacity');
+      startLabelRef.current.style.setProperty('opacity', opacity.toString());
+    }
+  }
+
+  useEffect(() => adjustLabelStyle(0), [visualStart]);
+  useEffect(() => adjustLabelStyle(1), [visualEnd]);
+
   return (
     <div className={styles.container}>
       {/* range input thumb 위에 있는 input의 현재 값 표시 */}
