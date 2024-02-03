@@ -47,7 +47,6 @@
 .label {
   position: absolute;
   top: 50%;
-  transform: translate(-50%, calc(-100% - 12px - 5px));
   color: var(--gray-color-gray050_text, #4b5259);
   font-family: Pretendard;
   font-size: 14px;

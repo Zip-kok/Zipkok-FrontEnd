@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import getScaler from './getScaler';
 import getUnscaler from './getUnscaler';
@@ -34,9 +34,33 @@ export default function RangeSlider({
   const getScaledValue = getScaler(min, max, scaleMethod);
   const getVisualValue = getUnscaler(min, max, scaleMethod);
 
-  //슬라이더 html 요소를 가르킴
+  //슬라이더 html 요소를 가리킴
   const slider1 = useRef<HTMLInputElement>(null);
   const slider2 = useRef<HTMLInputElement>(null);
+
+  // 라벨 html 요소를 가리킴
+  const [startLabelWidth, setStartLabelWidth] = useState(0);
+  const [endLabelWidth, setEndLabelWidth] = useState(0);
+  const startLabelRef = useRef<HTMLDivElement>(null);
+  const endLabelRef = useRef<HTMLDivElement>(null);
+
+  // 라벨의 너비 추적
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === startLabelRef.current) {
+          setStartLabelWidth(entry.contentRect.width);
+        } else if (entry.target === endLabelRef.current) {
+          setEndLabelWidth(entry.contentRect.width);
+        }
+      }
+    });
+
+    if (startLabelRef.current) observer.observe(startLabelRef.current);
+    if (endLabelRef.current) observer.observe(endLabelRef.current);
+
+    return () => observer.disconnect();
+  }, [startLabelRef, endLabelRef]);
 
   // 반환 값
   const [start, setStart] = useState<number>(defaultRangeStart);
@@ -50,9 +74,9 @@ export default function RangeSlider({
     getVisualValue(defaultRangeEnd),
   );
 
-  // 분기점 좌표 계산 함수
-  function getLeftStyle(value: number) {
-    return `calc((${value} / 100 * (100% - 24px) + 12px)`;
+  // left 계산 함수
+  function getLeftStyle(value: number, width = 0) {
+    return `max(${width / 2}px, calc(${value} / 100 * (100% - 24px) + 12px))`;
   }
 
   // min max 전환 함수
@@ -84,22 +108,39 @@ export default function RangeSlider({
     onChange(start, end);
   }
 
+  function getLabelStyle(
+    visualValue: number,
+    width: number,
+  ): React.CSSProperties {
+    if (visualValue < 50) {
+      return {
+        transform: 'translate(-50%, calc(-100% - 12px - 5px))',
+        left: getLeftStyle(visualValue, width),
+        textAlign: 'left',
+      };
+    } else {
+      return {
+        transform: 'translate(50%, calc(-100% - 12px - 5px))',
+        right: getLeftStyle(100 - visualValue, width),
+        textAlign: 'right',
+      };
+    }
+  }
+
   return (
     <div className={styles.container}>
       {/* range input thumb 위에 있는 input의 현재 값 표시 */}
       <div
         className={styles.label}
-        style={{
-          left: getLeftStyle(visualStart),
-        }}
+        style={getLabelStyle(visualStart, startLabelWidth)}
+        ref={startLabelRef}
       >
         {label(start)}
       </div>
       <div
         className={styles.label}
-        style={{
-          left: getLeftStyle(visualEnd),
-        }}
+        style={getLabelStyle(visualEnd, endLabelWidth)}
+        ref={endLabelRef}
       >
         {label(end)}
       </div>
