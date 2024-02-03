@@ -8,7 +8,6 @@ import data from 'models/kokItemDetail.json';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import Contract from './components/Contract';
 import InsideHome from './components/InsideHome';
 import NearHome from './components/NearHome';
 import ReView from './components/ReView';
@@ -71,7 +70,7 @@ const KokItem = () => {
     },
     {
       name: '중개 계약',
-      element: <Contract />,
+      element: <Property.Contract options={[]} pictures={[]} />,
     },
     {
       name: '후기',
