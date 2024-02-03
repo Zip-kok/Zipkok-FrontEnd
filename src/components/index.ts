@@ -1,5 +1,6 @@
 import AddressSearchPage from './AddressSearchPage';
 import BottomBtn from './BottomBtn';
+import BottomSheet from './BottomSheet';
 import Btn from './Btn';
 import CheckBox from './CheckBox';
 import CompleteAnim from './CompleteAnim';
@@ -10,7 +11,6 @@ import Highlight from './Highlight';
 import IconBtn from './IconBtn';
 import IconText from './IconText';
 import KoklistGroup from './KoklistGroup';
-import Modal from './Modal';
 import NaviBar from './NaviBar';
 import OptionsComponent from './Options';
 import PropertyComponents from './Property';
@@ -21,6 +21,7 @@ import Splash from './Splash';
 import StarRating from './StarRating';
 import SwiperCom from './Swiper';
 import Swiper_modal from './Swiper_modal';
+import SwiperItem from './SwiperItem';
 import TextInput from './TextInput';
 import TopMenu from './TopMenu';
 
@@ -32,6 +33,7 @@ export {
   CompleteAnim,
   EditFilterBtn,
   EditGenderBtn,
+  BottomSheet,
   Header,
   Highlight,
   IconBtn,
@@ -49,5 +51,5 @@ export {
   TextInput,
   TopMenu,
   StarRating,
-  Modal,
+  SwiperItem,
 };

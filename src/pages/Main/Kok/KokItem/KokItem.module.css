@@ -8,9 +8,6 @@
   }
 }
 
-h4 {
-  margin: 0;
-}
 .body {
   display: flex;
   flex-direction: column;
@@ -148,6 +145,10 @@ h4 {
   flex-direction: column;
   padding: 20px;
   gap: 10px;
+
+  > h4 {
+    margin: 0 0 10px 0;
+  }
 }
 
 .menu {

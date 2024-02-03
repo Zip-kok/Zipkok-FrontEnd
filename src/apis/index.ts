@@ -3,13 +3,25 @@ import { url } from 'constants/api';
 import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
+import { deleteZim } from './deleteZim';
+import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { onBoarding } from './onBoarding';
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
 import { signIn } from './signIn';
+import { zim } from './zim';
 
-export { searchAddress, signIn, kakaoLogin, refreshTokens, onBoarding };
+export {
+  searchAddress,
+  signIn,
+  kakaoLogin,
+  refreshTokens,
+  onBoarding,
+  getZim,
+  zim,
+  deleteZim,
+};
 
 /**
  * 필요한 경우에 토큰 갱신을 먼저 수행하고 서버에 요청을 보냅니다.

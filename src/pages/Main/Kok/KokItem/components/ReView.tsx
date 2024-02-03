@@ -55,7 +55,7 @@ const ReView = () => {
       <div></div>
 
       <div className={styles.reviewTextCtn}>
-        <textarea defaultValue={reviewText} />
+        <textarea defaultValue={reviewText} readOnly={true} />
       </div>
 
       <div className={styles.blank} />

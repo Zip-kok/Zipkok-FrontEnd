@@ -9,6 +9,7 @@ import { IconBtn } from 'components';
 import IconText from 'components/IconText';
 import data from 'models/kokItemDetail.json';
 
+import StaticMap from '../../../../../components/StaticMap/index';
 import styles from '../KokItem.module.css';
 
 const BasicInf = () => {
@@ -42,8 +43,7 @@ const BasicInf = () => {
         <div className={styles.blank} />
         <h4>위치</h4>
       </div>
-
-      <img className={styles.map} />
+      <StaticMap lat={result.latitude} lng={result.longitude} />
       <div className={styles.blank} />
       <div className={styles.blank} />
       <div className={styles.blank} />
