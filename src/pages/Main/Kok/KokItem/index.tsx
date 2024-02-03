@@ -13,9 +13,6 @@ import reviewDummy from 'models/kokItemReview.json';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import InsideHome from './components/InsideHome';
-import NearHome from './components/NearHome';
-import ReView from './components/ReView';
 import styles from './KokItem.module.css';
 
 import type { Address } from 'types/Address';
@@ -73,7 +70,12 @@ const KokItem = () => {
     },
     {
       name: '집 주변',
-      element: <NearHome />,
+      element: (
+        <Property.Outer
+          highlights={outerDummy.result.highlights}
+          options={outerDummy.result.options}
+        />
+      ),
     },
     {
       name: '집 내부',
