@@ -20,5 +20,7 @@ export default function getPriceString(value: number, truncate = true) {
     count++;
   }
 
+  if (count === 0) result = '0';
+
   return result.trim();
 }
