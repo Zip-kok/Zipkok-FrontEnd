@@ -19,6 +19,7 @@ import RadioBtn from './RadioBtn';
 import RangeSlider from './RangeSlider';
 import Splash from './Splash';
 import StarRating from './StarRating';
+import StaticMap from './StaticMap';
 import SwiperCom from './Swiper';
 import Swiper_modal from './Swiper_modal';
 import SwiperItem from './SwiperItem';
@@ -52,4 +53,5 @@ export {
   TopMenu,
   StarRating,
   SwiperItem,
+  StaticMap,
 };

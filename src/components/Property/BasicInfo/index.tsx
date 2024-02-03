@@ -1,20 +1,17 @@
 import React from 'react';
 
-import defaultThumbnail from 'assets/img/common/defaultThumbnail.png';
-import mapImg from 'assets/img/common/map.png';
 import floorIcon from 'assets/img/line(1)/floor.svg';
 import linkIcon from 'assets/img/line(1)/link.svg';
 import maintanenceFeeIcon from 'assets/img/line(1)/money.svg';
 import areaIcon from 'assets/img/line(1)/size.svg';
 import houseTypeIcon from 'assets/img/line(1)/structure.svg';
+import { StaticMap } from 'components';
 
 import styles from './BasicInfo.module.css';
-import BottomBtn from '../../BottomBtn';
 import IconBtn from '../../IconBtn';
 
 import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
-import type { PriceType } from 'types/PriceType';
 
 interface BasicInfoProps {
   area?: number;
@@ -85,12 +82,10 @@ export default function BasicInfo({
         <div className={styles.header}>
           <span className={styles.title}>위치</span>
         </div>
-        {/* TODO: address의 위치 정보를 이용해 카카오맵 띄우기 */}
         <div className={styles.map}>
-          <img src={mapImg} />
+          <StaticMap lat={address.y} lng={address.x} />
         </div>
       </div>
-      ;
     </>
   );
 }
