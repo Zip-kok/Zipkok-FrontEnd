@@ -77,7 +77,13 @@ const KokItem = () => {
     },
     {
       name: '집 내부',
-      element: <InsideHome />,
+      element: (
+        <Property.Inner
+          furnitureOptions={innerDummy.result.furnitureOptions}
+          direction={innerDummy.result.direction}
+          options={innerDummy.result.options}
+        />
+      ),
     },
     {
       name: '중개 계약',

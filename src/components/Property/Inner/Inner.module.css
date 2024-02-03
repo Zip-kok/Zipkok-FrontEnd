@@ -1,0 +1,42 @@
+.furnitureCtn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.furniture {
+  display: flex;
+  width: 72px;
+  height: 72px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px solid var(--gray-color-gray050_text, #4b5259);
+  color: var(--gray-color-gray050_text, #4b5259);
+  text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+  box-sizing: border-box;
+}
+
+.directCtn {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.directCtn > input {
+  margin-top: 20px;
+  width: 320px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--gray-color-gray030_text, #9fa4a9);
+  background: var(--gray-color-white, #fff);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  padding-left: 16px;
+  box-sizing: border-box;
+}

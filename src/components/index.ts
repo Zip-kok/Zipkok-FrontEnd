@@ -6,6 +6,7 @@ import CheckBox from './CheckBox';
 import CompleteAnim from './CompleteAnim';
 import EditFilterBtn from './EditFilterBtn';
 import EditGenderBtn from './EditGenderBtn';
+import Furnitures from './Furnitures';
 import Header from './Header';
 import Highlight from './Highlight';
 import IconBtn from './IconBtn';
@@ -54,4 +55,5 @@ export {
   StarRating,
   SwiperItem,
   StaticMap,
+  Furnitures,
 };
