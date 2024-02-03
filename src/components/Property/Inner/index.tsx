@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OptionsComponent, Furnitures } from 'components';
+import { OptionsComponent, Furnitures, TextInput } from 'components';
 
 import styles from './Inner.module.css';
 
@@ -25,24 +25,28 @@ export default function Inner({
 
   return (
     <>
+      {/* 가구 옵션 */}
       <div className={styles.furnitureCtn}>
         {filteredFurnitures.map((tag, index) => (
-          <p className={styles.furniture} key={index}>
+          <div className={styles.furniture} key={index}>
             <img src={tag.img} />
             {tag.name}
-          </p>
+          </div>
         ))}
       </div>
-      <div className={styles.directCtn}>
-        <h4>집 방향</h4>
-        <input type="text" value={direction} readOnly={true} />
+
+      {/* 방향 */}
+      <div className={styles.header}>
+        <span className={styles.title}>집 방향</span>
+      </div>
+      <div className={styles.directionContainer}>
+        <TextInput value={direction} style={'roundedBox'} readOnly />
       </div>
 
-      <div className={styles.optionsCtn}>
+      {/* 체크리스트 */}
+      <div className={styles.optionContainer}>
         <OptionsComponent optionData={options} readOnly={true} />
       </div>
-      <div className={styles.blank} />
-      <div className={styles.blank} />
     </>
   );
 }

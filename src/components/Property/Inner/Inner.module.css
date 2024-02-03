@@ -1,7 +1,28 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  margin: 0 20px;
+}
+
+.title {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.directionContainer {
+  margin: 0 20px 48px 20px;
+}
+
 .furnitureCtn {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin: 0 20px 36px 20px;
 }
 
 .furniture {
@@ -20,23 +41,6 @@
   box-sizing: border-box;
 }
 
-.directCtn {
-  display: flex;
-  flex-direction: column;
-  padding-top: 20px;
-}
-
-.directCtn > input {
-  margin-top: 20px;
-  width: 320px;
-  height: 48px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border: 1px solid var(--gray-color-gray030_text, #9fa4a9);
-  background: var(--gray-color-white, #fff);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  padding-left: 16px;
-  box-sizing: border-box;
+.optionContainer {
+  margin: 0 20px;
 }
