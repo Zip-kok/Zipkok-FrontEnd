@@ -70,24 +70,23 @@ export default function SignIn() {
           if (res.code === StatusCode.REGISTRATION_SUCCESS) {
             setStep('complete');
           } else {
-            let isDefinedError = false;
+            let isDefinedError = true;
             let errorStep: Step;
             switch (res.code) {
               // 닉네임이 없거나 잘못된 형식
               case StatusCode.INVALID_NICKNAME_FORMAT:
-                isDefinedError = true;
                 errorStep = 'nickname';
                 break;
               // 성별이 없거나 잘못된 형식
               case StatusCode.INVALID_GENDER_FORMAT:
-                isDefinedError = true;
                 errorStep = 'gender';
                 break;
               // 생년월일이 없거나 잘못된 형식
               case StatusCode.INVALID_BIRTHDAY_FORMAT:
-                isDefinedError = true;
                 errorStep = 'birth';
                 break;
+              default:
+                isDefinedError = false;
             }
 
             if (isDefinedError) {

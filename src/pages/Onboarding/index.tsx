@@ -141,7 +141,7 @@ export default function Onboarding() {
           if (res.code === StatusCode.MEMBER_INFO_UPDATE_SUCCESS) {
             setStep('complete');
           } else {
-            let isDefinedError = false;
+            let isDefinedError = true;
             let errorStep: Step;
             switch (res.code) {
               // 주소가 없거나 최대 입력 범위 초과
@@ -151,24 +151,22 @@ export default function Onboarding() {
                 break;
               // 위도, 경도가 없거나 범위 초과
               case StatusCode.INVALID_LAT_LNG:
-                isDefinedError = true;
                 errorStep = 'location';
                 break;
               // 최소 가격이 없거나 0 이하
               case StatusCode.INVALID_MIN_PRICE:
-                isDefinedError = true;
                 errorStep = 'price';
                 break;
               // 최대 가격이 없거나 0 이하
               case StatusCode.INVALID_MAX_PRICE:
-                isDefinedError = true;
                 errorStep = 'price';
                 break;
               // 관심매물유형 오류
               case StatusCode.INVALID_INTEREST_TYPE:
-                isDefinedError = true;
                 errorStep = 'type';
                 break;
+              default:
+                isDefinedError = false;
             }
 
             if (isDefinedError) {
