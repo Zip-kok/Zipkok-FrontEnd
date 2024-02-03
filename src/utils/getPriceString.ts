@@ -3,7 +3,7 @@
  * @param value 수
  * @returns 변환된 문자열
  */
-export default function getPriceString(value: number) {
+export default function getPriceString(value: number, truncate = true) {
   const unit = ['', '만', '억', '조', '경', '해'];
   const unitCount = 10000;
 
@@ -15,12 +15,12 @@ export default function getPriceString(value: number) {
     const current = temp % unitCount;
     temp = Math.floor(temp / unitCount);
 
-    if (current > 0) {
+    if (!(truncate && count === 0) && current > 0)
       result = `${current.toLocaleString()}${unit[count]} ${result}`;
-    }
-
     count++;
   }
 
-  return result.trim();
+  const trimmed = result.trim();
+  if (trimmed === '') result = '0';
+  return trimmed;
 }
