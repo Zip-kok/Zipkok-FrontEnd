@@ -18,7 +18,7 @@ const Wrapper = styled(motion.div)`
   right: 0;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  background-color: #fff;
+
   height: ${BOTTOM_SHEET_HEIGHT}px;
   /* 움직임 효과 */
   transition: transform 150ms ease-out;
@@ -27,6 +27,7 @@ const Wrapper = styled(motion.div)`
 const BottomSheetContent = styled.div`
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  background-color: white;
 `;
 
 const BottomSheet = () => {

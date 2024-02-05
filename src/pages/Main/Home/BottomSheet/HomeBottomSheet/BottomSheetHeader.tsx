@@ -12,10 +12,12 @@ const Wrapper = styled.div`
   height: 16px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+
   position: relative;
   padding: 4px 0;
   justify-content: center;
   align-items: center;
+  background-color: white;
 `;
 
 const Handle = styled.div`

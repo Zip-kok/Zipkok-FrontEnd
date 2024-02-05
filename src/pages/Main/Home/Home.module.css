@@ -16,3 +16,59 @@
 .bottomSheet {
   z-index: 101;
 }
+
+.notFilterCtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 32px;
+  padding: 12px 20px;
+  color: var(--gray-color-gray050_text, #4b5259);
+
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  z-index: 99;
+  background-color: white;
+}
+.filterBtn {
+  background-color: transparent;
+  border: none;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.filterCtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 12px 20px;
+  z-index: 99;
+  background-color: white;
+}
+
+.filter {
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  text-align: center;
+
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  border-radius: 16px;
+  border: 1px solid var(--gray-color-gray030_text, #9fa4a9);
+  background: var(--gray-color-white, #fff);
+}
