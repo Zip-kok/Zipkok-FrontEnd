@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import BottomSheet from 'components/BottomSheet';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import getPriceString from 'utils/getPriceString';
 
 import HomeBottomSheet from './BottomSheet';
 import { Filter, SearchBox } from './components';
@@ -64,30 +65,39 @@ export default function Home() {
         <>
           <div className={styles.bottomSheet}>
             <BottomSheet>
-              <Filter />
+              <Filter setFilterOpen={setFilterOpen} />
             </BottomSheet>
           </div>
           <div className={styles.overlay} onClick={handleOverlayClick}></div>
         </>
       )}
+
       <SearchBox></SearchBox>
 
       {/* 필터가 설정되었을 때와 설정되지 않았을 때의 화면 */}
       {filterSet ? (
         // 필터가 설정되었을 때 보여줄 화면
         <div className={styles.filterCtn}>
-          <div className={styles.filter} onClick={handleFilterClick}>
-            {realEstateType}
-          </div>
-          <div className={styles.filter} onClick={handleFilterClick}>
-            {transactionType}
-          </div>
-          <div className={styles.filter} onClick={handleFilterClick}>
-            {priceMax && `${priceMax}이하`}
-          </div>
-          <div className={styles.filter} onClick={handleFilterClick}>
-            {depositMax && `${depositMax}이하`}
-          </div>
+          {realEstateType && (
+            <div className={styles.filter} onClick={handleFilterClick}>
+              {realEstateType}
+            </div>
+          )}
+          {transactionType && (
+            <div className={styles.filter} onClick={handleFilterClick}>
+              {transactionType}
+            </div>
+          )}
+          {priceMax !== undefined && (
+            <div className={styles.filter} onClick={handleFilterClick}>
+              {`${getPriceString(priceMax, true)}이하`}
+            </div>
+          )}
+          {depositMax !== undefined && (
+            <div className={styles.filter} onClick={handleFilterClick}>
+              {`${getPriceString(depositMax, true)}이하`}
+            </div>
+          )}
         </div>
       ) : (
         // 필터가 설정되지 않았을 때 보여줄 화면
