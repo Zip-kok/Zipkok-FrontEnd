@@ -14,6 +14,7 @@ import quit from 'assets/img/line(2)/quit.svg';
 import { IconBtn } from 'components';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
+import { StatusCode } from 'types/StatusCode';
 import logout from 'utils/logout';
 
 import styles from './Mypage.module.css';
@@ -49,19 +50,42 @@ const Mypage = () => {
   const handleRecentClick = () => {};
   const handleNoticeClick = () => {};
   const handleInquiryClick = () => {};
-  const handleLogoutClick = () => {
-    modal
-      .open({
-        title: '로그아웃하시겠어요?',
-        primaryButton: '로그아웃',
-        secondaryButton: '취소',
-      })
-      .then((res) => {
-        if (res === 'primary') {
-          logout();
-          navigate('/login');
-        }
+  const handleLogoutClick = async () => {
+    // 로그아웃 확인 모달
+    const res = await modal.open({
+      title: '로그아웃하시겠어요?',
+      description: '로그아웃하면 다시 로그인해야 합니다.',
+      primaryButton: '로그아웃',
+      secondaryButton: '취소',
+    });
+
+    if (res !== 'primary') return;
+
+    // 로그아웃 버튼 클릭 시
+    // TODO: StatusCode 정의 후 수정
+    const logoutResult = await logout().catch((e) => {
+      modal.open({
+        title: '로그아웃에 실패했어요.',
+        description: e.message,
+        primaryButton: '확인',
       });
+      return;
+    });
+
+    if (!logoutResult) return;
+
+    // 로그아웃 성공 시
+    if (logoutResult.code === (5027 as StatusCode)) {
+      navigate('/login');
+      return;
+    }
+
+    // 로그아웃 실패 시
+    modal.open({
+      title: '로그아웃에 실패했어요.',
+      description: logoutResult.message,
+      primaryButton: '확인',
+    });
   };
   const handleQuitClick = () => {};
 
