@@ -1,13 +1,19 @@
 import MenuPath from 'types/MenuPath';
 import { create } from 'zustand';
 
+export interface Button {
+  id: string;
+  img: string;
+  onPress: () => void;
+}
+
 export interface UIStore {
   naviEnabled: boolean;
   headerEnabled: boolean;
   headerIcon?: string;
   headerTitle: string;
   headerBackButtonEnabled: boolean;
-  headerRightButtons: JSX.Element[];
+  headerRightButtons: Button[];
   path: MenuPath;
   setUI: (
     partial:

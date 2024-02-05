@@ -16,6 +16,7 @@ export default function PropertyMap() {
       ...state,
       headerIcon: undefined,
       title: '매물 선택하기',
+      headerRightButtons: [],
     }));
   }, []);
 
