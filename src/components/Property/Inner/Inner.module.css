@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  margin: 0 20px;
+}
+
+.title {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.directionContainer {
+  margin: 0 20px 48px 20px;
+}
+
+.furnitureCtn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 20px 36px 20px;
+}
+
+.furniture {
+  display: flex;
+  width: 72px;
+  height: 72px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px solid var(--gray-color-gray050_text, #4b5259);
+  color: var(--gray-color-gray050_text, #4b5259);
+  text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+  box-sizing: border-box;
+}
+
+.optionContainer {
+  margin: 0 20px;
+}

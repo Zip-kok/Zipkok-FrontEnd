@@ -5,7 +5,7 @@ import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 
 export interface CustomKokStore {
-  picture?: string;
+  pictures?: string[];
   address: Address;
   memo?: string;
   deposit?: number;
@@ -19,7 +19,7 @@ export interface CustomKokStore {
   priceType: PriceType;
   nickName?: string;
 
-  setPicture: (picture?: string) => void;
+  setPictures: (pictures?: string[]) => void;
   setAddress: (address: Address) => void;
   setMemo: (memo?: string) => void;
   setDeposit: (deposit?: number) => void;
@@ -52,7 +52,7 @@ const initialState: CustomKokStore = {
   priceType: '월세',
   nickName: undefined,
 
-  setPicture: () => {},
+  setPictures: () => {},
   setAddress: () => {},
   setMemo: () => {},
   setDeposit: () => {},
@@ -69,7 +69,7 @@ const initialState: CustomKokStore = {
 
 const useCustomKokStore = create<CustomKokStore>((set) => ({
   ...initialState,
-  setPicture: (picture) => set({ picture }),
+  setPictures: (pictures) => set({ pictures }),
   setAddress: (address) => set({ address }),
   setMemo: (memo) => set({ memo }),
   setDeposit: (deposit) => set({ deposit }),
