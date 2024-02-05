@@ -62,7 +62,6 @@ const Mypage = () => {
     if (res !== 'primary') return;
 
     // 로그아웃 버튼 클릭 시
-    // TODO: StatusCode 정의 후 수정
     const logoutResult = await logout().catch((e) => {
       modal.open({
         title: '로그아웃에 실패했어요.',
@@ -75,7 +74,7 @@ const Mypage = () => {
     if (!logoutResult) return;
 
     // 로그아웃 성공 시
-    if (logoutResult.code === (5027 as StatusCode)) {
+    if (logoutResult.code === StatusCode.LOGOUT_SUCCESS) {
       navigate('/login');
       return;
     }
