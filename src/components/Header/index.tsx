@@ -1,10 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import heart_fill from 'assets/img/fill/heart_selected.svg';
-import heart from 'assets/img/line(2)/heart.svg';
 import backIcon from 'assets/img/line(2)/left_arrow.svg';
-import share from 'assets/img/line(2)/share.svg';
 
 import styles from './Header.module.css';
 
@@ -14,14 +11,14 @@ interface HeaderProps {
   title: string;
   titleIcon?: string;
   backBtnEnabled?: boolean;
-  Buttons?: Button[];
+  buttons?: Button[];
 }
 
 const Header = ({
   title,
   titleIcon,
   backBtnEnabled = false,
-  Buttons = [],
+  buttons = [],
 }: HeaderProps) => {
   const navigate = useNavigate();
 
@@ -41,7 +38,7 @@ const Header = ({
       </span>
 
       <span className={styles.btnContainer}>
-        {Buttons.map((btn) => (
+        {buttons.map((btn) => (
           <button key={btn.id} className="imgBtn" onClick={btn.onPress}>
             <img src={btn.img}></img>
           </button>
