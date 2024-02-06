@@ -88,15 +88,30 @@ export default function Home() {
               {transactionType}
             </div>
           )}
-          {priceMax !== undefined && (
-            <div className={styles.filter} onClick={handleFilterClick}>
-              {`${getPriceString(priceMax)}이하`}
-            </div>
-          )}
-          {depositMax !== undefined && (
-            <div className={styles.filter} onClick={handleFilterClick}>
-              {`${getPriceString(depositMax)}이하`}
-            </div>
+          {transactionType === '월세' ? (
+            priceMax !== undefined &&
+            depositMax !== undefined && (
+              <div className={styles.filter} onClick={handleFilterClick}>
+                {`~${getPriceString(priceMax, true)}/~${getPriceString(
+                  depositMax,
+                  true,
+                )}`}
+              </div>
+            )
+          ) : (
+            <>
+              {priceMax !== undefined && (
+                <div className={styles.filter} onClick={handleFilterClick}>
+                  {`${getPriceString(priceMax, true)}`}
+                </div>
+              )}
+              {depositMax !== undefined && (
+                <div className={styles.filter} onClick={handleFilterClick}>
+                  {`${getPriceString(depositMax, true)}`}
+                </div>
+              )}
+            </>
+
           )}
         </div>
       ) : (
