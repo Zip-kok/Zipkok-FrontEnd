@@ -90,12 +90,12 @@ export default function Home() {
           )}
           {priceMax !== undefined && (
             <div className={styles.filter} onClick={handleFilterClick}>
-              {`${getPriceString(priceMax, true)}이하`}
+              {`${getPriceString(priceMax)}이하`}
             </div>
           )}
           {depositMax !== undefined && (
             <div className={styles.filter} onClick={handleFilterClick}>
-              {`${getPriceString(depositMax, true)}이하`}
+              {`${getPriceString(depositMax)}이하`}
             </div>
           )}
         </div>
