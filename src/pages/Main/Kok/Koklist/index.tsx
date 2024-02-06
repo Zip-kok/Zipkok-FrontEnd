@@ -18,6 +18,7 @@ export default function Koklist() {
       headerIcon: checkIcon,
       headerBackButtonEnabled: false,
       naviEnabled: true,
+      headerRightButtons: [],
     }));
   }, []);
 
@@ -42,7 +43,7 @@ export default function Koklist() {
             type={property.type}
             priceType={property.priceType}
             price={property.price}
-            deposit={0}
+            deposit={property.deposit}
             address={property.address}
             propertyName={property.propertyName}
             imageUrl={property.imageUrl}

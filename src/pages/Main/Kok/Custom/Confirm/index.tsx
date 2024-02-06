@@ -1,25 +1,30 @@
 import React, { useEffect } from 'react';
 
-import { PropertyInfo } from 'components';
+import { PropertyComponents as Property } from 'components';
 import useCustomKokStore from 'contexts/customKokStore';
 
 export default function Confirm() {
   const customKokStore = useCustomKokStore();
 
   return (
-    <PropertyInfo
-      picture={customKokStore.picture}
-      address={customKokStore.address}
-      memo={customKokStore.memo}
-      deposit={customKokStore.deposit}
-      monthlyPrice={customKokStore.monthlyPrice}
-      price={customKokStore.price}
-      maintanenceFee={customKokStore.maintanenceFee}
-      detailAddress={customKokStore.detailAddress}
-      area={customKokStore.area}
-      floor={customKokStore.floor}
-      houseType={customKokStore.houseType}
-      priceType={customKokStore.priceType}
-    />
+    <>
+      <Property.Header
+        pictures={customKokStore.pictures}
+        address={customKokStore.address}
+        detailAddress={customKokStore.detailAddress}
+        deposit={customKokStore.deposit}
+        monthlyPrice={customKokStore.monthlyPrice}
+        price={customKokStore.price}
+        priceType={customKokStore.priceType}
+      />
+
+      <Property.BasicInfo
+        area={customKokStore.area}
+        houseType={customKokStore.houseType}
+        floor={customKokStore.floor}
+        maintanenceFee={customKokStore.maintanenceFee}
+        address={customKokStore.address}
+      />
+    </>
   );
 }

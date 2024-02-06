@@ -32,6 +32,7 @@ export default function KokReview() {
       headerIcon: undefined,
       headerBackButtonEnabled: true,
       naviEnabled: false,
+      headerRightButtons: [],
     }));
   }, []);
 

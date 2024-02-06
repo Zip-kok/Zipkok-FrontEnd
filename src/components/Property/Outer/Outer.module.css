@@ -1,0 +1,21 @@
+.TagCtn {
+  display: flex;
+  gap: 8px;
+  margin: 0 20px 10px 20px;
+}
+
+.tag {
+  justify-content: center;
+  border-radius: 500px;
+  padding: 6px 12px;
+  border: 1px solid var(--gray-color-gray100, #00000a);
+  background: var(--gray-color-gray080_text, #1b1d1f);
+  color: var(--gray-color-white, #fff);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.optionsCtn {
+  margin: 0 20px;
+}

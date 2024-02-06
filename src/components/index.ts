@@ -6,6 +6,7 @@ import CheckBox from './CheckBox';
 import CompleteAnim from './CompleteAnim';
 import EditFilterBtn from './EditFilterBtn';
 import EditGenderBtn from './EditGenderBtn';
+import Furnitures from './Furnitures';
 import Header from './Header';
 import Highlight from './Highlight';
 import IconBtn from './IconBtn';
@@ -13,12 +14,13 @@ import IconText from './IconText';
 import KoklistGroup from './KoklistGroup';
 import NaviBar from './NaviBar';
 import OptionsComponent from './Options';
-import PropertyInfo from './PropertyInfo';
+import PropertyComponents from './Property';
 import PropertyItem from './PropertyItem';
 import RadioBtn from './RadioBtn';
 import RangeSlider from './RangeSlider';
 import Splash from './Splash';
 import StarRating from './StarRating';
+import StaticMap from './StaticMap';
 import SwiperCom from './Swiper';
 import Swiper_modal from './Swiper_modal';
 import SwiperItem from './SwiperItem';
@@ -41,7 +43,7 @@ export {
   KoklistGroup,
   NaviBar,
   OptionsComponent,
-  PropertyInfo,
+  PropertyComponents,
   PropertyItem,
   RadioBtn,
   RangeSlider,
@@ -52,4 +54,6 @@ export {
   TopMenu,
   StarRating,
   SwiperItem,
+  StaticMap,
+  Furnitures,
 };

@@ -48,10 +48,27 @@ body {
   align-items: center;
 }
 
-.swiper > .swiper-slide {
+.Swiper_modal_swiper2__DoMtk > .swiper-wrapper > .swiper-slide {
   opacity: 0.4;
 }
 
-.swiper > .swiper-slide-thumb-active {
+.swiper > .swiper-wrapper > .swiper-slide-thumb-active {
   opacity: 1;
+}
+
+.swiper-button-next {
+  background: url(./assets//img//navigation/next.svg) no-repeat;
+  background-position: center;
+  color: #fff;
+  width: 40px;
+}
+.swiper-button-prev {
+  background: url(./assets//img//navigation/prev.svg) no-repeat;
+  background-position: center;
+  color: #fff;
+  width: 40px;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
 }

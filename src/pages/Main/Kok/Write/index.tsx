@@ -20,6 +20,7 @@ export default function WriteKok() {
       headerIcon: undefined,
       headerBackButtonEnabled: true,
       naviEnabled: false,
+      headerRightButtons: [],
     }));
   }, []);
 

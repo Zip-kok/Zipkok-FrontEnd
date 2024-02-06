@@ -18,6 +18,7 @@ export default function Main() {
             title={ui.headerTitle}
             backBtnEnabled={ui.headerBackButtonEnabled}
             titleIcon={ui.headerIcon}
+            buttons={ui.headerRightButtons}
           />
         )}
       </div>
