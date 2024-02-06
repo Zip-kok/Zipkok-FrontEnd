@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { searchAddress } from 'apis';
 import searchIcon from 'assets/img/line(2)/search.svg';
-import { TextInput, BottomBtn } from 'components';
+import { BottomBtn } from 'components';
 import useAddressSearch from 'hooks/useAddressSearch';
 import { Address } from 'types/Address';
-import { StatusCode } from 'types/StatusCode';
 
 import styles from './AddressSearchPage.module.css';
-import { AddressContainer } from './components';
 
 interface AddressSearchPageProps {
   confirmLocation: (location: Address) => void;
