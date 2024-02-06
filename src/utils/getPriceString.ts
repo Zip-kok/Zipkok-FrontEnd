@@ -5,7 +5,6 @@
  * @returns 변환된 문자열
  */
 export default function getPriceString(value: number, truncate = true) {
-
   const unit = ['', '만', '억', '조', '경', '해'];
   const unitCount = 10000;
 
@@ -16,7 +15,6 @@ export default function getPriceString(value: number, truncate = true) {
   while (temp > 0) {
     const current = temp % unitCount;
     temp = Math.floor(temp / unitCount);
-
 
     if (!(truncate && count === 0) && current > 0)
       result = `${current.toLocaleString()}${unit[count]} ${result}`;
