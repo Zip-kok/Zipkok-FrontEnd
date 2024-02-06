@@ -37,6 +37,10 @@ export default function Header({
 
   const memoRef = useRef<HTMLParagraphElement>(null);
 
+  const handleModalOpen = () => {
+    setThumbnailModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
   // memo의 높이가 클램핑되는지 확인
   useEffect(() => {
     // ResizeObserver 인스턴스 생성
@@ -64,10 +68,7 @@ export default function Header({
         {pictures.length > 0 ? (
           /* pictures가 있을 때 */
           <>
-            <SwiperCom
-              imageUrls={pictures}
-              onClick={() => setThumbnailModalOpen(true)}
-            />
+            <SwiperCom imageUrls={pictures} onClick={handleModalOpen} />
             {thumbnailModalOpen && (
               <Swiper_modal
                 imageUrls={pictures}
