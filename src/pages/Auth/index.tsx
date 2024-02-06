@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 import { kakaoLogin } from 'apis';
 import useEmailStore from 'contexts/emailStore';
@@ -49,5 +50,18 @@ export default function Auth() {
     }
   }, []);
 
-  return <div>카카오 로그인 중...</div>;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+      }}
+    >
+      <BeatLoader />
+      <p>카카오 로그인 중...</p>
+    </div>
+  );
 }
