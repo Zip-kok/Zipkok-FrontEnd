@@ -31,7 +31,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
-  z-index: 99;
+  z-index: 101;
   background-color: white;
 }
 .filterBtn {
@@ -51,7 +51,7 @@
   gap: 8px;
   height: 32px;
   padding: 12px 20px;
-  z-index: 99;
+  z-index: 101;
   background-color: white;
 }
 

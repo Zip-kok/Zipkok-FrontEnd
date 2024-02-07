@@ -102,12 +102,12 @@ export default function Home() {
             <>
               {priceMax !== undefined && (
                 <div className={styles.filter} onClick={handleFilterClick}>
-                  {`${getPriceString(priceMax, true)}`}
+                  {`~${getPriceString(priceMax, true)}`}
                 </div>
               )}
               {depositMax !== undefined && (
                 <div className={styles.filter} onClick={handleFilterClick}>
-                  {`${getPriceString(depositMax, true)}`}
+                  {`~${getPriceString(depositMax, true)}`}
                 </div>
               )}
             </>
@@ -115,14 +115,12 @@ export default function Home() {
         </div>
       ) : (
         // 필터가 설정되지 않았을 때 보여줄 화면
-        <div className={styles.notFilterCtn}>
+        <div className={styles.notFilterCtn} onClick={handleFilterClick}>
           <p>
             아직 필터가 설정되지 않았어요
             <br /> 필터를 설정해보세요!
           </p>
-          <button className={styles.filterBtn} onClick={handleFilterClick}>
-            필터 설정하기
-          </button>
+          <button className={styles.filterBtn}>필터 설정하기</button>
         </div>
       )}
 
