@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import BarLoader from 'react-spinners/BarLoader';
 
 import { searchAddress } from 'apis';
-import { TextInput, BottomBtn } from 'components';
+import { TextInput } from 'components';
 import { Address } from 'types/Address';
 import { StatusCode } from 'types/StatusCode';
 
@@ -48,8 +48,10 @@ export default function useAddressSearch(
   async function handleSubmit() {
     const query = inputValue.replace(/\s/g, '');
     setQuery(query);
+    setIsLoading(true);
 
     const data = await searchAddress(query);
+    setIsLoading(false);
 
     if (data === null) {
       setError('주소를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
@@ -81,12 +83,26 @@ export default function useAddressSearch(
   );
 
   const AddressSearchResult = () => (
-    <AddressContainer
-      errorMessage={error}
-      addresses={addresses}
-      onClick={handleAddressClick}
-      onEndOfScroll={loadMoreAddresses}
-    />
+    <>
+      {isLoading ? (
+        <div
+          style={{
+            display: 'flex',
+            height: '100%',
+            justifyContent: 'center',
+          }}
+        >
+          <BarLoader color="#4b5259" />
+        </div>
+      ) : (
+        <AddressContainer
+          errorMessage={error}
+          addresses={addresses}
+          onClick={handleAddressClick}
+          onEndOfScroll={loadMoreAddresses}
+        />
+      )}
+    </>
   );
 
   return [
