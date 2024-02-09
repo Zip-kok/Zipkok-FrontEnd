@@ -8,7 +8,6 @@ import Monthly from 'pages/Onboarding/Price/priceSlider/Monthly';
 import Purchase from 'pages/Onboarding/Price/priceSlider/Purchase';
 
 import styles from './Filter.module.css';
-import { Gender } from '../../../../SignIn';
 
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
@@ -65,8 +64,10 @@ export default function Filter(props: FilterProps) {
   } = useMyPageStore();
 
   const handelSaveBtnClick = () => {
-    setRealEstateType(houseType!);
-    setTransactionType(priceType!);
+    if (houseType === undefined || priceType === undefined) return;
+
+    setRealEstateType(houseType);
+    setTransactionType(priceType);
 
     if (priceType === '월세') {
       // 월세의 경우, 첫 번째 배열 요소는 보증금 범위, 두 번째는 월세 범위
