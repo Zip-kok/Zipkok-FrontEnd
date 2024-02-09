@@ -4,16 +4,19 @@ import BeatLoader from 'react-spinners/BeatLoader';
 
 import { kakaoLogin } from 'apis';
 import useEmailStore from 'contexts/emailStore';
+import useModal from 'contexts/modalStore';
 import storeToken from 'utils/storeToken';
 
 export default function Auth() {
   const location = useLocation();
   const navigate = useNavigate();
+  const modal = useModal();
   const setEmail = useEmailStore((store) => store.setEmail);
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
 
+    // code가 있을 시
     if (code !== null) {
       kakaoLogin(code)
         .then((res) => {
@@ -39,14 +42,23 @@ export default function Auth() {
             navigate('/signin');
           }
           // 에러 발생 시
-          else {
-            throw new Error(res.message);
-          }
+          else throw new Error(res.message);
         })
         .catch((err) => {
-          alert(err.message);
-          navigate('/login');
+          modal
+            .open({
+              title: '오류가 발생했어요.',
+              description: err.message,
+              primaryButton: '확인',
+            })
+            .then((res) => {
+              navigate('/login');
+            });
         });
+    }
+    // code가 없을 시
+    else {
+      navigate('/login');
     }
   }, []);
 
