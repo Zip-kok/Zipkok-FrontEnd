@@ -20,6 +20,9 @@ export default function Auth() {
     if (code !== null) {
       kakaoLogin(code)
         .then((res) => {
+          // 오류가 발생한 경우
+          if (res.result === undefined) throw new Error(res.message);
+
           // 회원인 경우
           if (res.result.isMember) {
             const {
@@ -36,13 +39,12 @@ export default function Auth() {
             );
             navigate('/');
           }
+
           // 회원이 아닌 경우
           else if (res.result.isMember === false) {
             setEmail(res.result.email);
             navigate('/signin');
           }
-          // 에러 발생 시
-          else throw new Error(res.message);
         })
         .catch((err) => {
           modal
