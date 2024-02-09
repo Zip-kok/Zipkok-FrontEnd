@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import filledHeartIcon from 'assets/img/fill/heart_fill.svg';
+import heartIcon from 'assets/img/line(2)/heart.svg';
+import shareIcon from 'assets/img/line(2)/share.svg';
 import { PropertyComponents as Property, BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
@@ -41,6 +44,10 @@ const KokItem = () => {
         headerIcon: undefined,
         headerBackButtonEnabled: true,
         naviEnabled: false,
+        headerRightButtons: [
+          { id: 'heart', img: heartIcon, onPress: () => {} },
+          { id: 'share', img: shareIcon, onPress: () => {} },
+        ],
       };
     });
   }, [detailDummy]);

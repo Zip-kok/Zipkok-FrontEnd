@@ -18,6 +18,7 @@ export default function Koklist() {
       headerIcon: checkIcon,
       headerBackButtonEnabled: false,
       naviEnabled: true,
+      headerRightButtons: [],
     }));
   }, []);
 

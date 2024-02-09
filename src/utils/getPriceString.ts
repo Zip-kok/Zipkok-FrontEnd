@@ -1,6 +1,7 @@
 /**
  * 수를 한글 단위를 사용한 문자열로 변환합니다. (예: 15,000,000을 1천 5백만으로 변환합니다.)
  * @param value 수
+ * @param [omitNumber=false] 만 이하의 수의 생략 여부
  * @returns 변환된 문자열
  */
 export default function getPriceString(value: number, truncate = true) {

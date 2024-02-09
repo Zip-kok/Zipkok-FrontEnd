@@ -1,6 +1,7 @@
 .root {
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
 .header {
@@ -12,15 +13,6 @@
   border: 1px solid black;
   border-bottom: none;
 }
-
-/*
-.headerExpanded {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  padding: 6px 0;
-  border: none;
-} */
 
 .searchBox {
   height: 116px;

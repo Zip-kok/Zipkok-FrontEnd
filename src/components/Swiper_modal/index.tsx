@@ -27,10 +27,11 @@ const Swiper_modal: React.FC<modalProps> = ({
 }: modalProps) => {
   const closeModal = () => {
     setModalOpen(false);
+    document.body.style.overflow = 'unset';
   };
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
-    <div>
+    <div className={styles.modalCtn}>
       <div className={styles.blank}></div>
       <div className={styles.root}>
         <Header title="성북구 정릉동" />
@@ -41,11 +42,12 @@ const Swiper_modal: React.FC<modalProps> = ({
           pagination={{
             type: 'fraction',
           }}
-          modules={[FreeMode, Thumbs, Pagination]}
+          modules={[FreeMode, Thumbs, Pagination, Navigation]}
           className={styles.swiper}
           thumbs={{ swiper: thumbsSwiper }}
           loop={true}
           spaceBetween={10}
+          navigation={true}
         >
           {imageUrls.map((item, idx) => (
             <SwiperSlide className={styles.swiperSlide} key={idx}>
@@ -53,22 +55,23 @@ const Swiper_modal: React.FC<modalProps> = ({
             </SwiperSlide>
           ))}
         </Swiper>
-        <Swiper
-          onSwiper={setThumbsSwiper}
-          spaceBetween={10}
-          slidesPerView={4}
-          modules={[FreeMode, Thumbs, Pagination]}
-          className={styles.swiper2}
-          loop={true}
-          freeMode={true}
-          watchSlidesProgress={true}
-        >
-          {imageUrls.map((item, idx) => (
-            <SwiperSlide className={styles.swiperSlide} key={idx}>
-              <img src={item} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className={styles.modalSwiper}>
+          <Swiper
+            onSwiper={setThumbsSwiper}
+            spaceBetween={10}
+            slidesPerView={4}
+            modules={[FreeMode, Thumbs, Pagination]}
+            className={styles.swiper2}
+            freeMode={true}
+            watchSlidesProgress={true}
+          >
+            {imageUrls.map((item, idx) => (
+              <SwiperSlide className={styles.swiperSlide} key={idx}>
+                <img src={item} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </div>
   );

@@ -4,8 +4,7 @@ import handleImg from 'assets/img/common/handle.svg';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-import { BOTTOM_SHEET_HEIGHT } from './BottomSheetOption';
-import styles from '../BottomSheet.module.css';
+import styles from './BottomSheet.module.css';
 
 const Wrapper = styled.div`
   display: flex;

@@ -35,6 +35,7 @@ const Item = () => {
 
   const showModal = () => {
     setModalOpen(true);
+    document.body.style.overflow = 'hidden';
   };
   const ui = useUIStore();
   useEffect(() => {

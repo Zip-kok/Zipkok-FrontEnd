@@ -11,6 +11,7 @@ export default function NewKok() {
       headerIcon: undefined,
       headerBackButtonEnabled: true,
       naviEnabled: false,
+      headerRightButtons: [],
     }));
   }, []);
 

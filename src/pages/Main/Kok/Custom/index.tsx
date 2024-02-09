@@ -12,6 +12,7 @@ export default function Kok() {
       headerIcon: undefined,
       headerTitle: '매물 직접 등록하기',
       headerBackButtonEnabled: true,
+      headerRightButtons: [],
     }));
   }, []);
 

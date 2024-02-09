@@ -1,33 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import heart_fill from 'assets/img/fill/heart_selected.svg';
-import heart from 'assets/img/line(2)/heart.svg';
 import backIcon from 'assets/img/line(2)/left_arrow.svg';
-import share from 'assets/img/line(2)/share.svg';
 
 import styles from './Header.module.css';
+
+import type { Button } from 'contexts/uiStore';
 
 interface HeaderProps {
   title: string;
   titleIcon?: string;
   backBtnEnabled?: boolean;
-  heartBtnEnabled?: boolean;
-  heartBtnFill?: boolean;
-  heartBtnClick?: () => void;
-  shareBtnEnabled?: boolean;
-  shareBtnClick?: () => void;
+  buttons?: Button[];
 }
 
 const Header = ({
   title,
   titleIcon,
   backBtnEnabled = false,
-  heartBtnEnabled = false,
-  heartBtnFill = false,
-  heartBtnClick,
-  shareBtnEnabled = false,
-  shareBtnClick,
+  buttons = [],
 }: HeaderProps) => {
   const navigate = useNavigate();
 
@@ -47,20 +38,11 @@ const Header = ({
       </span>
 
       <span className={styles.btnContainer}>
-        <span>
-          {heartBtnEnabled && (
-            <button className="imgBtn" onClick={heartBtnClick}>
-              {heartBtnFill ? <img src={heart_fill} /> : <img src={heart} />}
-            </button>
-          )}
-        </span>
-        <span>
-          {shareBtnEnabled && (
-            <button className="imgBtn" onClick={shareBtnClick}>
-              <img src={share} className={styles.shareBtn}></img>
-            </button>
-          )}
-        </span>
+        {buttons.map((btn) => (
+          <button key={btn.id} className="imgBtn" onClick={btn.onPress}>
+            <img src={btn.img}></img>
+          </button>
+        ))}
       </span>
     </div>
   );

@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 
+import BottomBtn from 'components/BottomBtn';
+import useMyPageStore from 'contexts/useMyPageStore';
 import useRadioBtn from 'hooks/useRadioBtn';
 import Jeonse from 'pages/Onboarding/Price/priceSlider/Jeonse';
 import Monthly from 'pages/Onboarding/Price/priceSlider/Monthly';
 import Purchase from 'pages/Onboarding/Price/priceSlider/Purchase';
 
 import styles from './Filter.module.css';
-import { Gender } from '../../../../SignIn';
 
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 
 type PriceRange = [number, number];
 
-export default function Filter() {
+interface FilterProps {
+  setFilterOpen: (value: boolean) => void;
+}
+
+export default function Filter(props: FilterProps) {
+  const { setFilterOpen } = props;
   const defaultValues: Record<PriceType, PriceRange[]> = {
     월세: [
       [0, 60_000_000],
@@ -35,7 +41,6 @@ export default function Filter() {
     'tag',
     '원룸',
   );
-
   // 가격 타입 라디오 버튼
   const priceTypeOptions: { value: PriceType; content: string }[] = [
     { value: '월세', content: '월세' },
@@ -49,9 +54,52 @@ export default function Filter() {
   );
 
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
+  const {
+    setRealEstateType,
+    setTransactionType,
+    setPriceMax,
+    setDepositMax,
+    setPriceMin,
+    setDepositMin,
+  } = useMyPageStore();
+
+  const handelSaveBtnClick = () => {
+    if (houseType === undefined || priceType === undefined) return;
+
+    setRealEstateType(houseType);
+    setTransactionType(priceType);
+
+    if (priceType === '월세') {
+      // 월세의 경우, 첫 번째 배열 요소는 보증금 범위, 두 번째는 월세 범위
+      const [depositRange, monthlyRange] = priceRanges;
+      setDepositMin(depositRange[0]);
+      setDepositMax(depositRange[1]);
+      setPriceMin(monthlyRange[0]);
+      setPriceMax(monthlyRange[1]);
+    } else if (priceType === '전세') {
+      // 전세의 경우, 보증금 범위만
+      const [depositRange] = priceRanges;
+      setDepositMin(depositRange[0]);
+      setDepositMax(depositRange[1]);
+
+      setPriceMin(undefined);
+      setPriceMax(undefined);
+    } else if (priceType === '매매') {
+      // 매매의 경우, 가격 범위만
+      const [purchaseRange] = priceRanges;
+      setPriceMin(purchaseRange[0]);
+      setPriceMax(purchaseRange[1]);
+      setDepositMin(undefined);
+      setDepositMax(undefined);
+    }
+
+    // 저장하면 필터 내리기
+    setFilterOpen(false);
+  };
 
   return (
     <div className={styles.root}>
+      {/* 바텀 시트 Content */}
       {/* 필터 설정 */}
       <div className={styles.container}>
         <h1 className={styles.title}>필터 설정</h1>
@@ -65,7 +113,7 @@ export default function Filter() {
         </div>
 
         {/* 가격 설정 */}
-        <div className={styles.container}>
+        <div className={styles.priceContainer}>
           {priceType === '월세' && (
             <Monthly
               onChange1={(rangeStart, rangeEnd) => {
@@ -97,6 +145,8 @@ export default function Filter() {
           )}
         </div>
       </div>
+      <div style={{ height: '70px' }}></div>
+      <BottomBtn text="저장" onClick={handelSaveBtnClick} />
     </div>
   );
 }

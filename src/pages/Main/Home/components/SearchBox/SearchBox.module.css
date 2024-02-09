@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  background-color: #ffff;
+  z-index: 101;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  margin: 16px 20px 0 20px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 2px solid var(--gray-color-gray020_border, #c8cbd1);
+  cursor: pointer;
+  background-color: #ffff;
+}
+.placeholder {
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #9fa4a9;
+  background-color: #ffff;
+}
