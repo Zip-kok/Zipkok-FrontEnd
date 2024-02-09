@@ -14,7 +14,6 @@ import quit from 'assets/img/line(2)/quit.svg';
 import { IconBtn } from 'components';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
-import { StatusCode } from 'types/StatusCode';
 import logout from 'utils/logout';
 
 import styles from './Mypage.module.css';
@@ -65,23 +64,6 @@ const Mypage = () => {
           navigate('/login');
         }
       });
-      return;
-    });
-
-    if (!logoutResult) return;
-
-    // 로그아웃 성공 시
-    if (logoutResult.code === StatusCode.LOGOUT_SUCCESS) {
-      navigate('/login');
-      return;
-    }
-
-    // 로그아웃 실패 시
-    modal.open({
-      title: '로그아웃에 실패했어요.',
-      description: logoutResult.message,
-      primaryButton: '확인',
-    });
   };
   const handleQuitClick = () => {
     modal
