@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 
+import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 
 interface MyPageInfo {
   nickname?: string;
   imageUrl?: string;
-  address?: string;
+  address?: Address;
   realEstateType?: HouseType;
   transactionType?: PriceType;
   priceMax?: number;
@@ -16,7 +17,7 @@ interface MyPageInfo {
 
   setNickname: (nickname?: string) => void;
   setImageUrl: (imageUrl?: string) => void;
-  setAddress: (address?: string) => void;
+  setAddress: (address?: Address) => void;
   setRealEstateType: (houseType: HouseType) => void;
   setTransactionType: (priceType: PriceType) => void;
   setPriceMax: (priceMax?: number) => void;

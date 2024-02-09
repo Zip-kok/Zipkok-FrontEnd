@@ -25,13 +25,8 @@ export default function Home() {
     }));
   }, []);
 
-  const { realEstateType, transactionType, priceMax, depositMax } =
-    useMyPageStore((state) => ({
-      realEstateType: state.realEstateType,
-      transactionType: state.transactionType,
-      priceMax: state.priceMax,
-      depositMax: state.depositMax,
-    }));
+  const { realEstateType, transactionType, priceMax, depositMax, address } =
+    useMyPageStore();
   useEffect(() => {
     if (realEstateType) {
       setFilterSet(true);
@@ -125,7 +120,7 @@ export default function Home() {
       )}
 
       <div>
-        <KakaoMap />
+        <KakaoMap lat={address?.y} lng={address?.x} />
       </div>
       <HomeBottomSheet />
     </div>
