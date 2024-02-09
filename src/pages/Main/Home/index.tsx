@@ -67,61 +67,70 @@ export default function Home() {
         </>
       )}
 
-      <SearchBox></SearchBox>
+      {/* 검색 박스 */}
+      <div className={styles.searchBoxContainer}>
+        <SearchBox></SearchBox>
+      </div>
 
-      {/* 필터가 설정되었을 때와 설정되지 않았을 때의 화면 */}
-      {filterSet ? (
-        // 필터가 설정되었을 때 보여줄 화면
-        <div className={styles.filterCtn}>
-          {realEstateType && (
-            <div className={styles.filter} onClick={handleFilterClick}>
-              {realEstateType}
-            </div>
-          )}
-          {transactionType && (
-            <div className={styles.filter} onClick={handleFilterClick}>
-              {transactionType}
-            </div>
-          )}
-          {transactionType === '월세' ? (
-            priceMax !== undefined &&
-            depositMax !== undefined && (
+      {/* 필터 */}
+      <div className={styles.filterContainer}>
+        {/* 필터가 설정되었을 때와 설정되지 않았을 때의 화면 */}
+        {filterSet ? (
+          // 필터가 설정되었을 때 보여줄 화면
+          <div className={styles.filterCtn}>
+            {realEstateType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {`~${getPriceString(priceMax, true)}/~${getPriceString(
-                  depositMax,
-                  true,
-                )}`}
+                {realEstateType}
               </div>
-            )
-          ) : (
-            <>
-              {priceMax !== undefined && (
+            )}
+            {transactionType && (
+              <div className={styles.filter} onClick={handleFilterClick}>
+                {transactionType}
+              </div>
+            )}
+            {transactionType === '월세' ? (
+              priceMax !== undefined &&
+              depositMax !== undefined && (
                 <div className={styles.filter} onClick={handleFilterClick}>
-                  {`~${getPriceString(priceMax, true)}`}
+                  {`~${getPriceString(priceMax, true)}/~${getPriceString(
+                    depositMax,
+                    true,
+                  )}`}
                 </div>
-              )}
-              {depositMax !== undefined && (
-                <div className={styles.filter} onClick={handleFilterClick}>
-                  {`~${getPriceString(depositMax, true)}`}
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      ) : (
-        // 필터가 설정되지 않았을 때 보여줄 화면
-        <div className={styles.notFilterCtn} onClick={handleFilterClick}>
-          <p>
-            아직 필터가 설정되지 않았어요
-            <br /> 필터를 설정해보세요!
-          </p>
-          <button className={styles.filterBtn}>필터 설정하기</button>
-        </div>
-      )}
+              )
+            ) : (
+              <>
+                {priceMax !== undefined && (
+                  <div className={styles.filter} onClick={handleFilterClick}>
+                    {`~${getPriceString(priceMax, true)}`}
+                  </div>
+                )}
+                {depositMax !== undefined && (
+                  <div className={styles.filter} onClick={handleFilterClick}>
+                    {`~${getPriceString(depositMax, true)}`}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        ) : (
+          // 필터가 설정되지 않았을 때 보여줄 화면
+          <div className={styles.notFilterCtn} onClick={handleFilterClick}>
+            <p>
+              아직 필터가 설정되지 않았어요
+              <br /> 필터를 설정해보세요!
+            </p>
+            <button className={styles.filterBtn}>필터 설정하기</button>
+          </div>
+        )}
+      </div>
 
-      <div>
+      {/* 지도 */}
+      <div className={styles.mapContainer}>
         <KakaoMap lat={address?.y} lng={address?.x} />
       </div>
+
+      {/* 바텀 시트 */}
       <HomeBottomSheet />
     </div>
   );

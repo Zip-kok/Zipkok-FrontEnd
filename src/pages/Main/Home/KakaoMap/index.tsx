@@ -72,7 +72,7 @@ const KakaoMap = ({ lat, lng }: KakaoMapProps) => {
 
   return (
     <div className={styles.root}>
-      <div id="map" style={{ width: '100%', height: '550px' }}></div>
+      <div className={styles.map} id="map"></div>
       <div className={styles.BtnCtn}>
         <img src={floating} />
         <img src={position} onClick={getCurrentPosBtn} />
