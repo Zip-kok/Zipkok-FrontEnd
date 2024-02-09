@@ -6,6 +6,7 @@ import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 import { deleteZim } from './deleteZim';
 import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
+import { logout } from './logout';
 import { onBoarding } from './onBoarding';
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
@@ -21,6 +22,7 @@ export {
   getZim,
   zim,
   deleteZim,
+  logout,
 };
 
 /**
