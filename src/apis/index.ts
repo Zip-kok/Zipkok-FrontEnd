@@ -4,7 +4,8 @@ import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
 import { deleteZim } from './deleteZim';
-import { getMyPageInf } from './getMyPageInf';
+import { getMyPageInfo } from './getMyPageInfo';
+import { getProfileEditInfo } from './getProfileEditInfo';
 import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { onBoarding } from './onBoarding';
@@ -22,7 +23,8 @@ export {
   getZim,
   zim,
   deleteZim,
-  getMyPageInf,
+  getMyPageInfo,
+  getProfileEditInfo,
 };
 
 /**

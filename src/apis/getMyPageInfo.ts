@@ -18,7 +18,7 @@ export interface MyPageInfo {
  * `GET /user`로 마이 페이지 회원의 정보를 요청합니다.
  */
 
-export const getMyPageInf = async () => {
+export const getMyPageInfo = async () => {
   const path = `/user`;
   const method = 'GET';
   const params = {};

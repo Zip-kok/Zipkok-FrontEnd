@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getMyPageInf } from 'apis';
-import { MyPageInfo } from 'apis/getMyPageInf';
+import { MyPageInfo, getMyPageInfo } from 'apis/getMyPageInfo';
 import edit from 'assets/img/line(2)/edit.svg';
 import heart from 'assets/img/line(2)/heart.svg';
 import inquiry from 'assets/img/line(2)/inquiry.svg';
@@ -22,10 +21,10 @@ import styles from './Mypage.module.css';
 const Mypage = () => {
   const ui = useUIStore();
   const modal = useModal();
-  const [myPageInf, setMyPageInf] = useState<MyPageInfo>();
+  const [myPageInfo, setMyPageInfo] = useState<MyPageInfo>();
 
   useEffect(() => {
-    getMyPageInf().then((res) => setMyPageInf(res.result));
+    getMyPageInfo().then((res) => setMyPageInfo(res.result));
 
     ui.setUI((state) => ({
       ...state,
@@ -74,13 +73,13 @@ const Mypage = () => {
       <div className={styles.profile}>
         <img src="https://cdn.royalcanin-weshare-online.io/3DKT5m8BN5A8uWWASDMR/v4/ptpc1s3-welsh-pembroke-corgi-puppy-running-outside-in-a-garden" />
         <div className={styles.text}>
-          <div className={styles.name}>{myPageInf?.nickname}</div>
-          <div className={styles.location}>#{myPageInf?.address}</div>
+          <div className={styles.name}>{myPageInfo?.nickname}</div>
+          <div className={styles.location}>#{myPageInfo?.address}</div>
           <div className={styles.tag}>
-            <p>{myPageInf?.transactionType}</p>
-            <p>{myPageInf?.realEstateType}</p>
+            <p>{myPageInfo?.transactionType}</p>
+            <p>{myPageInfo?.realEstateType}</p>
             <p>
-              ~{myPageInf?.depositMax}/~{myPageInf?.priceMax}
+              ~{myPageInfo?.depositMax}/~{myPageInfo?.priceMax}
             </p>
           </div>
         </div>
