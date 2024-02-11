@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getMyPageInf } from 'apis';
+import { MyPageInfo } from 'apis/getMyPageInf';
 import edit from 'assets/img/line(2)/edit.svg';
 import heart from 'assets/img/line(2)/heart.svg';
 import inquiry from 'assets/img/line(2)/inquiry.svg';
@@ -17,12 +19,14 @@ import useUIStore from 'contexts/uiStore';
 import logout from 'utils/logout';
 
 import styles from './Mypage.module.css';
-
 const Mypage = () => {
   const ui = useUIStore();
   const modal = useModal();
+  const [myPageInf, setMyPageInf] = useState<MyPageInfo>();
 
   useEffect(() => {
+    getMyPageInf().then((res) => setMyPageInf(res.result));
+
     ui.setUI((state) => ({
       ...state,
       headerTitle: '마이페이지',
@@ -70,12 +74,14 @@ const Mypage = () => {
       <div className={styles.profile}>
         <img src="https://cdn.royalcanin-weshare-online.io/3DKT5m8BN5A8uWWASDMR/v4/ptpc1s3-welsh-pembroke-corgi-puppy-running-outside-in-a-garden" />
         <div className={styles.text}>
-          <div className={styles.name}>보리는 강아지 내가 주인</div>
-          <div className={styles.location}>#성북구 정릉동</div>
+          <div className={styles.name}>{myPageInf?.nickname}</div>
+          <div className={styles.location}>#{myPageInf?.address}</div>
           <div className={styles.tag}>
-            <p>월세</p>
-            <p>원룸</p>
-            <p>~6천/~40만</p>
+            <p>{myPageInf?.transactionType}</p>
+            <p>{myPageInf?.realEstateType}</p>
+            <p>
+              ~{myPageInf?.depositMax}/~{myPageInf?.priceMax}
+            </p>
           </div>
         </div>
       </div>
