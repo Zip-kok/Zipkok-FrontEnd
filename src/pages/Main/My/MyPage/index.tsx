@@ -31,7 +31,7 @@ const Mypage = () => {
       ...state,
       headerTitle: '마이페이지',
       headerIcon: my,
-      headerBackButtonEnabled: true,
+      headerBackButtonEnabled: false,
       naviEnabled: true,
     }));
   }, []);
