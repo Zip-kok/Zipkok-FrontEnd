@@ -2,47 +2,23 @@ import api from '.';
 
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
+interface Option {
+  optionId: number;
+  optionTitle: string;
+  orderNumber: number;
+  isVisible: boolean;
+  detailOptions: {
+    detailOptionId: number;
+    detailOptionTitle: string;
+    detailOptionIsVisible: boolean;
+  }[];
+}
+
 export interface UserKokOption {
   highlights: string[];
-  outerOptions: [
-    {
-      optionId: number;
-      optionTitle: string;
-      orderNumber: number;
-      isVisible: boolean;
-      detailOptions: {
-        detailOptionId: number;
-        detailOptionTitle: string;
-        detailOptionIsVisible: boolean;
-      };
-    },
-  ];
-  innerOptions: [
-    {
-      optionId: number;
-      optionTitle: string;
-      orderNumber: number;
-      isVisible: boolean;
-      detailOptions: {
-        detailOptionId: number;
-        detailOptionTitle: string;
-        detailOptionIsVisible: boolean;
-      };
-    },
-  ];
-  contractOptions: [
-    {
-      optionId: number;
-      optionTitle: string;
-      orderNumber: number;
-      isVisible: boolean;
-      detailOptions: {
-        detailOptionId: number;
-        detailOptionTitle: string;
-        detailOptionIsVisible: boolean;
-      };
-    },
-  ];
+  outerOptions: Option[];
+  innerOptions: Option[];
+  contractOptions: Option[];
 }
 /**
  * `GET /user/kokOption`
