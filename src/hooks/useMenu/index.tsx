@@ -36,10 +36,7 @@ export default function useMenu(
     [index],
   );
 
-  const contentCallback = useCallback(
-    () => <>{menus[index].element}</>,
-    [index],
-  );
+  const contentCallback = () => menus[index].element as JSX.Element;
 
   return [menuCallback, contentCallback, index] as [
     typeof menuCallback,

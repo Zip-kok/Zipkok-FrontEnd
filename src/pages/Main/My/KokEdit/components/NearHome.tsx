@@ -50,7 +50,7 @@ const NearHome = ({ highlights, options, setOptions }: NearHomeProps) => {
         <h1>매물 하이라이트</h1>
         <div>
           {highlights.map((highlight) => (
-            <Highlight text={highlight} highlightEnabled />
+            <Highlight key={highlight} text={highlight} highlightEnabled />
           ))}
         </div>
       </div>

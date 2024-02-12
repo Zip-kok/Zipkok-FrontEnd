@@ -28,6 +28,13 @@ const KokEdit = () => {
       headerBackButtonEnabled: true,
       naviEnabled: false,
     }));
+
+    getUserKokOption().then((res) => {
+      setHighlights(res.result.highlights);
+      setOuterOptions(res.result.outerOptions);
+      setInsideOptions(res.result.innerOptions);
+      setContractOptions(res.result.contractOptions);
+    });
   }, []);
 
   const navigate = useNavigate();
