@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getUserDetail } from 'apis';
-import { UserDetail } from 'apis/getUserDetail';
 import { getProfileEditInfo } from 'apis';
 import { ProfileEditInfo } from 'apis/getProfileEditInfo';
+import { UserDetail } from 'apis/getUserDetail';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn } from 'components';
 import useAddressStore from 'contexts/addressStore';
@@ -28,7 +28,6 @@ const ProfileEdit = () => {
   const ui = useUIStore();
   const [profileEditInfo, setProfileEditInfo] = useState<ProfileEditInfo>();
   useEffect(() => {
-
     getProfileEditInfo().then((res) => setProfileEditInfo(res.result));
     console.log(profileEditInfo);
     if (profileEditInfo?.imageUrl !== undefined) {
