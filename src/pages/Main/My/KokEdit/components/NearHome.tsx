@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Highlight } from 'components';
+import optionsToCheckListGroups from 'utils/optionsToCheckListGroups';
 
 import CheckListCategoryContainer from './CheckListCategoryContainer';
 import styles from '../KokEdit.module.css';
@@ -18,31 +19,6 @@ const NearHome = ({ highlights, options, setOptions }: NearHomeProps) => {
   const [checkListGroups, setCheckListGroups] = useState<CheckListGroup[]>(
     optionsToCheckListGroups(options),
   );
-
-  function optionsToCheckListGroups(options: Option[]) {
-    const result: CheckListGroup[] = [];
-    const sortedOptions = options.sort((a, b) => a.orderNumber - b.orderNumber);
-
-    for (const option of sortedOptions) {
-      const sortedDetailOptions = option.detailOptions.sort(
-        (a, b) => a.detailOptionId - b.detailOptionId,
-      );
-
-      const checkListItems = sortedDetailOptions.map((detailOption) => ({
-        name: detailOption.detailOptionTitle,
-        enabled: detailOption.detailOptionIsVisible,
-      }));
-
-      result.push({
-        id: option.optionId,
-        name: option.optionTitle,
-        items: checkListItems,
-        enabled: option.isVisible,
-      });
-    }
-
-    return result;
-  }
 
   return (
     <div className={styles.root}>
