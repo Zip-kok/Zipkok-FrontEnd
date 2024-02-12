@@ -12,10 +12,10 @@
   padding: 16px 20px 12px 20px;
   background: white;
   z-index: 1;
+  position: sticky;
+  top: 56px;
 }
 
 .propertyContainer {
-  height: 100%;
-  overflow-y: auto;
   padding-bottom: 80px;
 }

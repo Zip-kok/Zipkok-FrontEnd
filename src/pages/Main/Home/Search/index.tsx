@@ -17,7 +17,7 @@ export interface AddressHistory {
   date: string;
 }
 
-export default function Home() {
+export default function Search() {
   const { setAddress } = useAddressStore();
 
   const [searched, setSearched] = useState(false);

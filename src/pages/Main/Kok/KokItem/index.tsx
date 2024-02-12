@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { getKokInner, getKokOuter } from 'apis';
 import { KokOuter } from 'apis/getKokOuter';
 import filledHeartIcon from 'assets/img/fill/heart_fill.svg';

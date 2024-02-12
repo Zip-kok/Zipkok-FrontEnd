@@ -32,7 +32,7 @@ export async function kakaoLogin(code: string) {
   };
   const authRequired = false;
 
-  const res = await api<ZipkokResponse<KakaoLoginResult>>(
+  const res = await api<ZipkokResponse<undefined | KakaoLoginResult>>(
     path,
     method,
     authRequired,
@@ -40,6 +40,8 @@ export async function kakaoLogin(code: string) {
     undefined,
     undefined,
   );
+
+  if (res.result === undefined) return res as ZipkokResponse<undefined>;
 
   if (res.result.isMember)
     return res as ZipkokResponse<KaKaoLoginResultForMember>;
