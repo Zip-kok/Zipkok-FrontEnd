@@ -15,6 +15,7 @@ import quit from 'assets/img/line(2)/quit.svg';
 import { IconBtn } from 'components';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
+import getPriceString from 'utils/getPriceString';
 import logout from 'utils/logout';
 
 import styles from './Mypage.module.css';
@@ -95,7 +96,8 @@ const Mypage = () => {
             <p>{myPageInfo?.transactionType}</p>
             <p>{myPageInfo?.realEstateType}</p>
             <p>
-              ~{myPageInfo?.depositMax}/~{myPageInfo?.priceMax}
+              ~{getPriceString(myPageInfo?.depositMax ?? 0)}/~
+              {getPriceString(myPageInfo?.priceMax ?? 0)}
             </p>
           </div>
         </div>
