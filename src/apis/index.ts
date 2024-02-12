@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
 import { deleteZim } from './deleteZim';
+import { getMyPageInfo } from './getMyPageInfo';
+import { getProfileEditInfo } from './getProfileEditInfo';
 import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
@@ -22,6 +24,8 @@ export {
   getZim,
   zim,
   deleteZim,
+  getMyPageInfo,
+  getProfileEditInfo,
   logout,
 };
 
