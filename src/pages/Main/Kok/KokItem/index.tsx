@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getKokInner, getKokOuter } from 'apis';
+import {
+  getKokInner,
+  getKokOuter,
+  getKokContract,
+  getKokDetail,
+  getKokReview,
+} from 'apis';
 import { KokOuter } from 'apis/getKokOuter';
 import filledHeartIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart.svg';
@@ -19,6 +25,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import styles from './KokItem.module.css';
+import { KokContract } from '../../../../apis/getKokContract';
+import { KokDetail } from '../../../../apis/getKokDetail';
+import { KokInner } from '../../../../apis/getKokInner';
+import { KokReview } from '../../../../apis/getKokReview';
 
 import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
@@ -38,9 +48,14 @@ const KokItem = () => {
       y: latitude,
     }) as Address;
   const [KokOuter, setKokOuter] = useState<KokOuter>();
+  const [KokInner, setKokInner] = useState<KokInner>();
+  const [KokContract, setKokContract] = useState<KokContract>();
+  const [KokDetail, setKokDetail] = useState<KokDetail>();
+  const [KokReview, setKokReview] = useState<KokReview>();
   useEffect(() => {
     ui.setUI((state) => {
       getKokOuter(1).then((res) => setKokOuter(res.result));
+      getKokInner(1).then((res) => setKokInner(res.result));
       return {
         ...state,
         headerTitle: detailDummy.result.address,
@@ -91,9 +106,9 @@ const KokItem = () => {
       name: '집 내부',
       element: (
         <Property.Inner
-          furnitureOptions={innerDummy.result.furnitureOptions}
-          direction={innerDummy.result.direction}
-          options={innerDummy.result.options}
+          furnitureOptions={KokInner!.furnitureOptions}
+          direction={KokInner!.direction}
+          options={KokInner!.options}
         />
       ),
     },
@@ -101,8 +116,8 @@ const KokItem = () => {
       name: '중개 계약',
       element: (
         <Property.Contract
-          options={contractDummy.result.options}
-          pictures={contractDummy.result.imageInfo.imageUrls}
+          options={KokContract!.options}
+          pictures={KokContract!.imageInfo.imageURL}
         />
       ),
     },
@@ -110,12 +125,12 @@ const KokItem = () => {
       name: '후기',
       element: (
         <Property.Review
-          impressions={reviewDummy.result.impressions}
-          facilityStarCount={reviewDummy.result.facilityStarCount}
-          infraStarCount={reviewDummy.result.infraStarCount}
-          structureStarCount={reviewDummy.result.structureStarCount}
-          vibeStarCount={reviewDummy.result.vibeStarCount}
-          reviewText={reviewDummy.result.reviewText}
+          impressions={KokReview!.impressions}
+          facilityStarCount={KokReview!.facilityStarCount}
+          infraStarCount={KokReview!.infraStarCount}
+          structureStarCount={KokReview!.structureStarCount}
+          vibeStarCount={KokReview!.vibeStarCount}
+          reviewText={KokReview!.reviewText}
         />
       ),
     },

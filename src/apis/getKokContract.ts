@@ -3,7 +3,11 @@ import api from '.';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface KokContract {
-  options: options[];
+  options: {
+    option: string;
+    orderNumber: number;
+    detailOptions: string[];
+  }[];
   imageInfo: {
     imageNumber: number;
     imageURL: string[];
