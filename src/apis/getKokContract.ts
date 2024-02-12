@@ -22,7 +22,7 @@ export interface options {
  * @param number kokId
  */
 export async function getKokContract(kokId: number) {
-  const path = '/kok/${kokId}/contract';
+  const path = `/kok/${kokId}/contract`;
   const method = 'GET';
   const params = {};
   const authRequired = true;

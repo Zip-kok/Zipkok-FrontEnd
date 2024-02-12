@@ -34,7 +34,7 @@ export interface imageInfo {
  * @param number kokId
  */
 export async function getKokDetail(kokId: number) {
-  const path = '/kok/${kokId}/detail';
+  const path = `/kok/${kokId}/detail`;
   const method = 'GET';
   const params = {};
   const authRequired = true;

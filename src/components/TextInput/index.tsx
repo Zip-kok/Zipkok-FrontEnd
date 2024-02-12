@@ -42,6 +42,7 @@ export default function TextInput({
   readOnly,
 }: TextInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const deleteBtnRef = useRef<HTMLButtonElement>(null);
   const [isFocused, setIsFocused] = React.useState(false);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
@@ -84,18 +85,19 @@ export default function TextInput({
   }
 
   function handleInputFocus() {
-    onFocus && onFocus();
+    onFocus?.();
   }
 
   function handleInputBlur() {
-    onBlur && onBlur();
+    onBlur?.();
   }
 
   function handleBoxFocus() {
     setIsFocused(true);
   }
 
-  function handleBoxBlur() {
+  function handleBoxBlur(e: React.FocusEvent<HTMLDivElement>) {
+    if (e.relatedTarget === deleteBtnRef.current) return;
     setIsFocused(false);
   }
 
@@ -136,7 +138,11 @@ export default function TextInput({
         inputRef.current &&
         inputRef.current.value !== '' &&
         !readOnly ? (
-          <button className="imgBtn" onClick={handleDeleteClick}>
+          <button
+            className="imgBtn"
+            onClick={handleDeleteClick}
+            ref={deleteBtnRef}
+          >
             <img src={deleteIcon}></img>
           </button>
         ) : (

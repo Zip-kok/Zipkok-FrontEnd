@@ -21,7 +21,7 @@ export interface KokOuter {
  * @param number kokId
  */
 export async function getKokOuter(kokId: number) {
-  const path = '/kok/${kokId}/outer';
+  const path = `/kok/${kokId}/outer`;
   const method = 'GET';
   const params = {};
   const authRequired = true;

@@ -18,8 +18,8 @@ export interface KokReview {
  * 콕리스트_작성한리스트 확인 (5가지 항목) 에서 “후기” 탭 클릭시 호출되는 API
  * 콕의 후기 정보 반환
  */
-export async function getKokReview() {
-  const path = '/kok/${kokId}/review';
+export async function getKokReview(kokId: number) {
+  const path = `/kok/${kokId}/review`;
   const method = 'GET';
   const params = {};
   const authRequired = true;

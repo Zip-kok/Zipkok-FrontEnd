@@ -20,7 +20,7 @@ export interface options {
  * @param number kokId
  */
 export async function getKokInner(kokId: number) {
-  const path = '/kok/${kokId}/inner';
+  const path = `/kok/${kokId}/inner`;
   const method = 'GET';
   const params = {};
   const authRequired = true;
