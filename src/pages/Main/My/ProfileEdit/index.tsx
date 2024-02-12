@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getUserDetail } from 'apis';
+import { UserDetail } from 'apis/getUserDetail';
 import { getProfileEditInfo } from 'apis';
 import { ProfileEditInfo } from 'apis/getProfileEditInfo';
 import searchIcon from 'assets/img/line(2)/search.svg';
@@ -22,9 +24,11 @@ import type { PriceType } from 'types/PriceType';
 type PriceRange = [number, number];
 
 const ProfileEdit = () => {
+  const [UserDetail, setUserDetail] = useState<UserDetail>();
   const ui = useUIStore();
   const [profileEditInfo, setProfileEditInfo] = useState<ProfileEditInfo>();
   useEffect(() => {
+
     getProfileEditInfo().then((res) => setProfileEditInfo(res.result));
     console.log(profileEditInfo);
     if (profileEditInfo?.imageUrl !== undefined) {

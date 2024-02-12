@@ -4,6 +4,13 @@ import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
 import { deleteZim } from './deleteZim';
+import { getKokContract } from './getKokContract';
+import { getKokDetail } from './getKokDetail';
+import { getKokInner } from './getKokInner';
+import { getKokOuter } from './getKokOuter';
+import { getKokReview } from './getKokReview';
+import { getUserDetail } from './getUserDetail';
+import { getUserKokOption } from './getUserKokOption';
 import { getMyPageInfo } from './getMyPageInfo';
 import { getProfileEditInfo } from './getProfileEditInfo';
 import { getZim } from './getZim';
@@ -24,6 +31,12 @@ export {
   getZim,
   zim,
   deleteZim,
+  getUserDetail,
+  getKokContract,
+  getKokDetail,
+  getKokInner,
+  getKokOuter,
+  getKokReview,
   getMyPageInfo,
   getProfileEditInfo,
   logout,
@@ -58,7 +71,9 @@ export default async function api<T>(
   }
 
   const authHeader = authRequired
-    ? { Authorization: `Bearer ${accessToken}` }
+    ? {
+        Authorization: `Bearer ${accessToken}`,
+      }
     : {};
 
   const paramStr = params ? new URLSearchParams(params).toString() : '';

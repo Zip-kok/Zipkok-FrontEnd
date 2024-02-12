@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { getKokInner, getKokOuter } from 'apis';
+import { KokOuter } from 'apis/getKokOuter';
+import filledHeartIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart.svg';
 import shareIcon from 'assets/img/line(2)/share.svg';
 import { PropertyComponents as Property, BottomBtn } from 'components';
@@ -34,9 +36,10 @@ const KokItem = () => {
       x: longitude,
       y: latitude,
     }) as Address;
-
+  const [KokOuter, setKokOuter] = useState<KokOuter>();
   useEffect(() => {
     ui.setUI((state) => {
+      getKokOuter(1).then((res) => setKokOuter(res.result));
       return {
         ...state,
         headerTitle: detailDummy.result.address,
@@ -78,8 +81,8 @@ const KokItem = () => {
       name: '집 주변',
       element: (
         <Property.Outer
-          highlights={outerDummy.result.highlights}
-          options={outerDummy.result.options}
+          highlights={KokOuter!.hilights}
+          options={KokOuter!.options}
         />
       ),
     },
