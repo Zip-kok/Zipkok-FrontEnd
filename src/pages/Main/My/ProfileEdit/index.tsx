@@ -8,6 +8,7 @@ import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn } from 'components';
 import useAddressStore from 'contexts/addressStore';
 import useUIStore from 'contexts/uiStore';
+import useMyPageStore from 'contexts/useMyPageStore';
 import useBirthInput from 'hooks/useBirthInput';
 import useRadioBtn from 'hooks/useRadioBtn';
 
@@ -26,6 +27,9 @@ const ProfileEdit = () => {
   const [UserDetail, setUserDetail] = useState<UserDetail>();
   const ui = useUIStore();
   const [profileEditInfo, setProfileEditInfo] = useState<ProfileEditInfo>();
+
+  const MyPageStore = useMyPageStore();
+
   useEffect(() => {
     getProfileEditInfo().then((res) => setProfileEditInfo(res.result));
     console.log(profileEditInfo);
@@ -51,7 +55,7 @@ const ProfileEdit = () => {
   const [GenderRadioBtnContainer, gender] = useRadioBtn<Gender>(
     genderOptions,
     'round',
-    '남자',
+    MyPageStore.gender,
   );
 
   // 집 형태 라디오 버튼
@@ -64,7 +68,7 @@ const ProfileEdit = () => {
   const [HouseTypeRadioBtnContainer, houseType] = useRadioBtn<HouseType>(
     houseTypeOptions,
     'tag',
-    '원룸',
+    MyPageStore.realEstateType,
   );
 
   // 가격 타입 라디오 버튼
@@ -76,7 +80,7 @@ const ProfileEdit = () => {
   const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
     priceTypeOptions,
     'tag',
-    '월세',
+    MyPageStore.transactionType,
   );
 
   const [imgSrc, setImgSrc] = useState('');
@@ -89,11 +93,13 @@ const ProfileEdit = () => {
 
   const defaultValues: Record<PriceType, PriceRange[]> = {
     월세: [
-      [0, 60_000_000],
-      [0, 400_000],
+      [MyPageStore.mdepositMin || 0, MyPageStore.mdepositMax || 60_000_000],
+      [MyPageStore.mpriceMin || 0, MyPageStore.mpriceMax || 400_000],
     ],
-    전세: [[0, 60_000_000]],
-    매매: [[0, 120_000_000]],
+    전세: [
+      [MyPageStore.ydepositMin || 0, MyPageStore.ydepositMax || 60_000_000],
+    ],
+    매매: [[MyPageStore.priceMin || 0, MyPageStore.priceMax || 120_000_000]],
   };
 
   const navigate = useNavigate();
@@ -141,7 +147,10 @@ const ProfileEdit = () => {
             ref={fileInputRef}
           />
           <img
-            src={imgSrc || 'https://picpac.kr/common/img/default_profile.png'}
+            src={
+              MyPageStore.imageUrl ||
+              'https://picpac.kr/common/img/default_profile.png'
+            }
             onClick={handleImgClick}
           />
           <p onClick={handleImgClick}>수정하기</p>
@@ -152,7 +161,7 @@ const ProfileEdit = () => {
           <p className={styles.title}>닉네임</p>
           <TextInput
             placeholder="최대 12자"
-            defaultValue={profileEditInfo?.nickname}
+            defaultValue={MyPageStore.nickname}
             maxLength={12}
             style="roundedBox"
             captionStyle={{
@@ -169,7 +178,7 @@ const ProfileEdit = () => {
 
           <div className={styles.birthGenderContainer}>
             <BirthInput
-              defaultValue={profileEditInfo?.birthday}
+              defaultValue={MyPageStore.birthday}
               placeholder="6자리 숫자로 입력해주세요"
               style="roundedBox"
               caption={birthWarningMsg}
@@ -188,7 +197,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>희망 거주지역</p>
           <TextInput
-            defaultValue={address.address_name}
+            defaultValue={MyPageStore.address?.address_name}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('/my/profileEdit/locationEdit')}

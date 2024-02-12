@@ -23,17 +23,7 @@ const Mypage = () => {
   const ui = useUIStore();
   const modal = useModal();
 
-  const {
-    imageUrl,
-    nickname,
-    address,
-    realEstateType,
-    transactionType,
-    mpriceMax,
-    mdepositMax,
-    ydepositMax,
-    priceMax,
-  } = useMyPageStore();
+  const MyPageStore = useMyPageStore();
 
   useEffect(() => {
     ui.setUI((state) => ({
@@ -99,21 +89,23 @@ const Mypage = () => {
       <div className={styles.profile}>
         <img src="https://cdn.royalcanin-weshare-online.io/3DKT5m8BN5A8uWWASDMR/v4/ptpc1s3-welsh-pembroke-corgi-puppy-running-outside-in-a-garden" />
         <div className={styles.text}>
-          <div className={styles.name}>{nickname}</div>
-          <div className={styles.location}>#{address?.address_name}</div>
+          <div className={styles.name}>{MyPageStore.nickname}</div>
+          <div className={styles.location}>
+            #{MyPageStore.address?.address_name}
+          </div>
           <div className={styles.tag}>
-            <p>{transactionType}</p>
-            <p>{realEstateType}</p>
-            {transactionType && (
+            <p>{MyPageStore.transactionType}</p>
+            <p>{MyPageStore.realEstateType}</p>
+            {MyPageStore.transactionType && (
               <p>
-                {transactionType === '월세' &&
-                  `~${getPriceString(mdepositMax ?? 0)}/~${getPriceString(
-                    mpriceMax ?? 0,
-                  )}`}
-                {transactionType === '전세' &&
-                  `~${getPriceString(ydepositMax ?? 0)}`}
-                {transactionType === '매매' &&
-                  `~${getPriceString(priceMax ?? 0)}`}
+                {MyPageStore.transactionType === '월세' &&
+                  `~${getPriceString(
+                    MyPageStore.mdepositMax ?? 0,
+                  )}/~${getPriceString(MyPageStore.mpriceMax ?? 0)}`}
+                {MyPageStore.transactionType === '전세' &&
+                  `~${getPriceString(MyPageStore.ydepositMax ?? 0)}`}
+                {MyPageStore.transactionType === '매매' &&
+                  `~${getPriceString(MyPageStore.priceMax ?? 0)}`}
               </p>
             )}
           </div>
