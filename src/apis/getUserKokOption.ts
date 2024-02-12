@@ -4,39 +4,45 @@ import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface UserKokOption {
   highlights: string[];
-  outerOptions: {
-    optionId: number;
-    optionTitle: string;
-    orderNumber: number;
-    isVisible: boolean;
-    detailOptions: {
-      detailOptionId: number;
-      detailOptionTitle: string;
-      detailOptionIsVisible: boolean;
-    };
-  };
-  innerOptions: {
-    optionId: number;
-    optionTitle: string;
-    orderNumber: number;
-    isVisible: boolean;
-    detailOptions: {
-      detailOptionId: number;
-      detailOptionTitle: string;
-      detailOptionIsVisible: boolean;
-    };
-  };
-  contractOptions: {
-    optionId: number;
-    optionTitle: string;
-    orderNumber: number;
-    isVisible: boolean;
-    detailOptions: {
-      detailOptionId: number;
-      detailOptionTitle: string;
-      detailOptionIsVisible: boolean;
-    };
-  };
+  outerOptions: [
+    {
+      optionId: number;
+      optionTitle: string;
+      orderNumber: number;
+      isVisible: boolean;
+      detailOptions: {
+        detailOptionId: number;
+        detailOptionTitle: string;
+        detailOptionIsVisible: boolean;
+      };
+    },
+  ];
+  innerOptions: [
+    {
+      optionId: number;
+      optionTitle: string;
+      orderNumber: number;
+      isVisible: boolean;
+      detailOptions: {
+        detailOptionId: number;
+        detailOptionTitle: string;
+        detailOptionIsVisible: boolean;
+      };
+    },
+  ];
+  contractOptions: [
+    {
+      optionId: number;
+      optionTitle: string;
+      orderNumber: number;
+      isVisible: boolean;
+      detailOptions: {
+        detailOptionId: number;
+        detailOptionTitle: string;
+        detailOptionIsVisible: boolean;
+      };
+    },
+  ];
 }
 /**
  * `GET /user/kokOption`

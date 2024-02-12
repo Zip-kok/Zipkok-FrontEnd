@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getUserDetail } from 'apis';
+import { UserDetail } from 'apis/getUserDetail';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn } from 'components';
 import useAddressStore from 'contexts/addressStore';
@@ -20,8 +22,13 @@ import type { PriceType } from 'types/PriceType';
 type PriceRange = [number, number];
 
 const ProfileEdit = () => {
+  const [UserDetail, setUserDetail] = useState<UserDetail>();
   const ui = useUIStore();
   useEffect(() => {
+    getUserDetail().then((res) => setUserDetail(res.result));
+
+    setImgSrc(UserDetail!.imageURL);
+
     ui.setUI((state) => ({
       ...state,
       headerTitle: '프로필 수정하기',
