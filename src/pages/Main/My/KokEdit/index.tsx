@@ -7,18 +7,19 @@ import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 
 import Contract from './components/Contract';
-import InsideHome from './components/InsideHome';
-import NearHome from './components/NearHome';
+import Inner from './components/Inner';
+import Outer from './components/Outer';
 import styles from './KokEdit.module.css';
 
-import type { Option } from 'apis/getUserKokOption';
+import type { UserKokOption } from 'apis/getUserKokOption';
+import type { KokOption } from 'types/KokOption';
 
 const KokEdit = () => {
   const ui = useUIStore();
   const [highlights, setHighlights] = useState<string[]>([]);
-  const [outerOptions, setOuterOptions] = useState<Option[]>([]);
-  const [insideOptions, setInsideOptions] = useState<Option[]>([]);
-  const [contractOptions, setContractOptions] = useState<Option[]>([]);
+  const [outerOptions, setOuterOptions] = useState<KokOption[]>([]);
+  const [innerOptions, setInnerOptions] = useState<KokOption[]>([]);
+  const [contractOptions, setContractOptions] = useState<KokOption[]>([]);
 
   useEffect(() => {
     ui.setUI((state) => ({
@@ -29,22 +30,36 @@ const KokEdit = () => {
       naviEnabled: false,
     }));
 
+    // api 함수로부터 받은 데이터를 컴포넌트에서 사용할 수 있는 형태로 변환하는 함수
+    function convertRawOptions(rawOptions: UserKokOption[]) {
+      return rawOptions.map((option) => ({
+        ...option,
+        optionId: undefined,
+        id: option.optionId,
+      }));
+    }
+
+    // api 함수 호출 및 상태에 저장
     getUserKokOption().then((res) => {
       setHighlights(res.result.highlights);
-      setOuterOptions(res.result.outerOptions);
-      setInsideOptions(res.result.innerOptions);
-      setContractOptions(res.result.contractOptions);
+      const rawOuterOptions = res.result.outerOptions;
+      const rawInsideOptions = res.result.innerOptions;
+      const rawContractOptions = res.result.contractOptions;
+
+      setOuterOptions(convertRawOptions(rawOuterOptions));
+      setInnerOptions(convertRawOptions(rawInsideOptions));
+      setContractOptions(convertRawOptions(rawContractOptions));
     });
   }, []);
 
   const navigate = useNavigate();
 
   // 상단 메뉴 설정
-  const [TopMenu, Content, menuIndex] = useMenu([
+  const [TopMenu, Content] = useMenu([
     {
       name: '집 주변',
       element: (
-        <NearHome
+        <Outer
           highlights={highlights}
           options={outerOptions}
           setOptions={setOuterOptions}
@@ -54,9 +69,7 @@ const KokEdit = () => {
 
     {
       name: '집 내부',
-      element: (
-        <InsideHome options={insideOptions} setOptions={setInsideOptions} />
-      ),
+      element: <Inner options={innerOptions} setOptions={setInnerOptions} />,
     },
 
     {
