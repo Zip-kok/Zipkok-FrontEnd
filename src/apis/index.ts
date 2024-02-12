@@ -11,6 +11,8 @@ import { getKokOuter } from './getKokOuter';
 import { getKokReview } from './getKokReview';
 import { getUserDetail } from './getUserDetail';
 import { getUserKokOption } from './getUserKokOption';
+import { getMyPageInfo } from './getMyPageInfo';
+import { getProfileEditInfo } from './getProfileEditInfo';
 import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
@@ -35,6 +37,8 @@ export {
   getKokInner,
   getKokOuter,
   getKokReview,
+  getMyPageInfo,
+  getProfileEditInfo,
   logout,
 };
 

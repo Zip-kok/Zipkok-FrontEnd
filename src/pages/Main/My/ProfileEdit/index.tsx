@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { getUserDetail } from 'apis';
 import { UserDetail } from 'apis/getUserDetail';
+import { getProfileEditInfo } from 'apis';
+import { ProfileEditInfo } from 'apis/getProfileEditInfo';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn } from 'components';
 import useAddressStore from 'contexts/addressStore';
@@ -24,10 +26,14 @@ type PriceRange = [number, number];
 const ProfileEdit = () => {
   const [UserDetail, setUserDetail] = useState<UserDetail>();
   const ui = useUIStore();
+  const [profileEditInfo, setProfileEditInfo] = useState<ProfileEditInfo>();
   useEffect(() => {
-    getUserDetail().then((res) => setUserDetail(res.result));
 
-    setImgSrc(UserDetail!.imageURL);
+    getProfileEditInfo().then((res) => setProfileEditInfo(res.result));
+    console.log(profileEditInfo);
+    if (profileEditInfo?.imageUrl !== undefined) {
+      setImgSrc(profileEditInfo?.imageUrl);
+    }
 
     ui.setUI((state) => ({
       ...state,
@@ -148,7 +154,7 @@ const ProfileEdit = () => {
           <p className={styles.title}>닉네임</p>
           <TextInput
             placeholder="최대 12자"
-            defaultValue="보리는 강아지 내가 주인"
+            defaultValue={profileEditInfo?.nickname}
             maxLength={12}
             style="roundedBox"
             captionStyle={{
@@ -165,7 +171,7 @@ const ProfileEdit = () => {
 
           <div className={styles.birthGenderContainer}>
             <BirthInput
-              defaultValue="011203"
+              defaultValue={profileEditInfo?.birthday}
               placeholder="6자리 숫자로 입력해주세요"
               style="roundedBox"
               caption={birthWarningMsg}
