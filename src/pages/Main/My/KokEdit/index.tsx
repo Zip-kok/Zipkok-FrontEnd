@@ -54,12 +54,16 @@ const KokEdit = () => {
 
     {
       name: '집 내부',
-      element: <InsideHome />,
+      element: (
+        <InsideHome options={insideOptions} setOptions={setInsideOptions} />
+      ),
     },
 
     {
       name: '중개 / 계약',
-      element: <Contract />,
+      element: (
+        <Contract options={contractOptions} setOptions={setContractOptions} />
+      ),
     },
   ]);
 
