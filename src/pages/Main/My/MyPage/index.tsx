@@ -55,9 +55,11 @@ const Mypage = () => {
   const handleLogoutClick = () => {
     modal
       .open({
-        title: '로그아웃하시겠어요?',
+        title: '로그아웃하시겠습니까?',
+        description:
+          '로그아웃 시 매물 리스트 및 작성한 콕리스트를 확인할 수 없습니다.',
         primaryButton: '로그아웃',
-        secondaryButton: '취소',
+        secondaryButton: '돌아가기',
       })
       .then((res) => {
         if (res === 'primary') {
@@ -66,7 +68,21 @@ const Mypage = () => {
         }
       });
   };
-  const handleQuitClick = () => {};
+  const handleQuitClick = () => {
+    modal
+      .open({
+        title: '정말 탈퇴하시겠어요?',
+        description: '탈퇴하기 선택 시 계정은 삭제되며 복구되지 않습니다.',
+        primaryButton: '탈퇴하기',
+        secondaryButton: '취소',
+      })
+      .then((res) => {
+        if (res === 'primary') {
+          // TODO: 탈퇴
+          alert('탈퇴 기능은 아직 구현되지 않았습니다.');
+        }
+      });
+  };
 
   return (
     <div className={styles.root}>

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import filledHeartIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart.svg';
 import shareIcon from 'assets/img/line(2)/share.svg';
 import { PropertyComponents as Property, BottomBtn } from 'components';

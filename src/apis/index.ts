@@ -8,6 +8,7 @@ import { getMyPageInfo } from './getMyPageInfo';
 import { getProfileEditInfo } from './getProfileEditInfo';
 import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
+import { logout } from './logout';
 import { onBoarding } from './onBoarding';
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
@@ -25,6 +26,7 @@ export {
   deleteZim,
   getMyPageInfo,
   getProfileEditInfo,
+  logout,
 };
 
 /**

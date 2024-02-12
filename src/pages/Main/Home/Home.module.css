@@ -1,5 +1,6 @@
 .root {
   display: flex;
+  height: 100%;
   flex-direction: column;
 }
 
@@ -31,7 +32,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
-  z-index: 99;
+  z-index: 101;
   background-color: white;
 }
 .filterBtn {
@@ -51,7 +52,7 @@
   gap: 8px;
   height: 32px;
   padding: 12px 20px;
-  z-index: 99;
+  z-index: 101;
   background-color: white;
 }
 
@@ -71,4 +72,16 @@
   border-radius: 16px;
   border: 1px solid var(--gray-color-gray030_text, #9fa4a9);
   background: var(--gray-color-white, #fff);
+}
+
+.searchBoxContainer {
+  flex: 0 0 content;
+}
+
+.filterContainer {
+  flex: 0 0 content;
+}
+
+.mapContainer {
+  flex: 1 1 auto;
 }
