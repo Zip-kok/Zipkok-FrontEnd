@@ -2,7 +2,7 @@ import api from '.';
 
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
-interface Option {
+export interface Option {
   optionId: number;
   optionTitle: string;
   orderNumber: number;
@@ -23,8 +23,8 @@ export interface UserKokOption {
 /**
  * `GET /user/kokOption`
  * 마이페이지의 리스트 항목 수정을 눌렀을 떄 호출되는 API
- */
-export async function getUserKokOption(kokId: number) {
+ export */
+export async function getUserKokOption() {
   const path = '/user/kokOption';
   const method = 'GET';
   const params = {};

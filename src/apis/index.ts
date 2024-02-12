@@ -40,6 +40,7 @@ export {
   getMyPageInfo,
   getProfileEditInfo,
   logout,
+  getUserKokOption,
 };
 
 /**

@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getUserKokOption } from 'apis';
 import { BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
@@ -10,8 +11,15 @@ import InsideHome from './components/InsideHome';
 import NearHome from './components/NearHome';
 import styles from './KokEdit.module.css';
 
+import type { Option } from 'apis/getUserKokOption';
+
 const KokEdit = () => {
   const ui = useUIStore();
+  const [highlights, setHighlights] = useState<string[]>([]);
+  const [outerOptions, setOuterOptions] = useState<Option[]>([]);
+  const [insideOptions, setInsideOptions] = useState<Option[]>([]);
+  const [contractOptions, setContractOptions] = useState<Option[]>([]);
+
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
@@ -28,7 +36,13 @@ const KokEdit = () => {
   const [TopMenu, Content, menuIndex] = useMenu([
     {
       name: '집 주변',
-      element: <NearHome />,
+      element: (
+        <NearHome
+          highlights={highlights}
+          options={outerOptions}
+          setOptions={setOuterOptions}
+        />
+      ),
     },
 
     {
