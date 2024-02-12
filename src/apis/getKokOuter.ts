@@ -4,13 +4,11 @@ import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface KokOuter {
   hilights: string[];
-  options: [
-    {
-      option: string;
-      orderNumber: number;
-      detailOptions: string[];
-    },
-  ];
+  options: {
+    option: string;
+    orderNumber: number;
+    detailOptions: string[];
+  }[];
 }
 
 /**

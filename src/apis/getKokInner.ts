@@ -5,13 +5,13 @@ import type { ZipkokResponse } from 'types/ZipkokResponse';
 export interface KokInner {
   furnitureOptions: string[];
   direction: string;
-  options: options[];
+  options: {
+    option: string;
+    orderNumber: number;
+    detailOptions: string[];
+  }[];
 }
-export interface options {
-  option: string;
-  orderNumber: number;
-  detailOption: string[];
-}
+
 /**
  * `GET /kok/{kokId}/inner`
  * 콕리스트_작성한리스트 확인 (5가지 항목) 에서 “집 주변” 탭 클릭시 호출되는 API

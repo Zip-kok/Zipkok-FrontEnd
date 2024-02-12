@@ -5,7 +5,7 @@ import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface KokReview {
-  impressions: [string];
+  impressions: string[];
   facilityStarCount: number;
   infraStarCount: number;
   structureStarCount: number;
