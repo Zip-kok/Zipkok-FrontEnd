@@ -5,59 +5,96 @@ import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 
 interface MyPageInfo {
-  nickname?: string;
   imageUrl?: string;
+  nickname?: string;
+  birthday?: string;
+  gender?: string;
   address?: Address;
   realEstateType?: HouseType;
   transactionType?: PriceType;
-  priceMax?: number;
-  depositMax?: number;
-  priceMin?: number;
-  depositMin?: number;
 
-  setNickname: (nickname?: string) => void;
+  //월세
+  mpriceMin?: number;
+  mpriceMax?: number;
+  // 월세 보증금
+  mdepositMin?: number;
+  mdepositMax?: number;
+  //전세 보증금
+  ydepositMin?: number;
+  ydepositMax?: number;
+  //매매 가격
+  priceMax?: number;
+  priceMin?: number;
+
   setImageUrl: (imageUrl?: string) => void;
+  setNickname: (nickname?: string) => void;
+  setBirthday: (birthday?: string) => void;
+  setGender: (birthday?: string) => void;
   setAddress: (address?: Address) => void;
-  setRealEstateType: (houseType: HouseType) => void;
-  setTransactionType: (priceType: PriceType) => void;
-  setPriceMax: (priceMax?: number) => void;
-  setDepositMax: (depositMax?: number) => void;
-  setPriceMin: (priceMin?: number) => void;
-  setDepositMin: (depositMin?: number) => void;
+  setRealEstateType: (houseType?: HouseType) => void;
+  setTransactionType: (priceType?: PriceType) => void;
+  setMPriceMin: (mpriceMin?: number) => void;
+  setMPriceMax: (mpriceMax?: number) => void;
+  setMDepositMin: (mdepositMin?: number) => void;
+  setMDepositMax: (mdepositMax?: number) => void;
+  setYDepositMin: (ydepositMin?: number) => void;
+  setYDepositMax: (ydepositMax?: number) => void;
+  setPriceMin: (priceMax?: number) => void;
+  setPriceMax: (priceMin?: number) => void;
 }
 const initialState: MyPageInfo = {
-  nickname: undefined,
   imageUrl: undefined,
+  nickname: undefined,
+  birthday: undefined,
+  gender: undefined,
   address: undefined,
   realEstateType: undefined,
   transactionType: undefined,
+  mpriceMin: undefined,
+  mpriceMax: undefined,
+  mdepositMin: undefined,
+  mdepositMax: undefined,
+  ydepositMin: undefined,
+  ydepositMax: undefined,
   priceMax: undefined,
-  depositMax: undefined,
   priceMin: undefined,
-  depositMin: undefined,
 
-  setNickname: () => {},
   setImageUrl: () => {},
+  setNickname: () => {},
+  setBirthday: () => {},
+  setGender: () => {},
   setAddress: () => {},
   setRealEstateType: () => {},
   setTransactionType: () => {},
-  setPriceMax: () => {},
-  setDepositMax: () => {},
+  setMPriceMin: () => {},
+  setMPriceMax: () => {},
+  setMDepositMin: () => {},
+  setMDepositMax: () => {},
+  setYDepositMin: () => {},
+  setYDepositMax: () => {},
   setPriceMin: () => {},
-  setDepositMin: () => {},
+  setPriceMax: () => {},
 };
 
 const useMyPageStore = create<MyPageInfo>((set) => ({
   ...initialState,
-  setNickname: (nickname) => set({ nickname }),
   setImageUrl: (imageUrl) => set({ imageUrl }),
+  setNickname: (nickname) => set({ nickname }),
+  setBirthday: (birthday) => set({ birthday }),
+  setGender: (gender) => set({ gender }),
   setAddress: (address) => set({ address }),
   setRealEstateType: (realEstateType) => set({ realEstateType }),
   setTransactionType: (transactionType) => set({ transactionType }),
-  setPriceMax: (priceMax) => set({ priceMax }),
-  setDepositMax: (depositMax) => set({ depositMax }),
+
+  setMPriceMin: (mpriceMin) => set({ mpriceMin }),
+  setMPriceMax: (mpriceMax) => set({ mpriceMax }),
+  setMDepositMin: (mdepositMin) => set({ mdepositMin }),
+  setMDepositMax: (mdepositMax) => set({ mdepositMax }),
+  setYDepositMin: (ydepositMin) => set({ ydepositMin }),
+  setYDepositMax: (ydepositMax) => set({ ydepositMax }),
+
   setPriceMin: (priceMin) => set({ priceMin }),
-  setDepositMin: (depositMin) => set({ depositMin }),
+  setPriceMax: (priceMax) => set({ priceMax }),
 }));
 
 export default useMyPageStore;

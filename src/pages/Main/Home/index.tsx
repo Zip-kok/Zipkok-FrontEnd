@@ -25,15 +25,29 @@ export default function Home() {
     }));
   }, []);
 
-  const { realEstateType, transactionType, priceMax, depositMax, address } =
-    useMyPageStore();
+  const {
+    realEstateType,
+    transactionType,
+    mpriceMax,
+    mdepositMax,
+    ydepositMax,
+    priceMax,
+    address,
+  } = useMyPageStore();
   useEffect(() => {
     if (realEstateType) {
       setFilterSet(true);
     } else {
       setFilterSet(false);
     }
-  }, [realEstateType, transactionType, priceMax, depositMax]);
+  }, [
+    realEstateType,
+    transactionType,
+    mpriceMax,
+    mdepositMax,
+    ydepositMax,
+    priceMax,
+  ]);
 
   const navigate = useNavigate();
 
@@ -80,34 +94,34 @@ export default function Home() {
           <div className={styles.filterCtn}>
             {realEstateType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {realEstateType}
+                {transactionType}
               </div>
             )}
             {transactionType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {transactionType}
+                {realEstateType}
               </div>
             )}
             {transactionType === '월세' ? (
-              priceMax !== undefined &&
-              depositMax !== undefined && (
+              mpriceMax !== undefined &&
+              mdepositMax !== undefined && (
                 <div className={styles.filter} onClick={handleFilterClick}>
-                  {`~${getPriceString(priceMax, true)}/~${getPriceString(
-                    depositMax,
+                  {`~${getPriceString(mpriceMax, true)}/~${getPriceString(
+                    mdepositMax,
                     true,
                   )}`}
                 </div>
               )
             ) : (
               <>
-                {priceMax !== undefined && (
+                {transactionType === '전세' && (
                   <div className={styles.filter} onClick={handleFilterClick}>
-                    {`~${getPriceString(priceMax, true)}`}
+                    {`~${getPriceString(ydepositMax!, true)}`}
                   </div>
                 )}
-                {depositMax !== undefined && (
+                {transactionType === '매매' && (
                   <div className={styles.filter} onClick={handleFilterClick}>
-                    {`~${getPriceString(depositMax, true)}`}
+                    {`~${getPriceString(priceMax!, true)}`}
                   </div>
                 )}
               </>

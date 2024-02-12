@@ -57,10 +57,14 @@ export default function Filter(props: FilterProps) {
   const {
     setRealEstateType,
     setTransactionType,
-    setPriceMax,
-    setDepositMax,
+    setMPriceMin,
+    setMPriceMax,
+    setMDepositMax,
+    setMDepositMin,
+    setYDepositMin,
+    setYDepositMax,
     setPriceMin,
-    setDepositMin,
+    setPriceMax,
   } = useMyPageStore();
 
   const handelSaveBtnClick = () => {
@@ -72,16 +76,25 @@ export default function Filter(props: FilterProps) {
     if (priceType === '월세') {
       // 월세의 경우, 첫 번째 배열 요소는 보증금 범위, 두 번째는 월세 범위
       const [depositRange, monthlyRange] = priceRanges;
-      setDepositMin(depositRange[0]);
-      setDepositMax(depositRange[1]);
-      setPriceMin(monthlyRange[0]);
-      setPriceMax(monthlyRange[1]);
+      setMDepositMin(depositRange[0]);
+      setMDepositMax(depositRange[1]);
+      setMPriceMin(monthlyRange[0]);
+      setMPriceMax(monthlyRange[1]);
+
+      setYDepositMin(undefined);
+      setYDepositMax(undefined);
+      setYDepositMin(undefined);
+      setYDepositMax(undefined);
     } else if (priceType === '전세') {
       // 전세의 경우, 보증금 범위만
       const [depositRange] = priceRanges;
-      setDepositMin(depositRange[0]);
-      setDepositMax(depositRange[1]);
+      setYDepositMin(depositRange[0]);
+      setYDepositMax(depositRange[1]);
 
+      setMDepositMin(undefined);
+      setMDepositMax(undefined);
+      setMPriceMin(undefined);
+      setMPriceMax(undefined);
       setPriceMin(undefined);
       setPriceMax(undefined);
     } else if (priceType === '매매') {
@@ -89,8 +102,13 @@ export default function Filter(props: FilterProps) {
       const [purchaseRange] = priceRanges;
       setPriceMin(purchaseRange[0]);
       setPriceMax(purchaseRange[1]);
-      setDepositMin(undefined);
-      setDepositMax(undefined);
+
+      setYDepositMin(undefined);
+      setYDepositMax(undefined);
+      setMDepositMin(undefined);
+      setMDepositMax(undefined);
+      setMPriceMin(undefined);
+      setMPriceMax(undefined);
     }
 
     // 저장하면 필터 내리기
