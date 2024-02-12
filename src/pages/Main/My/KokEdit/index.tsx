@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 
@@ -46,8 +47,10 @@ const KokEdit = () => {
       <div className={styles.menu}>
         <TopMenu />
       </div>
-      <div className={styles.blank}></div>
-      <Content />
+      <div className={styles.content}>
+        <Content />
+      </div>
+      <BottomBtn text="저장하기" onClick={() => {}} />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getUserDetail } from 'apis';
 import { getProfileEditInfo } from 'apis';
 import { ProfileEditInfo } from 'apis/getProfileEditInfo';
 import { UserDetail } from 'apis/getUserDetail';
