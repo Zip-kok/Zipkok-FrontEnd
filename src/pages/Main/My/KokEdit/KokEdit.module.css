@@ -23,8 +23,8 @@
   flex-wrap: wrap;
 }
 
-.blank {
-  height: 47px;
+.content {
+  padding: 48px 0 80px 0;
 }
 
 .checkListGroupContainer {
