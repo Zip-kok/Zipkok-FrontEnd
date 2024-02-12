@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { onBoarding } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useModal from 'contexts/modalStore';
+import useMyPageStore from 'contexts/useMyPageStore';
 import { StatusCode } from 'types/StatusCode';
 
 import Complete from './Complete';
@@ -22,6 +23,30 @@ export type PriceRange = [number, number];
 export default function Onboarding() {
   const navigate = useNavigate();
   const modal = useModal();
+  const {
+    address,
+    setAddress,
+    realEstateType,
+    setRealEstateType,
+    transactionType,
+    setTransactionType,
+    mpriceMax,
+    mpriceMin,
+    setMPriceMax,
+    setMPriceMin,
+    mdepositMax,
+    mdepositMin,
+    setMDepositMax,
+    setMDepositMin,
+    ydepositMax,
+    ydepositMin,
+    setYDepositMax,
+    setYDepositMin,
+    priceMax,
+    priceMin,
+    setPriceMax,
+    setPriceMin,
+  } = useMyPageStore();
 
   function handleSkip() {
     modal
@@ -107,17 +132,25 @@ export default function Onboarding() {
       switch (priceType) {
         case '월세':
           mdepositMin = priceRanges[0][0];
+          setMDepositMin(priceRanges[0][0]);
           mdepositMax = priceRanges[0][1];
+          setMDepositMax(priceRanges[0][1]);
           mpriceMin = priceRanges[1][0];
+          setMPriceMin(priceRanges[1][0]);
           mpriceMax = priceRanges[1][1];
+          setMPriceMax(priceRanges[1][1]);
           break;
         case '전세':
           ydepositMin = priceRanges[0][0];
+          setYDepositMin(priceRanges[0][0]);
           ydepositMax = priceRanges[0][1];
+          setYDepositMax(priceRanges[0][1]);
           break;
         case '매매':
           purchaseMin = priceRanges[0][0];
+          setPriceMin(priceRanges[0][0]);
           purchaseMax = priceRanges[0][1];
+          setPriceMax(priceRanges[0][1]);
           break;
       }
 
@@ -139,6 +172,10 @@ export default function Onboarding() {
         .then((res) => {
           // 회원정보 등록/수정 성공
           if (res.code === StatusCode.MEMBER_INFO_UPDATE_SUCCESS) {
+            //전역변수에 값 저장
+            setAddress(location);
+            setRealEstateType(houseType);
+            setTransactionType(priceType);
             setStep('complete');
           } else {
             let isDefinedError = true;
