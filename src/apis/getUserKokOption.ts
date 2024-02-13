@@ -1,67 +1,31 @@
 import api from '.';
 
+import type { KokOption } from 'types/KokOption';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
-export interface UserKokOption {
+export type UserKokOption = Omit<KokOption, 'id'> & { optionId: number };
+
+interface GetUserKokOptionResponse<T> {
   highlights: string[];
-  outerOptions: [
-    {
-      optionId: number;
-      optionTitle: string;
-      orderNumber: number;
-      isVisible: boolean;
-      detailOptions: {
-        detailOptionId: number;
-        detailOptionTitle: string;
-        detailOptionIsVisible: boolean;
-      };
-    },
-  ];
-  innerOptions: [
-    {
-      optionId: number;
-      optionTitle: string;
-      orderNumber: number;
-      isVisible: boolean;
-      detailOptions: {
-        detailOptionId: number;
-        detailOptionTitle: string;
-        detailOptionIsVisible: boolean;
-      };
-    },
-  ];
-  contractOptions: [
-    {
-      optionId: number;
-      optionTitle: string;
-      orderNumber: number;
-      isVisible: boolean;
-      detailOptions: {
-        detailOptionId: number;
-        detailOptionTitle: string;
-        detailOptionIsVisible: boolean;
-      };
-    },
-  ];
+  outerOptions: T[];
+  innerOptions: T[];
+  contractOptions: T[];
 }
+
 /**
  * `GET /user/kokOption`
- * 마이페이지의 리스트 항목 수정을 눌렀을 떄 호출되는 API
+ * 마이페이지의 리스트 항목 수정을 눌렀을 때 호출되는 API
+ * @returns 유저의 콕 옵션 정보
  */
-export async function getUserKokOption(kokId: number) {
+export async function getUserKokOption() {
   const path = '/user/kokOption';
   const method = 'GET';
   const params = {};
   const authRequired = true;
 
-  const res = await api<ZipkokResponse<UserKokOption>>(
-    path,
-    method,
-    authRequired,
-    params,
-    undefined,
-    undefined,
-  );
+  const res = await api<
+    ZipkokResponse<GetUserKokOptionResponse<UserKokOption>>
+  >(path, method, authRequired, params, undefined, undefined);
 
-  return res as ZipkokResponse<UserKokOption>;
+  return res;
 }

@@ -38,12 +38,13 @@ export default function useMenu(
 
   const contentCallback = useCallback(
     () => <>{menus[index].element}</>,
-    [index],
+    [menus, index],
   );
 
-  return [menuCallback, contentCallback, index] as [
+  return [menuCallback, contentCallback, index, menus[index].element] as [
     typeof menuCallback,
     typeof contentCallback,
     number,
+    Menu['element'],
   ];
 }
