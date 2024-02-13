@@ -17,7 +17,7 @@ interface mapLocationInfo {
   northEastLon?: number;
 }
 
-interface realEstateInfoList {
+export interface realEstateInfoList {
   realEstateId: number;
   imageURL: string;
   deposit: number;

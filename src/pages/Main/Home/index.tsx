@@ -166,7 +166,7 @@ export default function Home() {
       </div>
 
       {/* 바텀 시트 */}
-      <HomeBottomSheet />
+      <HomeBottomSheet realEstateInfoList={mapRealEstate?.realEstateInfoList} />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import BottomSheetHeader from './BottomSheetHeader';
 import { BOTTOM_SHEET_HEIGHT } from './BottomSheetOption';
 import Content from './Content';
 import { useBottomSheet } from './useBottomSheet';
+import { realEstateInfoList } from '../../KakaoMap';
 import styles from '../BottomSheet.module.css';
 
 const Wrapper = styled(motion.div)`
@@ -30,7 +31,10 @@ const BottomSheetContent = styled.div`
   background-color: white;
 `;
 
-const BottomSheet = () => {
+interface BottomSheetProps {
+  realEstateInfoList?: realEstateInfoList[];
+}
+const BottomSheet = ({ realEstateInfoList }: BottomSheetProps) => {
   const { sheet, content, toggleSheet } = useBottomSheet();
 
   return (
@@ -42,7 +46,7 @@ const BottomSheet = () => {
       </div>
       <BottomSheetHeader />
       <BottomSheetContent ref={content}>
-        <Content />
+        <Content realEstateInfoList={realEstateInfoList} />
       </BottomSheetContent>
     </Wrapper>
   );
