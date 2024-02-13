@@ -55,7 +55,7 @@ const KokEdit = () => {
   const navigate = useNavigate();
 
   // 상단 메뉴 설정
-  const [TopMenu, Content] = useMenu([
+  const [TopMenu, , , contentElement] = useMenu([
     {
       name: '집 주변',
       element: (
@@ -85,9 +85,7 @@ const KokEdit = () => {
       <div className={styles.menu}>
         <TopMenu />
       </div>
-      <div className={styles.content}>
-        <Content />
-      </div>
+      <div className={styles.content}>{contentElement}</div>
       <BottomBtn text="저장하기" onClick={() => {}} />
     </div>
   );
