@@ -23,7 +23,10 @@ const NaviBar = () => {
         }`}
         onClick={() => navigate('kok')}
       >
-        <img src={naviMenu === 'kok' ? koklistSelected : koklistDefault}></img>
+        <img
+          src={naviMenu === 'kok' ? koklistSelected : koklistDefault}
+          className={styles.icon}
+        ></img>
         <span className={styles.label}>콕리스트</span>
       </button>
 
@@ -33,7 +36,10 @@ const NaviBar = () => {
         }`}
         onClick={() => navigate('')}
       >
-        <img src={naviMenu === 'home' ? homeSelected : homeDefault}></img>
+        <img
+          src={naviMenu === 'home' ? homeSelected : homeDefault}
+          className={styles.icon}
+        ></img>
         <span className={styles.label}>홈</span>
       </button>
 
@@ -43,7 +49,10 @@ const NaviBar = () => {
         }`}
         onClick={() => navigate('my')}
       >
-        <img src={naviMenu === 'my' ? mySelected : myDefault}></img>
+        <img
+          src={naviMenu === 'my' ? mySelected : myDefault}
+          className={styles.icon}
+        ></img>
         <span className={styles.label}>마이페이지</span>
       </button>
     </div>
