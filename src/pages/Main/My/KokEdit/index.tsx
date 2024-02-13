@@ -85,17 +85,20 @@ const KokEdit = () => {
   const handleSave = () => {
     putUserKokOption({
       highlights,
-      outerOptions: outerOptions.map((option) => ({
+      outerOptions: outerOptions.map((option, index) => ({
         ...option,
         optionId: option.id,
+        orderNumber: index,
       })),
-      innerOptions: innerOptions.map((option) => ({
+      innerOptions: innerOptions.map((option, index) => ({
         ...option,
         optionId: option.id,
+        orderNumber: index,
       })),
-      contractOptions: contractOptions.map((option) => ({
+      contractOptions: contractOptions.map((option, index) => ({
         ...option,
         optionId: option.id,
+        orderNumber: index,
       })),
     }).then(() => {
       setShowMessage(true);

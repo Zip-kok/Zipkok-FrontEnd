@@ -27,5 +27,15 @@ export async function getUserKokOption() {
     ZipkokResponse<GetUserKokOptionResponse<UserKokOption>>
   >(path, method, authRequired, params, undefined, undefined);
 
+  res.result.outerOptions = res.result.outerOptions.sort(
+    (a, b) => a.orderNumber - b.orderNumber,
+  );
+  res.result.innerOptions = res.result.innerOptions.sort(
+    (a, b) => a.orderNumber - b.orderNumber,
+  );
+  res.result.contractOptions = res.result.contractOptions.sort(
+    (a, b) => a.orderNumber - b.orderNumber,
+  );
+
   return res;
 }
