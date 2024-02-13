@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import edit from 'assets/img/line(2)/edit.svg';
@@ -16,6 +16,7 @@ import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
 import getPriceString from 'utils/getPriceString';
+import isLoggedIn from 'utils/isLoggedIn';
 import logout from 'utils/logout';
 
 import styles from './Mypage.module.css';
@@ -38,14 +39,62 @@ const Mypage = () => {
   const navigate = useNavigate();
 
   const handleProfileEditClick = () => {
+    if (!isLoggedIn()) {
+      modal
+        .open({
+          title: '로그인이 필요한 서비스입니다.',
+          description: '로그인 후 이용해주세요.',
+          primaryButton: '로그인',
+          secondaryButton: '돌아가기',
+        })
+        .then((res) => {
+          if (res === 'primary') {
+            navigate('/login');
+          }
+        });
+      return;
+    }
+
     navigate('./profileEdit');
   };
 
   const handleKeepClick = () => {
+    if (!isLoggedIn()) {
+      modal
+        .open({
+          title: '로그인이 필요한 서비스입니다.',
+          description: '로그인 후 이용해주세요.',
+          primaryButton: '로그인',
+          secondaryButton: '돌아가기',
+        })
+        .then((res) => {
+          if (res === 'primary') {
+            navigate('/login');
+          }
+        });
+      return;
+    }
+
     navigate('./likedProperties');
   };
 
   const handleListEditClick = () => {
+    if (!isLoggedIn()) {
+      modal
+        .open({
+          title: '로그인이 필요한 서비스입니다.',
+          description: '로그인 후 이용해주세요.',
+          primaryButton: '로그인',
+          secondaryButton: '돌아가기',
+        })
+        .then((res) => {
+          if (res === 'primary') {
+            navigate('/login');
+          }
+        });
+      return;
+    }
+
     navigate('./kokEdit');
   };
   const handlePinClick = () => {};
@@ -53,6 +102,11 @@ const Mypage = () => {
   const handleNoticeClick = () => {};
   const handleInquiryClick = () => {};
   const handleLogoutClick = () => {
+    if (!isLoggedIn()) {
+      navigate('/login');
+      return;
+    }
+
     modal
       .open({
         title: '로그아웃하시겠습니까?',
