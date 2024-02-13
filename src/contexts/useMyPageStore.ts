@@ -1,3 +1,4 @@
+import defaultUserIcon from 'assets/img/common/user.png';
 import { create } from 'zustand';
 
 import type { Gender } from 'pages/SignIn';
@@ -44,6 +45,25 @@ interface MyPageInfo {
   setPriceMax: (priceMin?: number) => void;
 }
 const initialState: MyPageInfo = {
+  imageUrl: defaultUserIcon,
+  nickname: '게스트',
+  birthday: '040405',
+  gender: '비공개',
+  address: {
+    address_name: '서울',
+    x: 127.024612,
+    y: 37.5326,
+  },
+  realEstateType: '원룸',
+  transactionType: '월세',
+  mpriceMin: 0,
+  mpriceMax: 400000,
+  mdepositMin: 0,
+  mdepositMax: 60000000,
+  ydepositMin: 0,
+  ydepositMax: 60000000,
+  priceMin: 0,
+  priceMax: 120000000,
   setImageUrl: () => {},
   setNickname: () => {},
   setBirthday: () => {},

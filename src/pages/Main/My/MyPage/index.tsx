@@ -87,7 +87,7 @@ const Mypage = () => {
   return (
     <div className={styles.root}>
       <div className={styles.profile}>
-        <img src="https://cdn.royalcanin-weshare-online.io/3DKT5m8BN5A8uWWASDMR/v4/ptpc1s3-welsh-pembroke-corgi-puppy-running-outside-in-a-garden" />
+        <img src={MyPageStore.imageUrl} />
         <div className={styles.text}>
           <div className={styles.name}>{MyPageStore.nickname}</div>
           <div className={styles.location}>
