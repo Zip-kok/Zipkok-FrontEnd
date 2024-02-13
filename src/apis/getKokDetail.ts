@@ -6,7 +6,10 @@ import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface KokDetail {
   kokId: number;
-  imageInfo: imageInfo[];
+  imageInfo: {
+    imageNumber: number;
+    imageUrls: string[];
+  };
   address: string;
   detailAddress: string;
   transactionType: PriceType;
@@ -17,15 +20,12 @@ export interface KokDetail {
   pyeongsu: number;
   realEstateType: HouseType;
   floorNum: number;
-  administraiveFee: number;
-  langtitude: number;
+  administrativeFee: number;
+  latitude: number;
   longtitude: number;
   isZimmed: boolean;
 }
-export interface imageInfo {
-  imageNumber: number;
-  imageUrls: string[];
-}
+
 /**
  * `GET /kok/{kokId}/detail`
  * 콕리스트에서 특정 콕을 클릭시 호출되는 API

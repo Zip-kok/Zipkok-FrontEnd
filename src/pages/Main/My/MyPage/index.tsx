@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { MyPageInfo, getMyPageInfo } from 'apis/getMyPageInfo';
 import edit from 'assets/img/line(2)/edit.svg';
 import heart from 'assets/img/line(2)/heart.svg';
 import inquiry from 'assets/img/line(2)/inquiry.svg';
@@ -15,6 +14,7 @@ import quit from 'assets/img/line(2)/quit.svg';
 import { IconBtn } from 'components';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
+import useMyPageStore from 'contexts/useMyPageStore';
 import getPriceString from 'utils/getPriceString';
 import logout from 'utils/logout';
 
@@ -22,11 +22,10 @@ import styles from './Mypage.module.css';
 const Mypage = () => {
   const ui = useUIStore();
   const modal = useModal();
-  const [myPageInfo, setMyPageInfo] = useState<MyPageInfo>();
+
+  const MyPageStore = useMyPageStore();
 
   useEffect(() => {
-    getMyPageInfo().then((res) => setMyPageInfo(res.result));
-
     ui.setUI((state) => ({
       ...state,
       headerTitle: '마이페이지',
@@ -90,15 +89,25 @@ const Mypage = () => {
       <div className={styles.profile}>
         <img src="https://cdn.royalcanin-weshare-online.io/3DKT5m8BN5A8uWWASDMR/v4/ptpc1s3-welsh-pembroke-corgi-puppy-running-outside-in-a-garden" />
         <div className={styles.text}>
-          <div className={styles.name}>{myPageInfo?.nickname}</div>
-          <div className={styles.location}>#{myPageInfo?.address}</div>
+          <div className={styles.name}>{MyPageStore.nickname}</div>
+          <div className={styles.location}>
+            #{MyPageStore.address?.address_name}
+          </div>
           <div className={styles.tag}>
-            <p>{myPageInfo?.transactionType}</p>
-            <p>{myPageInfo?.realEstateType}</p>
-            <p>
-              ~{getPriceString(myPageInfo?.depositMax ?? 0)}/~
-              {getPriceString(myPageInfo?.priceMax ?? 0)}
-            </p>
+            <p>{MyPageStore.transactionType}</p>
+            <p>{MyPageStore.realEstateType}</p>
+            {MyPageStore.transactionType && (
+              <p>
+                {MyPageStore.transactionType === '월세' &&
+                  `~${getPriceString(
+                    MyPageStore.mdepositMax ?? 0,
+                  )}/~${getPriceString(MyPageStore.mpriceMax ?? 0)}`}
+                {MyPageStore.transactionType === '전세' &&
+                  `~${getPriceString(MyPageStore.ydepositMax ?? 0)}`}
+                {MyPageStore.transactionType === '매매' &&
+                  `~${getPriceString(MyPageStore.priceMax ?? 0)}`}
+              </p>
+            )}
           </div>
         </div>
       </div>

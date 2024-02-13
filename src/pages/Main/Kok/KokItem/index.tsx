@@ -20,6 +20,7 @@ import detailDummy from 'models/kokItemDetail.json';
 import innerDummy from 'models/kokItemInner.json';
 import outerDummy from 'models/kokItemOuter.json';
 import reviewDummy from 'models/kokItemReview.json';
+import { StatusCode } from 'types/StatusCode';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -56,6 +57,9 @@ const KokItem = () => {
     ui.setUI((state) => {
       getKokOuter(1).then((res) => setKokOuter(res.result));
       getKokInner(1).then((res) => setKokInner(res.result));
+      getKokReview(1).then((res) => setKokReview(res.result));
+      getKokContract(1).then((res) => setKokContract(res.result));
+
       return {
         ...state,
         headerTitle: detailDummy.result.address,
@@ -81,14 +85,14 @@ const KokItem = () => {
       name: '기본정보',
       element: (
         <Property.BasicInfo
-          area={detailDummy.result.area_size}
-          houseType={detailDummy.result.realEstateType as HouseType}
-          floor={detailDummy.result.floorNum}
-          maintanenceFee={detailDummy.result.administrativeFee}
+          area={KokDetail?.areaSize}
+          houseType={KokDetail?.realEstateType as HouseType}
+          floor={KokDetail?.floorNum}
+          maintanenceFee={KokDetail?.administrativeFee}
           address={getAddressObject(
-            detailDummy.result.address,
-            detailDummy.result.longitude,
-            detailDummy.result.latitude,
+            KokDetail!.address,
+            KokDetail!.longtitude,
+            KokDetail!.latitude,
           )}
         />
       ),
@@ -139,18 +143,18 @@ const KokItem = () => {
   return (
     <div className={styles.root}>
       <Property.Header
-        pictures={detailDummy.result.imageInfo.imageUrls}
+        pictures={KokDetail!.imageInfo.imageUrls}
         address={getAddressObject(
-          detailDummy.result.address ?? '',
-          detailDummy.result.longitude ?? 0,
-          detailDummy.result.latitude ?? 0,
+          KokDetail!.address ?? '',
+          KokDetail!.longtitude ?? 0,
+          KokDetail!.latitude ?? 0,
         )}
-        detailAddress={detailDummy.result.detailAddress}
-        priceType={detailDummy.result.transactionType as PriceType}
-        memo={detailDummy.result.detail}
-        deposit={detailDummy.result.deposit}
-        monthlyPrice={detailDummy.result.price}
-        price={detailDummy.result.price}
+        detailAddress={KokDetail!.detailAddress}
+        priceType={KokDetail!.transactionType as PriceType}
+        memo={KokDetail!.detail}
+        deposit={KokDetail!.deposit}
+        monthlyPrice={KokDetail!.price}
+        price={KokDetail!.price}
       />
 
       {/* 메뉴 */}

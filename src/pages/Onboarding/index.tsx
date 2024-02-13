@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { onBoarding } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useModal from 'contexts/modalStore';
+import useMyPageStore from 'contexts/useMyPageStore';
 import { StatusCode } from 'types/StatusCode';
 
 import Complete from './Complete';
@@ -22,6 +23,7 @@ export type PriceRange = [number, number];
 export default function Onboarding() {
   const navigate = useNavigate();
   const modal = useModal();
+  const MyPageStore = useMyPageStore();
 
   function handleSkip() {
     modal
@@ -107,17 +109,25 @@ export default function Onboarding() {
       switch (priceType) {
         case '월세':
           mdepositMin = priceRanges[0][0];
+          MyPageStore.setMDepositMin(priceRanges[0][0]);
           mdepositMax = priceRanges[0][1];
+          MyPageStore.setMDepositMax(priceRanges[0][1]);
           mpriceMin = priceRanges[1][0];
+          MyPageStore.setMPriceMin(priceRanges[1][0]);
           mpriceMax = priceRanges[1][1];
+          MyPageStore.setMPriceMax(priceRanges[1][1]);
           break;
         case '전세':
           ydepositMin = priceRanges[0][0];
+          MyPageStore.setYDepositMin(priceRanges[0][0]);
           ydepositMax = priceRanges[0][1];
+          MyPageStore.setYDepositMax(priceRanges[0][1]);
           break;
         case '매매':
           purchaseMin = priceRanges[0][0];
+          MyPageStore.setPriceMin(priceRanges[0][0]);
           purchaseMax = priceRanges[0][1];
+          MyPageStore.setPriceMax(priceRanges[0][1]);
           break;
       }
 
@@ -139,6 +149,10 @@ export default function Onboarding() {
         .then((res) => {
           // 회원정보 등록/수정 성공
           if (res.code === StatusCode.MEMBER_INFO_UPDATE_SUCCESS) {
+            //전역변수에 값 저장
+            MyPageStore.setAddress(location);
+            MyPageStore.setRealEstateType(houseType);
+            MyPageStore.setTransactionType(priceType);
             setStep('complete');
           } else {
             let isDefinedError = true;

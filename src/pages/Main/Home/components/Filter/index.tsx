@@ -54,61 +54,50 @@ export default function Filter(props: FilterProps) {
   );
 
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  const {
-    setRealEstateType,
-    setTransactionType,
-    setMPriceMin,
-    setMPriceMax,
-    setMDepositMax,
-    setMDepositMin,
-    setYDepositMin,
-    setYDepositMax,
-    setPriceMin,
-    setPriceMax,
-  } = useMyPageStore();
+  const MyPageStore = useMyPageStore();
 
   const handelSaveBtnClick = () => {
     if (houseType === undefined || priceType === undefined) return;
 
-    setRealEstateType(houseType);
-    setTransactionType(priceType);
+    MyPageStore.setRealEstateType(houseType);
+    MyPageStore.setTransactionType(priceType);
 
     if (priceType === '월세') {
       // 월세의 경우, 첫 번째 배열 요소는 보증금 범위, 두 번째는 월세 범위
       const [depositRange, monthlyRange] = priceRanges;
-      setMDepositMin(depositRange[0]);
-      setMDepositMax(depositRange[1]);
-      setMPriceMin(monthlyRange[0]);
-      setMPriceMax(monthlyRange[1]);
+      MyPageStore.setMDepositMin(depositRange[0]);
+      MyPageStore.setMDepositMax(depositRange[1]);
+      MyPageStore.setMPriceMin(monthlyRange[0]);
+      MyPageStore.setMPriceMax(monthlyRange[1]);
 
-      setYDepositMin(undefined);
-      setYDepositMax(undefined);
-      setYDepositMin(undefined);
-      setYDepositMax(undefined);
+      MyPageStore.setYDepositMin(undefined);
+      MyPageStore.setYDepositMax(undefined);
+      MyPageStore.setYDepositMin(undefined);
+      MyPageStore.setYDepositMax(undefined);
     } else if (priceType === '전세') {
       // 전세의 경우, 보증금 범위만
       const [depositRange] = priceRanges;
-      setYDepositMin(depositRange[0]);
-      setYDepositMax(depositRange[1]);
+      MyPageStore.setYDepositMin(depositRange[0]);
+      MyPageStore.setYDepositMax(depositRange[1]);
 
-      setMDepositMin(undefined);
-      setMDepositMax(undefined);
-      setMPriceMin(undefined);
-      setMPriceMax(undefined);
-      setPriceMin(undefined);
-      setPriceMax(undefined);
+      MyPageStore.setMDepositMin(undefined);
+      MyPageStore.setMDepositMax(undefined);
+      MyPageStore.setMPriceMin(undefined);
+      MyPageStore.setMPriceMax(undefined);
+      MyPageStore.setPriceMin(undefined);
+      MyPageStore.setPriceMax(undefined);
     } else if (priceType === '매매') {
       // 매매의 경우, 가격 범위만
       const [purchaseRange] = priceRanges;
-      setPriceMin(purchaseRange[0]);
-      setPriceMax(purchaseRange[1]);
+      MyPageStore.setPriceMin(purchaseRange[0]);
+      MyPageStore.setPriceMax(purchaseRange[1]);
 
-      setYDepositMin(undefined);
-      setYDepositMax(undefined);
-      setMDepositMin(undefined);
-      setMDepositMax(undefined);
-      setMPriceMin(undefined);
-      setMPriceMax(undefined);
+      MyPageStore.setYDepositMin(undefined);
+      MyPageStore.setYDepositMax(undefined);
+      MyPageStore.setMDepositMin(undefined);
+      MyPageStore.setMDepositMax(undefined);
+      MyPageStore.setMPriceMin(undefined);
+      MyPageStore.setMPriceMax(undefined);
     }
 
     // 저장하면 필터 내리기

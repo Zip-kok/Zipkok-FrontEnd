@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 
+import type { Gender } from 'pages/SignIn';
 import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
@@ -8,7 +9,7 @@ interface MyPageInfo {
   imageUrl?: string;
   nickname?: string;
   birthday?: string;
-  gender?: string;
+  gender?: Gender;
   address?: Address;
   realEstateType?: HouseType;
   transactionType?: PriceType;
@@ -29,7 +30,7 @@ interface MyPageInfo {
   setImageUrl: (imageUrl?: string) => void;
   setNickname: (nickname?: string) => void;
   setBirthday: (birthday?: string) => void;
-  setGender: (birthday?: string) => void;
+  setGender: (birthday?: Gender) => void;
   setAddress: (address?: Address) => void;
   setRealEstateType: (houseType?: HouseType) => void;
   setTransactionType: (priceType?: PriceType) => void;
@@ -43,22 +44,6 @@ interface MyPageInfo {
   setPriceMax: (priceMin?: number) => void;
 }
 const initialState: MyPageInfo = {
-  imageUrl: undefined,
-  nickname: undefined,
-  birthday: undefined,
-  gender: undefined,
-  address: undefined,
-  realEstateType: undefined,
-  transactionType: undefined,
-  mpriceMin: undefined,
-  mpriceMax: undefined,
-  mdepositMin: undefined,
-  mdepositMax: undefined,
-  ydepositMin: undefined,
-  ydepositMax: undefined,
-  priceMax: undefined,
-  priceMin: undefined,
-
   setImageUrl: () => {},
   setNickname: () => {},
   setBirthday: () => {},
