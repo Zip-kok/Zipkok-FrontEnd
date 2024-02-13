@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getUserKokOption } from 'apis';
+import { getUserKokOption, putUserKokOption } from 'apis';
 import { BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
@@ -16,6 +16,9 @@ import type { KokOption } from 'types/KokOption';
 
 const KokEdit = () => {
   const ui = useUIStore();
+  const navigate = useNavigate();
+
+  const [showMessage, setShowMessage] = useState(false);
   const [highlights, setHighlights] = useState<string[]>([]);
   const [outerOptions, setOuterOptions] = useState<KokOption[]>([]);
   const [innerOptions, setInnerOptions] = useState<KokOption[]>([]);
@@ -52,8 +55,6 @@ const KokEdit = () => {
     });
   }, []);
 
-  const navigate = useNavigate();
-
   // 상단 메뉴 설정
   const [TopMenu, , , contentElement] = useMenu([
     {
@@ -80,13 +81,45 @@ const KokEdit = () => {
     },
   ]);
 
+  // 저장하기 버튼 클릭 시
+  const handleSave = () => {
+    putUserKokOption({
+      highlights,
+      outerOptions: outerOptions.map((option) => ({
+        ...option,
+        optionId: option.id,
+      })),
+      innerOptions: innerOptions.map((option) => ({
+        ...option,
+        optionId: option.id,
+      })),
+      contractOptions: contractOptions.map((option) => ({
+        ...option,
+        optionId: option.id,
+      })),
+    }).then(() => {
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+    });
+  };
+
   return (
     <div className={styles.root}>
+      {/* 상단 메뉴 */}
       <div className={styles.menu}>
         <TopMenu />
       </div>
+
+      {/* 콘텐츠 */}
       <div className={styles.content}>{contentElement}</div>
-      <BottomBtn text="저장하기" onClick={() => {}} />
+
+      {/* 하단 */}
+      {showMessage && (
+        <div className={styles.message}>리스트가 저장되었어요.</div>
+      )}
+      <BottomBtn text="저장하기" onClick={handleSave} />
     </div>
   );
 };

@@ -17,6 +17,7 @@ import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
+import { putUserKokOption } from './putUserKokOption';
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
 import { signIn } from './signIn';
@@ -41,6 +42,7 @@ export {
   getProfileEditInfo,
   logout,
   getUserKokOption,
+  putUserKokOption,
 };
 
 /**
