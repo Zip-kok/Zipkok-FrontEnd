@@ -144,25 +144,31 @@ const Mypage = () => {
         <img src={MyPageStore.imageUrl} />
         <div className={styles.text}>
           <div className={styles.name}>{MyPageStore.nickname}</div>
+
           <div className={styles.location}>
-            #{MyPageStore.address?.address_name}
+            {MyPageStore.address
+              ? `#${MyPageStore.address.address_name}`
+              : '주소 미등록'}
           </div>
-          <div className={styles.tag}>
-            <p>{MyPageStore.transactionType}</p>
-            <p>{MyPageStore.realEstateType}</p>
-            {MyPageStore.transactionType && (
-              <p>
-                {MyPageStore.transactionType === '월세' &&
-                  `~${getPriceString(
-                    MyPageStore.mdepositMax ?? 0,
-                  )}/~${getPriceString(MyPageStore.mpriceMax ?? 0)}`}
-                {MyPageStore.transactionType === '전세' &&
-                  `~${getPriceString(MyPageStore.ydepositMax ?? 0)}`}
-                {MyPageStore.transactionType === '매매' &&
-                  `~${getPriceString(MyPageStore.priceMax ?? 0)}`}
-              </p>
-            )}
-          </div>
+
+          {MyPageStore.transactionType && MyPageStore.realEstateType && (
+            <div className={styles.tag}>
+              <p>{MyPageStore.transactionType}</p>
+              <p>{MyPageStore.realEstateType}</p>
+              {MyPageStore.transactionType && (
+                <p>
+                  {MyPageStore.transactionType === '월세' &&
+                    `~${getPriceString(
+                      MyPageStore.mdepositMax ?? 0,
+                    )} / ~${getPriceString(MyPageStore.mpriceMax ?? 0)}`}
+                  {MyPageStore.transactionType === '전세' &&
+                    `~${getPriceString(MyPageStore.ydepositMax ?? 0)}`}
+                  {MyPageStore.transactionType === '매매' &&
+                    `~${getPriceString(MyPageStore.priceMax ?? 0)}`}
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
