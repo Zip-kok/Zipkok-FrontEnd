@@ -8,10 +8,12 @@ import styles from './Write.module.css';
 
 import type { Pin } from 'types/Pin';
 
+type PinWithoutId = Omit<Pin, 'id'>;
+
 export default function Write() {
   const ui = useUIStore();
   const pinId = useParams<{ pinId: string }>().pinId;
-  const [pin, setPin] = useState<Pin>();
+  const [pin, setPin] = useState<PinWithoutId>();
 
   useEffect(() => {
     ui.setUI((state) => ({
