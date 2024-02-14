@@ -29,6 +29,10 @@ const MyRoute = {
       children: [
         { index: true, element: <Pin /> },
         {
+          path: 'edit/:pinId',
+          element: <PinWrite />,
+        },
+        {
           path: 'write',
           element: <PinWrite />,
         },
