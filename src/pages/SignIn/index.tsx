@@ -5,6 +5,7 @@ import { signIn } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useEmailStore from 'contexts/emailStore';
 import useModal from 'contexts/modalStore';
+import useMyPageStore from 'contexts/useMyPageStore';
 import { StatusCode } from 'types/StatusCode';
 
 import Birth from './Birth';
@@ -22,9 +23,8 @@ export default function SignIn() {
   const modal = useModal();
 
   const email = useEmailStore((store) => store.email);
-  const [nickname, setNickname] = useState<string>('');
-  const [gender, setGender] = useState<Gender>('남자');
-  const [birth, setBirth] = useState<Date>(new Date());
+  const { nickname, gender, birthday, setNickname, setGender, setBirthday } =
+    useMyPageStore();
 
   const steps: Record<Step, JSX.Element> = {
     // nickname
@@ -51,8 +51,8 @@ export default function SignIn() {
     birth: (
       <Birth
         onConfirm={(birth: Date) => {
-          setBirth(birth);
-          handleFinalSubmit(nickname, gender, birth);
+          setBirthday(birth.toString());
+          handleFinalSubmit(nickname as string, gender as Gender, birth);
         }}
       />
     ),

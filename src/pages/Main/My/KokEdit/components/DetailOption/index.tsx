@@ -3,19 +3,19 @@ import React from 'react';
 import offIcon from 'assets/img/fill/off.svg';
 import onIcon from 'assets/img/fill/on.svg';
 
-import styles from './CheckListItem.module.css';
+import styles from './DetailOption.module.css';
 
-interface CheckListItemProps {
+interface DetailOptionProps {
   name: string;
   enabled: boolean;
   onClick: () => void;
 }
 
-export default function CheckListItem({
+export default function DetailOption({
   name,
   enabled = true,
   onClick,
-}: CheckListItemProps) {
+}: DetailOptionProps) {
   return (
     <div className={`${styles.container} ${!enabled ? styles.disabled : ''}`}>
       <button className="imgBtn" onClick={onClick}>

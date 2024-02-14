@@ -1,24 +1,24 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import offIcon from 'assets/img/fill/off.svg';
 import onIcon from 'assets/img/fill/on.svg';
 import dragIcon from 'assets/img/line(1)/drag.svg';
 
-import styles from './CheckListCategory.module.css';
+import styles from './Option.module.css';
 
-export interface CheckListCategoryProps {
+export interface OptionProps {
   name: string;
   enabled: boolean;
   children: React.ReactNode;
   onClick: () => void;
 }
 
-export default function CheckListCategory({
+export default function Option({
   name,
   enabled = true,
   children,
   onClick,
-}: CheckListCategoryProps) {
+}: OptionProps) {
   return (
     <div className={styles.container}>
       <div className={`${styles.header} ${!enabled ? styles.disabled : ''}`}>

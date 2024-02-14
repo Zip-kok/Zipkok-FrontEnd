@@ -4,13 +4,11 @@ import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface KokOuter {
   hilights: string[];
-  options: [
-    {
-      option: string;
-      orderNumber: number;
-      detailOptions: string[];
-    },
-  ];
+  options: {
+    option: string;
+    orderNumber: number;
+    detailOptions: string[];
+  }[];
 }
 
 /**
@@ -21,7 +19,7 @@ export interface KokOuter {
  * @param number kokId
  */
 export async function getKokOuter(kokId: number) {
-  const path = '/kok/${kokId}/outer';
+  const path = `/kok/${kokId}/outer`;
   const method = 'GET';
   const params = {};
   const authRequired = true;

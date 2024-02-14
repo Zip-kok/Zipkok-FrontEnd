@@ -76,10 +76,12 @@
 
 .searchBoxContainer {
   flex: 0 0 content;
+  z-index: 102;
 }
 
 .filterContainer {
   flex: 0 0 content;
+  z-index: 102;
 }
 
 .mapContainer {

@@ -18,6 +18,7 @@ import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
+import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
 import { signIn } from './signIn';
@@ -42,6 +43,8 @@ export {
   getProfileEditInfo,
   getMapRealEstate,
   logout,
+  getUserKokOption,
+  putUserKokOption,
 };
 
 /**

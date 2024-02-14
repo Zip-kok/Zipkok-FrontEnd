@@ -5,12 +5,12 @@ import styles from '../KokEdit.module.css';
 
 import type { KokOption } from 'types/KokOption';
 
-interface OuterProps {
+interface InnerProps {
   options: KokOption[];
   setOptions: React.Dispatch<React.SetStateAction<KokOption[]>>;
 }
 
-const Outer = ({ options, setOptions }: OuterProps) => {
+const Inner = ({ options, setOptions }: InnerProps) => {
   return (
     <div className={styles.root}>
       <div className={styles.checkListGroupContainer}>
@@ -20,4 +20,4 @@ const Outer = ({ options, setOptions }: OuterProps) => {
   );
 };
 
-export default Outer;
+export default Inner;

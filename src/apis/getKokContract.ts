@@ -3,7 +3,11 @@ import api from '.';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface KokContract {
-  options: options[];
+  options: {
+    option: string;
+    orderNumber: number;
+    detailOptions: string[];
+  }[];
   imageInfo: {
     imageNumber: number;
     imageURL: string[];
@@ -22,7 +26,7 @@ export interface options {
  * @param number kokId
  */
 export async function getKokContract(kokId: number) {
-  const path = '/kok/${kokId}/contract';
+  const path = `/kok/${kokId}/contract`;
   const method = 'GET';
   const params = {};
   const authRequired = true;

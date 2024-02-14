@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getKokInner, getKokOuter } from 'apis';
+import {
+  getKokInner,
+  getKokOuter,
+  getKokContract,
+  getKokDetail,
+  getKokReview,
+} from 'apis';
 import { KokOuter } from 'apis/getKokOuter';
 import filledHeartIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart.svg';
@@ -14,11 +20,16 @@ import detailDummy from 'models/kokItemDetail.json';
 import innerDummy from 'models/kokItemInner.json';
 import outerDummy from 'models/kokItemOuter.json';
 import reviewDummy from 'models/kokItemReview.json';
+import { StatusCode } from 'types/StatusCode';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 import styles from './KokItem.module.css';
+import { KokContract } from '../../../../apis/getKokContract';
+import { KokDetail } from '../../../../apis/getKokDetail';
+import { KokInner } from '../../../../apis/getKokInner';
+import { KokReview } from '../../../../apis/getKokReview';
 
 import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
@@ -38,9 +49,17 @@ const KokItem = () => {
       y: latitude,
     }) as Address;
   const [KokOuter, setKokOuter] = useState<KokOuter>();
+  const [KokInner, setKokInner] = useState<KokInner>();
+  const [KokContract, setKokContract] = useState<KokContract>();
+  const [KokDetail, setKokDetail] = useState<KokDetail>();
+  const [KokReview, setKokReview] = useState<KokReview>();
   useEffect(() => {
     ui.setUI((state) => {
       getKokOuter(1).then((res) => setKokOuter(res.result));
+      getKokInner(1).then((res) => setKokInner(res.result));
+      getKokReview(1).then((res) => setKokReview(res.result));
+      getKokContract(1).then((res) => setKokContract(res.result));
+
       return {
         ...state,
         headerTitle: detailDummy.result.address,
@@ -66,14 +85,14 @@ const KokItem = () => {
       name: '기본정보',
       element: (
         <Property.BasicInfo
-          area={detailDummy.result.area_size}
-          houseType={detailDummy.result.realEstateType as HouseType}
-          floor={detailDummy.result.floorNum}
-          maintanenceFee={detailDummy.result.administrativeFee}
+          area={KokDetail?.areaSize}
+          houseType={KokDetail?.realEstateType as HouseType}
+          floor={KokDetail?.floorNum}
+          maintanenceFee={KokDetail?.administrativeFee}
           address={getAddressObject(
-            detailDummy.result.address,
-            detailDummy.result.longitude,
-            detailDummy.result.latitude,
+            KokDetail!.address,
+            KokDetail!.longtitude,
+            KokDetail!.latitude,
           )}
         />
       ),
@@ -91,9 +110,9 @@ const KokItem = () => {
       name: '집 내부',
       element: (
         <Property.Inner
-          furnitureOptions={innerDummy.result.furnitureOptions}
-          direction={innerDummy.result.direction}
-          options={innerDummy.result.options}
+          furnitureOptions={KokInner!.furnitureOptions}
+          direction={KokInner!.direction}
+          options={KokInner!.options}
         />
       ),
     },
@@ -101,8 +120,8 @@ const KokItem = () => {
       name: '중개 계약',
       element: (
         <Property.Contract
-          options={contractDummy.result.options}
-          pictures={contractDummy.result.imageInfo.imageUrls}
+          options={KokContract!.options}
+          pictures={KokContract!.imageInfo.imageURL}
         />
       ),
     },
@@ -110,12 +129,12 @@ const KokItem = () => {
       name: '후기',
       element: (
         <Property.Review
-          impressions={reviewDummy.result.impressions}
-          facilityStarCount={reviewDummy.result.facilityStarCount}
-          infraStarCount={reviewDummy.result.infraStarCount}
-          structureStarCount={reviewDummy.result.structureStarCount}
-          vibeStarCount={reviewDummy.result.vibeStarCount}
-          reviewText={reviewDummy.result.reviewText}
+          impressions={KokReview!.impressions}
+          facilityStarCount={KokReview!.facilityStarCount}
+          infraStarCount={KokReview!.infraStarCount}
+          structureStarCount={KokReview!.structureStarCount}
+          vibeStarCount={KokReview!.vibeStarCount}
+          reviewText={KokReview!.reviewText}
         />
       ),
     },
@@ -124,18 +143,18 @@ const KokItem = () => {
   return (
     <div className={styles.root}>
       <Property.Header
-        pictures={detailDummy.result.imageInfo.imageUrls}
+        pictures={KokDetail!.imageInfo.imageUrls}
         address={getAddressObject(
-          detailDummy.result.address ?? '',
-          detailDummy.result.longitude ?? 0,
-          detailDummy.result.latitude ?? 0,
+          KokDetail!.address ?? '',
+          KokDetail!.longtitude ?? 0,
+          KokDetail!.latitude ?? 0,
         )}
-        detailAddress={detailDummy.result.detailAddress}
-        priceType={detailDummy.result.transactionType as PriceType}
-        memo={detailDummy.result.detail}
-        deposit={detailDummy.result.deposit}
-        monthlyPrice={detailDummy.result.price}
-        price={detailDummy.result.price}
+        detailAddress={KokDetail!.detailAddress}
+        priceType={KokDetail!.transactionType as PriceType}
+        memo={KokDetail!.detail}
+        deposit={KokDetail!.deposit}
+        monthlyPrice={KokDetail!.price}
+        price={KokDetail!.price}
       />
 
       {/* 메뉴 */}
