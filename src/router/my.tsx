@@ -2,6 +2,7 @@ import My from 'pages/Main/My';
 import KokEdit from 'pages/Main/My/KokEdit';
 import LikedProperties from 'pages/Main/My/LikedProperties';
 import MyPage from 'pages/Main/My/MyPage';
+import Pin from 'pages/Main/My/Pin';
 import ProfileEdit from 'pages/Main/My/ProfileEdit';
 import LocationEdit from 'pages/Main/My/ProfileEdit/LocationEdit';
 
@@ -22,6 +23,7 @@ const MyRoute = {
       ],
     },
     { path: 'likedProperties', element: <LikedProperties /> },
+    { path: 'pin', element: <Pin /> },
   ],
 };
 

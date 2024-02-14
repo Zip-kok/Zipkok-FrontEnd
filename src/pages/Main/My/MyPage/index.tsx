@@ -97,7 +97,9 @@ const Mypage = () => {
 
     navigate('./kokEdit');
   };
-  const handlePinClick = () => {};
+  const handlePinClick = () => {
+    navigate('./pin');
+  };
   const handleRecentClick = () => {};
   const handleNoticeClick = () => {};
   const handleInquiryClick = () => {};
