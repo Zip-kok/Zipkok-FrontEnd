@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import { GetRealEstateInfoResult } from 'apis/getRealEstateInfo';
+import { getRealEstateInfo } from 'apis/getRealEstateInfo';
 import floor from 'assets/img/line(1)/floor.svg';
 import link from 'assets/img/line(1)/link.svg';
 import money from 'assets/img/line(1)/money.svg';
@@ -17,19 +19,39 @@ import StaticMap from 'components/StaticMap/index';
 import SwiperItem from 'components/SwiperItem';
 import useUIStore from 'contexts/uiStore';
 import data from 'models/HomeItem.json';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
-
 import styles from './Item.module.css';
 const Item = () => {
   const navigate = useNavigate();
+  const { realEstateId } = useParams();
+  const [realEstateInfo, setRealEstateInfo] =
+    useState<GetRealEstateInfoResult>();
+
+  useEffect(() => {
+    if (realEstateId === undefined) return;
+    const ItemId = parseInt(realEstateId, 10);
+    getRealEstateInfo(ItemId).then((res) => setRealEstateInfo(res.result));
+  }, []);
 
   const handleWriteClick = () => {
     navigate('../');
   };
-
   const handleOtherItemClick = () => {};
-  const { code, message, result } = data;
+
+  const ui = useUIStore();
+
+  useEffect(() => {
+    ui.setUI((state) => ({
+      ...state,
+      headerTitle: realEstateInfo?.address,
+      headerIcon: undefined,
+      headerBackButtonEnabled: true,
+      naviEnabled: false,
+    }));
+  }, []);
+  console.log(realEstateInfo);
   //모달
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -37,50 +59,48 @@ const Item = () => {
     setModalOpen(true);
     document.body.style.overflow = 'hidden';
   };
-  const ui = useUIStore();
-  useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '성북구 정릉동',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
-      naviEnabled: false,
-    }));
-  }, []);
 
   //더보기
   const [moreView, setMoreView] = useState(false);
-  const charCount = result.detail.length;
+  const charCount = realEstateInfo?.detail.length;
   const handleMoreBtn = () => {
     setMoreView(!moreView);
   };
 
   const showMoreBtn = () => {
-    const lineCount = result.detail.split('\n').length;
+    const lineCount = realEstateInfo?.detail.split('\n').length;
+    if (lineCount === undefined || charCount === undefined) return;
     return lineCount > 3 || charCount > 86;
   };
 
   return (
     <div className={styles.root}>
-      <SwiperCom imageUrls={result.imageInfo.imageUrls} onClick={showModal} />
+      <SwiperCom
+        imageUrls={realEstateInfo?.imageInfo.imageURL}
+        onClick={showModal}
+      />
       {modalOpen && (
         <Swiper_modal
-          imageUrls={result.imageInfo.imageUrls}
+          imageUrls={realEstateInfo?.imageInfo.imageURL}
           setModalOpen={setModalOpen}
         />
       )}
       <div className={styles.body}>
-        <div className={styles.address}>{result.address}</div>
+        <div className={styles.address}>{realEstateInfo?.address}</div>
         <div className={styles.priceContainer}>
-          <div className={styles.priceType}>{result.transactionType}</div>
+          <div className={styles.priceType}>
+            {realEstateInfo?.transactionType}
+          </div>
           <div className={styles.priceInf}>
-            {result.deposit + ' / '}
-            {result.price}
+            {realEstateInfo?.deposit + ' / '}
+            {realEstateInfo?.price}
           </div>
         </div>
         <div className={styles.detailCtn}>
           {/* styles.moreView 클래스를 가진 div의 내용을 shouldShowMoreButton의 결과에 따라 다르게 렌더링 */}
-          <div className={moreView ? '' : styles.moreView}>{result.detail}</div>
+          <div className={moreView ? '' : styles.moreView}>
+            {realEstateInfo?.detail}
+          </div>
           {showMoreBtn() && (
             <button onClick={handleMoreBtn}>{moreView ? '' : '더보기'}</button>
           )}
@@ -99,23 +119,26 @@ const Item = () => {
         <div className={styles.infCtn}>
           <IconText
             img={structure}
-            text={data.result.areaSize + 'm^2'}
-            sizeText={'(' + data.result.pyeongsu + ')평'}
+            text={realEstateInfo?.areaSize + 'm^2'}
+            sizeText={'(' + realEstateInfo?.pyeongsu + ')평'}
           />
-          <IconText img={size} text={data.result.realEstateType} />
-          <IconText img={floor} text={data.result.floorNum + '층'} />
+          <IconText img={size} text={realEstateInfo?.realEstateType} />
+          <IconText img={floor} text={realEstateInfo?.floorNum + '층'} />
           <IconText
             img={money}
-            text={'관리비 ' + data.result.administrativeFee + '만원'}
+            text={'관리비 ' + realEstateInfo?.administrativeFee + '만원'}
           />
         </div>
         <h4>위치</h4>
       </div>
-      <StaticMap lat={result.latitude} lng={result.longitude}></StaticMap>
+      <StaticMap
+        lat={realEstateInfo?.longitude}
+        lng={realEstateInfo?.latitude}
+      ></StaticMap>
 
       <h4>주변의 다른 매물</h4>
       <SwiperItem
-        imageUrls={result.imageInfo.imageUrls}
+        imageUrls={realEstateInfo?.imageInfo.imageURL}
         onClick={handleOtherItemClick}
       ></SwiperItem>
       <div className={styles.blank} />

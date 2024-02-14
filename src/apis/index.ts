@@ -12,6 +12,7 @@ import { getKokReview } from './getKokReview';
 import { getMapRealEstate } from './getMapRealEstate';
 import { getMyPageInfo } from './getMyPageInfo';
 import { getProfileEditInfo } from './getProfileEditInfo';
+import { getRealEstateInfo } from './getRealEstateInfo';
 import { getUserDetail } from './getUserDetail';
 import { getUserKokOption } from './getUserKokOption';
 import { getZim } from './getZim';
@@ -45,6 +46,7 @@ export {
   logout,
   getUserKokOption,
   putUserKokOption,
+  getRealEstateInfo,
 };
 
 /**
