@@ -22,8 +22,7 @@ export const getPin = async () => {
   //);
 
   // 테스트를 위해 localStorage 사용
-  const data = localStorage.getItem('pin');
-  if (!data) return [];
+  const data = localStorage.getItem('pin') ?? '[]';
 
   const res = { result: JSON.parse(data) as Pin[] } as ZipkokResponse<Pin[]>;
   return res;
