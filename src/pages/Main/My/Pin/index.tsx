@@ -27,7 +27,11 @@ export default function Pin() {
     });
   }, []);
 
-  const handleDeletePin = (pinId: number) => {};
+  const handleDeletePin = (pinId: number) => {
+    deletePin(pinId).then(() => {
+      setPins((prevPins) => prevPins.filter((pin) => pin.id !== pinId));
+    });
+  };
 
   return (
     <div className={styles.root}>
@@ -50,7 +54,7 @@ export default function Pin() {
             </div>
             <div>
               <button>수정</button>
-              <button>삭제</button>
+              <button onClick={() => handleDeletePin(pin.id)}>삭제</button>
             </div>
           </div>
         ))}
