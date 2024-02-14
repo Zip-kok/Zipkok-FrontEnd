@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn } from 'components';
 import useAddressSearch from 'hooks/useAddressSearch';
@@ -34,7 +35,7 @@ export default function Address({
   }
 
   return (
-    <>
+    <div className={styles.root}>
       <div className={styles.inputContainer}>
         <AddressSeachInput
           placeholder="도로명, 지번 검색"
@@ -42,15 +43,17 @@ export default function Address({
           icon={searchIcon}
           onChange={handleInputChange}
           onSubmit={handleSubmit}
-          caption={
-            addressCount > 0
-              ? `${addressCount.toLocaleString()}건의 검색 결과`
-              : undefined
-          }
         />
+        <button className={`imgBtn ${styles.mapBtn}`}>
+          <img src={mapIcon} />
+          <span>지도에서 위치 보기</span>
+        </button>
       </div>
 
-      <AddressSearchResult />
+      <div className={styles.addressContainer}>
+        <AddressSearchResult />
+      </div>
+
       {(selectedAddress !== null || addressCount === 0) && (
         <BottomBtn
           onClick={() => {
@@ -59,9 +62,8 @@ export default function Address({
           }}
           text="확인"
           disabled={inputValue === ''}
-          occupySpace
         />
       )}
-    </>
+    </div>
   );
 }

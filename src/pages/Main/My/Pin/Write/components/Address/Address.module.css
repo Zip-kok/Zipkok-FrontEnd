@@ -1,4 +1,30 @@
+.root {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
 .inputContainer {
   margin-top: 48px;
   padding: 0 20px;
+}
+
+.mapBtn {
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.mapBtn > span {
+  color: var(--gray-color-gray050_text, #4b5259);
+
+  /* body_14(20)_regular */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.addressContainer {
+  margin-top: 32px;
 }
