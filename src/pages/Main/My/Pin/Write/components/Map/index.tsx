@@ -2,12 +2,12 @@ import React from 'react';
 
 import styles from './Map.module.css';
 
-import type { Step } from '../..';
+import type { Address } from 'types/Address';
 
 interface MapProps {
-  setStep: React.Dispatch<React.SetStateAction<Step>>;
+  confirmLocation: (location: Address) => void;
 }
 
-export default function Map({ setStep }: MapProps) {
+export default function Map({ confirmLocation }: MapProps) {
   return <div></div>;
 }

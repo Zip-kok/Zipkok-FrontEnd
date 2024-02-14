@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom';
 import { getPin, patchPin, postPin } from 'apis';
 import useUIStore from 'contexts/uiStore';
 
-import { Address, Map, Name } from './components';
+import { Address as AddressPage, Map, Name } from './components';
 import styles from './Write.module.css';
 
+import type { Address } from 'types/Address';
 import type { Pin } from 'types/Pin';
 
 type PinWithoutId = Omit<Pin, 'id'>;
@@ -41,10 +42,27 @@ export default function Write() {
     }
   }, []);
 
+  const handleAddressSubmit = (address: Address) => {
+    setPin((prev) => ({
+      ...prev,
+      address: {
+        address_name: address.address_name,
+        x: address.x,
+        y: address.y,
+      },
+    }));
+    setStep('name');
+  };
+
   return (
     <div className={styles.root}>
-      {step === 'address' && <Address setStep={setStep} />}
-      {step === 'map' && <Map setStep={setStep} />}
+      {step === 'address' && (
+        <AddressPage
+          confirmLocation={handleAddressSubmit}
+          defaultAddress={pin.address.address_name}
+        />
+      )}
+      {step === 'map' && <Map confirmLocation={handleAddressSubmit} />}
       {step === 'name' && <Name />}
     </div>
   );
