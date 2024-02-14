@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import floating from 'assets/img/pinIcon/floating.svg';
+import selectedFloating from 'assets/img/pinIcon/floating_selected.svg';
 import pinIcon from 'assets/img/pinIcon/pin.svg';
 import position from 'assets/img/pinIcon/positon.svg';
 import spot from 'assets/img/pinIcon/spot.svg';
@@ -53,6 +54,7 @@ const KakaoMap = ({
   pins,
 }: KakaoMapProps) => {
   const [map, setMap] = useState<any>();
+  const [showPins, setShowPins] = useState(false);
   const [coord, setCoord] = useState<[number, number]>();
   const [estateMakers, setEstateMarkers] = useState<any[]>([]);
   const [pinMarkers, setPinMarkers] = useState<any[]>([]);
@@ -166,15 +168,17 @@ const KakaoMap = ({
   // 5) 핀 마커 추가
   useEffect(() => {
     if (map === undefined) return;
+    if (!showPins) {
+      pinMarkers.forEach((marker) => {
+        marker.setMap(null);
+      });
+      return;
+    }
 
     const pinImage = new window.kakao.maps.MarkerImage(
       pinIcon,
       new window.kakao.maps.Size(48, 48),
     );
-
-    pinMarkers.forEach((marker) => {
-      marker.setMap(null);
-    });
 
     setPinMarkers(
       pins?.map((pin) => {
@@ -190,14 +194,23 @@ const KakaoMap = ({
         return marker;
       }) ?? [],
     );
-  }, [map, pins]);
+
+    return () =>
+      pinMarkers.forEach((marker) => {
+        marker.setMap(null);
+      });
+  }, [map, showPins, pins]);
 
   return (
     <div className={styles.root}>
       <div className={styles.map} id="map"></div>
       <div className={styles.BtnCtn}>
-        <img src={floating} />
-        <img src={position} onClick={getCurrentPosBtn} />
+        <button className="imgBtn" onClick={() => setShowPins((prev) => !prev)}>
+          <img src={showPins ? selectedFloating : floating} />
+        </button>
+        <button className="imgBtn" onClick={getCurrentPosBtn}>
+          <img src={position} />
+        </button>
       </div>
     </div>
   );
