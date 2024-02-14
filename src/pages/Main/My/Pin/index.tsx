@@ -35,6 +35,10 @@ export default function Pin() {
     });
   };
 
+  const handleEditPin = (pinId: number) => {
+    navigate(`./edit/${pinId}`);
+  };
+
   return (
     <div className={styles.root}>
       {/* 새로운 핀 등록하기 버튼 */}
@@ -49,13 +53,13 @@ export default function Pin() {
       {/* 핀 목록 */}
       <div className={styles.pinContainer}>
         {pins.map((pin) => (
-          <div className={styles.pin}>
+          <div className={styles.pin} key={pin.id}>
             <div>
               <h1>{pin.name}</h1>
               <h2>{pin.address.address_name}</h2>
             </div>
             <div>
-              <button>수정</button>
+              <button onClick={() => handleEditPin(pin.id)}>수정</button>
               <button onClick={() => handleDeletePin(pin.id)}>삭제</button>
             </div>
           </div>

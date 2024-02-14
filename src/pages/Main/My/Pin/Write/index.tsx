@@ -4,16 +4,26 @@ import { useParams } from 'react-router-dom';
 import { getPin, patchPin, postPin } from 'apis';
 import useUIStore from 'contexts/uiStore';
 
+import { Address, Map, Name } from './components';
 import styles from './Write.module.css';
 
 import type { Pin } from 'types/Pin';
 
 type PinWithoutId = Omit<Pin, 'id'>;
+export type Step = 'address' | 'map' | 'name';
 
 export default function Write() {
   const ui = useUIStore();
   const pinId = useParams<{ pinId: string }>().pinId;
-  const [pin, setPin] = useState<PinWithoutId>();
+  const [step, setStep] = useState<Step>('address');
+  const [pin, setPin] = useState<PinWithoutId>({
+    name: '',
+    address: {
+      address_name: '',
+      x: 0,
+      y: 0,
+    },
+  });
 
   useEffect(() => {
     ui.setUI((state) => ({
@@ -31,5 +41,11 @@ export default function Write() {
     }
   }, []);
 
-  return <div className={styles.root}></div>;
+  return (
+    <div className={styles.root}>
+      {step === 'address' && <Address setStep={setStep} />}
+      {step === 'map' && <Map setStep={setStep} />}
+      {step === 'name' && <Name />}
+    </div>
+  );
 }
