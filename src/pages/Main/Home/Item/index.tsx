@@ -51,7 +51,6 @@ const Item = () => {
       naviEnabled: false,
     }));
   }, []);
-  console.log(realEstateInfo);
   //모달
   const [modalOpen, setModalOpen] = useState(false);
 
