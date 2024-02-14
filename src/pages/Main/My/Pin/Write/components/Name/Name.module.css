@@ -3,3 +3,29 @@
   display: flex;
   flex-direction: column;
 }
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 56px 20px 0 20px;
+}
+
+.container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.address {
+  margin: 0;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+
+  /* sub_16(24)_semibold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}

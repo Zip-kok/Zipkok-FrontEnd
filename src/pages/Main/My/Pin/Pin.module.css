@@ -32,6 +32,7 @@
 
 .pinContainer {
   display: flex;
+  flex-direction: column;
   margin-top: 24px;
 }
 
@@ -40,6 +41,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  box-sizing: border-box;
   padding: 11px 20px;
 }
 
