@@ -9,6 +9,7 @@ import { getKokDetail } from './getKokDetail';
 import { getKokInner } from './getKokInner';
 import { getKokOuter } from './getKokOuter';
 import { getKokReview } from './getKokReview';
+import { getMapRealEstate } from './getMapRealEstate';
 import { getMyPageInfo } from './getMyPageInfo';
 import { getProfileEditInfo } from './getProfileEditInfo';
 import { getUserDetail } from './getUserDetail';
@@ -40,6 +41,7 @@ export {
   getKokReview,
   getMyPageInfo,
   getProfileEditInfo,
+  getMapRealEstate,
   logout,
   getUserKokOption,
   putUserKokOption,
@@ -79,11 +81,18 @@ export default async function api<T>(
       }
     : {};
 
+  const contentTypeHeader =
+    method === 'GET'
+      ? {
+          'Content-Type': 'application/json',
+        }
+      : {};
+
   const paramStr = params ? new URLSearchParams(params).toString() : '';
   const res = await fetch(`${url}${path}?${paramStr}`, {
     method,
     headers: {
-      'Content-Type': 'application/json',
+      ...contentTypeHeader,
       ...authHeader,
       ...headers,
     },
