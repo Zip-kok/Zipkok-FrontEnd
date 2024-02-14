@@ -44,9 +44,11 @@ interface KakaoMapProps {
   setMapLocationInfo: React.Dispatch<React.SetStateAction<mapLocationInfo>>;
   realEstatesInfo?: realEstateInfo[];
   pins?: Pin[];
+  selectedProprety: realEstateInfo | null;
   setSelectedProperty: React.Dispatch<
     React.SetStateAction<realEstateInfo | null>
   >;
+  selectedPin: Pin | null;
   setSelectedPin: React.Dispatch<React.SetStateAction<Pin | null>>;
 }
 
@@ -57,7 +59,9 @@ const KakaoMap = ({
   setMapLocationInfo,
   realEstatesInfo,
   pins,
+  selectedProprety,
   setSelectedProperty,
+  selectedPin,
   setSelectedPin,
 }: KakaoMapProps) => {
   const [map, setMap] = useState<any>();
@@ -152,17 +156,19 @@ const KakaoMap = ({
               realEstateInfo.latitude,
             );
             const marker = new window.kakao.maps.Marker({
+              opacity:
+                !selectedProprety ||
+                selectedProprety?.realEstateId === realEstateInfo.realEstateId
+                  ? 1
+                  : 0.5,
+              title: realEstateInfo.realEstateId.toString(),
               map: map,
               position: position,
               image: markerImage,
             });
-            kakao.maps.event.addListener(marker, 'click', () => {
+            window.kakao.maps.event.addListener(marker, 'click', () => {
               setSelectedPin(null);
               setSelectedProperty(realEstateInfo);
-
-              // 마커 이미지 변경
-              estateMakers.forEach((m) => m.setOpacity(0.5));
-              marker.setOpacity(1);
             });
             return marker;
           }) ?? []
@@ -207,19 +213,15 @@ const KakaoMap = ({
           pin.address.y,
         );
         const marker = new window.kakao.maps.Marker({
+          opacity: !selectedPin || selectedPin?.id === pin.id ? 1 : 0.5,
+          title: pin.id.toString(),
           map: map,
           position: position,
           image: pinImage,
         });
-        kakao.maps.event.addListener(marker, 'click', () => {
+        window.kakao.maps.event.addListener(marker, 'click', () => {
           setSelectedProperty(null);
           setSelectedPin(pin);
-
-          // 마커 이미지 변경
-          pinMarkers.forEach((marker) => {
-            marker.setOpacity(0.5);
-          });
-          marker.setOpacity(1);
         });
         return marker;
       }) ?? [],
@@ -230,6 +232,25 @@ const KakaoMap = ({
         marker.setMap(null);
       });
   }, [map, showPins, pins]);
+
+  useEffect(() => {
+    if (map === undefined) return;
+
+    estateMakers.forEach((marker) => {
+      if (
+        !selectedProprety ||
+        marker.getTitle() === selectedProprety?.realEstateId.toString()
+      )
+        marker.setOpacity(1);
+      else marker.setOpacity(0.5);
+    });
+
+    pinMarkers.forEach((marker) => {
+      if (!selectedPin || marker.getTitle() === selectedPin?.id.toString())
+        marker.setOpacity(1);
+      else marker.setOpacity(0.5);
+    });
+  }, [map, selectedProprety, selectedPin]);
 
   return (
     <div className={styles.root}>

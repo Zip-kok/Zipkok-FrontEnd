@@ -181,7 +181,9 @@ export default function Home() {
           setMapLocationInfo={setMapLocationInfo}
           realEstatesInfo={mapRealEstate?.realEstateInfoList}
           pins={pins}
+          selectedProprety={selectedProperty}
           setSelectedProperty={setSelectedProperty}
+          selectedPin={selectedPin}
           setSelectedPin={setSelectedPin}
         />
       </div>
