@@ -11,6 +11,7 @@ import { getKokOuter } from './getKokOuter';
 import { getKokReview } from './getKokReview';
 import { getMapRealEstate } from './getMapRealEstate';
 import { getMyPageInfo } from './getMyPageInfo';
+import { getPin } from './getPin';
 import { getProfileEditInfo } from './getProfileEditInfo';
 import { getUserDetail } from './getUserDetail';
 import { getUserKokOption } from './getUserKokOption';
@@ -18,6 +19,8 @@ import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
+import { patchPin } from './patchPin';
+import { postPin } from './postPin';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
@@ -45,6 +48,9 @@ export {
   logout,
   getUserKokOption,
   putUserKokOption,
+  getPin,
+  postPin,
+  patchPin,
 };
 
 /**
