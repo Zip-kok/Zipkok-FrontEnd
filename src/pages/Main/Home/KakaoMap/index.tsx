@@ -8,7 +8,6 @@ import spot from 'assets/img/pinIcon/spot.svg';
 
 import styles from './KakaoMap.module.css';
 
-import type { MapRealEstate } from 'apis/getMapRealEstate';
 import type { Pin } from 'types/Pin';
 
 declare global {
@@ -144,9 +143,7 @@ const KakaoMap = ({
       );
 
       setEstateMarkers((prev) => {
-        prev.forEach((marker) => {
-          marker.setMap(null);
-        });
+        prev.forEach((marker) => marker.setMap(null));
 
         return (
           realEstatesInfo?.map((realEstateInfo) => {
@@ -162,6 +159,10 @@ const KakaoMap = ({
             kakao.maps.event.addListener(marker, 'click', () => {
               setSelectedPin(null);
               setSelectedProperty(realEstateInfo);
+
+              // 마커 이미지 변경
+              estateMakers.forEach((m) => m.setOpacity(0.5));
+              marker.setOpacity(1);
             });
             return marker;
           }) ?? []
@@ -213,6 +214,12 @@ const KakaoMap = ({
         kakao.maps.event.addListener(marker, 'click', () => {
           setSelectedProperty(null);
           setSelectedPin(pin);
+
+          // 마커 이미지 변경
+          pinMarkers.forEach((marker) => {
+            marker.setOpacity(0.5);
+          });
+          marker.setOpacity(1);
         });
         return marker;
       }) ?? [],
