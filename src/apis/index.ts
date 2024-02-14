@@ -14,6 +14,7 @@ import { getMapRealEstate } from './getMapRealEstate';
 import { getMyPageInfo } from './getMyPageInfo';
 import { getPin } from './getPin';
 import { getProfileEditInfo } from './getProfileEditInfo';
+import { getRealEstateInfo } from './getRealEstateInfo';
 import { getUserDetail } from './getUserDetail';
 import { getUserKokOption } from './getUserKokOption';
 import { getZim } from './getZim';
@@ -53,6 +54,7 @@ export {
   getPin,
   postPin,
   patchPin,
+  getRealEstateInfo,
 };
 
 /**

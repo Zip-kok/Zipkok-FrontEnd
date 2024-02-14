@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { PropertyItem } from 'components';
 import properties from 'models/properties';
 
-import { realEstateInfoList } from '../../KakaoMap';
+import { realEstateInfo } from '../../KakaoMap';
 import styles from '../BottomSheet.module.css';
 interface ContentProps {
-  realEstateInfoList?: realEstateInfoList[];
+  realEstateInfoList?: realEstateInfo[];
 }
 
 export default function Content({ realEstateInfoList }: ContentProps) {

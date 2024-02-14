@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getRealEstateInfo, getPin } from 'apis';
 import { MapRealEstate, getMapRealEstate } from 'apis/getMapRealEstate';
 import BottomSheet from 'components/BottomSheet';
 import useUIStore from 'contexts/uiStore';
@@ -12,6 +13,8 @@ import { Filter, SearchBox } from './components';
 import styles from './Home.module.css';
 import KakaoMap from './KakaoMap';
 
+import type { Pin } from 'types/Pin';
+
 interface mapLocationInfo {
   southWestLat?: number;
   southWestLon?: number;
@@ -22,8 +25,13 @@ interface mapLocationInfo {
 export default function Home() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterSet, setFilterSet] = useState(false);
+  const [pins, setPins] = useState<Pin[]>([]);
   const [mapRealEstate, setMapRealEstate] = useState<MapRealEstate>();
   const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
+
+  const [selectedProperty, setSelectedProperty] =
+    useState<MapRealEstate | null>(null);
+  const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
 
   const ui = useUIStore();
   useEffect(() => {
@@ -33,6 +41,8 @@ export default function Home() {
       naviEnabled: true,
       path: 'home',
     }));
+
+    getPin().then((res) => setPins(res.result as Pin[]));
   }, []);
 
   useEffect(() => {
@@ -168,7 +178,8 @@ export default function Home() {
           lng={MyPageStore.address?.x}
           mapLocationInfo={mapLocationInfo}
           setMapLocationInfo={setMapLocationInfo}
-          realEstateInfoList={mapRealEstate?.realEstateInfoList}
+          realEstatesInfo={mapRealEstate?.realEstateInfoList}
+          pins={pins}
         />
       </div>
 
