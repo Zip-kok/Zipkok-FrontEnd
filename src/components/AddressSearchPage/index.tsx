@@ -12,19 +12,21 @@ interface AddressSearchPageProps {
   confirmLocation: (location: Address) => void;
   skippable?: boolean;
   onSkip?: () => void;
-  defaultAddress?: string;
+  defaultAddress?: Address;
 }
 
 export default function AddressSearchPage({
   confirmLocation,
   skippable = true,
   onSkip = () => navigate('/'),
-  defaultAddress = '',
+  defaultAddress,
 }: AddressSearchPageProps) {
   const [, addressCount, AddressSeachInput, AddressSearchResult, handleSubmit] =
     useAddressSearch(handleAddressClick, defaultAddress);
 
-  const [inputValue, setInputValue] = useState<string>(defaultAddress);
+  const [inputValue, setInputValue] = useState<string>(
+    defaultAddress?.address_name ?? '',
+  );
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
   function handleInputChange(e: React.FormEvent<HTMLInputElement>) {

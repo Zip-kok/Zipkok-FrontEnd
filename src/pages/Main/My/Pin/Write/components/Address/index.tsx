@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
@@ -12,7 +12,7 @@ import type { Address } from 'types/Address';
 interface AddressProps {
   confirmLocation: (location: Address) => void;
   showMap: () => void;
-  defaultAddress: string;
+  defaultAddress?: Address;
 }
 
 export default function Address({
@@ -23,8 +23,12 @@ export default function Address({
   const [, addressCount, AddressSeachInput, AddressSearchResult, handleSubmit] =
     useAddressSearch(handleAddressClick, defaultAddress);
 
-  const [inputValue, setInputValue] = useState<string>(defaultAddress);
-  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [inputValue, setInputValue] = useState<string>(
+    defaultAddress?.address_name ?? '',
+  );
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(
+    defaultAddress ?? null,
+  );
 
   function handleInputChange(e: React.FormEvent<HTMLInputElement>) {
     setSelectedAddress(null);
@@ -41,7 +45,6 @@ export default function Address({
       <div className={styles.inputContainer}>
         <AddressSeachInput
           placeholder="도로명, 지번 검색"
-          value={inputValue}
           icon={searchIcon}
           onChange={handleInputChange}
           onSubmit={handleSubmit}

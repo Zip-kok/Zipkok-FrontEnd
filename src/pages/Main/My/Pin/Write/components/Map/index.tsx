@@ -10,11 +10,12 @@ import type { Address } from 'types/Address';
 
 interface MapProps {
   confirmLocation: (location: Address) => void;
+  defaultAddress?: Address;
 }
 
-export default function Map({ confirmLocation }: MapProps) {
+export default function Map({ confirmLocation, defaultAddress }: MapProps) {
   const mapRef = useRef<KakaoMapRef>(null);
-  const [address, setAddress] = useState<Address>();
+  const [address, setAddress] = useState<Address | undefined>(defaultAddress);
 
   const handleSubmit = () => {
     if (address) {
@@ -24,7 +25,11 @@ export default function Map({ confirmLocation }: MapProps) {
 
   return (
     <div className={styles.root}>
-      <KakaoMap setAddress={setAddress} ref={mapRef} />
+      <KakaoMap
+        setAddress={setAddress}
+        ref={mapRef}
+        defaultAddress={defaultAddress}
+      />
       <div className={styles.bottom}>
         <h1>{address?.address_name}</h1>
         <button

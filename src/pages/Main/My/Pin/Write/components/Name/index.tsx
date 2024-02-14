@@ -15,7 +15,7 @@ interface NameProps {
 
 export default function Name({ pin, confirm }: NameProps) {
   const [detailAddress, setDetailAddress] = useState('');
-  const [name, setName] = useState('');
+  const [name, setName] = useState(pin.name);
 
   return (
     <div className={styles.root}>

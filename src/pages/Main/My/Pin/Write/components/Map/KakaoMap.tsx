@@ -23,10 +23,11 @@ export interface KakaoMapRef {
 
 interface KakaoMapProps {
   setAddress: (address: Address) => void;
+  defaultAddress?: Address;
 }
 
 const KakaoMap = forwardRef<KakaoMapRef, KakaoMapProps>(
-  ({ setAddress }: KakaoMapProps, ref) => {
+  ({ setAddress, defaultAddress }: KakaoMapProps, ref) => {
     const [map, setMap] = useState<any>();
     const [coord, setCoord] = useState<[number, number]>();
 
@@ -41,9 +42,9 @@ const KakaoMap = forwardRef<KakaoMapRef, KakaoMapProps>(
       map.panTo(currentPos);
     }, [map, coord]);
 
-    // 전달된 lat 및 lng가 없을 시
+    // 전달된 address가 없을 시
     useEffect(() => {
-      getCurrentPosBtn();
+      if (defaultAddress === undefined) getCurrentPosBtn();
     }, []);
 
     // 1) 지도 생성
@@ -51,7 +52,10 @@ const KakaoMap = forwardRef<KakaoMapRef, KakaoMapProps>(
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
         const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.978),
+          center: new window.kakao.maps.LatLng(
+            defaultAddress?.x ?? 37.5665,
+            defaultAddress?.y ?? 126.978,
+          ),
           level: 3,
         };
 
@@ -103,6 +107,7 @@ const KakaoMap = forwardRef<KakaoMapRef, KakaoMapProps>(
         const center = map.getCenter();
         marker.setPosition(center);
       };
+      centerChangeHandler();
 
       const idleHandler = () => {
         const center = map.getCenter();
@@ -119,6 +124,7 @@ const KakaoMap = forwardRef<KakaoMapRef, KakaoMapProps>(
           },
         );
       };
+      idleHandler();
 
       // 이벤트 리스너 추가
       window.kakao.maps.event.addListener(

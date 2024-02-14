@@ -17,6 +17,7 @@ export default function Write() {
   const navigate = useNavigate();
   const ui = useUIStore();
   const pinId = useParams<{ pinId: string }>().pinId;
+  const [pinLoaded, setPinLoaded] = useState(false);
   const [step, setStep] = useState<Step>('address');
   const [pin, setPin] = useState<PinWithoutId>({
     name: '',
@@ -39,7 +40,10 @@ export default function Write() {
     if (pinId !== undefined) {
       getPin(parseInt(pinId)).then((res) => {
         setPin(res.result as Pin);
+        setPinLoaded(true);
       });
+    } else {
+      setPinLoaded(true);
     }
   }, []);
 
@@ -81,15 +85,24 @@ export default function Write() {
 
   return (
     <div className={styles.root}>
-      {step === 'address' && (
-        <AddressPage
-          confirmLocation={handleAddressSubmit}
-          showMap={() => setStep('map')}
-          defaultAddress={pin.address.address_name}
-        />
+      {pinLoaded && (
+        <>
+          {step === 'address' && (
+            <AddressPage
+              confirmLocation={handleAddressSubmit}
+              showMap={() => setStep('map')}
+              defaultAddress={pinId !== undefined ? pin.address : undefined}
+            />
+          )}
+          {step === 'map' && (
+            <Map
+              confirmLocation={handleAddressSubmit}
+              defaultAddress={pinId !== undefined ? pin.address : undefined}
+            />
+          )}
+          {step === 'name' && <Name pin={pin} confirm={handlePinSubmit} />}
+        </>
       )}
-      {step === 'map' && <Map confirmLocation={handleAddressSubmit} />}
-      {step === 'name' && <Name pin={pin} confirm={handlePinSubmit} />}
     </div>
   );
 }
