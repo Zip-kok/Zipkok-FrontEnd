@@ -106,8 +106,6 @@ const KakaoMap = ({
     if (map === undefined) return;
 
     const boundsChangedListener = () => {
-      //현재 맵의 두 좌표 등록
-
       //마커 띄우기
       if (realEstateInfoList === undefined) return;
       // 이전에 생성된 마커 제거
@@ -149,6 +147,7 @@ const KakaoMap = ({
       boundsChangedListener,
     );
     window.kakao.maps.event.addListener(map, 'idle', function () {
+      //현재 맵의 두 좌표 등록
       const bounds = map.getBounds();
       const southWestLat = bounds.ha;
       const southWestLon = bounds.qa;

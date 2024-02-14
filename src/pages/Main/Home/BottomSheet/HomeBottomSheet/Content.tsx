@@ -17,7 +17,6 @@ export default function Content({ realEstateInfoList }: ContentProps) {
   const handlePropertyClick = (propertyId: number) => {
     navigate(`./`);
   };
-  console.log(realEstateInfoList);
   return (
     <div className={styles.root}>
       <div className={styles.propertyContainer}>
