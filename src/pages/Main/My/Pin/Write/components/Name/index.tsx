@@ -1,7 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { TextInput, BottomBtn } from 'components';
 
 import styles from './Name.module.css';
 
-export default function Name() {
-  return <div></div>;
+import type { Pin } from 'types/Pin';
+
+type PinWithoutId = Omit<Pin, 'id'>;
+
+interface NameProps {
+  pin: PinWithoutId;
+  confirm: (name: string, detailAddress: string) => void;
+}
+
+export default function Name({ pin, confirm }: NameProps) {
+  const [detailAddress, setDetailAddress] = useState('');
+  const [name, setName] = useState('');
+
+  return (
+    <div className={styles.root}>
+      <div>
+        <h1>{pin.address.address_name}</h1>
+        <TextInput
+          placeholder="상세 주소 (선택)"
+          value={detailAddress}
+          onChange={(e) => setDetailAddress(e.currentTarget.value)}
+          style="roundedBox"
+        />
+      </div>
+      <TextInput
+        placeholder="핀의 별명을 입력해주세요. (최대 12자)"
+        maxLength={12}
+        value={name}
+        onChange={(e) => setName(e.currentTarget.value)}
+        style="roundedBox"
+      />
+      <BottomBtn
+        disabled={!name}
+        text="핀 등록하기"
+        onClick={() => {
+          if (name) {
+            confirm(name, detailAddress);
+          }
+        }}
+      />
+    </div>
+  );
 }
