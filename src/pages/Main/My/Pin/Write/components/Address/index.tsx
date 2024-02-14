@@ -11,11 +11,13 @@ import type { Address } from 'types/Address';
 
 interface AddressProps {
   confirmLocation: (location: Address) => void;
+  showMap: () => void;
   defaultAddress: string;
 }
 
 export default function Address({
   confirmLocation,
+  showMap,
   defaultAddress,
 }: AddressProps) {
   const [, addressCount, AddressSeachInput, AddressSearchResult, handleSubmit] =
@@ -44,7 +46,7 @@ export default function Address({
           onChange={handleInputChange}
           onSubmit={handleSubmit}
         />
-        <button className={`imgBtn ${styles.mapBtn}`}>
+        <button className={`imgBtn ${styles.mapBtn}`} onClick={showMap}>
           <img src={mapIcon} />
           <span>지도에서 위치 보기</span>
         </button>

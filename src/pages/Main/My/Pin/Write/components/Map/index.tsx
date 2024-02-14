@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import KakaoMap from './KakaoMap';
 import styles from './Map.module.css';
 
 import type { Address } from 'types/Address';
@@ -9,5 +10,11 @@ interface MapProps {
 }
 
 export default function Map({ confirmLocation }: MapProps) {
-  return <div></div>;
+  const [address, setAddress] = useState<Address>();
+
+  return (
+    <div className={styles.root}>
+      <KakaoMap setAddress={setAddress} />
+    </div>
+  );
 }

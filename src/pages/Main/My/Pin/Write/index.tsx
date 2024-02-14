@@ -59,6 +59,7 @@ export default function Write() {
       {step === 'address' && (
         <AddressPage
           confirmLocation={handleAddressSubmit}
+          showMap={() => setStep('map')}
           defaultAddress={pin.address.address_name}
         />
       )}
