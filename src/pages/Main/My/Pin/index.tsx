@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { getPin, patchPin, postPin } from 'apis';
+import { getPin, patchPin, postPin, deletePin } from 'apis';
 import pinIcon from 'assets/img/line(2)/pin.svg';
 import arrowIcon from 'assets/img/line(2)/right_arrow.svg';
 import useUIStore from 'contexts/uiStore';
@@ -26,6 +26,8 @@ export default function Pin() {
       setPins(res.result);
     });
   }, []);
+
+  const handleDeletePin = (pinId: number) => {};
 
   return (
     <div className={styles.root}>

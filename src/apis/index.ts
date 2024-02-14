@@ -3,6 +3,7 @@ import { url } from 'constants/api';
 import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
+import { deletePin } from './deletePin';
 import { deleteZim } from './deleteZim';
 import { getKokContract } from './getKokContract';
 import { getKokDetail } from './getKokDetail';
@@ -28,6 +29,7 @@ import { signIn } from './signIn';
 import { zim } from './zim';
 
 export {
+  deletePin,
   searchAddress,
   signIn,
   kakaoLogin,
