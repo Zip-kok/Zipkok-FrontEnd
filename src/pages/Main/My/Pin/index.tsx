@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { getPin, patchPin, postPin, deletePin } from 'apis';
 import pinIcon from 'assets/img/line(2)/pin.svg';
@@ -11,6 +12,7 @@ import type { Pin } from 'types/Pin';
 
 export default function Pin() {
   const ui = useUIStore();
+  const navigate = useNavigate();
   const [pins, setPins] = useState<Pin[]>([]);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export default function Pin() {
     }));
 
     getPin().then((res) => {
-      setPins(res.result);
+      setPins(res.result as Pin[]);
     });
   }, []);
 
@@ -36,7 +38,7 @@ export default function Pin() {
   return (
     <div className={styles.root}>
       {/* 새로운 핀 등록하기 버튼 */}
-      <button className={styles.newPinBtn}>
+      <button className={styles.newPinBtn} onClick={() => navigate('./write')}>
         <div>
           <img src={pinIcon} />
           <span className={styles.newPinBtnLabel}>새로운 핀 등록하기</span>
