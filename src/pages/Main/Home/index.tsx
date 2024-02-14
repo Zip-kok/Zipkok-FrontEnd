@@ -56,13 +56,23 @@ export default function Home() {
 
   const { realEstateType, transactionType, priceMax, depositMax, address } =
     useMyPageStore();
+
+  const MyPageStore = useMyPageStore();
+
   useEffect(() => {
-    if (realEstateType) {
+    if (MyPageStore.realEstateType) {
       setFilterSet(true);
     } else {
       setFilterSet(false);
     }
-  }, [realEstateType, transactionType, priceMax, depositMax]);
+  }, [
+    MyPageStore.realEstateType,
+    MyPageStore.transactionType,
+    MyPageStore.mpriceMax,
+    MyPageStore.mdepositMax,
+    MyPageStore.ydepositMax,
+    MyPageStore.priceMax,
+  ]);
 
   const navigate = useNavigate();
 
@@ -107,36 +117,36 @@ export default function Home() {
         {filterSet ? (
           // 필터가 설정되었을 때 보여줄 화면
           <div className={styles.filterCtn}>
-            {realEstateType && (
+            {MyPageStore.realEstateType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {realEstateType}
+                {MyPageStore.transactionType}
               </div>
             )}
-            {transactionType && (
+            {MyPageStore.transactionType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {transactionType}
+                {MyPageStore.realEstateType}
               </div>
             )}
-            {transactionType === '월세' ? (
-              priceMax !== undefined &&
-              depositMax !== undefined && (
+            {MyPageStore.transactionType === '월세' ? (
+              MyPageStore.mpriceMax !== undefined &&
+              MyPageStore.mdepositMax !== undefined && (
                 <div className={styles.filter} onClick={handleFilterClick}>
-                  {`~${getPriceString(priceMax, true)}/~${getPriceString(
-                    depositMax,
+                  {`~${getPriceString(
+                    MyPageStore.mpriceMax,
                     true,
-                  )}`}
+                  )}/~${getPriceString(MyPageStore.mdepositMax, true)}`}
                 </div>
               )
             ) : (
               <>
-                {priceMax !== undefined && (
+                {MyPageStore.transactionType === '전세' && (
                   <div className={styles.filter} onClick={handleFilterClick}>
-                    {`~${getPriceString(priceMax, true)}`}
+                    {`~${getPriceString(MyPageStore.ydepositMax!, true)}`}
                   </div>
                 )}
-                {depositMax !== undefined && (
+                {MyPageStore.transactionType === '매매' && (
                   <div className={styles.filter} onClick={handleFilterClick}>
-                    {`~${getPriceString(depositMax, true)}`}
+                    {`~${getPriceString(MyPageStore.priceMax!, true)}`}
                   </div>
                 )}
               </>
@@ -156,6 +166,7 @@ export default function Home() {
 
       {/* 지도 */}
       <div className={styles.mapContainer}>
+
         <KakaoMap
           lat={address?.y}
           lng={address?.x}
@@ -163,6 +174,7 @@ export default function Home() {
           setMapLocationInfo={setMapLocationInfo}
           realEstateInfoList={mapRealEstate?.realEstateInfoList}
         />
+
       </div>
 
       {/* 바텀 시트 */}

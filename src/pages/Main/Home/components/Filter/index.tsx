@@ -54,43 +54,50 @@ export default function Filter(props: FilterProps) {
   );
 
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  const {
-    setRealEstateType,
-    setTransactionType,
-    setPriceMax,
-    setDepositMax,
-    setPriceMin,
-    setDepositMin,
-  } = useMyPageStore();
+  const MyPageStore = useMyPageStore();
 
   const handelSaveBtnClick = () => {
     if (houseType === undefined || priceType === undefined) return;
 
-    setRealEstateType(houseType);
-    setTransactionType(priceType);
+    MyPageStore.setRealEstateType(houseType);
+    MyPageStore.setTransactionType(priceType);
 
     if (priceType === '월세') {
       // 월세의 경우, 첫 번째 배열 요소는 보증금 범위, 두 번째는 월세 범위
       const [depositRange, monthlyRange] = priceRanges;
-      setDepositMin(depositRange[0]);
-      setDepositMax(depositRange[1]);
-      setPriceMin(monthlyRange[0]);
-      setPriceMax(monthlyRange[1]);
+      MyPageStore.setMDepositMin(depositRange[0]);
+      MyPageStore.setMDepositMax(depositRange[1]);
+      MyPageStore.setMPriceMin(monthlyRange[0]);
+      MyPageStore.setMPriceMax(monthlyRange[1]);
+
+      MyPageStore.setYDepositMin(undefined);
+      MyPageStore.setYDepositMax(undefined);
+      MyPageStore.setYDepositMin(undefined);
+      MyPageStore.setYDepositMax(undefined);
     } else if (priceType === '전세') {
       // 전세의 경우, 보증금 범위만
       const [depositRange] = priceRanges;
-      setDepositMin(depositRange[0]);
-      setDepositMax(depositRange[1]);
+      MyPageStore.setYDepositMin(depositRange[0]);
+      MyPageStore.setYDepositMax(depositRange[1]);
 
-      setPriceMin(undefined);
-      setPriceMax(undefined);
+      MyPageStore.setMDepositMin(undefined);
+      MyPageStore.setMDepositMax(undefined);
+      MyPageStore.setMPriceMin(undefined);
+      MyPageStore.setMPriceMax(undefined);
+      MyPageStore.setPriceMin(undefined);
+      MyPageStore.setPriceMax(undefined);
     } else if (priceType === '매매') {
       // 매매의 경우, 가격 범위만
       const [purchaseRange] = priceRanges;
-      setPriceMin(purchaseRange[0]);
-      setPriceMax(purchaseRange[1]);
-      setDepositMin(undefined);
-      setDepositMax(undefined);
+      MyPageStore.setPriceMin(purchaseRange[0]);
+      MyPageStore.setPriceMax(purchaseRange[1]);
+
+      MyPageStore.setYDepositMin(undefined);
+      MyPageStore.setYDepositMax(undefined);
+      MyPageStore.setMDepositMin(undefined);
+      MyPageStore.setMDepositMax(undefined);
+      MyPageStore.setMPriceMin(undefined);
+      MyPageStore.setMPriceMax(undefined);
     }
 
     // 저장하면 필터 내리기

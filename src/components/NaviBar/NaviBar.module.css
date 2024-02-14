@@ -24,6 +24,7 @@
   gap: 4px;
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
 
 .label {
@@ -37,4 +38,18 @@
 
 .selected .label {
   color: var(--primary-color-primary_default, #fa4549);
+}
+
+.icon {
+  transition: transform 0.15s ease-in-out;
+}
+
+.menuBtn:hover > .icon,
+.menuBtn:focus > .icon,
+.menuBtn:active > .icon {
+  transform: scale(0.9);
+}
+
+.selected > .icon {
+  transform: scale(0.9);
 }

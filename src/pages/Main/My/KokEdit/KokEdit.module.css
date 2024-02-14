@@ -23,8 +23,8 @@
   flex-wrap: wrap;
 }
 
-.blank {
-  height: 47px;
+.content {
+  padding: 48px 0 80px 0;
 }
 
 .checkListGroupContainer {
@@ -34,4 +34,19 @@
 .menu {
   position: sticky;
   top: 56px;
+}
+
+.message {
+  position: fixed;
+  bottom: 80px;
+  width: calc(100% - 40px);
+  padding: 12px 0;
+  margin: 0 20px;
+  border-radius: 5px;
+  color: var(--gray-color-white, #fff);
+  background: var(--gray-color-gray040, #6e747a);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-weight: 400;
 }
