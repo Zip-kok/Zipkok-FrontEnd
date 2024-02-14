@@ -4,31 +4,37 @@ import { useNavigate } from 'react-router-dom';
 import { PropertyItem } from 'components';
 import properties from 'models/properties';
 
+import { realEstateInfoList } from '../../KakaoMap';
 import styles from '../BottomSheet.module.css';
-export default function Content() {
+interface ContentProps {
+  realEstateInfoList?: realEstateInfoList[];
+}
+
+export default function Content({ realEstateInfoList }: ContentProps) {
   const navigate = useNavigate();
 
   // 해당 매물로 가는 함수, 구현 아직
   const handlePropertyClick = (propertyId: number) => {
     navigate(`./`);
   };
+  console.log(realEstateInfoList);
   return (
     <div className={styles.root}>
       <div className={styles.propertyContainer}>
-        {properties.map((property) => (
+        {realEstateInfoList?.map((property) => (
           <PropertyItem
-            key={property.id}
-            id={property.id}
-            like={property.like}
-            type={property.type}
-            priceType={property.priceType}
+            key={property.realEstateId}
+            id={property.realEstateId}
+            like={property.isZimmed}
+            type={property.realEstateType}
+            priceType={property.transactionType}
             price={property.price}
-            deposit={property.maintenanceFee}
+            deposit={property.deposit}
             address={property.address}
-            propertyName={property.propertyName}
-            imageUrl={property.imageUrl}
-            kokList={property.kokList}
-            onClick={() => handlePropertyClick(property.id)}
+            propertyName={property.agent}
+            imageUrl={property.imageURL}
+            kokList={property.isKokked}
+            onClick={() => handlePropertyClick(property.realEstateId)}
           />
         ))}
       </div>

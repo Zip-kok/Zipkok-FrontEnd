@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { MapRealEstate, getMapRealEstate } from 'apis/getMapRealEstate';
 import BottomSheet from 'components/BottomSheet';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
@@ -11,9 +12,18 @@ import { Filter, SearchBox } from './components';
 import styles from './Home.module.css';
 import KakaoMap from './KakaoMap';
 
+interface mapLocationInfo {
+  southWestLat?: number;
+  southWestLon?: number;
+  northEastLat?: number;
+  northEastLon?: number;
+}
+
 export default function Home() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterSet, setFilterSet] = useState(false);
+  const [mapRealEstate, setMapRealEstate] = useState<MapRealEstate>();
+  const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
 
   const ui = useUIStore();
   useEffect(() => {
@@ -25,7 +35,27 @@ export default function Home() {
     }));
   }, []);
 
+  useEffect(() => {
+    const { southWestLat, southWestLon, northEastLat, northEastLon } =
+      mapLocationInfo;
+    if (
+      southWestLat === undefined ||
+      southWestLon === undefined ||
+      northEastLat === undefined ||
+      northEastLon === undefined
+    )
+      return;
+
+    getMapRealEstate(
+      southWestLat,
+      southWestLon,
+      northEastLat,
+      northEastLon,
+    ).then((res) => setMapRealEstate(res.result));
+  }, [mapLocationInfo]);
+
   const MyPageStore = useMyPageStore();
+
   useEffect(() => {
     if (MyPageStore.realEstateType) {
       setFilterSet(true);
@@ -133,11 +163,17 @@ export default function Home() {
 
       {/* 지도 */}
       <div className={styles.mapContainer}>
-        <KakaoMap lat={MyPageStore.address?.y} lng={MyPageStore.address?.x} />
+        <KakaoMap
+          lat={MyPageStore.address?.y}
+          lng={MyPageStore.address?.x}
+          mapLocationInfo={mapLocationInfo}
+          setMapLocationInfo={setMapLocationInfo}
+          realEstateInfoList={mapRealEstate?.realEstateInfoList}
+        />
       </div>
 
       {/* 바텀 시트 */}
-      <HomeBottomSheet />
+      <HomeBottomSheet realEstateInfoList={mapRealEstate?.realEstateInfoList} />
     </div>
   );
 }

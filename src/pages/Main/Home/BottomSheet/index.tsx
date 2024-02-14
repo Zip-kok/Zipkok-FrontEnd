@@ -1,11 +1,15 @@
 import React from 'react';
 
 import HomeBottomSheet from './HomeBottomSheet/BottomSheet';
+import { realEstateInfoList } from '../KakaoMap';
 
-const BottomSheet = () => {
+interface BottomSheetProps {
+  realEstateInfoList?: realEstateInfoList[];
+}
+const BottomSheet = ({ realEstateInfoList }: BottomSheetProps) => {
   return (
     <div>
-      <HomeBottomSheet />
+      <HomeBottomSheet realEstateInfoList={realEstateInfoList} />
     </div>
   );
 };
