@@ -54,9 +54,6 @@ export default function Home() {
     ).then((res) => setMapRealEstate(res.result));
   }, [mapLocationInfo]);
 
-  const { realEstateType, transactionType, priceMax, depositMax, address } =
-    useMyPageStore();
-
   const MyPageStore = useMyPageStore();
 
   useEffect(() => {
@@ -166,15 +163,13 @@ export default function Home() {
 
       {/* 지도 */}
       <div className={styles.mapContainer}>
-
         <KakaoMap
-          lat={address?.y}
-          lng={address?.x}
+          lat={MyPageStore.address?.y}
+          lng={MyPageStore.address?.x}
           mapLocationInfo={mapLocationInfo}
           setMapLocationInfo={setMapLocationInfo}
           realEstateInfoList={mapRealEstate?.realEstateInfoList}
         />
-
       </div>
 
       {/* 바텀 시트 */}
