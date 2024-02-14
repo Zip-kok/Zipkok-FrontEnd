@@ -87,3 +87,36 @@
 .mapContainer {
   flex: 1 1 auto;
 }
+
+.selectedPin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 34px 20px;
+}
+
+.selectedPin > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selectedPin h1 {
+  margin: 0;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.selectedPin h2 {
+  margin: 0;
+  color: var(--gray-color-gray050_text, #4b5259);
+  font-family: 'Noto Sans KR';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

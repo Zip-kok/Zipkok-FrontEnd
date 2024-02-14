@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getRealEstateInfo, getPin } from 'apis';
+import { getPin } from 'apis';
 import { MapRealEstate, getMapRealEstate } from 'apis/getMapRealEstate';
-import BottomSheet from 'components/BottomSheet';
+import pinIcon from 'assets/img/pinIcon/pin.svg';
+import { PropertyItem, BottomSheet } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
 import getPriceString from 'utils/getPriceString';
@@ -11,7 +12,7 @@ import getPriceString from 'utils/getPriceString';
 import HomeBottomSheet from './BottomSheet';
 import { Filter, SearchBox } from './components';
 import styles from './Home.module.css';
-import KakaoMap from './KakaoMap';
+import KakaoMap, { realEstateInfo } from './KakaoMap';
 
 import type { Pin } from 'types/Pin';
 
@@ -30,7 +31,7 @@ export default function Home() {
   const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
 
   const [selectedProperty, setSelectedProperty] =
-    useState<MapRealEstate | null>(null);
+    useState<realEstateInfo | null>(null);
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
 
   const ui = useUIStore();
@@ -180,11 +181,44 @@ export default function Home() {
           setMapLocationInfo={setMapLocationInfo}
           realEstatesInfo={mapRealEstate?.realEstateInfoList}
           pins={pins}
+          setSelectedProperty={setSelectedProperty}
+          setSelectedPin={setSelectedPin}
         />
       </div>
 
       {/* 바텀 시트 */}
-      <HomeBottomSheet realEstateInfoList={mapRealEstate?.realEstateInfoList} />
+      {selectedProperty !== null && (
+        <div className={styles.selectedProperty}>
+          <PropertyItem
+            id={selectedProperty.realEstateId}
+            like={false}
+            type={selectedProperty.realEstateType}
+            priceType={selectedProperty.transactionType}
+            deposit={selectedProperty.deposit}
+            price={selectedProperty.price}
+            address={selectedProperty.address}
+            propertyName={selectedProperty.detailAddress}
+            imageUrl={selectedProperty.imageURL}
+            kokList={false}
+          />
+        </div>
+      )}
+
+      {selectedPin !== null && (
+        <div className={styles.selectedPin}>
+          <div>
+            <h1>{selectedPin.name}</h1>
+            <h2>{selectedPin.address.address_name}</h2>
+          </div>
+          <img src={pinIcon} />
+        </div>
+      )}
+
+      {selectedProperty === null && selectedPin === null && (
+        <HomeBottomSheet
+          realEstateInfoList={mapRealEstate?.realEstateInfoList}
+        />
+      )}
     </div>
   );
 }

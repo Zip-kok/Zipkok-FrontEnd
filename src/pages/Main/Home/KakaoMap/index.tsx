@@ -8,7 +8,9 @@ import spot from 'assets/img/pinIcon/spot.svg';
 
 import styles from './KakaoMap.module.css';
 
+import type { MapRealEstate } from 'apis/getMapRealEstate';
 import type { Pin } from 'types/Pin';
+
 declare global {
   interface Window {
     kakao: any;
@@ -43,6 +45,10 @@ interface KakaoMapProps {
   setMapLocationInfo: React.Dispatch<React.SetStateAction<mapLocationInfo>>;
   realEstatesInfo?: realEstateInfo[];
   pins?: Pin[];
+  setSelectedProperty: React.Dispatch<
+    React.SetStateAction<realEstateInfo | null>
+  >;
+  setSelectedPin: React.Dispatch<React.SetStateAction<Pin | null>>;
 }
 
 const KakaoMap = ({
@@ -52,6 +58,8 @@ const KakaoMap = ({
   setMapLocationInfo,
   realEstatesInfo,
   pins,
+  setSelectedProperty,
+  setSelectedPin,
 }: KakaoMapProps) => {
   const [map, setMap] = useState<any>();
   const [showPins, setShowPins] = useState(false);
@@ -151,17 +159,28 @@ const KakaoMap = ({
               position: position,
               image: markerImage,
             });
+            kakao.maps.event.addListener(marker, 'click', () => {
+              setSelectedPin(null);
+              setSelectedProperty(realEstateInfo);
+            });
             return marker;
           }) ?? []
         );
       });
     };
 
+    const handleClick = () => {
+      setSelectedProperty(null);
+      setSelectedPin(null);
+    };
+
     window.kakao.maps.event.addListener(map, 'idle', handleIdle);
+    window.kakao.maps.event.addListener(map, 'click', handleClick);
 
     // 컴포넌트가 언마운트되면 이벤트 리스너 제거
     return () => {
       window.kakao.maps.event.removeListener(map, 'idle', handleIdle);
+      window.kakao.maps.event.removeListener(map, 'click', handleClick);
     };
   }, [map, realEstatesInfo]);
 
@@ -190,6 +209,10 @@ const KakaoMap = ({
           map: map,
           position: position,
           image: pinImage,
+        });
+        kakao.maps.event.addListener(marker, 'click', () => {
+          setSelectedProperty(null);
+          setSelectedPin(pin);
         });
         return marker;
       }) ?? [],
