@@ -60,11 +60,10 @@ export default function Write() {
       id: pinId !== undefined ? parseInt(pinId) : undefined,
       name,
       address: {
-        address_name: pin.address.address_name,
+        address_name: `${pin.address.address_name} ${detailAddress}`,
         x: pin.address.x,
         y: pin.address.y,
       },
-      detail_address: detailAddress,
     };
 
     const callback = () => {
