@@ -5,6 +5,8 @@ import React, {
   useImperativeHandle,
 } from 'react';
 
+import markerIcon from 'assets/img/pinIcon/pin.svg';
+
 import styles from './Map.module.css';
 
 import type { Address } from 'types/Address';
@@ -86,6 +88,22 @@ const KakaoMap = forwardRef<KakaoMapRef, KakaoMapProps>(
     useEffect(() => {
       if (map === undefined) return;
 
+      const markerImage = new window.kakao.maps.MarkerImage(
+        markerIcon,
+        new window.kakao.maps.Size(48, 48),
+      );
+
+      const marker = new window.kakao.maps.Marker({
+        map: map,
+        position: new window.kakao.maps.LatLng(37.5665, 126.978),
+        image: markerImage,
+      });
+
+      const centerChangeHandler = () => {
+        const center = map.getCenter();
+        marker.setPosition(center);
+      };
+
       const idleHandler = () => {
         const center = map.getCenter();
         geocoder.coord2Address(
@@ -102,11 +120,21 @@ const KakaoMap = forwardRef<KakaoMapRef, KakaoMapProps>(
         );
       };
 
-      // idle 이벤트에 대한 이벤트 리스너 추가
+      // 이벤트 리스너 추가
+      window.kakao.maps.event.addListener(
+        map,
+        'center_changed',
+        centerChangeHandler,
+      );
       window.kakao.maps.event.addListener(map, 'idle', idleHandler);
 
       // 컴포넌트가 언마운트되면 이벤트 리스너 제거
       return () => {
+        window.kakao.maps.event.removeListener(
+          map,
+          'center_changed',
+          centerChangeHandler,
+        );
         window.kakao.maps.event.removeListener(map, 'idle', idleHandler);
       };
     }, [map]);
