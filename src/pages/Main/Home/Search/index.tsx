@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import backIcon from 'assets/img/line(2)/left_arrow.svg';
 import useAddressStore from 'contexts/addressStore';
@@ -78,9 +78,11 @@ export default function Search() {
     <div className={styles.root}>
       {/* 검색 상자 */}
       <div className={styles.top}>
-        <button className="imgBtn">
-          <img src={backIcon}></img>
-        </button>
+        <Link to="/">
+          <button className="imgBtn">
+            <img src={backIcon}></img>
+          </button>
+        </Link>
         <AddressSeachInput
           style="none"
           placeholder="어느 지역의 매물을 찾고 계신가요?"
