@@ -71,6 +71,7 @@ const KakaoMap = ({
   const [estateMakers, setEstateMarkers] = useState<any[]>([]);
   const [pinMarkers, setPinMarkers] = useState<any[]>([]);
   const [lines, setLines] = useState<any[]>([]);
+  const [overlays, setOverlays] = useState<any[]>([]);
 
   // coord가 변경될 때마다 지도의 중심을 변경
   useEffect(() => {
@@ -254,11 +255,12 @@ const KakaoMap = ({
       else marker.setOpacity(0.5);
     });
 
-    // 라인 삭제
+    // 라인 및 오버레이 삭제
     lines.forEach((line) => line.setMap(null));
+    overlays.forEach((overlay) => overlay.setMap(null));
 
     // 길찾기
-    if (selectedPin) {
+    if (selectedPin !== null) {
       realEstatesInfo?.forEach((realEstateInfo) => {
         getDirection(
           {
@@ -292,6 +294,16 @@ const KakaoMap = ({
             ),
           );
 
+          const overlay = new window.kakao.maps.CustomOverlay({
+            map: map,
+            position: path[Math.floor(path.length / 2)],
+            content: `<div class="${styles.overlay}">
+                ${Math.floor(res.routes[0].summary.duration / 60)}분
+              </div>`,
+          });
+
+          setOverlays((prev) => [...prev, overlay]);
+
           const polyline = new window.kakao.maps.Polyline({
             map: map,
             path: path,
@@ -306,6 +318,10 @@ const KakaoMap = ({
       });
     }
   }, [map, selectedProprety, selectedPin]);
+
+  useEffect(() => {
+    if (!showPins) setSelectedPin(null);
+  }, [showPins]);
 
   return (
     <div className={styles.root}>
