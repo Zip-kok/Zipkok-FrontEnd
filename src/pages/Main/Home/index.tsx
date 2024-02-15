@@ -7,6 +7,7 @@ import pinIcon from 'assets/img/pinIcon/pin.svg';
 import { PropertyItem, BottomSheet } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import convertHouseTypeToString from 'utils/convertHouseTypeToString';
 import getPriceString from 'utils/getPriceString';
 
 import HomeBottomSheet from './BottomSheet';
@@ -153,7 +154,7 @@ export default function Home() {
             )}
             {MyPageStore.transactionType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {MyPageStore.realEstateType}
+                {convertHouseTypeToString(MyPageStore.realEstateType)}
               </div>
             )}
             {MyPageStore.transactionType === '월세' ? (

@@ -16,6 +16,7 @@ import { IconBtn } from 'components';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import convertHouseTypeToString from 'utils/convertHouseTypeToString';
 import getPriceString from 'utils/getPriceString';
 import isLoggedIn from 'utils/isLoggedIn';
 import logout from 'utils/logout';
@@ -165,7 +166,7 @@ const Mypage = () => {
           {MyPageStore.transactionType && MyPageStore.realEstateType && (
             <div className={styles.tag}>
               <p>{MyPageStore.transactionType}</p>
-              <p>{MyPageStore.realEstateType}</p>
+              <p>{convertHouseTypeToString(MyPageStore.realEstateType)}</p>
               {MyPageStore.transactionType && (
                 <p>
                   {MyPageStore.transactionType === '월세' &&
