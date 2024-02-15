@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getUserKokList } from 'apis';
 import checkIcon from 'assets/img/line(2)/check.svg';
 import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen_white.svg';
 import { BottomBtn, PropertyItem } from 'components';
@@ -12,6 +13,9 @@ import styles from './Kok.module.css';
 export default function Koklist() {
   const ui = useUIStore();
   useEffect(() => {
+    getUserKokList(1, 1).then((res) => {
+      console.log(res);
+    });
     ui.setUI((state) => ({
       ...state,
       headerTitle: '콕리스트',

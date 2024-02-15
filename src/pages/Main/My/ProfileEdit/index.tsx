@@ -36,7 +36,6 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     getProfileEditInfo().then((res) => setProfileEditInfo(res.result));
-    console.log(profileEditInfo);
     if (profileEditInfo?.imageUrl !== undefined) {
       setImgSrc(profileEditInfo?.imageUrl);
     }

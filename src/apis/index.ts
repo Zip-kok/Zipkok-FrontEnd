@@ -16,6 +16,7 @@ import { getPin } from './getPin';
 import { getProfileEditInfo } from './getProfileEditInfo';
 import { getRealEstateInfo } from './getRealEstateInfo';
 import { getUserDetail } from './getUserDetail';
+import { getUserKokList } from './getUserKokList';
 import { getUserKokOption } from './getUserKokOption';
 import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
@@ -55,6 +56,7 @@ export {
   postPin,
   patchPin,
   getRealEstateInfo,
+  getUserKokList,
 };
 
 /**
