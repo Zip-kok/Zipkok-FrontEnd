@@ -45,12 +45,13 @@ const Item = () => {
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
+      headerEnabled: true,
       headerTitle: realEstateInfo?.address,
       headerIcon: undefined,
       headerBackButtonEnabled: true,
       naviEnabled: false,
     }));
-  }, []);
+  }, [realEstateInfo]);
   //모달
   const [modalOpen, setModalOpen] = useState(false);
 
