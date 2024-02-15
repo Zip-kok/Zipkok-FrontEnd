@@ -29,10 +29,10 @@ interface User {
 }
 
 /**
- * 마이페이지 회원정보 수정 페이지에서 모든 정보를 입력받고 확인 버튼을 눌렀을때, 호출하는 API
+ * 사용자 프로필 업데이트를 위한 PUT API 호출 함수
  */
 export async function putUser(user: User) {
-  const path = '/user';
+  const path = '/path/to/put/user/profile'; // 실제 API 경로로 수정 필요
   const method = 'PUT';
   const body = user;
   const authRequired = true;

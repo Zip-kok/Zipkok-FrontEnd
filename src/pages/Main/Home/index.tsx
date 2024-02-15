@@ -54,8 +54,7 @@ export default function Home() {
     ).then((res) => setMapRealEstate(res.result));
   }, [mapLocationInfo]);
 
-  const MyPageStore = useMyPageStore();
-
+  const MyPageStore = useMyPageStore((store) => store);
   useEffect(() => {
     if (MyPageStore.realEstateType) {
       setFilterSet(true);

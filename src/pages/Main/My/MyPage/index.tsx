@@ -24,7 +24,7 @@ const Mypage = () => {
   const ui = useUIStore();
   const modal = useModal();
 
-  const MyPageStore = useMyPageStore();
+  const MyPageStore = useMyPageStore((store) => store);
 
   useEffect(() => {
     ui.setUI((state) => ({

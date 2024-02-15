@@ -54,7 +54,7 @@ export default function Filter(props: FilterProps) {
   );
 
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  const MyPageStore = useMyPageStore();
+  const MyPageStore = useMyPageStore((store) => store);
 
   const handelSaveBtnClick = () => {
     if (houseType === undefined || priceType === undefined) return;

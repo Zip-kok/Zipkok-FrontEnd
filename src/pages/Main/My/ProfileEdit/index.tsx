@@ -31,7 +31,7 @@ const ProfileEdit = () => {
   const ui = useUIStore();
   const [profileEditInfo, setProfileEditInfo] = useState<ProfileEditInfo>();
 
-  const MyPageStore = useMyPageStore();
+  const MyPageStore = useMyPageStore((store) => store);
   const modal = useModal();
 
   useEffect(() => {
@@ -110,25 +110,54 @@ const ProfileEdit = () => {
 
   const handleConfirmClick = async () => {
     try {
+      const baseData = {
+        nickname: MyPageStore.nickname || '',
+        birthday: MyPageStore.birthday || '',
+        gender: MyPageStore.gender as Gender,
+        realEstateType: MyPageStore.realEstateType as HouseType,
+        address: MyPageStore.address?.address_name || '',
+        latitude: MyPageStore.address?.y || 0,
+        longitude: MyPageStore.address?.x || 0,
+        transactionType: MyPageStore.transactionType as PriceType,
+      };
+      const priceData =
+        priceType === '월세'
+          ? {
+              mpriceMin: priceRanges[1][0],
+              mpriceMax: priceRanges[1][1],
+              mdepositMin: priceRanges[0][0],
+              mdepositMax: priceRanges[0][1],
+              ydepositMin: 0,
+              ydepositMax: 0,
+              purchaseMin: 0,
+              purchaseMax: 0,
+            }
+          : priceType === '전세'
+            ? {
+                mpriceMin: 0,
+                mpriceMax: 0,
+                mdepositMin: 0,
+                mdepositMax: 0,
+                ydepositMin: priceRanges[0][0],
+                ydepositMax: priceRanges[0][1],
+                purchaseMin: 0,
+                purchaseMax: 0,
+              }
+            : {
+                mpriceMin: 0,
+                mpriceMax: 0,
+                mdepositMin: 0,
+                mdepositMax: 0,
+                ydepositMin: 0,
+                ydepositMax: 0,
+                purchaseMin: priceRanges[0][0],
+                purchaseMax: priceRanges[0][1],
+              };
       const response = await putUser({
         file: imgSrc,
         data: {
-          nickname: MyPageStore.nickname || '',
-          birthday: MyPageStore.birthday || '',
-          gender: MyPageStore.gender as Gender,
-          realEstateType: MyPageStore.realEstateType as HouseType,
-          address: MyPageStore.address?.address_name || '',
-          latitude: MyPageStore.address?.y || 0,
-          longitude: MyPageStore.address?.x || 0,
-          transactionType: MyPageStore.transactionType as PriceType,
-          mpriceMin: priceRanges[1][0],
-          mpriceMax: priceRanges[1][1],
-          mdepositMin: priceRanges[0][0],
-          mdepositMax: priceRanges[0][1],
-          ydepositMin: priceRanges[0][0],
-          ydepositMax: priceRanges[0][1],
-          purchaseMin: priceRanges[0][0],
-          purchaseMax: priceRanges[0][1],
+          ...baseData,
+          ...priceData,
         },
       });
 
@@ -274,7 +303,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>희망 거주지역</p>
           <TextInput
-            defaultValue={MyPageStore.address?.address_name}
+            defaultValue={address.address_name}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('/my/profileEdit/locationEdit')}

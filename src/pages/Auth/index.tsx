@@ -3,8 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import { kakaoLogin } from 'apis';
+import { getUserDetail } from 'apis';
 import useEmailStore from 'contexts/emailStore';
 import useModal from 'contexts/modalStore';
+import useMyPageStore from 'contexts/useMyPageStore';
+import { Gender } from 'pages/SignIn';
+import { Address } from 'types/Address';
 import storeToken from 'utils/storeToken';
 
 export default function Auth() {
@@ -12,6 +16,7 @@ export default function Auth() {
   const navigate = useNavigate();
   const modal = useModal();
   const setEmail = useEmailStore((store) => store.setEmail);
+  const MyPageStore = useMyPageStore((store) => store);
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
@@ -37,6 +42,16 @@ export default function Auth() {
               expiresIn,
               refreshTokenExpiresIn,
             );
+            getUserDetail().then((res) => {
+              MyPageStore.setImageUrl(res.result.imageURL);
+              MyPageStore.setNickname(res.result.nickname);
+              MyPageStore.setBirthday(res.result.birthday);
+              MyPageStore.setGender(res.result.gender as Gender);
+              //api 수정필요
+              MyPageStore.setAddress(res.result.address);
+              MyPageStore.setRealEstateType(res.result.realEstateType);
+              MyPageStore.setTransactionType(res.result.transactionType);
+            });
             navigate('/');
           }
 
