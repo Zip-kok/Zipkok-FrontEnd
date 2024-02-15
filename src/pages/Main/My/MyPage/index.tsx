@@ -137,9 +137,10 @@ const Mypage = () => {
     if (res !== 'primary') return;
 
     deleteUser().then((res) => {
-      logout();
-      if (res.code === 5030) navigate('/login');
-      else
+      if (res.code === 5030) {
+        navigate('/login');
+        logout();
+      } else
         modal.open({
           title: '회원탈퇴 실패',
           description: res.message,
