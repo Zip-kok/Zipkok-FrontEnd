@@ -5,6 +5,7 @@ import { getUserKokList } from 'apis';
 import checkIcon from 'assets/img/line(2)/check.svg';
 import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen_white.svg';
 import { BottomBtn, PropertyItem } from 'components';
+import useCustomKokStore from 'contexts/customKokStore';
 import useUIStore from 'contexts/uiStore';
 import properties from 'models/properties';
 
@@ -12,6 +13,8 @@ import styles from './Kok.module.css';
 
 export default function Koklist() {
   const ui = useUIStore();
+  const customKokStore = useCustomKokStore();
+
   useEffect(() => {
     getUserKokList(1, 1).then((res) => {
       console.log(res);
@@ -33,6 +36,23 @@ export default function Koklist() {
   };
 
   const handlePropertyClick = (propertyId: number) => {
+    customKokStore.setAddress({
+      address_name: '',
+      x: 0,
+      y: 0,
+    });
+    customKokStore.setMemo();
+    customKokStore.setDeposit();
+    customKokStore.setMonthlyPrice();
+    customKokStore.setPrice();
+    customKokStore.setMaintanenceFee();
+    customKokStore.setDetailAddress();
+    customKokStore.setArea();
+    customKokStore.setFloor();
+    customKokStore.setHouseType('원룸');
+    customKokStore.setPriceType('월세');
+    customKokStore.setNickName();
+
     navigate(`./kokItem/${propertyId}`);
   };
 
