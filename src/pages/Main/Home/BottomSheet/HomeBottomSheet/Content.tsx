@@ -12,8 +12,6 @@ interface ContentProps {
 
 export default function Content({ realEstateInfoList }: ContentProps) {
   const navigate = useNavigate();
-
-  // 해당 매물로 가는 함수, 구현 아직
   const handlePropertyClick = (realEstateId: number) => {
     navigate(`./item/${realEstateId}`);
   };

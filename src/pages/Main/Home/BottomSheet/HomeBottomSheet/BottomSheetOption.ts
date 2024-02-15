@@ -3,5 +3,5 @@
 // BOTTOM_SHEET_HEIGHT : 바텀시트 높이
 
 export const MIN_Y = 125;
-export const MAX_Y = window.innerHeight - 165;
+export const MAX_Y = window.innerHeight - 80;
 export const BOTTOM_SHEET_HEIGHT = window.innerHeight - MIN_Y;

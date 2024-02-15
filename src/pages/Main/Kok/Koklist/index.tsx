@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getUserKokList } from 'apis';
+import { UserKokList } from 'apis/getUserKokList';
 import checkIcon from 'assets/img/line(2)/check.svg';
 import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen_white.svg';
 import { BottomBtn, PropertyItem } from 'components';
@@ -9,12 +10,15 @@ import useUIStore from 'contexts/uiStore';
 import properties from 'models/properties';
 
 import styles from './Kok.module.css';
+import { realEstateInfo } from '../../Home/KakaoMap/index';
 
 export default function Koklist() {
   const ui = useUIStore();
+  const [propertyList, setPropertyList] = useState<UserKokList>();
   useEffect(() => {
     getUserKokList(1, 1).then((res) => {
       console.log(res);
+      setPropertyList(res.result);
     });
     ui.setUI((state) => ({
       ...state,
@@ -32,29 +36,30 @@ export default function Koklist() {
     navigate('./');
   };
 
-  const handlePropertyClick = (propertyId: number) => {
-    navigate(`./kokItem/${propertyId}`);
+  const handlePropertyClick = (kokId: number) => {
+    navigate(`./kokItem/${kokId}`);
   };
 
   return (
     <div className={styles.root}>
       <div className={styles.propertyContainer}>
-        {properties.map((property) => (
-          <PropertyItem
-            key={property.id}
-            id={property.id}
-            like={property.like}
-            type={property.type}
-            priceType={property.priceType}
-            price={property.price}
-            deposit={property.deposit}
-            address={property.address}
-            propertyName={property.propertyName}
-            imageUrl={property.imageUrl}
-            kokList={property.kokList}
-            onClick={() => handlePropertyClick(property.id)}
-          />
-        ))}
+        {propertyList &&
+          propertyList.koks.map((property: any) => (
+            <PropertyItem
+              key={property.kokId}
+              id={property.kokId}
+              like={property.isZimmed}
+              type={property.realEstateType}
+              priceType={property.transactionType}
+              price={property.price}
+              deposit={property.deposit}
+              address={property.address}
+              propertyName={property.estateAgent}
+              imageUrl={property.imageUrl}
+              kokList={true}
+              onClick={() => handlePropertyClick(property.kokId)}
+            />
+          ))}
       </div>
 
       <BottomBtn
