@@ -18,22 +18,26 @@ export default function Content({ realEstateInfoList }: ContentProps) {
   return (
     <div className={styles.root}>
       <div className={styles.propertyContainer}>
-        {realEstateInfoList?.map((property) => (
-          <PropertyItem
-            key={property.realEstateId}
-            id={property.realEstateId}
-            like={property.isZimmed}
-            type={property.realEstateType}
-            priceType={property.transactionType}
-            price={property.price}
-            deposit={property.deposit}
-            address={property.address}
-            propertyName={property.agent}
-            imageUrl={property.imageURL}
-            kokList={property.isKokked}
-            onClick={() => handlePropertyClick(property.realEstateId)}
-          />
-        ))}
+        {realEstateInfoList && realEstateInfoList.length > 0 ? (
+          realEstateInfoList.map((property) => (
+            <PropertyItem
+              key={property.realEstateId}
+              id={property.realEstateId}
+              like={property.isZimmed}
+              type={property.realEstateType}
+              priceType={property.transactionType}
+              price={property.price}
+              deposit={property.deposit}
+              address={property.address}
+              propertyName={property.agent}
+              imageUrl={property.imageURL}
+              kokList={property.isKokked}
+              onClick={() => handlePropertyClick(property.realEstateId)}
+            />
+          ))
+        ) : (
+          <div className={styles.error}>해당 지역에는 매물이 없습니다.</div>
+        )}
       </div>
     </div>
   );
