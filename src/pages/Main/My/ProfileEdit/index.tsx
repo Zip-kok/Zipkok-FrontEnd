@@ -51,9 +51,9 @@ const ProfileEdit = () => {
 
   // 성별 라디오 버튼
   const genderOptions: { value: Gender; content: string }[] = [
-    { value: '남자', content: '남' },
-    { value: '여자', content: '여' },
-    { value: '비공개', content: '비공개' },
+    { value: 'MALE', content: '남' },
+    { value: 'FEMALE', content: '여' },
+    { value: 'DISCLOSURE', content: '비공개' },
   ];
   const [GenderRadioBtnContainer, gender] = useRadioBtn<Gender>(
     genderOptions,

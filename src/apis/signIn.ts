@@ -23,26 +23,13 @@ export async function signIn(
   gender: Gender,
   birth: Date,
 ) {
-  let convertedGender = '';
-  switch (gender) {
-    case '남자':
-      convertedGender = 'MALE';
-      break;
-    case '여자':
-      convertedGender = 'FEMALE';
-      break;
-    case '비공개':
-      convertedGender = 'UNDISCLOSED';
-      break;
-  }
-
   const path = '/user';
   const method = 'POST';
   const body = {
     nickname,
     oauthProvider,
     email,
-    gender: convertedGender,
+    gender,
     birthday: birth.toISOString().slice(2, 10).replace(/-/g, ''),
   };
   const authRequired = false;

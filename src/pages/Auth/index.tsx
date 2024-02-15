@@ -46,7 +46,7 @@ export default function Auth() {
               MyPageStore.setImageUrl(res.result.imageURL);
               MyPageStore.setNickname(res.result.nickname);
               MyPageStore.setBirthday(res.result.birthday);
-              MyPageStore.setGender(res.result.gender as Gender);
+              MyPageStore.setGender(res.result.gender);
               //api 수정필요
               MyPageStore.setAddress(res.result.address);
               MyPageStore.setRealEstateType(res.result.realEstateType);
