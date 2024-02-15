@@ -3,6 +3,7 @@ import { url } from 'constants/api';
 import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
+import { deletePin } from './deletePin';
 import { deleteZim } from './deleteZim';
 import { getKokContract } from './getKokContract';
 import { getKokDetail } from './getKokDetail';
@@ -11,6 +12,7 @@ import { getKokOuter } from './getKokOuter';
 import { getKokReview } from './getKokReview';
 import { getMapRealEstate } from './getMapRealEstate';
 import { getMyPageInfo } from './getMyPageInfo';
+import { getPin } from './getPin';
 import { getProfileEditInfo } from './getProfileEditInfo';
 import { getRealEstateInfo } from './getRealEstateInfo';
 import { getUserDetail } from './getUserDetail';
@@ -19,6 +21,8 @@ import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
+import { patchPin } from './patchPin';
+import { postPin } from './postPin';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
@@ -26,6 +30,7 @@ import { signIn } from './signIn';
 import { zim } from './zim';
 
 export {
+  deletePin,
   searchAddress,
   signIn,
   kakaoLogin,
@@ -46,6 +51,9 @@ export {
   logout,
   getUserKokOption,
   putUserKokOption,
+  getPin,
+  postPin,
+  patchPin,
   getRealEstateInfo,
 };
 
@@ -84,7 +92,7 @@ export default async function api<T>(
     : {};
 
   const contentTypeHeader =
-    method === 'GET'
+    method !== 'GET'
       ? {
           'Content-Type': 'application/json',
         }

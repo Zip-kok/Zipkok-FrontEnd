@@ -1,0 +1,83 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.newPinBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 32px;
+}
+
+.newPinBtn > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.newPinBtnLabel {
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.018px;
+}
+
+.pinContainer {
+  display: flex;
+  margin-top: 24px;
+}
+
+.pin {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 11px 20px;
+}
+
+.pin h1 {
+  margin: 0;
+  color: var(--gray-color-gray080_text, #1b1d1f);
+
+  /* body_16_regular */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.pin h2 {
+  margin: 0;
+  color: var(--gray-color-gray030_text, #9fa4a9);
+
+  /* caption_12(16)_regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.pin button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-color-gray050_text, #4b5259);
+  text-align: center;
+
+  /* caption_12(16)_regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}

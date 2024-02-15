@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getPin } from 'apis';
 import { MapRealEstate, getMapRealEstate } from 'apis/getMapRealEstate';
-import BottomSheet from 'components/BottomSheet';
+import pinIcon from 'assets/img/pinIcon/pin.svg';
+import { PropertyItem, BottomSheet } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
 import getPriceString from 'utils/getPriceString';
@@ -10,7 +12,9 @@ import getPriceString from 'utils/getPriceString';
 import HomeBottomSheet from './BottomSheet';
 import { Filter, SearchBox } from './components';
 import styles from './Home.module.css';
-import KakaoMap from './KakaoMap';
+import KakaoMap, { realEstateInfo } from './KakaoMap';
+
+import type { Pin } from 'types/Pin';
 
 interface mapLocationInfo {
   southWestLat?: number;
@@ -22,8 +26,13 @@ interface mapLocationInfo {
 export default function Home() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterSet, setFilterSet] = useState(false);
+  const [pins, setPins] = useState<Pin[]>([]);
   const [mapRealEstate, setMapRealEstate] = useState<MapRealEstate>();
   const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
+
+  const [selectedProperty, setSelectedProperty] =
+    useState<realEstateInfo | null>(null);
+  const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
 
   const ui = useUIStore();
   useEffect(() => {
@@ -33,6 +42,8 @@ export default function Home() {
       naviEnabled: true,
       path: 'home',
     }));
+
+    getPin().then((res) => setPins(res.result as Pin[]));
   }, []);
 
   useEffect(() => {
@@ -168,12 +179,48 @@ export default function Home() {
           lng={MyPageStore.address?.x}
           mapLocationInfo={mapLocationInfo}
           setMapLocationInfo={setMapLocationInfo}
-          realEstateInfoList={mapRealEstate?.realEstateInfoList}
+          realEstatesInfo={mapRealEstate?.realEstateInfoList}
+          pins={pins}
+          selectedProprety={selectedProperty}
+          setSelectedProperty={setSelectedProperty}
+          selectedPin={selectedPin}
+          setSelectedPin={setSelectedPin}
         />
       </div>
 
       {/* 바텀 시트 */}
-      <HomeBottomSheet realEstateInfoList={mapRealEstate?.realEstateInfoList} />
+      {selectedProperty !== null && (
+        <div className={styles.selectedProperty}>
+          <PropertyItem
+            id={selectedProperty.realEstateId}
+            like={false}
+            type={selectedProperty.realEstateType}
+            priceType={selectedProperty.transactionType}
+            deposit={selectedProperty.deposit}
+            price={selectedProperty.price}
+            address={selectedProperty.address}
+            propertyName={selectedProperty.detailAddress}
+            imageUrl={selectedProperty.imageURL}
+            kokList={false}
+          />
+        </div>
+      )}
+
+      {selectedPin !== null && (
+        <div className={styles.selectedPin}>
+          <div>
+            <h1>{selectedPin.name}</h1>
+            <h2>{selectedPin.address.address_name}</h2>
+          </div>
+          <img src={pinIcon} />
+        </div>
+      )}
+
+      {selectedProperty === null && selectedPin === null && (
+        <HomeBottomSheet
+          realEstateInfoList={mapRealEstate?.realEstateInfoList}
+        />
+      )}
     </div>
   );
 }

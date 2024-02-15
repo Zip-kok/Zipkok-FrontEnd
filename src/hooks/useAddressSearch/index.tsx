@@ -12,13 +12,19 @@ import type { TextInputProps } from 'components/TextInput';
 
 export default function useAddressSearch(
   handleAddressClick: (address: Address) => void,
-  defaultAddress = '',
+  defaultAddress?: Address,
 ) {
-  const [inputValue, setInputValue] = useState<string>(defaultAddress);
-  const [query, setQuery] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(
+    defaultAddress?.address_name ?? '',
+  );
+  const [query, setQuery] = useState<string>(
+    defaultAddress?.address_name ?? '',
+  );
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
-  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [addresses, setAddresses] = useState<Address[]>(
+    defaultAddress ? [defaultAddress] : [],
+  );
   const [addressCount, setAddressCount] = useState(0);
 
   async function loadMoreAddresses() {
@@ -70,17 +76,21 @@ export default function useAddressSearch(
     }
   }
 
-  const AddressSeachInput = useCallback(
-    ({ defaultValue: defaultAddress, ...props }: TextInputProps) => {
-      function handleChange(e: React.FormEvent<HTMLInputElement>) {
-        setInputValue(e.currentTarget.value);
-        props.onChange?.(e);
-      }
+  const AddressSeachInput = useCallback(({ ...props }: TextInputProps) => {
+    function handleChange(e: React.FormEvent<HTMLInputElement>) {
+      setInputValue(e.currentTarget.value);
+      props.onChange?.(e);
+    }
 
-      return <TextInput {...props} onChange={handleChange} />;
-    },
-    [],
-  );
+    return (
+      <TextInput
+        {...props}
+        defaultValue={defaultAddress?.address_name ?? ''}
+        value={undefined}
+        onChange={handleChange}
+      />
+    );
+  }, []);
 
   const AddressSearchResult = () => (
     <>

@@ -1,33 +1,34 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
+import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn } from 'components';
 import useAddressSearch from 'hooks/useAddressSearch';
-import { Address } from 'types/Address';
 
-import styles from './AddressSearchPage.module.css';
+import styles from './Address.module.css';
 
-interface AddressSearchPageProps {
+import type { Address } from 'types/Address';
+
+interface AddressProps {
   confirmLocation: (location: Address) => void;
-  skippable?: boolean;
-  onSkip?: () => void;
+  showMap: () => void;
   defaultAddress?: Address;
 }
 
-export default function AddressSearchPage({
+export default function Address({
   confirmLocation,
-  skippable = true,
-  onSkip = () => navigate('/'),
+  showMap,
   defaultAddress,
-}: AddressSearchPageProps) {
+}: AddressProps) {
   const [, addressCount, AddressSeachInput, AddressSearchResult, handleSubmit] =
     useAddressSearch(handleAddressClick, defaultAddress);
 
   const [inputValue, setInputValue] = useState<string>(
     defaultAddress?.address_name ?? '',
   );
-  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(
+    defaultAddress ?? null,
+  );
 
   function handleInputChange(e: React.FormEvent<HTMLInputElement>) {
     setSelectedAddress(null);
@@ -39,34 +40,25 @@ export default function AddressSearchPage({
     setSelectedAddress(address);
   }
 
-  const navigate = useNavigate();
-
   return (
     <div className={styles.root}>
-      <div className={styles.header}>
-        <h1>
-          희망 거주 지역을
-          <br />
-          알려주세요.
-        </h1>
-      </div>
-
       <div className={styles.inputContainer}>
         <AddressSeachInput
           placeholder="도로명, 지번 검색"
-          value={inputValue}
           icon={searchIcon}
           onChange={handleInputChange}
           onSubmit={handleSubmit}
-          caption={
-            addressCount > 0
-              ? `${addressCount.toLocaleString()}건의 검색 결과`
-              : undefined
-          }
         />
+        <button className={`imgBtn ${styles.mapBtn}`} onClick={showMap}>
+          <img src={mapIcon} />
+          <span>지도에서 위치 보기</span>
+        </button>
       </div>
 
-      <AddressSearchResult />
+      <div className={styles.addressContainer}>
+        <AddressSearchResult />
+      </div>
+
       {(selectedAddress !== null || addressCount === 0) && (
         <BottomBtn
           onClick={() => {
@@ -74,10 +66,7 @@ export default function AddressSearchPage({
             else handleSubmit();
           }}
           text="확인"
-          onAnchorClick={onSkip}
-          anchorText={skippable ? '나중에 설정하기' : undefined}
           disabled={inputValue === ''}
-          occupySpace
         />
       )}
     </div>

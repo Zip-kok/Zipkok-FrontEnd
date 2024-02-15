@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
-import { MapMarker } from 'react-kakao-maps-sdk';
+import { useEffect, useState } from 'react';
+
+import floating from 'assets/img/pinIcon/floating.svg';
+import selectedFloating from 'assets/img/pinIcon/floating_selected.svg';
+import pinIcon from 'assets/img/pinIcon/pin.svg';
+import position from 'assets/img/pinIcon/positon.svg';
+import spot from 'assets/img/pinIcon/spot.svg';
 
 import styles from './KakaoMap.module.css';
-import floating from '../../../../assets/img/pinIcon/floating.svg';
-import position from '../../../../assets/img/pinIcon/positon.svg';
-import spot from '../../../../assets/img/pinIcon/spot.svg';
+
+import type { Pin } from 'types/Pin';
+
 declare global {
   interface Window {
     kakao: any;
@@ -17,7 +22,7 @@ interface mapLocationInfo {
   northEastLon?: number;
 }
 
-export interface realEstateInfoList {
+export interface realEstateInfo {
   realEstateId: number;
   imageURL: string;
   deposit: number;
@@ -37,7 +42,14 @@ interface KakaoMapProps {
   lng?: number;
   mapLocationInfo: mapLocationInfo;
   setMapLocationInfo: React.Dispatch<React.SetStateAction<mapLocationInfo>>;
-  realEstateInfoList?: realEstateInfoList[];
+  realEstatesInfo?: realEstateInfo[];
+  pins?: Pin[];
+  selectedProprety: realEstateInfo | null;
+  setSelectedProperty: React.Dispatch<
+    React.SetStateAction<realEstateInfo | null>
+  >;
+  selectedPin: Pin | null;
+  setSelectedPin: React.Dispatch<React.SetStateAction<Pin | null>>;
 }
 
 const KakaoMap = ({
@@ -45,11 +57,18 @@ const KakaoMap = ({
   lng,
   mapLocationInfo,
   setMapLocationInfo,
-  realEstateInfoList,
+  realEstatesInfo,
+  pins,
+  selectedProprety,
+  setSelectedProperty,
+  selectedPin,
+  setSelectedPin,
 }: KakaoMapProps) => {
   const [map, setMap] = useState<any>();
+  const [showPins, setShowPins] = useState(false);
   const [coord, setCoord] = useState<[number, number]>();
-  const [markers, setMarkers] = useState<any[]>([]);
+  const [estateMakers, setEstateMarkers] = useState<any[]>([]);
+  const [pinMarkers, setPinMarkers] = useState<any[]>([]);
 
   // coord가 변경될 때마다 지도의 중심을 변경
   useEffect(() => {
@@ -102,81 +121,147 @@ const KakaoMap = ({
     setCoord([latitude, longitude]);
   };
 
+  // 4) 지도 이벤트 리스너 추가
   useEffect(() => {
     if (map === undefined) return;
 
-    const boundsChangedListener = () => {
-      //마커 띄우기
-      if (realEstateInfoList === undefined) return;
-      // 이전에 생성된 마커 제거
-      markers.forEach((marker) => {
-        marker.setMap(null);
-      });
-      // 이전 마커 배열 초기화
-      setMarkers([]);
-
-      const imageSrc = spot;
-      // 새로 생성된 마커를 추적하기 위한 배열
-      const newMarkers: any[] = [];
-
-      for (let i = 0; i < realEstateInfoList.length; i++) {
-        const { latitude, longitude } = realEstateInfoList[i];
-        const position = new window.kakao.maps.LatLng(longitude, latitude);
-        const imageSize = new window.kakao.maps.Size(24, 35);
-        const markerImage = new window.kakao.maps.MarkerImage(
-          imageSrc,
-          imageSize,
-        );
-        // 마커를 생성하고 추적 배열에 추가
-        const marker = new window.kakao.maps.Marker({
-          map: map,
-          position: position,
-          title: '위치',
-          image: markerImage,
-        });
-        newMarkers.push(marker);
-      }
-      // 새로 생성된 마커 배열 업데이트
-      setMarkers(newMarkers);
-    };
-
-    // bounds_changed 이벤트에 대한 이벤트 리스너 추가
-    window.kakao.maps.event.addListener(
-      map,
-      'bounds_changed',
-      boundsChangedListener,
-    );
-    window.kakao.maps.event.addListener(map, 'idle', function () {
-      //현재 맵의 두 좌표 등록
+    const handleIdle = () => {
+      // bounds 정보 업데이트
       const bounds = map.getBounds();
       const southWestLat = bounds.ha;
       const southWestLon = bounds.qa;
       const northEastLat = bounds.oa;
       const northEastLon = bounds.pa;
+
       setMapLocationInfo({
         southWestLon,
         southWestLat,
         northEastLon,
         northEastLat,
       });
-    });
+
+      // 마커 업데이트
+      const markerImage = new window.kakao.maps.MarkerImage(
+        spot,
+        new window.kakao.maps.Size(24, 35),
+      );
+
+      setEstateMarkers((prev) => {
+        prev.forEach((marker) => marker.setMap(null));
+
+        return (
+          realEstatesInfo?.map((realEstateInfo) => {
+            const position = new window.kakao.maps.LatLng(
+              realEstateInfo.longitude,
+              realEstateInfo.latitude,
+            );
+            const marker = new window.kakao.maps.Marker({
+              opacity:
+                !selectedProprety ||
+                selectedProprety?.realEstateId === realEstateInfo.realEstateId
+                  ? 1
+                  : 0.5,
+              title: realEstateInfo.realEstateId.toString(),
+              map: map,
+              position: position,
+              image: markerImage,
+            });
+            window.kakao.maps.event.addListener(marker, 'click', () => {
+              setSelectedPin(null);
+              setSelectedProperty(realEstateInfo);
+            });
+            return marker;
+          }) ?? []
+        );
+      });
+    };
+
+    const handleClick = () => {
+      setSelectedProperty(null);
+      setSelectedPin(null);
+    };
+
+    window.kakao.maps.event.addListener(map, 'idle', handleIdle);
+    window.kakao.maps.event.addListener(map, 'click', handleClick);
 
     // 컴포넌트가 언마운트되면 이벤트 리스너 제거
     return () => {
-      window.kakao.maps.event.removeListener(
-        map,
-        'bounds_changed',
-        boundsChangedListener,
-      );
+      window.kakao.maps.event.removeListener(map, 'idle', handleIdle);
+      window.kakao.maps.event.removeListener(map, 'click', handleClick);
     };
-  }, [map, realEstateInfoList, markers]);
+  }, [map, realEstatesInfo]);
+
+  // 5) 핀 마커 추가
+  useEffect(() => {
+    if (map === undefined) return;
+    if (!showPins) {
+      pinMarkers.forEach((marker) => {
+        marker.setMap(null);
+      });
+      return;
+    }
+
+    const pinImage = new window.kakao.maps.MarkerImage(
+      pinIcon,
+      new window.kakao.maps.Size(48, 48),
+    );
+
+    setPinMarkers(
+      pins?.map((pin) => {
+        const position = new window.kakao.maps.LatLng(
+          pin.address.x,
+          pin.address.y,
+        );
+        const marker = new window.kakao.maps.Marker({
+          opacity: !selectedPin || selectedPin?.id === pin.id ? 1 : 0.5,
+          title: pin.id.toString(),
+          map: map,
+          position: position,
+          image: pinImage,
+        });
+        window.kakao.maps.event.addListener(marker, 'click', () => {
+          setSelectedProperty(null);
+          setSelectedPin(pin);
+        });
+        return marker;
+      }) ?? [],
+    );
+
+    return () =>
+      pinMarkers.forEach((marker) => {
+        marker.setMap(null);
+      });
+  }, [map, showPins, pins]);
+
+  useEffect(() => {
+    if (map === undefined) return;
+
+    estateMakers.forEach((marker) => {
+      if (
+        !selectedProprety ||
+        marker.getTitle() === selectedProprety?.realEstateId.toString()
+      )
+        marker.setOpacity(1);
+      else marker.setOpacity(0.5);
+    });
+
+    pinMarkers.forEach((marker) => {
+      if (!selectedPin || marker.getTitle() === selectedPin?.id.toString())
+        marker.setOpacity(1);
+      else marker.setOpacity(0.5);
+    });
+  }, [map, selectedProprety, selectedPin]);
 
   return (
     <div className={styles.root}>
       <div className={styles.map} id="map"></div>
       <div className={styles.BtnCtn}>
-        <img src={floating} />
-        <img src={position} onClick={getCurrentPosBtn} />
+        <button className="imgBtn" onClick={() => setShowPins((prev) => !prev)}>
+          <img src={showPins ? selectedFloating : floating} />
+        </button>
+        <button className="imgBtn" onClick={getCurrentPosBtn}>
+          <img src={position} />
+        </button>
       </div>
     </div>
   );
