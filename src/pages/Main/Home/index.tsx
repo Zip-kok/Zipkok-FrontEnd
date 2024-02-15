@@ -25,7 +25,7 @@ export default function Home() {
     }));
   }, []);
 
-  const MyPageStore = useMyPageStore();
+  const MyPageStore = useMyPageStore((store) => store);
   useEffect(() => {
     if (MyPageStore.realEstateType) {
       setFilterSet(true);

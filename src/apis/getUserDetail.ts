@@ -1,3 +1,5 @@
+import { Address } from 'types/Address';
+
 import api from './';
 
 import type { HouseType } from 'types/HouseType';
@@ -9,7 +11,7 @@ export interface UserDetail {
   nickname: string;
   birthday: string;
   gender: string;
-  address: string;
+  address: Address;
   realEstateType: HouseType;
   transactionType: PriceType;
   mpriceMin: number;

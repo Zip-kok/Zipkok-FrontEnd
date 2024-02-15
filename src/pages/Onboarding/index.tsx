@@ -23,7 +23,7 @@ export type PriceRange = [number, number];
 export default function Onboarding() {
   const navigate = useNavigate();
   const modal = useModal();
-  const MyPageStore = useMyPageStore();
+  const MyPageStore = useMyPageStore((store) => store);
 
   function handleSkip() {
     modal

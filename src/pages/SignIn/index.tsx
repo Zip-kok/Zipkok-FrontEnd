@@ -23,15 +23,14 @@ export default function SignIn() {
   const modal = useModal();
 
   const email = useEmailStore((store) => store.email);
-  const { nickname, gender, birthday, setNickname, setGender, setBirthday } =
-    useMyPageStore();
+  const MyPageStore = useMyPageStore((store) => store);
 
   const steps: Record<Step, JSX.Element> = {
     // nickname
     nickname: (
       <NickName
         onConfirm={(nickname: string) => {
-          setNickname(nickname);
+          MyPageStore.setNickname(nickname);
           setStep('gender');
         }}
       />
@@ -41,7 +40,7 @@ export default function SignIn() {
     gender: (
       <Gender
         onConfirm={(gender: Gender) => {
-          setGender(gender);
+          MyPageStore.setGender(gender);
           setStep('birth');
         }}
       />
@@ -51,8 +50,12 @@ export default function SignIn() {
     birth: (
       <Birth
         onConfirm={(birth: Date) => {
-          setBirthday(birth.toString());
-          handleFinalSubmit(nickname as string, gender as Gender, birth);
+          MyPageStore.setBirthday(birth.toString());
+          handleFinalSubmit(
+            MyPageStore.nickname as string,
+            MyPageStore.gender as Gender,
+            birth,
+          );
         }}
       />
     ),
