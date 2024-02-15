@@ -4,15 +4,15 @@ import styles from './StaticMap.module.css';
 import spotPin from '../../assets/img/pinIcon/spotPin.svg';
 
 interface StaticMapProps {
-  lat: number;
-  lng: number;
+  lat?: number;
+  lng?: number;
 }
 
 const StaticMap: React.FC<StaticMapProps> = ({ lat, lng }) => {
   useEffect(() => {
     kakao.maps.load(() => {
       const mapContainer = document.getElementById('staticMap') as HTMLElement;
-
+      if (lat === undefined || lng === undefined) return;
       const mapOption = {
         center: new kakao.maps.LatLng(lat, lng),
         level: 3,

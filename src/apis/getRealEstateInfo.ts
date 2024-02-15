@@ -2,7 +2,7 @@ import api from './';
 
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
-interface GetRealEstateInfoResult {
+export interface GetRealEstateInfoResult {
   realEstateId: number;
   imageInfo: {
     imageNumber: number;
@@ -18,7 +18,7 @@ interface GetRealEstateInfoResult {
   pyeongsu: number;
   realEstateType: string;
   floorNum: number;
-  adminstrativeFee: number;
+  administrativeFee: number;
   latitude: number;
   longitude: number;
   isZimmed: boolean;

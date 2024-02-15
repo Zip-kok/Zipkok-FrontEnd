@@ -10,7 +10,7 @@ const HomeRoute = {
       element: <Home />,
     },
     { path: 'search', element: <Search /> },
-    { path: 'item', element: <Item /> },
+    { path: 'item/:realEstateId', element: <Item /> },
   ],
 };
 

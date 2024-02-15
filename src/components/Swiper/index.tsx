@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 interface SwiperComProps {
-  imageUrls: string[];
+  imageUrls?: string[];
   onClick?: () => void;
 }
 const SwiperCom: React.FC<SwiperComProps> = ({ imageUrls, onClick }) => {
@@ -22,7 +22,7 @@ const SwiperCom: React.FC<SwiperComProps> = ({ imageUrls, onClick }) => {
       className={styles.swiper}
       loop={true}
     >
-      {imageUrls.map((item, idx) => (
+      {imageUrls?.map((item, idx) => (
         <SwiperSlide className={styles.swiperSlide} key={idx} onClick={onClick}>
           <img src={item} />
         </SwiperSlide>
