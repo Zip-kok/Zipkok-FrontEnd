@@ -17,7 +17,6 @@ export default function Location({
       confirmLocation={confirmLocation}
       skippable={true}
       onSkip={handleSkip}
-      defaultAddress=""
     />
   );
 }

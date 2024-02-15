@@ -7,7 +7,7 @@ import styles from './SwiperItem.module.css';
 import 'swiper/css';
 
 interface SwiperComProps {
-  imageUrls: string[];
+  imageUrls?: string[];
   onClick?: () => void;
 }
 const SwiperItem: React.FC<SwiperComProps> = ({ imageUrls, onClick }) => {
@@ -19,7 +19,7 @@ const SwiperItem: React.FC<SwiperComProps> = ({ imageUrls, onClick }) => {
       spaceBetween={20}
       slidesOffsetBefore={20}
     >
-      {imageUrls.map((item, idx) => (
+      {imageUrls?.map((item, idx) => (
         <SwiperSlide className={styles.swiperSlide} key={idx} onClick={onClick}>
           <img src={item} />
           <div className={styles.priceInf}>1000 / 50</div>

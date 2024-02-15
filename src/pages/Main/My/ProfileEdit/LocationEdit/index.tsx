@@ -27,7 +27,6 @@ export default function LocationEdit() {
         navigate(-1);
       }}
       skippable={false}
-      defaultAddress=""
     />
   );
 }

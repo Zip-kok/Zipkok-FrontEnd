@@ -4,20 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { PropertyItem } from 'components';
 import properties from 'models/properties';
 
-import { realEstateInfoList } from '../../KakaoMap';
+import { realEstateInfo } from '../../KakaoMap';
 import styles from '../BottomSheet.module.css';
 interface ContentProps {
-  realEstateInfoList?: realEstateInfoList[];
+  realEstateInfoList?: realEstateInfo[];
 }
 
 export default function Content({ realEstateInfoList }: ContentProps) {
   const navigate = useNavigate();
 
   // 해당 매물로 가는 함수, 구현 아직
-  const handlePropertyClick = (propertyId: number) => {
-    navigate(`./`);
+  const handlePropertyClick = (realEstateId: number) => {
+    navigate(`./item/${realEstateId}`);
   };
-  console.log(realEstateInfoList);
   return (
     <div className={styles.root}>
       <div className={styles.propertyContainer}>
