@@ -14,16 +14,17 @@ interface Bound {
 export interface Route {
   result_code: number;
   result_msg: string;
+  sections: Section[];
   summary: {
     origin: Point;
     destination: Point;
     waypoints: Point[];
     priority: string;
     bound: Bound;
+    fare: { taxi: number; toll: number };
+    distance: number;
+    duration: number;
   };
-  fare: { taxi: number; toll: number };
-  distance: number;
-  duration: number;
 }
 
 interface Section {
@@ -54,7 +55,6 @@ interface Guide {
 interface DirectionResponse {
   trans_id: string;
   routes: Route[];
-  sections: Section[];
   guides: Guide[];
 }
 

@@ -70,6 +70,7 @@ const KakaoMap = ({
   const [coord, setCoord] = useState<[number, number]>();
   const [estateMakers, setEstateMarkers] = useState<any[]>([]);
   const [pinMarkers, setPinMarkers] = useState<any[]>([]);
+  const [lines, setLines] = useState<any[]>([]);
 
   // coord가 변경될 때마다 지도의 중심을 변경
   useEffect(() => {
@@ -253,6 +254,9 @@ const KakaoMap = ({
       else marker.setOpacity(0.5);
     });
 
+    // 라인 삭제
+    lines.forEach((line) => line.setMap(null));
+
     // 길찾기
     if (selectedPin) {
       realEstatesInfo?.forEach((realEstateInfo) => {
@@ -267,7 +271,38 @@ const KakaoMap = ({
             x: realEstateInfo.latitude,
             y: realEstateInfo.longitude,
           },
-        ).then((res) => console.log(res));
+        ).then((res) => {
+          console.log(res);
+          const path: any[] = [];
+
+          res.routes[0].sections[0].roads.forEach((road) => {
+            for (let i = 0; i < road.vertexes.length; i += 2) {
+              path.push(
+                new window.kakao.maps.LatLng(
+                  road.vertexes[i + 1],
+                  road.vertexes[i],
+                ),
+              );
+            }
+          });
+          path.push(
+            new window.kakao.maps.LatLng(
+              realEstateInfo.longitude,
+              realEstateInfo.latitude,
+            ),
+          );
+
+          const polyline = new window.kakao.maps.Polyline({
+            map: map,
+            path: path,
+            strokeWeight: 4,
+            strokeColor: '#FA4549',
+            strokeStyle: 'solid',
+            opacity: 1,
+          });
+
+          setLines((prev) => [...prev, polyline]);
+        });
       });
     }
   }, [map, selectedProprety, selectedPin]);
