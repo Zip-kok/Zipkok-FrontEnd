@@ -92,7 +92,7 @@ export default async function api<T>(
     : {};
 
   const contentTypeHeader =
-    method === 'GET'
+    method !== 'GET'
       ? {
           'Content-Type': 'application/json',
         }
