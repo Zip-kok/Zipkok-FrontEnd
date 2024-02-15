@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { getDirection } from 'apis';
 import floating from 'assets/img/pinIcon/floating.svg';
 import selectedFloating from 'assets/img/pinIcon/floating_selected.svg';
 import pinIcon from 'assets/img/pinIcon/pin.svg';
@@ -236,6 +237,7 @@ const KakaoMap = ({
   useEffect(() => {
     if (map === undefined) return;
 
+    // 마커 투명도 업데이트
     estateMakers.forEach((marker) => {
       if (
         !selectedProprety ||
@@ -250,6 +252,24 @@ const KakaoMap = ({
         marker.setOpacity(1);
       else marker.setOpacity(0.5);
     });
+
+    // 길찾기
+    if (selectedPin) {
+      realEstatesInfo?.forEach((realEstateInfo) => {
+        getDirection(
+          {
+            name: selectedPin.name,
+            x: selectedPin.address.y,
+            y: selectedPin.address.x,
+          },
+          {
+            name: realEstateInfo.address,
+            x: realEstateInfo.latitude,
+            y: realEstateInfo.longitude,
+          },
+        ).then((res) => console.log(res));
+      });
+    }
   }, [map, selectedProprety, selectedPin]);
 
   return (

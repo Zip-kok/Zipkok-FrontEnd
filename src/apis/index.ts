@@ -5,6 +5,7 @@ import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
 import { deletePin } from './deletePin';
 import { deleteZim } from './deleteZim';
+import { getDirection } from './getDirection';
 import { getKokContract } from './getKokContract';
 import { getKokDetail } from './getKokDetail';
 import { getKokInner } from './getKokInner';
@@ -32,6 +33,7 @@ import { zim } from './zim';
 export {
   deletePin,
   searchAddress,
+  getDirection,
   signIn,
   kakaoLogin,
   refreshTokens,
