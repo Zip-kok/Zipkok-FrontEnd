@@ -106,7 +106,29 @@ export default function Home() {
         <>
           <div className={styles.bottomSheet}>
             <BottomSheet>
-              <Filter setFilterOpen={setFilterOpen} />
+              <Filter
+                setFilterOpen={setFilterOpen}
+                selectedHouseType={MyPageStore.realEstateType}
+                selectedPriceType={MyPageStore.transactionType}
+                prices={{
+                  mprice: [
+                    MyPageStore.mpriceMin ?? 0,
+                    MyPageStore.mpriceMax ?? 400_000,
+                  ],
+                  mdeposit: [
+                    MyPageStore.mdepositMin ?? 0,
+                    MyPageStore.mdepositMax ?? 60_000_000,
+                  ],
+                  ydeposit: [
+                    MyPageStore.ydepositMin ?? 0,
+                    MyPageStore.ydepositMax ?? 60_000_000,
+                  ],
+                  price: [
+                    MyPageStore.priceMin ?? 0,
+                    MyPageStore.priceMax ?? 120_000_000,
+                  ],
+                }}
+              />
             </BottomSheet>
           </div>
           <div className={styles.overlay} onClick={handleOverlayClick}></div>

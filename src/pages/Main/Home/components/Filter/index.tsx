@@ -16,10 +16,22 @@ type PriceRange = [number, number];
 
 interface FilterProps {
   setFilterOpen: (value: boolean) => void;
+  selectedHouseType?: HouseType;
+  selectedPriceType?: PriceType;
+  prices: {
+    mprice: PriceRange;
+    mdeposit: PriceRange;
+    ydeposit: PriceRange;
+    price: PriceRange;
+  };
 }
 
-export default function Filter(props: FilterProps) {
-  const { setFilterOpen } = props;
+export default function Filter({
+  setFilterOpen,
+  selectedHouseType,
+  selectedPriceType,
+  prices,
+}: FilterProps) {
   const defaultValues: Record<PriceType, PriceRange[]> = {
     월세: [
       [0, 60_000_000],
@@ -39,7 +51,7 @@ export default function Filter(props: FilterProps) {
   const [HouseTypeRadioBtnContainer, houseType] = useRadioBtn<HouseType>(
     houseTypeOptions,
     'tag',
-    '원룸',
+    selectedHouseType ?? '원룸',
   );
   // 가격 타입 라디오 버튼
   const priceTypeOptions: { value: PriceType; content: string }[] = [
@@ -50,10 +62,13 @@ export default function Filter(props: FilterProps) {
   const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
     priceTypeOptions,
     'tag',
-    '월세',
+    selectedPriceType ?? '월세',
   );
 
-  const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
+  const [priceRanges, setPriceRanges] = useState<PriceRange[]>([
+    [0, 60_000_000],
+    [0, 400_000],
+  ]);
   const MyPageStore = useMyPageStore((store) => store);
 
   const handelSaveBtnClick = () => {
@@ -129,7 +144,7 @@ export default function Filter(props: FilterProps) {
               onChange2={(rangeStart, rangeEnd) => {
                 setPriceRanges((prev) => [prev[0], [rangeStart, rangeEnd]]);
               }}
-              defaultValues={defaultValues[priceType]}
+              defaultValues={[prices.mdeposit, prices.mprice]}
             />
           )}
 
@@ -138,7 +153,7 @@ export default function Filter(props: FilterProps) {
               onChange={(rangeStart, rangeEnd) => {
                 setPriceRanges([[rangeStart, rangeEnd]]);
               }}
-              defaultValues={defaultValues[priceType]}
+              defaultValues={[prices.ydeposit]}
             />
           )}
 
@@ -147,7 +162,7 @@ export default function Filter(props: FilterProps) {
               onChange={(rangeStart, rangeEnd) => {
                 setPriceRanges([[rangeStart, rangeEnd]]);
               }}
-              defaultValues={defaultValues[priceType]}
+              defaultValues={[prices.price]}
             />
           )}
         </div>
