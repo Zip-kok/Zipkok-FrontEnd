@@ -15,7 +15,7 @@ import 'swiper/css/thumbs';
 interface modalProps {
   setModalOpen: (isOpen: boolean) => void;
   address?: string;
-  imageUrls: string[];
+  imageUrls?: string[];
   onClick?: () => void;
 }
 
@@ -49,7 +49,7 @@ const Swiper_modal: React.FC<modalProps> = ({
           spaceBetween={10}
           navigation={true}
         >
-          {imageUrls.map((item, idx) => (
+          {imageUrls?.map((item, idx) => (
             <SwiperSlide className={styles.swiperSlide} key={idx}>
               <img src={item} />
             </SwiperSlide>
@@ -65,7 +65,7 @@ const Swiper_modal: React.FC<modalProps> = ({
             freeMode={true}
             watchSlidesProgress={true}
           >
-            {imageUrls.map((item, idx) => (
+            {imageUrls?.map((item, idx) => (
               <SwiperSlide className={styles.swiperSlide} key={idx}>
                 <img src={item} />
               </SwiperSlide>

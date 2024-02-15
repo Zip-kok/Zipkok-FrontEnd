@@ -14,10 +14,9 @@ export default function Content({ realEstateInfoList }: ContentProps) {
   const navigate = useNavigate();
 
   // 해당 매물로 가는 함수, 구현 아직
-  const handlePropertyClick = (propertyId: number) => {
-    navigate(`./`);
+  const handlePropertyClick = (realEstateId: number) => {
+    navigate(`./item/${realEstateId}`);
   };
-  console.log(realEstateInfoList);
   return (
     <div className={styles.root}>
       <div className={styles.propertyContainer}>
