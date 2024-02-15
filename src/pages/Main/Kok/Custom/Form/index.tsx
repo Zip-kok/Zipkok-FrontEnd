@@ -20,15 +20,15 @@ export default function CustomProperty() {
 
   // 집 형태 라디오 버튼
   const houseTypeOptions: { value: HouseType; content: string }[] = [
-    { value: '원룸', content: '원룸' },
-    { value: '오피스텔', content: '오피스텔' },
-    { value: '아파트', content: '아파트' },
-    { value: '빌라/투룸', content: '빌라/투룸' },
+    { value: 'ONEROOM', content: '원룸' },
+    { value: 'OFFICETELL', content: '오피스텔' },
+    { value: 'APARTMENT', content: '아파트' },
+    { value: 'TWOROOM', content: '빌라/투룸' },
   ];
   const [HouseTypeRadioBtnContainer, houseType] = useRadioBtn<HouseType>(
     houseTypeOptions,
     'tag',
-    '원룸',
+    'ONEROOM',
   );
 
   // 가격 타입 라디오 버튼

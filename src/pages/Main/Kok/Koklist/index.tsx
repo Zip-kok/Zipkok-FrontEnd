@@ -49,7 +49,7 @@ export default function Koklist() {
     customKokStore.setDetailAddress();
     customKokStore.setArea();
     customKokStore.setFloor();
-    customKokStore.setHouseType('원룸');
+    customKokStore.setHouseType('ONEROOM');
     customKokStore.setPriceType('월세');
     customKokStore.setNickName();
 

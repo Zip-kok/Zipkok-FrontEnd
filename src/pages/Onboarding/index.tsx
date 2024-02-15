@@ -46,7 +46,7 @@ export default function Onboarding() {
     x: 0,
     y: 0,
   });
-  const [houseType, setHouseType] = useState<HouseType>('원룸');
+  const [houseType, setHouseType] = useState<HouseType>('ONEROOM');
   const [, setPriceType] = useState<PriceType>('월세');
   const [, setPriceRanges] = useState<PriceRange[]>([]);
 
