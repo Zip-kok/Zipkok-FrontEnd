@@ -137,6 +137,7 @@ const Mypage = () => {
     if (res !== 'primary') return;
 
     deleteUser().then((res) => {
+      logout();
       if (res.code === 5030) navigate('/login');
       else
         modal.open({
