@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
 import { deletePin } from './deletePin';
+import { deleteUser } from './deleteUser';
 import { deleteZim } from './deleteZim';
 import { getDirection } from './getDirection';
 import { getKokContract } from './getKokContract';
@@ -33,6 +34,7 @@ import { zim } from './zim';
 
 export {
   deletePin,
+  deleteUser,
   searchAddress,
   getDirection,
   signIn,

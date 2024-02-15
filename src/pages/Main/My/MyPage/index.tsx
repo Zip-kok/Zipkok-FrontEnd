@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { deleteUser } from 'apis';
 import edit from 'assets/img/line(2)/edit.svg';
 import heart from 'assets/img/line(2)/heart.svg';
 import inquiry from 'assets/img/line(2)/inquiry.svg';
@@ -20,6 +21,7 @@ import isLoggedIn from 'utils/isLoggedIn';
 import logout from 'utils/logout';
 
 import styles from './Mypage.module.css';
+
 const Mypage = () => {
   const ui = useUIStore();
   const modal = useModal();
@@ -124,20 +126,25 @@ const Mypage = () => {
         }
       });
   };
-  const handleQuitClick = () => {
-    modal
-      .open({
-        title: '정말 탈퇴하시겠어요?',
-        description: '탈퇴하기 선택 시 계정은 삭제되며 복구되지 않습니다.',
-        primaryButton: '탈퇴하기',
-        secondaryButton: '취소',
-      })
-      .then((res) => {
-        if (res === 'primary') {
-          // TODO: 탈퇴
-          alert('탈퇴 기능은 아직 구현되지 않았습니다.');
-        }
-      });
+  const handleQuitClick = async () => {
+    const res = await modal.open({
+      title: '정말 탈퇴하시겠어요?',
+      description: '탈퇴하기 선택 시 계정은 삭제되며 복구되지 않습니다.',
+      primaryButton: '탈퇴하기',
+      secondaryButton: '취소',
+    });
+
+    if (res !== 'primary') return;
+
+    deleteUser().then((res) => {
+      if (res.code === 5030) navigate('/login');
+      else
+        modal.open({
+          title: '회원탈퇴 실패',
+          description: res.message,
+          primaryButton: '확인',
+        });
+    });
   };
 
   return (
