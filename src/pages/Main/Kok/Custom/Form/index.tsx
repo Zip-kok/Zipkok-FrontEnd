@@ -98,20 +98,23 @@ export default function CustomProperty() {
       customKokStore.setFloor(floor);
       customKokStore.setHouseType(houseType as HouseType);
       customKokStore.setPriceType(priceType as PriceType);
-
       postRealEstate(
-        customKokStore.memo as string,
-        customKokStore.priceType,
-        customKokStore.houseType,
-        customKokStore.deposit as number,
-        customKokStore.price as number,
-        customKokStore.maintanenceFee as number,
-        customKokStore.address.address_name,
-        customKokStore.detailAddress as string,
-        customKokStore.address.x,
-        customKokStore.address.y,
-        customKokStore.area as number,
-        customKokStore.floor as number,
+        memo as string,
+        priceType as string,
+        houseType as string,
+        priceType === 'MONTHLY' || 'YEARLY' ? (deposit as number) : 0,
+        priceType === 'MONTHLY'
+          ? (deposit as number)
+          : priceType === 'YEARLY'
+            ? (deposit as number)
+            : 0,
+        maintanenceFee as number,
+        address.address_name,
+        detailAddress as string,
+        address.x,
+        address.y,
+        area as number,
+        floor as number,
       ).then((res) => {
         res;
       });

@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import defaultThumbnail from 'assets/img/common/defaultThumbnail.png';
 import { SwiperCom, Swiper_modal } from 'components';
 import convertPriceTypeToString from 'utils/convertPriceTypeToString';
+import getPriceString from 'utils/getPriceString';
 
 import styles from './Header.module.css';
 
@@ -97,8 +98,8 @@ export default function Header({
           {
             {
               MONTHLY: `${deposit?.toLocaleString()} / ${monthlyPrice?.toLocaleString()}`,
-              YEARLY: `${deposit?.toLocaleString()}`,
-              PURCHASE: `${price?.toLocaleString()}`,
+              YEARLY: `${getPriceString((deposit ?? 0) * 10000)}`,
+              PURCHASE: `${getPriceString((price ?? 0) * 10000)}`,
             }[priceType]
           }
         </span>
