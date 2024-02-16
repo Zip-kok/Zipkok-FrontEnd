@@ -3,26 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { GetRealEstateInfoResult } from 'apis/getRealEstateInfo';
 import { getRealEstateInfo } from 'apis/getRealEstateInfo';
-import floor from 'assets/img/line(1)/floor.svg';
-import link from 'assets/img/line(1)/link.svg';
-import money from 'assets/img/line(1)/money.svg';
-import size from 'assets/img/line(1)/size.svg';
-import structure from 'assets/img/line(1)/structure.svg';
-import {
-  BottomBtn,
-  IconBtn,
-  IconText,
-  SwiperCom,
-  Swiper_modal,
-} from 'components';
+import { BottomBtn } from 'components';
 import Property from 'components/Property';
-import StaticMap from 'components/StaticMap/index';
-import SwiperItem from 'components/SwiperItem';
 import useUIStore from 'contexts/uiStore';
+import getPriceString from 'utils/getPriceString';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './Item.module.css';
+
 const Item = () => {
   const navigate = useNavigate();
   const { realEstateId } = useParams();
@@ -33,7 +22,7 @@ const Item = () => {
     if (realEstateId === undefined) return;
     const ItemId = parseInt(realEstateId);
     getRealEstateInfo(ItemId).then((res) => setRealEstateInfo(res.result));
-  }, []);
+  }, [realEstateId]);
 
   const handleWriteClick = () => {
     navigate('../');
@@ -60,39 +49,53 @@ const Item = () => {
             pictures={realEstateInfo.imageInfo.imageURL}
             address={{
               address_name: realEstateInfo.address,
-              x: realEstateInfo.longitude,
-              y: realEstateInfo.latitude,
+              x: realEstateInfo.latitude,
+              y: realEstateInfo.longitude,
             }}
-            detailAddress={realEstateInfo.detailAddress}
+            detailAddress={realEstateInfo.detailAddress ?? undefined}
             priceType={realEstateInfo.transactionType}
-            memo={realEstateInfo.detail}
+            memo={realEstateInfo.detail ?? undefined}
             deposit={realEstateInfo.deposit}
             monthlyPrice={realEstateInfo.price}
             price={realEstateInfo.price}
           />
 
           <Property.BasicInfo
-            area={realEstateInfo.pyeongsu}
+            area={realEstateInfo.pyeongsu ?? undefined}
             houseType={realEstateInfo.realEstateType}
-            floor={realEstateInfo.floorNum}
+            floor={realEstateInfo.floorNum ?? undefined}
             maintanenceFee={realEstateInfo.administrativeFee}
             address={{
               address_name: realEstateInfo.address,
-              x: realEstateInfo.longitude,
-              y: realEstateInfo.latitude,
+              x: realEstateInfo.latitude,
+              y: realEstateInfo.longitude,
             }}
           />
         </>
       )}
 
-      <h4>주변의 다른 매물</h4>
-      <SwiperItem
-        imageUrls={realEstateInfo?.imageInfo.imageURL}
-        onClick={() => {}}
-      ></SwiperItem>
-      <div className={styles.blank} />
-      <div className={styles.blank} />
-      <div className={styles.blank} />
+      <span className={styles.title}>주변의 다른 매물</span>
+      <div className={styles.neighborContainer}>
+        {realEstateInfo?.neighborRealEstates.map((neighbor) => (
+          <button
+            className={styles.neighbor}
+            onClick={() => {
+              navigate(`/item/${neighbor.realEstateId}`);
+              window.scrollTo(0, 0);
+            }}
+            key={neighbor.realEstateId}
+          >
+            <img src={neighbor.imageUrl} />
+            <h1>
+              {neighbor.deposit && neighbor.price
+                ? `${neighbor.deposit.toLocaleString()} / ${neighbor.price.toLocaleString()}`
+                : getPriceString(neighbor.price * 10000)}
+            </h1>
+            <h2>{neighbor.address}</h2>
+          </button>
+        ))}
+      </div>
+
       <BottomBtn text="콕리스트 기록" onClick={handleWriteClick} />
     </div>
   );

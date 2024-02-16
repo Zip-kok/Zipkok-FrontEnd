@@ -11,20 +11,27 @@ export interface GetRealEstateInfoResult {
     imageURL: string[];
   };
   address: string;
-  detailAddress: string;
+  detailAddress: string | null;
   transactionType: PriceType;
   deposit: number;
   price: number;
-  detail: string;
-  areaSize: number;
-  pyeongsu: number;
+  detail: string | null;
+  areaSize: number | null;
+  pyeongsu: number | null;
   realEstateType: HouseType;
-  floorNum: number;
+  floorNum: number | null;
   administrativeFee: number;
   latitude: number;
   longitude: number;
   isZimmed: boolean;
   isKokked: boolean;
+  neighborRealEstates: {
+    realEstateId: number;
+    address: string;
+    deposit: number;
+    imageUrl: string;
+    price: number;
+  }[];
 }
 
 /**
