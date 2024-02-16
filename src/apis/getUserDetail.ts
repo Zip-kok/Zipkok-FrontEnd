@@ -8,7 +8,7 @@ import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface UserDetail {
-  imageURL: string;
+  imageUrl: string;
   nickname: string;
   birthday: string;
   gender: Gender;

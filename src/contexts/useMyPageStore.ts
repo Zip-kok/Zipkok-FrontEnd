@@ -3,37 +3,18 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import type { Gender } from 'pages/SignIn';
-import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
+import type { UserInfo } from 'types/UserInfo';
 
-interface MyPageInfo {
-  imageUrl?: string;
-  nickname?: string;
-  birthday?: string;
-  gender?: Gender;
-  address?: Address;
-  realEstateType?: HouseType;
-  transactionType?: PriceType;
-
-  //월세
-  mpriceMin?: number;
-  mpriceMax?: number;
-  // 월세 보증금
-  mdepositMin?: number;
-  mdepositMax?: number;
-  //전세 보증금
-  ydepositMin?: number;
-  ydepositMax?: number;
-  //매매 가격
-  priceMax?: number;
-  priceMin?: number;
-
+type MyPageInfo = UserInfo & {
   setImageUrl: (imageUrl?: string) => void;
   setNickname: (nickname?: string) => void;
   setBirthday: (birthday?: string) => void;
   setGender: (birthday?: Gender) => void;
-  setAddress: (address?: Address) => void;
+  setAddress: (string?: string) => void;
+  setLongitude: (longitude?: number) => void;
+  setLatitude: (latitude?: number) => void;
   setRealEstateType: (houseType?: HouseType) => void;
   setTransactionType: (priceType?: PriceType) => void;
   setMPriceMin: (mpriceMin?: number) => void;
@@ -42,17 +23,28 @@ interface MyPageInfo {
   setMDepositMax: (mdepositMax?: number) => void;
   setYDepositMin: (ydepositMin?: number) => void;
   setYDepositMax: (ydepositMax?: number) => void;
-  setPriceMin: (priceMax?: number) => void;
-  setPriceMax: (priceMin?: number) => void;
-}
+  setPurchaseMin: (purchaseMin?: number) => void;
+  setPurchaseMax: (purchaseMax?: number) => void;
+  set: (newState: Partial<MyPageInfo>) => void;
+};
+
 const initialState: MyPageInfo = {
   imageUrl: defaultUserIcon,
   nickname: '게스트',
+  birthday: '040405',
+  gender: 'DISCLOSURE',
+  realEstateType: 'ONEROOM',
+  transactionType: 'MONTHLY',
+  address: '화양동',
+  longitude: 127.041,
+  latitude: 37.551,
   setImageUrl: () => {},
   setNickname: () => {},
   setBirthday: () => {},
   setGender: () => {},
   setAddress: () => {},
+  setLongitude: () => {},
+  setLatitude: () => {},
   setRealEstateType: () => {},
   setTransactionType: () => {},
   setMPriceMin: () => {},
@@ -61,32 +53,33 @@ const initialState: MyPageInfo = {
   setMDepositMax: () => {},
   setYDepositMin: () => {},
   setYDepositMax: () => {},
-  setPriceMin: () => {},
-  setPriceMax: () => {},
+  setPurchaseMin: () => {},
+  setPurchaseMax: () => {},
+  set: () => {},
 };
 
 const useMyPageStore = create(
-  persist(
+  persist<MyPageInfo>(
     (set) => ({
       ...initialState,
-      setImageUrl: (imageUrl: string) => set({ imageUrl }),
-      setNickname: (nickname: string) => set({ nickname }),
-      setBirthday: (birthday: string) => set({ birthday }),
-      setGender: (gender: Gender) => set({ gender }),
-      setAddress: (address: Address) => set({ address }),
-      setRealEstateType: (realEstateType: HouseType) => set({ realEstateType }),
-      setTransactionType: (transactionType: PriceType) =>
-        set({ transactionType }),
+      setImageUrl: (imageUrl) => set({ imageUrl }),
+      setNickname: (nickname) => set({ nickname }),
+      setBirthday: (birthday) => set({ birthday }),
+      setGender: (gender) => set({ gender }),
+      setAddress: (address) => set({ address }),
+      setRealEstateType: (realEstateType) => set({ realEstateType }),
+      setTransactionType: (transactionType) => set({ transactionType }),
 
-      setMPriceMin: (mpriceMin: number) => set({ mpriceMin }),
-      setMPriceMax: (mpriceMax: number) => set({ mpriceMax }),
-      setMDepositMin: (mdepositMin: number) => set({ mdepositMin }),
-      setMDepositMax: (mdepositMax: number) => set({ mdepositMax }),
-      setYDepositMin: (ydepositMin: number) => set({ ydepositMin }),
-      setYDepositMax: (ydepositMax: number) => set({ ydepositMax }),
+      setMPriceMin: (mpriceMin) => set({ mpriceMin }),
+      setMPriceMax: (mpriceMax) => set({ mpriceMax }),
+      setMDepositMin: (mdepositMin) => set({ mdepositMin }),
+      setMDepositMax: (mdepositMax) => set({ mdepositMax }),
+      setYDepositMin: (ydepositMin) => set({ ydepositMin }),
+      setYDepositMax: (ydepositMax) => set({ ydepositMax }),
+      setPurchaseMin: (purchaseMin) => set({ purchaseMin }),
+      setPurchaseMax: (purchaseMax) => set({ purchaseMax }),
 
-      setPriceMin: (priceMin: number) => set({ priceMin }),
-      setPriceMax: (priceMax: number) => set({ priceMax }),
+      set: (newState) => set(newState),
     }),
     {
       name: 'myPageStore',

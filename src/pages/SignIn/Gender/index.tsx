@@ -13,15 +13,15 @@ interface GenderProps {
 export default function Gender({ onConfirm }: GenderProps) {
   const genderOptions = [
     {
-      value: '남자' as GenderType,
+      value: 'MALE' as GenderType,
       content: '남자',
     },
     {
-      value: '여자' as GenderType,
+      value: 'FEMALE' as GenderType,
       content: '여자',
     },
     {
-      value: '비공개' as GenderType,
+      value: 'UNDISCLOSED ' as GenderType,
       content: '비공개',
     },
   ];
