@@ -15,7 +15,7 @@ export default function Root() {
   useEffect(() => {
     if (isLoggedIn()) {
       getUserDetail().then((res) => {
-        MyPageStore.setImageUrl(res.result.imageURL);
+        MyPageStore.setImageUrl(res.result.imageUrl);
         MyPageStore.setNickname(res.result.nickname);
         MyPageStore.setBirthday(res.result.birthday);
         MyPageStore.setGender(res.result.gender);

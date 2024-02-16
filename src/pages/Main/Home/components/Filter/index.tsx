@@ -34,15 +34,6 @@ export default function Filter({
   selectedPriceType,
   prices,
 }: FilterProps) {
-  const defaultValues: Record<PriceType, PriceRange[]> = {
-    MONTHLY: [
-      [0, 60_000_000],
-      [0, 400_000],
-    ],
-    YEARLY: [[0, 60_000_000]],
-    PURCHASE: [[0, 120_000_000]],
-  };
-
   // 집 형태 라디오 버튼
   const houseTypeOptions: { value: HouseType; content: string }[] = [
     { value: 'ONEROOM', content: '원룸' },

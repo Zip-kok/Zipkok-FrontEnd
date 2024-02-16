@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getProfileEditInfo } from 'apis';
-import { ProfileEditInfo } from 'apis/getProfileEditInfo';
-import { UserDetail } from 'apis/getUserDetail';
 import { putUser } from 'apis/putUser';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn } from 'components';
@@ -11,7 +8,6 @@ import useAddressStore from 'contexts/addressStore';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
-import MyPageStore from 'contexts/useMyPageStore';
 import useBirthInput from 'hooks/useBirthInput';
 import useRadioBtn from 'hooks/useRadioBtn';
 import { StatusCode } from 'types/StatusCode';
@@ -24,23 +20,74 @@ import { Gender } from '../../../SignIn';
 
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
+import type { UserInfo } from 'types/UserInfo';
+
+type UserInfoInput = Omit<UserInfo, 'imageUrl'>;
 
 type PriceRange = [number, number];
 
 const ProfileEdit = () => {
-  const [UserDetail, setUserDetail] = useState<UserDetail>();
   const ui = useUIStore();
-  const [profileEditInfo, setProfileEditInfo] = useState<ProfileEditInfo>();
-
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
   const modal = useModal();
 
-  useEffect(() => {
-    getProfileEditInfo().then((res) => setProfileEditInfo(res.result));
-    if (profileEditInfo?.imageUrl !== undefined) {
-      setImgSrc(profileEditInfo?.imageUrl);
-    }
+  const [input, setInput] = useState<UserInfoInput>({
+    ...MyPageStore,
+    imageUrl: undefined,
+  } as UserInfoInput);
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
 
+  // 가격 범위 설정
+  const [priceRanges, setPriceRanges] = useState<PriceRange[]>([
+    [0, 0],
+    [0, 0],
+  ]);
+  useEffect(() => {
+    if (input.transactionType === 'MONTHLY')
+      setInput((prev) => ({
+        ...prev,
+        mpriceMin: priceRanges[0][0],
+        mpriceMax: priceRanges[0][1],
+        mdepositMin: priceRanges[1][0],
+        mdepositMax: priceRanges[1][1],
+        ydepositMax: 0,
+        ydepositMin: 0,
+        purchaseMax: 0,
+        purchaseMin: 0,
+      }));
+    else if (input.transactionType === 'YEARLY')
+      setInput((prev) => ({
+        ...prev,
+        ydepositMin: priceRanges[0][0],
+        ydepositMax: priceRanges[0][1],
+        mpriceMax: 0,
+        mpriceMin: 0,
+        mdepositMax: 0,
+        mdepositMin: 0,
+        purchaseMax: 0,
+        purchaseMin: 0,
+      }));
+    else if (input.transactionType === 'PURCHASE')
+      setInput((prev) => ({
+        ...prev,
+        purchaseMin: priceRanges[0][0],
+        purchaseMax: priceRanges[0][1],
+        mpriceMax: 0,
+        mpriceMin: 0,
+        mdepositMax: 0,
+        mdepositMin: 0,
+        ydepositMax: 0,
+        ydepositMin: 0,
+      }));
+  }, [priceRanges]);
+  useEffect(() => {
+    setPriceRanges([
+      [input.mdepositMin, input.mdepositMax],
+      [input.mpriceMin, input.mpriceMax],
+    ] as PriceRange[]);
+  }, [input.transactionType]);
+
+  useEffect(() => {
     ui.setUI((state) => ({
       ...state,
       headerTitle: '프로필 수정하기',
@@ -59,8 +106,14 @@ const ProfileEdit = () => {
   const [GenderRadioBtnContainer, gender] = useRadioBtn<Gender>(
     genderOptions,
     'round',
-    MyPageStore.gender,
+    input.gender,
   );
+  useEffect(() => {
+    setInput((prev) => ({
+      ...prev,
+      gender,
+    }));
+  }, [gender]);
 
   // 집 형태 라디오 버튼
   const houseTypeOptions: { value: HouseType; content: string }[] = [
@@ -72,8 +125,14 @@ const ProfileEdit = () => {
   const [HouseTypeRadioBtnContainer, houseType] = useRadioBtn<HouseType>(
     houseTypeOptions,
     'tag',
-    MyPageStore.realEstateType,
+    input.realEstateType,
   );
+  useEffect(() => {
+    setInput((prev) => ({
+      ...prev,
+      realEstateType: houseType,
+    }));
+  }, [houseType]);
 
   // 가격 타입 라디오 버튼
   const priceTypeOptions: { value: PriceType; content: string }[] = [
@@ -84,16 +143,37 @@ const ProfileEdit = () => {
   const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
     priceTypeOptions,
     'tag',
-    MyPageStore.transactionType,
+    input.transactionType,
   );
+  useEffect(() => {
+    setInput((prev) => ({
+      ...prev,
+      transactionType: priceType,
+    }));
+  }, [priceType]);
 
-  const [imgSrc, setImgSrc] = useState('');
-  const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  const [BirthInput, , , birthWarningMsg] = useBirthInput();
+  // 생일 설정
+  const [BirthInput, birthday, , birthWarningMsg] = useBirthInput();
+  useEffect(() => {
+    if (birthday === undefined) return;
+    setInput((prev) => ({
+      ...prev,
+      birthday: birthday.toISOString().slice(2, 10).replace(/-/g, ''),
+    }));
+  }, [birthday]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // 주소 설정
   const address = useAddressStore((state) => state.address);
+  useEffect(() => {
+    setInput((prev) => ({
+      ...prev,
+      address: address.address_name,
+      latitude: address.y,
+      longitude: address.x,
+    }));
+  }, [address]);
 
   const defaultValues: Record<PriceType, PriceRange[]> = {
     MONTHLY: [
@@ -104,7 +184,7 @@ const ProfileEdit = () => {
       [MyPageStore.ydepositMin || 0, MyPageStore.ydepositMax || 60_000_000],
     ],
     PURCHASE: [
-      [MyPageStore.priceMin || 0, MyPageStore.priceMax || 120_000_000],
+      [MyPageStore.purchaseMin || 0, MyPageStore.purchaseMax || 120_000_000],
     ],
   };
 
@@ -112,58 +192,13 @@ const ProfileEdit = () => {
 
   const handleConfirmClick = async () => {
     try {
-      const baseData = {
-        nickname: MyPageStore.nickname || '',
-        birthday: MyPageStore.birthday || '',
-        gender: MyPageStore.gender as Gender,
-        realEstateType: MyPageStore.realEstateType as HouseType,
-        address: MyPageStore.address?.address_name || '',
-        latitude: MyPageStore.address?.y || 0,
-        longitude: MyPageStore.address?.x || 0,
-        transactionType: MyPageStore.transactionType as PriceType,
-      };
-      const priceData =
-        priceType === 'MONTHLY'
-          ? {
-              mpriceMin: priceRanges[1][0],
-              mpriceMax: priceRanges[1][1],
-              mdepositMin: priceRanges[0][0],
-              mdepositMax: priceRanges[0][1],
-              ydepositMin: 0,
-              ydepositMax: 0,
-              purchaseMin: 0,
-              purchaseMax: 0,
-            }
-          : priceType === 'YEARLY'
-            ? {
-                mpriceMin: 0,
-                mpriceMax: 0,
-                mdepositMin: 0,
-                mdepositMax: 0,
-                ydepositMin: priceRanges[0][0],
-                ydepositMax: priceRanges[0][1],
-                purchaseMin: 0,
-                purchaseMax: 0,
-              }
-            : {
-                mpriceMin: 0,
-                mpriceMax: 0,
-                mdepositMin: 0,
-                mdepositMax: 0,
-                ydepositMin: 0,
-                ydepositMax: 0,
-                purchaseMin: priceRanges[0][0],
-                purchaseMax: priceRanges[0][1],
-              };
-
-      const imgres = await fetch(imgSrc);
-      const blob = await imgres.blob();
-      const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
-      const userInfo = {
-        file: file,
-        data: { ...baseData, ...priceData },
-      };
-      const response = await putUser(file, userInfo);
+      const imgFile =
+        imageUrl === undefined
+          ? undefined
+          : new File([await (await fetch(imageUrl)).blob()], 'image.jpg', {
+              type: 'image/jpeg',
+            });
+      const response = await putUser(input, imgFile);
 
       switch (response.code) {
         case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
@@ -228,7 +263,7 @@ const ProfileEdit = () => {
       };
     });
 
-    setImgSrc(reader.result as string);
+    setImageUrl(reader.result as string);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -236,15 +271,12 @@ const ProfileEdit = () => {
       fileChange(e.target.files[0]);
     }
   };
+
   const handleImgClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-
-  useEffect(() => {
-    console.log('priceRanges', priceRanges);
-  }, [priceRanges]);
 
   return (
     <div className={styles.root}>
@@ -261,10 +293,7 @@ const ProfileEdit = () => {
             ref={fileInputRef}
           />
           <img
-            src={
-              MyPageStore.imageUrl ||
-              'https://picpac.kr/common/img/default_profile.png'
-            }
+            src={imageUrl ?? MyPageStore.imageUrl}
             onClick={handleImgClick}
           />
           <p onClick={handleImgClick}>수정하기</p>
@@ -275,7 +304,7 @@ const ProfileEdit = () => {
           <p className={styles.title}>닉네임</p>
           <TextInput
             placeholder="최대 12자"
-            defaultValue={MyPageStore.nickname}
+            defaultValue={input.nickname}
             maxLength={12}
             style="roundedBox"
             captionStyle={{
@@ -292,7 +321,7 @@ const ProfileEdit = () => {
 
           <div className={styles.birthGenderContainer}>
             <BirthInput
-              defaultValue={MyPageStore.birthday}
+              defaultValue={input.birthday}
               placeholder="6자리 숫자로 입력해주세요"
               style="roundedBox"
               caption={birthWarningMsg}
@@ -311,7 +340,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>희망 거주지역</p>
           <TextInput
-            defaultValue={address.address_name}
+            value={input.address}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('/my/profileEdit/locationEdit')}
@@ -367,8 +396,6 @@ const ProfileEdit = () => {
           </div>
         </div>
       </div>
-
-      <div className={styles.blank}></div>
 
       <BottomBtn text="수정 완료" onClick={handleConfirmClick} occupySpace />
     </div>
