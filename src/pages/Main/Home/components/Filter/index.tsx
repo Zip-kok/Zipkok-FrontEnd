@@ -112,6 +112,15 @@ export default function Filter({
       MyPageStore.setMPriceMax(undefined);
       MyPageStore.setPriceMin(undefined);
       MyPageStore.setPriceMax(undefined);
+
+      patchUserFilter(
+        priceType,
+        houseType,
+        0,
+        0,
+        depositRange[0],
+        depositRange[1],
+      ).then((res) => res);
     } else if (priceType === 'PURCHASE') {
       // 매매의 경우, 가격 범위만
       const [purchaseRange] = priceRanges;
@@ -124,6 +133,15 @@ export default function Filter({
       MyPageStore.setMDepositMax(undefined);
       MyPageStore.setMPriceMin(undefined);
       MyPageStore.setMPriceMax(undefined);
+
+      patchUserFilter(
+        priceType,
+        houseType,
+        purchaseRange[0],
+        purchaseRange[1],
+        0,
+        0,
+      ).then((res) => res);
     }
 
     // 저장하면 필터 내리기
