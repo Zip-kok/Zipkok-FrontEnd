@@ -45,7 +45,9 @@ export default function Home() {
 
   const ui = useUIStore();
   const addressStore = useAddressStore();
-
+  const handleSelectedProperty = (selectedPropertyId: number) => {
+    navigate(`./item/${selectedPropertyId}`);
+  };
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
@@ -256,6 +258,9 @@ export default function Home() {
             propertyName={selectedProperty.detailAddress}
             imageUrl={selectedProperty.imageURL}
             kokList={false}
+            onClick={() =>
+              handleSelectedProperty(selectedProperty.realEstateId)
+            }
           />
         </div>
       )}
