@@ -5,6 +5,7 @@ import { signIn } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useEmailStore from 'contexts/emailStore';
 import useModal from 'contexts/modalStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import useMyPageStore from 'contexts/useMyPageStore';
 import { StatusCode } from 'types/StatusCode';
 
@@ -21,9 +22,8 @@ export default function SignIn() {
   const [step, setStep] = useState<Step>('nickname');
   const navigate = useNavigate();
   const modal = useModal();
-
+  const MyPageStore: any = useMyPageStore();
   const email = useEmailStore((store) => store.email);
-  const MyPageStore = useMyPageStore((store) => store);
 
   const steps: Record<Step, JSX.Element> = {
     // nickname

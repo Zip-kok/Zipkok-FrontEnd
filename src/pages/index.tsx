@@ -5,12 +5,13 @@ import { getUserDetail } from 'apis';
 import { Modal } from 'contexts/modalStore';
 import useModal from 'contexts/modalStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import isLoggedIn from 'utils/isLoggedIn';
 
 export default function Root() {
   console.log('Root');
-  const MyPageStore = useMyPageStore((store) => store);
   const modal = useModal();
+  const MyPageStore: any = useMyPageStore();
   useEffect(() => {
     if (isLoggedIn()) {
       getUserDetail().then((res) => {

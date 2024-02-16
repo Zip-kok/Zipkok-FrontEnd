@@ -1,5 +1,6 @@
 import defaultUserIcon from 'assets/img/common/user.png';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 import type { Gender } from 'pages/SignIn';
 import type { Address } from 'types/Address';
@@ -64,25 +65,33 @@ const initialState: MyPageInfo = {
   setPriceMax: () => {},
 };
 
-const useMyPageStore = create<MyPageInfo>((set) => ({
-  ...initialState,
-  setImageUrl: (imageUrl) => set({ imageUrl }),
-  setNickname: (nickname) => set({ nickname }),
-  setBirthday: (birthday) => set({ birthday }),
-  setGender: (gender) => set({ gender }),
-  setAddress: (address) => set({ address }),
-  setRealEstateType: (realEstateType) => set({ realEstateType }),
-  setTransactionType: (transactionType) => set({ transactionType }),
+const useMyPageStore = create(
+  persist(
+    (set) => ({
+      ...initialState,
+      setImageUrl: (imageUrl: string) => set({ imageUrl }),
+      setNickname: (nickname: string) => set({ nickname }),
+      setBirthday: (birthday: string) => set({ birthday }),
+      setGender: (gender: Gender) => set({ gender }),
+      setAddress: (address: Address) => set({ address }),
+      setRealEstateType: (realEstateType: HouseType) => set({ realEstateType }),
+      setTransactionType: (transactionType: PriceType) =>
+        set({ transactionType }),
 
-  setMPriceMin: (mpriceMin) => set({ mpriceMin }),
-  setMPriceMax: (mpriceMax) => set({ mpriceMax }),
-  setMDepositMin: (mdepositMin) => set({ mdepositMin }),
-  setMDepositMax: (mdepositMax) => set({ mdepositMax }),
-  setYDepositMin: (ydepositMin) => set({ ydepositMin }),
-  setYDepositMax: (ydepositMax) => set({ ydepositMax }),
+      setMPriceMin: (mpriceMin: number) => set({ mpriceMin }),
+      setMPriceMax: (mpriceMax: number) => set({ mpriceMax }),
+      setMDepositMin: (mdepositMin: number) => set({ mdepositMin }),
+      setMDepositMax: (mdepositMax: number) => set({ mdepositMax }),
+      setYDepositMin: (ydepositMin: number) => set({ ydepositMin }),
+      setYDepositMax: (ydepositMax: number) => set({ ydepositMax }),
 
-  setPriceMin: (priceMin) => set({ priceMin }),
-  setPriceMax: (priceMax) => set({ priceMax }),
-}));
+      setPriceMin: (priceMin: number) => set({ priceMin }),
+      setPriceMax: (priceMax: number) => set({ priceMax }),
+    }),
+    {
+      name: 'myPageStore',
+    },
+  ),
+);
 
 export default useMyPageStore;

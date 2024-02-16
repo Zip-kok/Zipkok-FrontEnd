@@ -70,10 +70,10 @@ export {
  * `authRequired`가 `false`이면 토큰 갱신을 수행하지 않습니다.
  * @param path 요청을 보낼 하위 경로 (예: `/user`)
  * @param method HTTP 메소드
+ * @param authRequired 인증이 필요한지 여부
  * @param params 쿼리 파라미터
  * @param body 요청 바디
  * @param headers 요청 헤더
- * @param authRequired 인증이 필요한지 여부
  */
 export default async function api<T>(
   path: string,
@@ -114,7 +114,7 @@ export default async function api<T>(
       ...authHeader,
       ...headers,
     },
-    body: JSON.stringify(body),
+    body: body,
   });
   const data = (await res.json()) as T;
   return data;

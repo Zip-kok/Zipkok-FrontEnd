@@ -33,6 +33,7 @@ interface User {
  * 사용자 프로필 업데이트를 위한 PUT API 호출 함수
  */
 export async function putUser(user: User) {
+  console.log(user);
   const formData = new FormData();
   formData.append('file', user.file);
   formData.append('data', JSON.stringify(user.data));

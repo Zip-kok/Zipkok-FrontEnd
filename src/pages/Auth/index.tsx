@@ -7,6 +7,7 @@ import { getUserDetail } from 'apis';
 import useEmailStore from 'contexts/emailStore';
 import useModal from 'contexts/modalStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import { Gender } from 'pages/SignIn';
 import { Address } from 'types/Address';
 import storeToken from 'utils/storeToken';
@@ -16,8 +17,7 @@ export default function Auth() {
   const navigate = useNavigate();
   const modal = useModal();
   const setEmail = useEmailStore((store) => store.setEmail);
-  const MyPageStore = useMyPageStore((store) => store);
-
+  const MyPageStore: any = useMyPageStore();
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
 

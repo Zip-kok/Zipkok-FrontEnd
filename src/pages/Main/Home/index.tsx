@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getPin } from 'apis';
 import { MapRealEstate, getMapRealEstate } from 'apis/getMapRealEstate';
 import pinIcon from 'assets/img/pinIcon/pin.svg';
 import { PropertyItem, BottomSheet } from 'components';
+import useAddressStore from 'contexts/addressStore';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import convertHouseTypeToString from 'utils/convertHouseTypeToString';
 import getPriceString from 'utils/getPriceString';
 
@@ -30,12 +32,19 @@ export default function Home() {
   const [pins, setPins] = useState<Pin[]>([]);
   const [mapRealEstate, setMapRealEstate] = useState<MapRealEstate>();
   const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
-
+  const MyPageStore: any = useMyPageStore();
+  const [initialLocation, setInitialLocation] = useState<{
+    lat?: number;
+    lng?: number;
+    initialized: boolean;
+  }>();
   const [selectedProperty, setSelectedProperty] =
     useState<realEstateInfo | null>(null);
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
 
   const ui = useUIStore();
+  const addressStore = useAddressStore();
+
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
@@ -45,6 +54,27 @@ export default function Home() {
     }));
 
     getPin().then((res) => setPins(res.result as Pin[]));
+  }, []);
+
+  useLayoutEffect(() => {
+    if (addressStore.src === 'home_search') {
+      setInitialLocation({
+        lat: addressStore.address.y,
+        lng: addressStore.address.x,
+        initialized: true,
+      });
+      addressStore.resetSrc();
+    } else if (MyPageStore.address !== undefined) {
+      setInitialLocation({
+        lat: MyPageStore.address.y,
+        lng: MyPageStore.address.x,
+        initialized: true,
+      });
+    } else {
+      setInitialLocation({
+        initialized: true,
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -66,7 +96,6 @@ export default function Home() {
     ).then((res) => setMapRealEstate(res.result));
   }, [mapLocationInfo]);
 
-  const MyPageStore = useMyPageStore((store) => store);
   useEffect(() => {
     if (MyPageStore.realEstateType) {
       setFilterSet(true);
@@ -196,18 +225,20 @@ export default function Home() {
 
       {/* 지도 */}
       <div className={styles.mapContainer}>
-        <KakaoMap
-          lat={MyPageStore.address?.y}
-          lng={MyPageStore.address?.x}
-          mapLocationInfo={mapLocationInfo}
-          setMapLocationInfo={setMapLocationInfo}
-          realEstatesInfo={mapRealEstate?.realEstateInfoList}
-          pins={pins}
-          selectedProprety={selectedProperty}
-          setSelectedProperty={setSelectedProperty}
-          selectedPin={selectedPin}
-          setSelectedPin={setSelectedPin}
-        />
+        {initialLocation?.initialized && (
+          <KakaoMap
+            lat={initialLocation?.lat}
+            lng={initialLocation?.lng}
+            mapLocationInfo={mapLocationInfo}
+            setMapLocationInfo={setMapLocationInfo}
+            realEstatesInfo={mapRealEstate?.realEstateInfoList}
+            pins={pins}
+            selectedProprety={selectedProperty}
+            setSelectedProperty={setSelectedProperty}
+            selectedPin={selectedPin}
+            setSelectedPin={setSelectedPin}
+          />
+        )}
       </div>
 
       {/* 바텀 시트 */}
