@@ -10,6 +10,7 @@ import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
 import MyPageStore from 'contexts/useMyPageStore';
 import convertHouseTypeToString from 'utils/convertHouseTypeToString';
+import convertPriceTypeToString from 'utils/convertPriceTypeToString';
 import getPriceString from 'utils/getPriceString';
 
 import HomeBottomSheet from './BottomSheet';
@@ -178,7 +179,7 @@ export default function Home() {
           <div className={styles.filterCtn}>
             {MyPageStore.realEstateType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {MyPageStore.transactionType}
+                {convertPriceTypeToString(MyPageStore.transactionType)}
               </div>
             )}
             {MyPageStore.transactionType && (
