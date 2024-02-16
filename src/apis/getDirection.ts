@@ -64,7 +64,11 @@ interface DirectionResponse {
  */
 export const getDirection = async (origin: Point, destination: Point) => {
   const res = (await fetch(
-    `https://apis-navi.kakaomobility.com/v1/directions?origin=${origin.x},${origin.y},name=${origin.name}&destination=${destination.x},${destination.y},name=${destination.name}`,
+    `https://apis-navi.kakaomobility.com/v1/directions?origin=${origin.x},${
+      origin.y
+    },name=${origin.name.replaceAll(',', '')}&destination=${destination.x},${
+      destination.y
+    },name=${destination.name.replaceAll(',', '')}`,
     {
       method: 'GET',
       headers: {
