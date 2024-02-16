@@ -26,6 +26,7 @@ import { logout } from './logout';
 import { onBoarding } from './onBoarding';
 import { patchPin } from './patchPin';
 import { postPin } from './postPin';
+import { putUser } from './putUser';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
@@ -61,6 +62,7 @@ export {
   patchPin,
   getRealEstateInfo,
   getUserKokList,
+  putUser,
 };
 
 /**

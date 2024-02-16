@@ -152,13 +152,15 @@ const ProfileEdit = () => {
                 purchaseMin: priceRanges[0][0],
                 purchaseMax: priceRanges[0][1],
               };
-      const response = await putUser({
-        file: imgSrc,
-        data: {
-          ...baseData,
-          ...priceData,
-        },
-      });
+
+      const imgres = await fetch(imgSrc);
+      const blob = await imgres.blob();
+      const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+      const userInfo = {
+        file: file,
+        data: { ...baseData, ...priceData },
+      };
+      const response = await putUser(userInfo);
 
       switch (response.code) {
         case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
@@ -202,7 +204,7 @@ const ProfileEdit = () => {
           });
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
       modal.open({
         title: '네트워크 오류',
         description:

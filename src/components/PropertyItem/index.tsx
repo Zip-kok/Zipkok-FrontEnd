@@ -81,9 +81,9 @@ export default function PropertyItem({
         </div>
 
         {kokList && (
-          <span className={styles.listBtn}>
+          <div className={styles.listBtn}>
             <img src={listIcon} alt="listIcon" />
-          </span>
+          </div>
         )}
       </div>
     </div>
