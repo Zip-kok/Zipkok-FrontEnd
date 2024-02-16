@@ -114,7 +114,7 @@ export default async function api<T>(
       ...authHeader,
       ...headers,
     },
-    body: body,
+    body: JSON.stringify(body),
   });
   const data = (await res.json()) as T;
   return data;
