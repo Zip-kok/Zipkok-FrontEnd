@@ -98,10 +98,11 @@ export default function CustomProperty() {
       customKokStore.setFloor(floor);
       customKokStore.setHouseType(houseType as HouseType);
       customKokStore.setPriceType(priceType as PriceType);
+
       postRealEstate(
         memo as string,
-        priceType as string,
-        houseType as string,
+        priceType as PriceType,
+        houseType as HouseType,
         priceType === 'MONTHLY' || 'YEARLY' ? (deposit as number) : 0,
         priceType === 'MONTHLY'
           ? (deposit as number)

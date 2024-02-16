@@ -8,11 +8,13 @@ import getPriceString from 'utils/getPriceString';
 
 import styles from './PropertyItem.module.css';
 
+import type { PriceType } from 'types/PriceType';
+
 interface PropertyItemProps {
   id: number;
   like: boolean;
   type: string;
-  priceType: string;
+  priceType: PriceType;
   deposit: number;
   price: number;
   address: string;
@@ -65,9 +67,11 @@ export default function PropertyItem({
           <div className={styles.price}>
             {
               {
-                월세: `${getPriceString(deposit)} / ${getPriceString(price)}`,
-                전세: `${getPriceString(deposit)}`,
-                매매: `${getPriceString(price)}`,
+                MONTHLY: `${getPriceString(deposit)} / ${getPriceString(
+                  price,
+                )}`,
+                YEARLY: `${getPriceString(deposit)}`,
+                PURCHASE: `${getPriceString(price)}`,
               }[priceType]
             }
           </div>

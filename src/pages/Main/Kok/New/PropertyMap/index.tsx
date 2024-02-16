@@ -5,7 +5,6 @@ import mapImg from 'assets/img/common/map.png';
 import BottomBtn from 'components/BottomBtn';
 import PropertyItem from 'components/PropertyItem';
 import useUIStore from 'contexts/uiStore';
-import properties from 'models/properties';
 
 import styles from './OnMap.module.css';
 
@@ -22,7 +21,7 @@ export default function PropertyMap() {
 
   const navigate = useNavigate();
 
-  const [property, setProperty] = useState(properties[0]);
+  const [property, setProperty] = useState();
 
   return (
     <div className={styles.root}>
@@ -31,19 +30,21 @@ export default function PropertyMap() {
       </div>
 
       <div>
-        <PropertyItem
-          key={property.id}
-          id={property.id}
-          like={property.like}
-          type={property.type}
-          priceType={property.priceType}
-          price={property.price}
-          deposit={0}
-          address={property.address}
-          propertyName={property.propertyName}
-          imageUrl={property.imageUrl}
-          kokList={property.kokList}
-        />
+        {/*
+          <PropertyItem
+            key={property.id}
+            id={property.id}
+            like={property.like}
+            type={property.type}
+            priceType={property.priceType}
+            price={property.price}
+            deposit={0}
+            address={property.address}
+            propertyName={property.propertyName}
+            imageUrl={property.imageUrl}
+            kokList={property.kokList}
+          />
+  */}
       </div>
 
       <BottomBtn

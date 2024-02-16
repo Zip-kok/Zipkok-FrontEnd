@@ -11,8 +11,8 @@ export interface RawRealEstate {
   price: number;
   address: string;
   agent: string;
-  transactionType: string;
-  realestateType: string;
+  transactionType: PriceType;
+  realestateType: HouseType;
 }
 
 export interface RealEstate {
