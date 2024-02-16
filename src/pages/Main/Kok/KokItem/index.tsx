@@ -158,7 +158,7 @@ const KokItem = () => {
           KokDetail ? KokDetail.latitude : 0,
         )}
         detailAddress={KokDetail ? KokDetail.detailAddress : ''}
-        priceType={KokDetail ? KokDetail.transactionType : '월세'}
+        priceType={KokDetail ? KokDetail.transactionType : 'MONTHLY'}
         memo={KokDetail ? KokDetail.detail : ''}
         deposit={KokDetail ? KokDetail.deposit : 0}
         monthlyPrice={KokDetail ? KokDetail.price : 0}

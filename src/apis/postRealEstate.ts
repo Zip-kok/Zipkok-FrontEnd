@@ -1,11 +1,9 @@
 import api from 'apis';
 
 import type { ZipkokResponse } from 'types/ZipkokResponse';
-
 interface postRealEstateInfo {
   realEstateId: number;
 }
-
 /**
  * `POST /realEstate`으로 매물 등록을 요청합니다.
  */
@@ -24,7 +22,7 @@ export async function postRealEstate(
   pyeongsu: number,
   floorNum: number,
 ) {
-  const path = '/realEatate';
+  const path = '/realEstate';
   const method = 'POST';
   const body = {
     realEstateName,
@@ -40,7 +38,7 @@ export async function postRealEstate(
     pyeongsu,
     floorNum,
   };
-  const authRequired = false;
+  const authRequired = true;
   const res = await api<ZipkokResponse<postRealEstateInfo>>(
     path,
     method,
@@ -50,5 +48,7 @@ export async function postRealEstate(
     undefined,
   );
 
-  return res;
+  return {
+    res,
+  };
 }

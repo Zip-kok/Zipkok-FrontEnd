@@ -4,7 +4,9 @@ import type { Address } from 'types/Address';
 
 export interface AddressStore {
   address: Address;
-  setAddress: (address: Address) => void;
+  src?: string;
+  setAddress: (address: Address, src?: string) => void;
+  resetSrc: () => void;
 }
 
 const initialState: AddressStore = {
@@ -14,15 +16,24 @@ const initialState: AddressStore = {
     y: 0,
   },
   setAddress: () => {},
+  resetSrc: () => {},
 };
 
 const useAddressStore = create<AddressStore>((set) => ({
   ...initialState,
 
-  setAddress: (address) => {
+  setAddress: (address, src?: string) => {
     set((state) => ({
       ...state,
       address,
+      src,
+    }));
+  },
+
+  resetSrc: () => {
+    set((state) => ({
+      ...state,
+      src: undefined,
     }));
   },
 }));

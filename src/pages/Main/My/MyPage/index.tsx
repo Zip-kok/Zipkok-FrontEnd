@@ -169,13 +169,13 @@ const Mypage = () => {
               <p>{convertHouseTypeToString(MyPageStore.realEstateType)}</p>
               {MyPageStore.transactionType && (
                 <p>
-                  {MyPageStore.transactionType === '월세' &&
+                  {MyPageStore.transactionType === 'MONTHLY' &&
                     `~${getPriceString(
                       MyPageStore.mdepositMax ?? 0,
                     )} / ~${getPriceString(MyPageStore.mpriceMax ?? 0)}`}
-                  {MyPageStore.transactionType === '전세' &&
+                  {MyPageStore.transactionType === 'YEARLY' &&
                     `~${getPriceString(MyPageStore.ydepositMax ?? 0)}`}
-                  {MyPageStore.transactionType === '매매' &&
+                  {MyPageStore.transactionType === 'PURCHASE' &&
                     `~${getPriceString(MyPageStore.priceMax ?? 0)}`}
                 </p>
               )}

@@ -21,15 +21,15 @@ interface PriceProps {
 export default function Price({ confirmPrice, handleSkip }: PriceProps) {
   const priceTypeOptions = [
     {
-      value: '월세' as PriceType,
+      value: 'MONTHLY' as PriceType,
       content: '월세',
     },
     {
-      value: '전세' as PriceType,
+      value: 'YEARLY' as PriceType,
       content: '전세',
     },
     {
-      value: '매매' as PriceType,
+      value: 'PURCHASE' as PriceType,
       content: '매매',
     },
   ];
@@ -43,12 +43,12 @@ export default function Price({ confirmPrice, handleSkip }: PriceProps) {
   }, [priceType]);
 
   const defaultValues: Record<PriceType, PriceRange[]> = {
-    월세: [
+    MONTHLY: [
       [0, 60_000_000],
       [0, 400_000],
     ],
-    전세: [[0, 60_000_000]],
-    매매: [[0, 120_000_000]],
+    YEARLY: [[0, 60_000_000]],
+    PURCHASE: [[0, 120_000_000]],
   };
 
   const handleConfirmClick = () => {
@@ -71,7 +71,7 @@ export default function Price({ confirmPrice, handleSkip }: PriceProps) {
 
       <div className={styles.priceSliderContainer}>
         <div>
-          {priceType === '월세' && (
+          {priceType === 'MONTHLY' && (
             <Monthly
               onChange1={(rangeStart, rangeEnd) => {
                 setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
@@ -83,7 +83,7 @@ export default function Price({ confirmPrice, handleSkip }: PriceProps) {
             />
           )}
 
-          {priceType === '전세' && (
+          {priceType === 'YEARLY' && (
             <Jeonse
               onChange={(rangeStart, rangeEnd) => {
                 setPriceRanges([[rangeStart, rangeEnd]]);
@@ -92,7 +92,7 @@ export default function Price({ confirmPrice, handleSkip }: PriceProps) {
             />
           )}
 
-          {priceType === '매매' && (
+          {priceType === 'PURCHASE' && (
             <Purchase
               onChange={(rangeStart, rangeEnd) => {
                 setPriceRanges([[rangeStart, rangeEnd]]);

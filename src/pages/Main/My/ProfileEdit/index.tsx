@@ -77,9 +77,9 @@ const ProfileEdit = () => {
 
   // 가격 타입 라디오 버튼
   const priceTypeOptions: { value: PriceType; content: string }[] = [
-    { value: '월세', content: '월세' },
-    { value: '전세', content: '전세' },
-    { value: '매매', content: '매매' },
+    { value: 'MONTHLY', content: '월세' },
+    { value: 'YEARLY', content: '전세' },
+    { value: 'PURCHASE', content: '매매' },
   ];
   const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
     priceTypeOptions,
@@ -96,14 +96,16 @@ const ProfileEdit = () => {
   const address = useAddressStore((state) => state.address);
 
   const defaultValues: Record<PriceType, PriceRange[]> = {
-    월세: [
+    MONTHLY: [
       [MyPageStore.mdepositMin || 0, MyPageStore.mdepositMax || 60_000_000],
       [MyPageStore.mpriceMin || 0, MyPageStore.mpriceMax || 400_000],
     ],
-    전세: [
+    YEARLY: [
       [MyPageStore.ydepositMin || 0, MyPageStore.ydepositMax || 60_000_000],
     ],
-    매매: [[MyPageStore.priceMin || 0, MyPageStore.priceMax || 120_000_000]],
+    PURCHASE: [
+      [MyPageStore.priceMin || 0, MyPageStore.priceMax || 120_000_000],
+    ],
   };
 
   const navigate = useNavigate();
@@ -121,7 +123,7 @@ const ProfileEdit = () => {
         transactionType: MyPageStore.transactionType as PriceType,
       };
       const priceData =
-        priceType === '월세'
+        priceType === 'MONTHLY'
           ? {
               mpriceMin: priceRanges[1][0],
               mpriceMax: priceRanges[1][1],
@@ -132,7 +134,7 @@ const ProfileEdit = () => {
               purchaseMin: 0,
               purchaseMax: 0,
             }
-          : priceType === '전세'
+          : priceType === 'YEARLY'
             ? {
                 mpriceMin: 0,
                 mpriceMax: 0,
@@ -333,7 +335,7 @@ const ProfileEdit = () => {
         {/* 가격 설정 */}
         <div className={styles.priceSliderContainer}>
           <div>
-            {priceType === '월세' && (
+            {priceType === 'MONTHLY' && (
               <Monthly
                 onChange1={(rangeStart, rangeEnd) => {
                   setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
@@ -345,7 +347,7 @@ const ProfileEdit = () => {
               />
             )}
 
-            {priceType === '전세' && (
+            {priceType === 'YEARLY' && (
               <Jeonse
                 onChange={(rangeStart, rangeEnd) => {
                   setPriceRanges([[rangeStart, rangeEnd]]);
@@ -354,7 +356,7 @@ const ProfileEdit = () => {
               />
             )}
 
-            {priceType === '매매' && (
+            {priceType === 'PURCHASE' && (
               <Purchase
                 onChange={(rangeStart, rangeEnd) => {
                   setPriceRanges([[rangeStart, rangeEnd]]);

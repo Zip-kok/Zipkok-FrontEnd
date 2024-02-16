@@ -1,2 +1,2 @@
-type PriceType = '월세' | '전세' | '매매';
+type PriceType = 'MONTHLY' | 'YEARLY' | 'PURCHASE';
 export type { PriceType };

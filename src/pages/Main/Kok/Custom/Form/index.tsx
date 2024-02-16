@@ -1,12 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { postRealEstate } from 'apis/postRealEstate';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn, TextInput } from 'components';
 import useAddressStore from 'contexts/addressStore';
 import useCustomKokStore from 'contexts/customKokStore';
 import useHistoryState from 'hooks/useHistoryState';
 import useRadioBtn from 'hooks/useRadioBtn';
+import { StatusCode } from 'types/StatusCode';
 
 import styles from './CustomProperty.module.css';
 
@@ -33,14 +35,14 @@ export default function CustomProperty() {
 
   // 가격 타입 라디오 버튼
   const priceTypeOptions: { value: PriceType; content: string }[] = [
-    { value: '월세', content: '월세' },
-    { value: '전세', content: '전세' },
-    { value: '매매', content: '매매' },
+    { value: 'MONTHLY', content: '월세' },
+    { value: 'YEARLY', content: '전세' },
+    { value: 'PURCHASE', content: '매매' },
   ];
   const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
     priceTypeOptions,
     'tag',
-    '월세',
+    'MONTHLY',
   );
 
   const [memo, setMemo] = useHistoryState('memo', customKokStore.memo); // 매물 메모
@@ -69,13 +71,13 @@ export default function CustomProperty() {
     if (maintanenceFee === undefined) return false;
 
     switch (priceType) {
-      case '월세':
+      case 'MONTHLY':
         if (deposit === undefined || monthlyPrice === undefined) return false;
         break;
-      case '전세':
+      case 'YEARLY':
         if (deposit === undefined) return false;
         break;
-      case '매매':
+      case 'PURCHASE':
         if (price === undefined) return false;
         break;
     }
@@ -97,6 +99,22 @@ export default function CustomProperty() {
       customKokStore.setHouseType(houseType as HouseType);
       customKokStore.setPriceType(priceType as PriceType);
 
+      postRealEstate(
+        customKokStore.memo as string,
+        customKokStore.priceType,
+        customKokStore.houseType,
+        customKokStore.deposit as number,
+        customKokStore.price as number,
+        customKokStore.maintanenceFee as number,
+        customKokStore.address.address_name,
+        customKokStore.detailAddress as string,
+        customKokStore.address.x,
+        customKokStore.address.y,
+        customKokStore.area as number,
+        customKokStore.floor as number,
+      ).then((res) => {
+        res;
+      });
       navigate('./confirm');
     }
   }
@@ -140,7 +158,7 @@ export default function CustomProperty() {
         {/* 가격 */}
         <div className={styles.inputContainer}>
           {/* 월세 */}
-          {priceType === '월세' && (
+          {priceType === 'MONTHLY' && (
             <>
               <p className={styles.inputTitle}>보증금 / 월세</p>
               <div className={styles.monthlyPriceContainer}>
@@ -166,7 +184,7 @@ export default function CustomProperty() {
           )}
 
           {/* 전세 */}
-          {priceType === '전세' && (
+          {priceType === 'YEARLY' && (
             <>
               <p className={styles.inputTitle}>보증금</p>
               <div className={styles.priceInputContainer}>
@@ -183,7 +201,7 @@ export default function CustomProperty() {
           )}
 
           {/* 매매 */}
-          {priceType === '매매' && (
+          {priceType === 'PURCHASE' && (
             <>
               <p className={styles.inputTitle}>매매가</p>
               <div className={styles.priceInputContainer}>

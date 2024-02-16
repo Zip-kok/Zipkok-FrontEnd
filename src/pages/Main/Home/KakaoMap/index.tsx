@@ -260,18 +260,27 @@ const KakaoMap = ({
     overlays.forEach((overlay) => overlay.setMap(null));
 
     // 길찾기
-    if (selectedPin !== null) {
-      realEstatesInfo?.forEach((realEstateInfo) => {
+    if (selectedProprety !== null) {
+      pins?.forEach((pin) => {
+        // 핀이 화면 내에 없으면 길찾기를 하지 않음
+        if (
+          pin.address.y < (mapLocationInfo?.southWestLat ?? 0) ||
+          pin.address.y > (mapLocationInfo?.northEastLat ?? 0) ||
+          pin.address.x < (mapLocationInfo?.southWestLon ?? 0) ||
+          pin.address.x > (mapLocationInfo?.northEastLon ?? 0)
+        )
+          return;
+
         getDirection(
           {
-            name: selectedPin.name,
-            x: selectedPin.address.y,
-            y: selectedPin.address.x,
+            name: selectedProprety.address,
+            x: selectedProprety.latitude,
+            y: selectedProprety.longitude,
           },
           {
-            name: realEstateInfo.address,
-            x: realEstateInfo.latitude,
-            y: realEstateInfo.longitude,
+            name: pin.name,
+            x: pin.address.y,
+            y: pin.address.x,
           },
         ).then((res) => {
           console.log(res);
@@ -287,12 +296,7 @@ const KakaoMap = ({
               );
             }
           });
-          path.push(
-            new window.kakao.maps.LatLng(
-              realEstateInfo.longitude,
-              realEstateInfo.latitude,
-            ),
-          );
+          path.push(new window.kakao.maps.LatLng(pin.address.x, pin.address.y));
 
           const overlay = new window.kakao.maps.CustomOverlay({
             map: map,

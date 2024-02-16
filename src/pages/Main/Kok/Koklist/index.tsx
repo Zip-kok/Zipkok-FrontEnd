@@ -78,7 +78,7 @@ export default function Koklist() {
     customKokStore.setArea();
     customKokStore.setFloor();
     customKokStore.setHouseType('ONEROOM');
-    customKokStore.setPriceType('월세');
+    customKokStore.setPriceType('MONTHLY');
     customKokStore.setNickName();
 
     navigate(`./kokItem/${kokId}`);
