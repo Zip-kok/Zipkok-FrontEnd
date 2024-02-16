@@ -4,6 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import defaultThumbnail from 'assets/img/common/defaultThumbnail.png';
 import { SwiperCom, Swiper_modal } from 'components';
+import convertPriceTypeToString from 'utils/convertPriceTypeToString';
 
 import styles from './Header.module.css';
 
@@ -89,7 +90,9 @@ export default function Header({
 
       {/* 가격 */}
       <div className={styles.priceContainer}>
-        <span className={styles.priceType}>{priceType}</span>
+        <span className={styles.priceType}>
+          {convertPriceTypeToString(priceType)}
+        </span>
         <span className={styles.price}>
           {
             {

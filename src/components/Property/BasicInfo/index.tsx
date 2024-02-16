@@ -6,6 +6,7 @@ import maintanenceFeeIcon from 'assets/img/line(1)/money.svg';
 import areaIcon from 'assets/img/line(1)/size.svg';
 import houseTypeIcon from 'assets/img/line(1)/structure.svg';
 import { StaticMap } from 'components';
+import convertHouseTypeToString from 'utils/convertHouseTypeToString';
 
 import styles from './BasicInfo.module.css';
 import IconBtn from '../../IconBtn';
@@ -59,7 +60,7 @@ export default function BasicInfo({
         )}
         <div className={styles.detail}>
           <img src={houseTypeIcon} />
-          <span>{houseType}</span>
+          <span>{convertHouseTypeToString(houseType)}</span>
         </div>
         {floor !== undefined && (
           <div className={styles.detail}>
