@@ -82,7 +82,7 @@ export default function WriteKok() {
     <div className={styles.root}>
       <TopMenu className={styles.top} />
       <Content />
-      <BottomBtn text="저장하기" onClick={() => {}} />
+      <BottomBtn text="다음" onClick={() => {}} />
     </div>
   );
 }

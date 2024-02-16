@@ -8,7 +8,6 @@ import useMyPageStore from 'contexts/useMyPageStore';
 import isLoggedIn from 'utils/isLoggedIn';
 
 export default function Root() {
-  console.log('Root');
   const modal = useModal();
   const MyPageStore = useMyPageStore();
   useEffect(() => {
