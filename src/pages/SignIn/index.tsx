@@ -50,7 +50,6 @@ export default function SignIn() {
     birth: (
       <Birth
         onConfirm={(birth: Date) => {
-          MyPageStore.setBirthday(birth.toString());
           handleFinalSubmit(
             MyPageStore.nickname as string,
             MyPageStore.gender as Gender,

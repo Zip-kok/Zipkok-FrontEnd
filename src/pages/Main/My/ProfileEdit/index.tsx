@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { putUser } from 'apis/putUser';
+import defaultProfilePicture from 'assets/img/common/user.png';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { TextInput, BottomBtn } from 'components';
 import useAddressStore from 'contexts/addressStore';
@@ -295,7 +296,7 @@ const ProfileEdit = () => {
             ref={fileInputRef}
           />
           <img
-            src={imageUrl ?? MyPageStore.imageUrl}
+            src={imageUrl ?? MyPageStore.imageUrl ?? defaultProfilePicture}
             onClick={handleImgClick}
           />
           <p onClick={handleImgClick}>수정하기</p>
@@ -323,7 +324,7 @@ const ProfileEdit = () => {
 
           <div className={styles.birthGenderContainer}>
             <BirthInput
-              defaultValue={input.birthday}
+              defaultValue={MyPageStore.birthday}
               placeholder="6자리 숫자로 입력해주세요"
               style="roundedBox"
               caption={birthWarningMsg}
@@ -342,7 +343,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>희망 거주지역</p>
           <TextInput
-            value={input.address}
+            value={MyPageStore.address}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('/my/profileEdit/locationEdit')}

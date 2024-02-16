@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { deleteUser } from 'apis';
+import defaultProfilePicture from 'assets/img/common/user.png';
 import edit from 'assets/img/line(2)/edit.svg';
 import heart from 'assets/img/line(2)/heart.svg';
 import inquiry from 'assets/img/line(2)/inquiry.svg';
@@ -154,7 +155,7 @@ const Mypage = () => {
   return (
     <div className={styles.root}>
       <div className={styles.profile}>
-        <img src={MyPageStore.imageUrl} />
+        <img src={MyPageStore.imageUrl ?? defaultProfilePicture} />
         <div className={styles.text}>
           <div className={styles.name}>{MyPageStore.nickname}</div>
 

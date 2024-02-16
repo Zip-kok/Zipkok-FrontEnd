@@ -2,7 +2,7 @@ import type { HouseType } from './HouseType';
 import type { PriceType } from './PriceType';
 
 interface UserInfo {
-  imageUrl: string;
+  imageUrl: string | null;
   nickname: string;
   birthday: string;
   gender: Gender;
