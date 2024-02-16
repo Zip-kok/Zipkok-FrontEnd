@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { patchUserFilter } from 'apis/patchUserFilter';
 import BottomBtn from 'components/BottomBtn';
 import useMyPageStore from 'contexts/useMyPageStore';
 import MyPageStore from 'contexts/useMyPageStore';
@@ -90,6 +91,15 @@ export default function Filter({
       MyPageStore.setYDepositMax(undefined);
       MyPageStore.setYDepositMin(undefined);
       MyPageStore.setYDepositMax(undefined);
+
+      patchUserFilter(
+        priceType,
+        houseType,
+        monthlyRange[0],
+        monthlyRange[1],
+        depositRange[0],
+        depositRange[1],
+      ).then((res) => res);
     } else if (priceType === 'YEARLY') {
       // 전세의 경우, 보증금 범위만
       const [depositRange] = priceRanges;
