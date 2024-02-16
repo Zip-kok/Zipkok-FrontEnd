@@ -48,26 +48,13 @@ export async function getZim() {
     undefined,
   );
 
-  function convertTransactionType(type: string): PriceType {
-    switch (type) {
-      case 'MONTHLY':
-        return '월세';
-      case 'YEARLY':
-        return '전세';
-      case 'PURCHASE':
-        return '매매';
-      default:
-        return '월세';
-    }
-  }
-
   return {
     ...res,
     result: {
       ...res.result,
       realEstateInfo: res.result.realEstateInfo.map((realEstate) => ({
         ...realEstate,
-        transactionType: convertTransactionType(realEstate.transactionType),
+        transactionType: realEstate.transactionType,
         realestateType: realEstate.realestateType,
       })),
     },

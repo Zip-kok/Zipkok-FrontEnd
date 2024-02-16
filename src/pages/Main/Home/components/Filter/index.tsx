@@ -33,12 +33,12 @@ export default function Filter({
   prices,
 }: FilterProps) {
   const defaultValues: Record<PriceType, PriceRange[]> = {
-    월세: [
+    MONTHLY: [
       [0, 60_000_000],
       [0, 400_000],
     ],
-    전세: [[0, 60_000_000]],
-    매매: [[0, 120_000_000]],
+    YEARLY: [[0, 60_000_000]],
+    PURCHASE: [[0, 120_000_000]],
   };
 
   // 집 형태 라디오 버튼
@@ -55,14 +55,14 @@ export default function Filter({
   );
   // 가격 타입 라디오 버튼
   const priceTypeOptions: { value: PriceType; content: string }[] = [
-    { value: '월세', content: '월세' },
-    { value: '전세', content: '전세' },
-    { value: '매매', content: '매매' },
+    { value: 'MONTHLY', content: '월세' },
+    { value: 'YEARLY', content: '전세' },
+    { value: 'PURCHASE', content: '매매' },
   ];
   const [PriceTypeRadioBtnContainer, priceType] = useRadioBtn<PriceType>(
     priceTypeOptions,
     'tag',
-    selectedPriceType ?? '월세',
+    selectedPriceType ?? 'MONTHLY',
   );
 
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([
@@ -77,7 +77,7 @@ export default function Filter({
     MyPageStore.setRealEstateType(houseType);
     MyPageStore.setTransactionType(priceType);
 
-    if (priceType === '월세') {
+    if (priceType === 'MONTHLY') {
       // 월세의 경우, 첫 번째 배열 요소는 보증금 범위, 두 번째는 월세 범위
       const [depositRange, monthlyRange] = priceRanges;
       MyPageStore.setMDepositMin(depositRange[0]);
@@ -89,7 +89,7 @@ export default function Filter({
       MyPageStore.setYDepositMax(undefined);
       MyPageStore.setYDepositMin(undefined);
       MyPageStore.setYDepositMax(undefined);
-    } else if (priceType === '전세') {
+    } else if (priceType === 'YEARLY') {
       // 전세의 경우, 보증금 범위만
       const [depositRange] = priceRanges;
       MyPageStore.setYDepositMin(depositRange[0]);
@@ -101,7 +101,7 @@ export default function Filter({
       MyPageStore.setMPriceMax(undefined);
       MyPageStore.setPriceMin(undefined);
       MyPageStore.setPriceMax(undefined);
-    } else if (priceType === '매매') {
+    } else if (priceType === 'PURCHASE') {
       // 매매의 경우, 가격 범위만
       const [purchaseRange] = priceRanges;
       MyPageStore.setPriceMin(purchaseRange[0]);
@@ -136,7 +136,7 @@ export default function Filter({
 
         {/* 가격 설정 */}
         <div className={styles.priceContainer}>
-          {priceType === '월세' && (
+          {priceType === 'MONTHLY' && (
             <Monthly
               onChange1={(rangeStart, rangeEnd) => {
                 setPriceRanges((prev) => [[rangeStart, rangeEnd], prev[1]]);
@@ -148,7 +148,7 @@ export default function Filter({
             />
           )}
 
-          {priceType === '전세' && (
+          {priceType === 'YEARLY' && (
             <Jeonse
               onChange={(rangeStart, rangeEnd) => {
                 setPriceRanges([[rangeStart, rangeEnd]]);
@@ -157,7 +157,7 @@ export default function Filter({
             />
           )}
 
-          {priceType === '매매' && (
+          {priceType === 'PURCHASE' && (
             <Purchase
               onChange={(rangeStart, rangeEnd) => {
                 setPriceRanges([[rangeStart, rangeEnd]]);

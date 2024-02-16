@@ -157,7 +157,7 @@ export default function Home() {
                 {convertHouseTypeToString(MyPageStore.realEstateType)}
               </div>
             )}
-            {MyPageStore.transactionType === '월세' ? (
+            {MyPageStore.transactionType === 'MONTHLY' ? (
               MyPageStore.mpriceMax !== undefined &&
               MyPageStore.mdepositMax !== undefined && (
                 <div className={styles.filter} onClick={handleFilterClick}>
@@ -169,12 +169,12 @@ export default function Home() {
               )
             ) : (
               <>
-                {MyPageStore.transactionType === '전세' && (
+                {MyPageStore.transactionType === 'YEARLY' && (
                   <div className={styles.filter} onClick={handleFilterClick}>
                     {`~${getPriceString(MyPageStore.ydepositMax!, true)}`}
                   </div>
                 )}
-                {MyPageStore.transactionType === '매매' && (
+                {MyPageStore.transactionType === 'PURCHASE' && (
                   <div className={styles.filter} onClick={handleFilterClick}>
                     {`~${getPriceString(MyPageStore.priceMax!, true)}`}
                   </div>

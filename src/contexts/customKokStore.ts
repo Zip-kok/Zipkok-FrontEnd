@@ -49,7 +49,7 @@ const initialState: CustomKokStore = {
   area: undefined,
   floor: undefined,
   houseType: 'ONEROOM',
-  priceType: '월세',
+  priceType: 'MONTHLY',
   nickName: undefined,
 
   setPictures: () => {},

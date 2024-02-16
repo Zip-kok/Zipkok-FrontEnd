@@ -93,9 +93,9 @@ export default function Header({
         <span className={styles.price}>
           {
             {
-              월세: `${deposit?.toLocaleString()} / ${monthlyPrice?.toLocaleString()}`,
-              전세: `${deposit?.toLocaleString()}`,
-              매매: `${price?.toLocaleString()}`,
+              MONTHLY: `${deposit?.toLocaleString()} / ${monthlyPrice?.toLocaleString()}`,
+              YEARLY: `${deposit?.toLocaleString()}`,
+              PURCHASE: `${price?.toLocaleString()}`,
             }[priceType]
           }
         </span>

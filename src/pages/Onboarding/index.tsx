@@ -47,7 +47,7 @@ export default function Onboarding() {
     y: 0,
   });
   const [houseType, setHouseType] = useState<HouseType>('ONEROOM');
-  const [, setPriceType] = useState<PriceType>('월세');
+  const [, setPriceType] = useState<PriceType>('MONTHLY');
   const [, setPriceRanges] = useState<PriceRange[]>([]);
 
   const steps: Record<Step, JSX.Element> = {
@@ -107,7 +107,7 @@ export default function Onboarding() {
         purchaseMax = 0;
 
       switch (priceType) {
-        case '월세':
+        case 'MONTHLY':
           mdepositMin = priceRanges[0][0];
           MyPageStore.setMDepositMin(priceRanges[0][0]);
           mdepositMax = priceRanges[0][1];
@@ -117,13 +117,13 @@ export default function Onboarding() {
           mpriceMax = priceRanges[1][1];
           MyPageStore.setMPriceMax(priceRanges[1][1]);
           break;
-        case '전세':
+        case 'YEARLY':
           ydepositMin = priceRanges[0][0];
           MyPageStore.setYDepositMin(priceRanges[0][0]);
           ydepositMax = priceRanges[0][1];
           MyPageStore.setYDepositMax(priceRanges[0][1]);
           break;
-        case '매매':
+        case 'PURCHASE':
           purchaseMin = priceRanges[0][0];
           MyPageStore.setPriceMin(priceRanges[0][0]);
           purchaseMax = priceRanges[0][1];
