@@ -74,6 +74,7 @@ export {
  * @param params 쿼리 파라미터
  * @param body 요청 바디
  * @param headers 요청 헤더
+ * @param contentType 요청 컨텐츠 타입
  */
 export default async function api<T>(
   path: string,
@@ -82,6 +83,7 @@ export default async function api<T>(
   params?: any,
   body?: any,
   headers?: any,
+  contentType?: string | null,
 ) {
   let accessToken = Cookies.get('accessToken');
 
@@ -99,12 +101,12 @@ export default async function api<T>(
       }
     : {};
 
-  const contentTypeHeader =
-    method !== 'GET'
-      ? {
-          'Content-Type': 'application/json',
-        }
-      : {};
+  let contentTypeHeader = {};
+
+  if (contentType) contentTypeHeader = { 'Content-Type': contentType };
+  else if (contentType === null) contentTypeHeader = {};
+  else if (method !== 'GET')
+    contentTypeHeader = { 'Content-Type': 'application/json' };
 
   const paramStr = params ? new URLSearchParams(params).toString() : '';
   const res = await fetch(`${url}${path}?${paramStr}`, {
