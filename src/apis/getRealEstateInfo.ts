@@ -1,5 +1,7 @@
 import api from './';
 
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface GetRealEstateInfoResult {
@@ -10,13 +12,13 @@ export interface GetRealEstateInfoResult {
   };
   address: string;
   detailAddress: string;
-  transactionType: string;
+  transactionType: PriceType;
   deposit: number;
   price: number;
   detail: string;
   areaSize: number;
   pyeongsu: number;
-  realEstateType: string;
+  realEstateType: HouseType;
   floorNum: number;
   administrativeFee: number;
   latitude: number;
