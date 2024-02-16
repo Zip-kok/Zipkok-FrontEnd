@@ -46,10 +46,10 @@ const ProfileEdit = () => {
     if (input.transactionType === 'MONTHLY')
       setInput((prev) => ({
         ...prev,
-        mpriceMin: priceRanges[0][0],
-        mpriceMax: priceRanges[0][1],
-        mdepositMin: priceRanges[1][0],
-        mdepositMax: priceRanges[1][1],
+        mpriceMin: priceRanges[1][0],
+        mpriceMax: priceRanges[1][1],
+        mdepositMin: priceRanges[0][0],
+        mdepositMax: priceRanges[0][1],
         ydepositMax: 0,
         ydepositMin: 0,
         purchaseMax: 0,
@@ -202,6 +202,8 @@ const ProfileEdit = () => {
 
       switch (response.code) {
         case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
+          MyPageStore.set(input);
+
           navigate(-1);
           break;
         case StatusCode.INVALID_NICKNAME_FORMAT:

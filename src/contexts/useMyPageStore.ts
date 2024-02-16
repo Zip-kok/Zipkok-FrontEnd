@@ -25,6 +25,7 @@ type MyPageInfo = UserInfo & {
   setYDepositMax: (ydepositMax?: number) => void;
   setPurchaseMin: (purchaseMin?: number) => void;
   setPurchaseMax: (purchaseMax?: number) => void;
+  set: (newState: Partial<MyPageInfo>) => void;
 };
 
 const initialState: MyPageInfo = {
@@ -54,6 +55,7 @@ const initialState: MyPageInfo = {
   setYDepositMax: () => {},
   setPurchaseMin: () => {},
   setPurchaseMax: () => {},
+  set: () => {},
 };
 
 const useMyPageStore = create(
@@ -76,6 +78,8 @@ const useMyPageStore = create(
       setYDepositMax: (ydepositMax) => set({ ydepositMax }),
       setPurchaseMin: (purchaseMin) => set({ purchaseMin }),
       setPurchaseMax: (purchaseMax) => set({ purchaseMax }),
+
+      set: (newState) => set(newState),
     }),
     {
       name: 'myPageStore',

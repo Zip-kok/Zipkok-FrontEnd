@@ -28,7 +28,7 @@ const Mypage = () => {
   const ui = useUIStore();
   const modal = useModal();
 
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
 
   useEffect(() => {
     ui.setUI((state) => ({
@@ -159,9 +159,7 @@ const Mypage = () => {
           <div className={styles.name}>{MyPageStore.nickname}</div>
 
           <div className={styles.location}>
-            {MyPageStore.address
-              ? `#${MyPageStore.address.address_name}`
-              : '주소 미등록'}
+            {MyPageStore.address ? `#${MyPageStore.address}` : '주소 미등록'}
           </div>
 
           {MyPageStore.transactionType && MyPageStore.realEstateType && (
@@ -177,7 +175,7 @@ const Mypage = () => {
                   {MyPageStore.transactionType === 'YEARLY' &&
                     `~${getPriceString(MyPageStore.ydepositMax ?? 0)}`}
                   {MyPageStore.transactionType === 'PURCHASE' &&
-                    `~${getPriceString(MyPageStore.priceMax ?? 0)}`}
+                    `~${getPriceString(MyPageStore.purchaseMax ?? 0)}`}
                 </p>
               )}
             </div>
