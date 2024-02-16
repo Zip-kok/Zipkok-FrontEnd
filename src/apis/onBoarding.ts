@@ -1,6 +1,7 @@
 import api from './';
 
 import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 /**
@@ -19,6 +20,7 @@ export async function onBoarding(
   ydepositMax: number,
   purchaseMin: number,
   purchaseMax: number,
+  transactionType: PriceType,
 ) {
   const path = '/user';
   const method = 'PATCH';
@@ -35,6 +37,7 @@ export async function onBoarding(
     ydepositMax: Math.floor(ydepositMax),
     purchaseMin: Math.floor(purchaseMin),
     purchaseMax: Math.floor(purchaseMax),
+    transactionType: transactionType,
   };
   const authRequired = true;
 

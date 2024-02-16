@@ -145,6 +145,7 @@ export default function Onboarding() {
       ydepositMax,
       purchaseMin,
       purchaseMax,
+      priceType,
     )
       .then((res) => {
         // 회원정보 등록/수정 성공
