@@ -9,10 +9,9 @@ body {
   align-items: center;
 }
 .zipkokIcon {
-  width: 140px;
-  height: 192px;
   flex-shrink: 0;
   margin-top: 251px;
+  margin-bottom: 120px;
 }
 
 .loginBtn {

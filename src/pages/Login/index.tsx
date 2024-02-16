@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import kakaoIcon from 'assets/img/login/kakaoIcon.svg';
-import zipkokIcon from 'assets/img/login/zipkokIcon_white.svg';
+import zipkokIcon from 'assets/img/login/loginIcon.svg';
 import { Splash } from 'components';
 
 import styles from './Login.module.css';
