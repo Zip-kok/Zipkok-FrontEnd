@@ -151,7 +151,9 @@ export default function Onboarding() {
           // 회원정보 등록/수정 성공
           if (res.code === StatusCode.MEMBER_INFO_UPDATE_SUCCESS) {
             //전역변수에 값 저장
-            MyPageStore.setAddress(location);
+            MyPageStore.setAddress(location.address_name);
+            MyPageStore.setLatitude(location.y);
+            MyPageStore.setLongitude(location.x);
             MyPageStore.setRealEstateType(houseType);
             MyPageStore.setTransactionType(priceType);
             setStep('complete');
