@@ -19,17 +19,17 @@ interface PriceProps {
 }
 
 export default function Price({ confirmPrice, handleSkip }: PriceProps) {
-  const priceTypeOptions = [
+  const priceTypeOptions: { value: PriceType; content: string }[] = [
     {
-      value: 'MONTHLY' as PriceType,
+      value: 'MONTHLY',
       content: '월세',
     },
     {
-      value: 'YEARLY' as PriceType,
+      value: 'YEARLY',
       content: '전세',
     },
     {
-      value: 'PURCHASE' as PriceType,
+      value: 'PURCHASE',
       content: '매매',
     },
   ];

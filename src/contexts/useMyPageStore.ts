@@ -1,4 +1,3 @@
-import defaultUserIcon from 'assets/img/common/user.png';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -29,7 +28,7 @@ type MyPageInfo = UserInfo & {
 };
 
 const initialState: MyPageInfo = {
-  imageUrl: defaultUserIcon,
+  imageUrl: null,
   nickname: '게스트',
   birthday: '040405',
   gender: 'DISCLOSURE',

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getPin, patchPin, postPin, deletePin } from 'apis';
+import { getPin, deletePin } from 'apis';
 import pinIcon from 'assets/img/line(2)/pin.svg';
 import arrowIcon from 'assets/img/line(2)/right_arrow.svg';
 import useUIStore from 'contexts/uiStore';

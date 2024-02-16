@@ -3,14 +3,12 @@ import api from '.';
 import type { Pin } from 'types/Pin';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
-type PinWithoutId = Omit<Pin, 'id'>;
-
 /**
- * `POST /pin`으로 핀 추가를 요청합니다.
+ * `PUT /pin`으로 핀 수정을 요청합니다.
  */
-export const postPin = async (pin: PinWithoutId) => {
+export const putPin = async (pin: Pin) => {
   const path = `/pin`;
-  const method = 'POST';
+  const method = 'PATCH';
   const body = {
     pin,
   };

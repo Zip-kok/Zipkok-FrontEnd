@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { getZim, zim } from 'apis';
+import { deleteZim } from 'apis';
 import { GetRealEstateInfoResult } from 'apis/getRealEstateInfo';
 import { getRealEstateInfo } from 'apis/getRealEstateInfo';
 import { BottomBtn } from 'components';
@@ -11,7 +13,7 @@ import getPriceString from 'utils/getPriceString';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './Item.module.css';
-import fillHeart from '../../../../assets/img/fill/heart_fill.svg';
+import fillHeart from '../../../../assets/img/fill/heart_selected.svg';
 import heart from '../../../../assets/img/line(2)/heart.svg';
 
 const Item = () => {
@@ -30,9 +32,17 @@ const Item = () => {
   const handleWriteClick = () => {
     navigate('../');
   };
+  const handlePress = () => {
+    if (realEstateId === undefined) return;
 
+    setIsZimmed(!isZimmed);
+    if (!isZimmed) {
+      zim(parseInt(realEstateId)).then((res) => res);
+    } else if (isZimmed) {
+      deleteZim(parseInt(realEstateId)).then((res) => res);
+    }
+  };
   const ui = useUIStore();
-
   useEffect(() => {
     ui.setUI((state) => ({
       ...state,
@@ -44,15 +54,12 @@ const Item = () => {
       headerRightButtons: [
         {
           id: '1',
-          img: isZimmed ? heart : fillHeart,
-          onPress() {
-            if (isZimmed === true) setIsZimmed(false);
-            else if (isZimmed === false) setIsZimmed(true);
-          },
+          img: isZimmed ? fillHeart : heart,
+          onPress: handlePress,
         },
       ],
     }));
-  }, [realEstateInfo]);
+  }, [realEstateInfo, isZimmed]);
 
   return (
     <div className={styles.root}>

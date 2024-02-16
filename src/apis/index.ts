@@ -24,8 +24,8 @@ import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
-import { patchPin } from './patchPin';
 import { postPin } from './postPin';
+import { putPin } from './putPin';
 import { putUser } from './putUser';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
 import { refreshTokens } from './refreshTokens';
@@ -59,7 +59,7 @@ export {
   putUserKokOption,
   getPin,
   postPin,
-  patchPin,
+  putPin,
   getRealEstateInfo,
   getUserKokList,
   putUser,
@@ -109,7 +109,7 @@ export default async function api<T>(
     contentTypeHeader = { 'Content-Type': 'application/json' };
 
   const paramStr = params ? new URLSearchParams(params).toString() : '';
-  const res = await fetch(`${url}${path}?${paramStr}`, {
+  const res = await fetch(`${url}${path}${paramStr ? '?' : ''}${paramStr}`, {
     method,
     headers: {
       ...contentTypeHeader,
