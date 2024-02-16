@@ -34,7 +34,7 @@ const Swiper_modal: React.FC<modalProps> = ({
     <div className={styles.modalCtn}>
       <div className={styles.blank}></div>
       <div className={styles.root}>
-        <Header title="성북구 정릉동" />
+        <Header title="" />
         <button className={styles.closeBtn} onClick={closeModal}>
           X
         </button>

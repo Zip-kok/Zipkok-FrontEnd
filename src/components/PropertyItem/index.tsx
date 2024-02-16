@@ -4,6 +4,9 @@ import propertyImg_null from 'assets/img/common/propertyImg_null.svg';
 import heartFillIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart_white.svg';
 import listIcon from 'assets/img/line(2)/list.svg';
+import { HouseType } from 'types/HouseType';
+import convertHouseTypeToString from 'utils/convertHouseTypeToString';
+import convertPriceTypeToString from 'utils/convertPriceTypeToString';
 import getPriceString from 'utils/getPriceString';
 
 import styles from './PropertyItem.module.css';
@@ -67,11 +70,11 @@ export default function PropertyItem({
           <div className={styles.price}>
             {
               {
-                MONTHLY: `${getPriceString(deposit)} / ${getPriceString(
-                  price,
+                MONTHLY: `${getPriceString(deposit * 10000)} / ${getPriceString(
+                  price * 10000,
                 )}`,
-                YEARLY: `${getPriceString(deposit)}`,
-                PURCHASE: `${getPriceString(price)}`,
+                YEARLY: `${getPriceString(deposit * 10000)}`,
+                PURCHASE: `${getPriceString(price * 10000)}`,
               }[priceType]
             }
           </div>
@@ -79,8 +82,12 @@ export default function PropertyItem({
           <div className={styles.property}>{propertyName}</div>
 
           <div className={styles.tags}>
-            <div className={styles.tag}>{priceType}</div>
-            <div className={styles.tag}>{type}</div>
+            <div className={styles.tag}>
+              {convertPriceTypeToString(priceType)}
+            </div>
+            <div className={styles.tag}>
+              {convertHouseTypeToString(type as HouseType)}
+            </div>
           </div>
         </div>
 

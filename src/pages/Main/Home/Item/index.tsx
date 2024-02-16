@@ -11,12 +11,15 @@ import getPriceString from 'utils/getPriceString';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './Item.module.css';
+import fillHeart from '../../../../assets/img/fill/heart_fill.svg';
+import heart from '../../../../assets/img/line(2)/heart.svg';
 
 const Item = () => {
   const navigate = useNavigate();
   const { realEstateId } = useParams();
   const [realEstateInfo, setRealEstateInfo] =
     useState<GetRealEstateInfoResult>();
+  const [isZimmed, setIsZimmed] = useState(realEstateInfo?.isZimmed);
 
   useEffect(() => {
     if (realEstateId === undefined) return;
@@ -38,6 +41,16 @@ const Item = () => {
       headerIcon: undefined,
       headerBackButtonEnabled: true,
       naviEnabled: false,
+      headerRightButtons: [
+        {
+          id: '1',
+          img: isZimmed ? heart : fillHeart,
+          onPress() {
+            if (isZimmed === true) setIsZimmed(false);
+            else if (isZimmed === false) setIsZimmed(true);
+          },
+        },
+      ],
     }));
   }, [realEstateInfo]);
 
