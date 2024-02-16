@@ -5,9 +5,9 @@ import { signIn } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useEmailStore from 'contexts/emailStore';
 import useModal from 'contexts/modalStore';
-import MyPageStore from 'contexts/useMyPageStore';
 import useMyPageStore from 'contexts/useMyPageStore';
 import { StatusCode } from 'types/StatusCode';
+import storeToken from 'utils/storeToken';
 
 import Birth from './Birth';
 import Complete from './Complete';
@@ -71,6 +71,18 @@ export default function SignIn() {
         .then((res) => {
           // 회원가입 성공
           if (res.code === StatusCode.REGISTRATION_SUCCESS) {
+            const {
+              accessToken,
+              refreshToken,
+              expiresIn,
+              refreshTokenExpiresIn,
+            } = res.result.authTokens;
+            storeToken(
+              accessToken,
+              refreshToken,
+              expiresIn,
+              refreshTokenExpiresIn,
+            );
             setStep('complete');
           } else {
             let isDefinedError = true;
