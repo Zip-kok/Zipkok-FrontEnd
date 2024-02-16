@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import homeIcon from 'assets/img/line(2)/home_default.svg';
 import { PropertyItem } from 'components';
 import properties from 'models/properties';
 
@@ -36,7 +37,13 @@ export default function Content({ realEstateInfoList }: ContentProps) {
             />
           ))
         ) : (
-          <div className={styles.error}>해당 지역에는 매물이 없습니다.</div>
+          <div className={styles.error}>
+            <img src={homeIcon}></img>
+            <div>
+              해당 지역에는 매물이 없습니다.
+              <br /> 다른 지역을 확인해주세요.
+            </div>
+          </div>
         )}
       </div>
     </div>

@@ -32,15 +32,39 @@ interface User {
 /**
  * 사용자 프로필 업데이트를 위한 PUT API 호출 함수
  */
-export async function putUser(user: User) {
-  console.log(user);
-  const formData = new FormData();
-  formData.append('file', user.file);
-  formData.append('data', JSON.stringify(user.data));
+export async function putUser(file: File, user: User) {
+  const contentPromise = new Promise<string>((resolve) => {
+    const reader = new FileReader();
+    reader.onload = async function (evt) {
+      const pdfContent: string = evt?.target?.result as string;
+      resolve(pdfContent);
+    };
 
+    reader.readAsBinaryString(file);
+  });
+
+  const binaryContent = await contentPromise;
+
+  const boundary = 'WebAppBoundary';
+  const content = `--WebAppBoundary
+  Content-Disposition: form-data; name="file"; filename="${file.name}"
+  Content-Type: application/pdf
+  
+  ${binaryContent}
+  --WebAppBoundary--`;
+  console.log(content);
+  const formData = new FormData();
+
+  formData.append('file', content);
+  // content.append('data', JSON.stringify(user.data));
+  // formData.append('data', JSON.stringify(user.data));
+
+  console.log(formData);
   const path = '/user';
   const method = 'PUT';
-  const headers = { 'Content-Type': 'multipart/form-data' };
+  const headers = {
+    'Content-Type': 'multipart/form-data; boundary=WebAppBoundary',
+  };
   const authRequired = true;
 
   const res = await api<ZipkokResponse<undefined>>(
@@ -51,6 +75,5 @@ export async function putUser(user: User) {
     formData,
     headers,
   );
-
   return res;
 }
