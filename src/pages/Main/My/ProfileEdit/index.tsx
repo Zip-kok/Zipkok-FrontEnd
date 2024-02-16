@@ -11,6 +11,7 @@ import useAddressStore from 'contexts/addressStore';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import useBirthInput from 'hooks/useBirthInput';
 import useRadioBtn from 'hooks/useRadioBtn';
 import { StatusCode } from 'types/StatusCode';
@@ -31,7 +32,7 @@ const ProfileEdit = () => {
   const ui = useUIStore();
   const [profileEditInfo, setProfileEditInfo] = useState<ProfileEditInfo>();
 
-  const MyPageStore = useMyPageStore((store) => store);
+  const MyPageStore: any = useMyPageStore();
   const modal = useModal();
 
   useEffect(() => {
@@ -238,6 +239,10 @@ const ProfileEdit = () => {
       fileInputRef.current.click();
     }
   };
+
+  useEffect(() => {
+    console.log('priceRanges', priceRanges);
+  }, [priceRanges]);
 
   return (
     <div className={styles.root}>

@@ -5,6 +5,7 @@ import { onBoarding } from 'apis';
 import leftArrowIcon from 'assets/img/line(2)/left_arrow.svg';
 import useModal from 'contexts/modalStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import { StatusCode } from 'types/StatusCode';
 
 import Complete from './Complete';
@@ -23,7 +24,7 @@ export type PriceRange = [number, number];
 export default function Onboarding() {
   const navigate = useNavigate();
   const modal = useModal();
-  const MyPageStore = useMyPageStore((store) => store);
+  const MyPageStore: any = useMyPageStore();
 
   function handleSkip() {
     modal

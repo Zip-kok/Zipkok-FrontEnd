@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import BottomBtn from 'components/BottomBtn';
 import useMyPageStore from 'contexts/useMyPageStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import useRadioBtn from 'hooks/useRadioBtn';
 import Jeonse from 'pages/Onboarding/Price/priceSlider/Jeonse';
 import Monthly from 'pages/Onboarding/Price/priceSlider/Monthly';
@@ -69,7 +70,7 @@ export default function Filter({
     [0, 60_000_000],
     [0, 400_000],
   ]);
-  const MyPageStore = useMyPageStore((store) => store);
+  const MyPageStore: any = useMyPageStore();
 
   const handelSaveBtnClick = () => {
     if (houseType === undefined || priceType === undefined) return;

@@ -7,6 +7,7 @@ import pinIcon from 'assets/img/pinIcon/pin.svg';
 import { PropertyItem, BottomSheet } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import MyPageStore from 'contexts/useMyPageStore';
 import convertHouseTypeToString from 'utils/convertHouseTypeToString';
 import getPriceString from 'utils/getPriceString';
 
@@ -30,7 +31,7 @@ export default function Home() {
   const [pins, setPins] = useState<Pin[]>([]);
   const [mapRealEstate, setMapRealEstate] = useState<MapRealEstate>();
   const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
-
+  const MyPageStore: any = useMyPageStore();
   const [selectedProperty, setSelectedProperty] =
     useState<realEstateInfo | null>(null);
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
@@ -66,7 +67,6 @@ export default function Home() {
     ).then((res) => setMapRealEstate(res.result));
   }, [mapLocationInfo]);
 
-  const MyPageStore = useMyPageStore((store) => store);
   useEffect(() => {
     if (MyPageStore.realEstateType) {
       setFilterSet(true);
