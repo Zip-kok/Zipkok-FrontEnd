@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { getPin, patchPin, postPin } from 'apis';
+import { getPin, putPin, postPin } from 'apis';
 import useUIStore from 'contexts/uiStore';
 
 import { Address as AddressPage, Map, Name } from './components';
@@ -76,7 +76,7 @@ export default function Write() {
 
     // 핀 수정하기
     if (pinId !== undefined) {
-      patchPin(data as Pin).then(callback);
+      putPin(data as Pin).then(callback);
       // 핀 등록하기
     } else {
       postPin(data as PinWithoutId).then(callback);
