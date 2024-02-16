@@ -91,140 +91,137 @@ export default function Onboarding() {
   };
 
   // 서버에 최종 데이터 전송
-  const handleFinalSubmit = useCallback(
-    (
-      location: Address,
-      houseType: HouseType,
-      priceType: PriceType,
-      priceRanges: PriceRange[],
-    ) => {
-      let mpriceMin = 0,
-        mpriceMax = 0,
-        mdepositMin = 0,
-        mdepositMax = 0,
-        ydepositMin = 0,
-        ydepositMax = 0,
-        purchaseMin = 0,
-        purchaseMax = 0;
+  const handleFinalSubmit = (
+    location: Address,
+    houseType: HouseType,
+    priceType: PriceType,
+    priceRanges: PriceRange[],
+  ) => {
+    let mpriceMin = 0,
+      mpriceMax = 0,
+      mdepositMin = 0,
+      mdepositMax = 0,
+      ydepositMin = 0,
+      ydepositMax = 0,
+      purchaseMin = 0,
+      purchaseMax = 0;
 
-      switch (priceType) {
-        case 'MONTHLY':
-          mdepositMin = priceRanges[0][0];
-          MyPageStore.setMDepositMin(priceRanges[0][0]);
-          mdepositMax = priceRanges[0][1];
-          MyPageStore.setMDepositMax(priceRanges[0][1]);
-          mpriceMin = priceRanges[1][0];
-          MyPageStore.setMPriceMin(priceRanges[1][0]);
-          mpriceMax = priceRanges[1][1];
-          MyPageStore.setMPriceMax(priceRanges[1][1]);
-          break;
-        case 'YEARLY':
-          ydepositMin = priceRanges[0][0];
-          MyPageStore.setYDepositMin(priceRanges[0][0]);
-          ydepositMax = priceRanges[0][1];
-          MyPageStore.setYDepositMax(priceRanges[0][1]);
-          break;
-        case 'PURCHASE':
-          purchaseMin = priceRanges[0][0];
-          MyPageStore.setPurchaseMin(priceRanges[0][0]);
-          purchaseMax = priceRanges[0][1];
-          MyPageStore.setPurchaseMax(priceRanges[0][1]);
-          break;
-      }
+    switch (priceType) {
+      case 'MONTHLY':
+        mdepositMin = priceRanges[0][0];
+        MyPageStore.setMDepositMin(priceRanges[0][0]);
+        mdepositMax = priceRanges[0][1];
+        MyPageStore.setMDepositMax(priceRanges[0][1]);
+        mpriceMin = priceRanges[1][0];
+        MyPageStore.setMPriceMin(priceRanges[1][0]);
+        mpriceMax = priceRanges[1][1];
+        MyPageStore.setMPriceMax(priceRanges[1][1]);
+        break;
+      case 'YEARLY':
+        ydepositMin = priceRanges[0][0];
+        MyPageStore.setYDepositMin(priceRanges[0][0]);
+        ydepositMax = priceRanges[0][1];
+        MyPageStore.setYDepositMax(priceRanges[0][1]);
+        break;
+      case 'PURCHASE':
+        purchaseMin = priceRanges[0][0];
+        MyPageStore.setPurchaseMin(priceRanges[0][0]);
+        purchaseMax = priceRanges[0][1];
+        MyPageStore.setPurchaseMax(priceRanges[0][1]);
+        break;
+    }
 
-      // TODO: add lat, lng
-      onBoarding(
-        location.address_name,
-        location.y,
-        location.x,
-        houseType,
-        mpriceMin,
-        mpriceMax,
-        mdepositMin,
-        mdepositMax,
-        ydepositMin,
-        ydepositMax,
-        purchaseMin,
-        purchaseMax,
-      )
-        .then((res) => {
-          // 회원정보 등록/수정 성공
-          if (res.code === StatusCode.MEMBER_INFO_UPDATE_SUCCESS) {
-            //전역변수에 값 저장
-            MyPageStore.setAddress(location.address_name);
-            MyPageStore.setLatitude(location.y);
-            MyPageStore.setLongitude(location.x);
-            MyPageStore.setRealEstateType(houseType);
-            MyPageStore.setTransactionType(priceType);
-            setStep('complete');
-          } else {
-            let isDefinedError = true;
-            let errorStep: Step;
-            switch (res.code) {
-              // 주소가 없거나 최대 입력 범위 초과
-              case StatusCode.ADDRESS_OVER_LENGTH:
-                isDefinedError = true;
-                errorStep = 'location';
-                break;
-              // 위도, 경도가 없거나 범위 초과
-              case StatusCode.INVALID_LAT_LNG:
-                errorStep = 'location';
-                break;
-              // 최소 가격이 없거나 0 이하
-              case StatusCode.INVALID_MIN_PRICE:
-                errorStep = 'price';
-                break;
-              // 최대 가격이 없거나 0 이하
-              case StatusCode.INVALID_MAX_PRICE:
-                errorStep = 'price';
-                break;
-              // 관심매물유형 오류
-              case StatusCode.INVALID_INTEREST_TYPE:
-                errorStep = 'type';
-                break;
-              default:
-                isDefinedError = false;
-            }
-
-            if (isDefinedError) {
-              modal
-                .open({
-                  title: '올바르지 않은 값이 있어요.',
-                  description: res.message,
-                  primaryButton: '다시 설정하기',
-                  secondaryButton: '나중에 설정하기',
-                })
-                .then((res) => {
-                  if (res === 'primary') setStep(errorStep);
-                  else navigate('/');
-                });
-            } else {
-              modal
-                .open({
-                  title: '오류가 발생했어요.',
-                  description: res.message,
-                  primaryButton: '나중에 설정하기',
-                })
-                .then((res) => {
-                  if (res === 'primary') navigate('/');
-                });
-            }
+    // TODO: add lat, lng
+    onBoarding(
+      location.address_name,
+      location.y,
+      location.x,
+      houseType,
+      mpriceMin,
+      mpriceMax,
+      mdepositMin,
+      mdepositMax,
+      ydepositMin,
+      ydepositMax,
+      purchaseMin,
+      purchaseMax,
+    )
+      .then((res) => {
+        // 회원정보 등록/수정 성공
+        if (res.code === StatusCode.MEMBER_INFO_UPDATE_SUCCESS) {
+          //전역변수에 값 저장
+          MyPageStore.setAddress(location.address_name);
+          MyPageStore.setLatitude(location.y);
+          MyPageStore.setLongitude(location.x);
+          MyPageStore.setRealEstateType(houseType);
+          MyPageStore.setTransactionType(priceType);
+          setStep('complete');
+        } else {
+          let isDefinedError = true;
+          let errorStep: Step;
+          switch (res.code) {
+            // 주소가 없거나 최대 입력 범위 초과
+            case StatusCode.ADDRESS_OVER_LENGTH:
+              isDefinedError = true;
+              errorStep = 'location';
+              break;
+            // 위도, 경도가 없거나 범위 초과
+            case StatusCode.INVALID_LAT_LNG:
+              errorStep = 'location';
+              break;
+            // 최소 가격이 없거나 0 이하
+            case StatusCode.INVALID_MIN_PRICE:
+              errorStep = 'price';
+              break;
+            // 최대 가격이 없거나 0 이하
+            case StatusCode.INVALID_MAX_PRICE:
+              errorStep = 'price';
+              break;
+            // 관심매물유형 오류
+            case StatusCode.INVALID_INTEREST_TYPE:
+              errorStep = 'type';
+              break;
+            default:
+              isDefinedError = false;
           }
-        })
-        .catch((err) => {
-          modal
-            .open({
-              title: '오류가 발생했어요.',
-              description: err.message,
-              primaryButton: '나중에 설정하기',
-            })
-            .then((res) => {
-              if (res === 'primary') navigate('/');
-            });
-        });
-    },
-    [],
-  );
+
+          if (isDefinedError) {
+            modal
+              .open({
+                title: '올바르지 않은 값이 있어요.',
+                description: res.message,
+                primaryButton: '다시 설정하기',
+                secondaryButton: '나중에 설정하기',
+              })
+              .then((res) => {
+                if (res === 'primary') setStep(errorStep);
+                else navigate('/');
+              });
+          } else {
+            modal
+              .open({
+                title: '오류가 발생했어요.',
+                description: res.message,
+                primaryButton: '나중에 설정하기',
+              })
+              .then((res) => {
+                if (res === 'primary') navigate('/');
+              });
+          }
+        }
+      })
+      .catch((err) => {
+        modal
+          .open({
+            title: '오류가 발생했어요.',
+            description: err.message,
+            primaryButton: '나중에 설정하기',
+          })
+          .then((res) => {
+            if (res === 'primary') navigate('/');
+          });
+      });
+  };
 
   // 프로그레스바 가로 길이를 계산하기 위한 값
   const progresses: Record<Step, number> = {
