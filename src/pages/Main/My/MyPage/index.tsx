@@ -171,6 +171,8 @@ const Mypage = () => {
                   {MyPageStore.transactionType === 'MONTHLY' &&
                     `~${getPriceString(
                       MyPageStore.mdepositMax ?? 0,
+                      true,
+                      true,
                     )} / ~${getPriceString(MyPageStore.mpriceMax ?? 0)}`}
                   {MyPageStore.transactionType === 'YEARLY' &&
                     `~${getPriceString(MyPageStore.ydepositMax ?? 0)}`}
