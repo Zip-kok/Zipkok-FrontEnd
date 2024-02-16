@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { PropertyComponents as Property } from 'components';
+import { BottomBtn, PropertyComponents as Property } from 'components';
 import useCustomKokStore from 'contexts/customKokStore';
 
 export default function Confirm() {
   const customKokStore = useCustomKokStore();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -24,6 +26,11 @@ export default function Confirm() {
         floor={customKokStore.floor}
         maintanenceFee={customKokStore.maintanenceFee}
         address={customKokStore.address}
+      />
+      <BottomBtn
+        onClick={() => navigate('/kok/edit/:kokId')}
+        text="콕리스트 작성하기"
+        occupySpace
       />
     </>
   );

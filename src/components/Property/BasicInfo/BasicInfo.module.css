@@ -104,6 +104,7 @@
 
 .map {
   height: 200px;
+  margin-bottom: 48px;
 }
 
 .map > img {
