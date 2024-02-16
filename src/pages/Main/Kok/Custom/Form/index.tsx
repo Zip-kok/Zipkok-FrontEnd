@@ -1,12 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { postRealEstate } from 'apis/postRealEstate';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn, TextInput } from 'components';
 import useAddressStore from 'contexts/addressStore';
 import useCustomKokStore from 'contexts/customKokStore';
 import useHistoryState from 'hooks/useHistoryState';
 import useRadioBtn from 'hooks/useRadioBtn';
+import { StatusCode } from 'types/StatusCode';
 
 import styles from './CustomProperty.module.css';
 
@@ -97,6 +99,22 @@ export default function CustomProperty() {
       customKokStore.setHouseType(houseType as HouseType);
       customKokStore.setPriceType(priceType as PriceType);
 
+      postRealEstate(
+        customKokStore.memo as string,
+        customKokStore.priceType,
+        customKokStore.houseType,
+        customKokStore.deposit as number,
+        customKokStore.price as number,
+        customKokStore.maintanenceFee as number,
+        customKokStore.address.address_name,
+        customKokStore.detailAddress as string,
+        customKokStore.address.x,
+        customKokStore.address.y,
+        customKokStore.area as number,
+        customKokStore.floor as number,
+      ).then((res) => {
+        res.result;
+      });
       navigate('./confirm');
     }
   }
