@@ -1,13 +1,14 @@
+import { Gender } from 'pages/SignIn';
+
 import api from './';
 
-import type { Gender } from 'pages/SignIn';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 // 사용자 프로필 업데이트를 위한 인터페이스 정의
 interface User {
-  file: string;
+  file: File;
   data: {
     nickname: string;
     birthday: string;
@@ -32,9 +33,13 @@ interface User {
  * 사용자 프로필 업데이트를 위한 PUT API 호출 함수
  */
 export async function putUser(user: User) {
-  const path = '/path/to/put/user/profile'; // 실제 API 경로로 수정 필요
+  const formData = new FormData();
+  formData.append('file', user.file);
+  formData.append('data', JSON.stringify(user.data));
+
+  const path = '/user';
   const method = 'PUT';
-  const body = user;
+  const headers = { 'Content-Type': 'multipart/form-data' };
   const authRequired = true;
 
   const res = await api<ZipkokResponse<undefined>>(
@@ -42,7 +47,8 @@ export async function putUser(user: User) {
     method,
     authRequired,
     undefined,
-    body,
+    formData,
+    headers,
   );
 
   return res;

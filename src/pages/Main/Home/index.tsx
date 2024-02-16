@@ -7,6 +7,7 @@ import pinIcon from 'assets/img/pinIcon/pin.svg';
 import { PropertyItem, BottomSheet } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
+import convertHouseTypeToString from 'utils/convertHouseTypeToString';
 import getPriceString from 'utils/getPriceString';
 
 import HomeBottomSheet from './BottomSheet';
@@ -106,7 +107,29 @@ export default function Home() {
         <>
           <div className={styles.bottomSheet}>
             <BottomSheet>
-              <Filter setFilterOpen={setFilterOpen} />
+              <Filter
+                setFilterOpen={setFilterOpen}
+                selectedHouseType={MyPageStore.realEstateType}
+                selectedPriceType={MyPageStore.transactionType}
+                prices={{
+                  mprice: [
+                    MyPageStore.mpriceMin ?? 0,
+                    MyPageStore.mpriceMax ?? 400_000,
+                  ],
+                  mdeposit: [
+                    MyPageStore.mdepositMin ?? 0,
+                    MyPageStore.mdepositMax ?? 60_000_000,
+                  ],
+                  ydeposit: [
+                    MyPageStore.ydepositMin ?? 0,
+                    MyPageStore.ydepositMax ?? 60_000_000,
+                  ],
+                  price: [
+                    MyPageStore.priceMin ?? 0,
+                    MyPageStore.priceMax ?? 120_000_000,
+                  ],
+                }}
+              />
             </BottomSheet>
           </div>
           <div className={styles.overlay} onClick={handleOverlayClick}></div>
@@ -131,7 +154,7 @@ export default function Home() {
             )}
             {MyPageStore.transactionType && (
               <div className={styles.filter} onClick={handleFilterClick}>
-                {MyPageStore.realEstateType}
+                {convertHouseTypeToString(MyPageStore.realEstateType)}
               </div>
             )}
             {MyPageStore.transactionType === '월세' ? (

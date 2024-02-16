@@ -21,7 +21,7 @@ export default function Type({ confirmHouseType, handleSkip }: TypeProps) {
   const navigate = useNavigate();
   const houseTypeOptions: { value: HouseType; content: JSX.Element }[] = [
     {
-      value: '아파트',
+      value: 'APARTMENT',
       content: (
         <>
           <img src={apartmentIcon}></img>
@@ -30,7 +30,7 @@ export default function Type({ confirmHouseType, handleSkip }: TypeProps) {
       ),
     },
     {
-      value: '원룸',
+      value: 'ONEROOM',
       content: (
         <>
           <img src={oneroomIcon}></img>
@@ -39,7 +39,7 @@ export default function Type({ confirmHouseType, handleSkip }: TypeProps) {
       ),
     },
     {
-      value: '빌라/투룸',
+      value: 'TWOROOM',
       content: (
         <>
           <img src={tworoomIcon}></img>
@@ -48,7 +48,7 @@ export default function Type({ confirmHouseType, handleSkip }: TypeProps) {
       ),
     },
     {
-      value: '오피스텔',
+      value: 'OFFICETELL',
       content: (
         <>
           <img src={officetelIcon}></img>

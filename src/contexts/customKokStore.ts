@@ -48,7 +48,7 @@ const initialState: CustomKokStore = {
   detailAddress: undefined,
   area: undefined,
   floor: undefined,
-  houseType: '원룸',
+  houseType: 'ONEROOM',
   priceType: '월세',
   nickName: undefined,
 

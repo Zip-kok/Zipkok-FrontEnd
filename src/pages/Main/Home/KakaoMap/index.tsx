@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { getDirection } from 'apis';
 import floating from 'assets/img/pinIcon/floating.svg';
 import selectedFloating from 'assets/img/pinIcon/floating_selected.svg';
 import pinIcon from 'assets/img/pinIcon/pin.svg';
@@ -69,6 +70,8 @@ const KakaoMap = ({
   const [coord, setCoord] = useState<[number, number]>();
   const [estateMakers, setEstateMarkers] = useState<any[]>([]);
   const [pinMarkers, setPinMarkers] = useState<any[]>([]);
+  const [lines, setLines] = useState<any[]>([]);
+  const [overlays, setOverlays] = useState<any[]>([]);
 
   // coord가 변경될 때마다 지도의 중심을 변경
   useEffect(() => {
@@ -236,6 +239,7 @@ const KakaoMap = ({
   useEffect(() => {
     if (map === undefined) return;
 
+    // 마커 투명도 업데이트
     estateMakers.forEach((marker) => {
       if (
         !selectedProprety ||
@@ -250,7 +254,74 @@ const KakaoMap = ({
         marker.setOpacity(1);
       else marker.setOpacity(0.5);
     });
+
+    // 라인 및 오버레이 삭제
+    lines.forEach((line) => line.setMap(null));
+    overlays.forEach((overlay) => overlay.setMap(null));
+
+    // 길찾기
+    if (selectedPin !== null) {
+      realEstatesInfo?.forEach((realEstateInfo) => {
+        getDirection(
+          {
+            name: selectedPin.name,
+            x: selectedPin.address.y,
+            y: selectedPin.address.x,
+          },
+          {
+            name: realEstateInfo.address,
+            x: realEstateInfo.latitude,
+            y: realEstateInfo.longitude,
+          },
+        ).then((res) => {
+          console.log(res);
+          const path: any[] = [];
+
+          res.routes[0].sections[0].roads.forEach((road) => {
+            for (let i = 0; i < road.vertexes.length; i += 2) {
+              path.push(
+                new window.kakao.maps.LatLng(
+                  road.vertexes[i + 1],
+                  road.vertexes[i],
+                ),
+              );
+            }
+          });
+          path.push(
+            new window.kakao.maps.LatLng(
+              realEstateInfo.longitude,
+              realEstateInfo.latitude,
+            ),
+          );
+
+          const overlay = new window.kakao.maps.CustomOverlay({
+            map: map,
+            position: path[Math.floor(path.length / 2)],
+            content: `<div class="${styles.overlay}">
+                ${Math.floor(res.routes[0].summary.duration / 60)}분
+              </div>`,
+          });
+
+          setOverlays((prev) => [...prev, overlay]);
+
+          const polyline = new window.kakao.maps.Polyline({
+            map: map,
+            path: path,
+            strokeWeight: 4,
+            strokeColor: '#FA4549',
+            strokeStyle: 'solid',
+            opacity: 1,
+          });
+
+          setLines((prev) => [...prev, polyline]);
+        });
+      });
+    }
   }, [map, selectedProprety, selectedPin]);
+
+  useEffect(() => {
+    if (!showPins) setSelectedPin(null);
+  }, [showPins]);
 
   return (
     <div className={styles.root}>

@@ -15,7 +15,7 @@ import NickName from './NickName';
 import styles from './SignIn.module.css';
 
 type Step = 'nickname' | 'gender' | 'birth' | 'complete';
-export type Gender = '남자' | '여자' | '비공개';
+export type Gender = 'MALE' | 'FEMALE' | 'DISCLOSURE';
 
 export default function SignIn() {
   const [step, setStep] = useState<Step>('nickname');

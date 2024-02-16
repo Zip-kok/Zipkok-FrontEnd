@@ -2,6 +2,7 @@ import { Address } from 'types/Address';
 
 import api from './';
 
+import type { Gender } from 'pages/SignIn';
 import type { HouseType } from 'types/HouseType';
 import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
@@ -10,7 +11,7 @@ export interface UserDetail {
   imageURL: string;
   nickname: string;
   birthday: string;
-  gender: string;
+  gender: Gender;
   address: Address;
   realEstateType: HouseType;
   transactionType: PriceType;

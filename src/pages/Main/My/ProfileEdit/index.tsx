@@ -51,9 +51,9 @@ const ProfileEdit = () => {
 
   // 성별 라디오 버튼
   const genderOptions: { value: Gender; content: string }[] = [
-    { value: '남자', content: '남' },
-    { value: '여자', content: '여' },
-    { value: '비공개', content: '비공개' },
+    { value: 'MALE', content: '남' },
+    { value: 'FEMALE', content: '여' },
+    { value: 'DISCLOSURE', content: '비공개' },
   ];
   const [GenderRadioBtnContainer, gender] = useRadioBtn<Gender>(
     genderOptions,
@@ -63,10 +63,10 @@ const ProfileEdit = () => {
 
   // 집 형태 라디오 버튼
   const houseTypeOptions: { value: HouseType; content: string }[] = [
-    { value: '원룸', content: '원룸' },
-    { value: '오피스텔', content: '오피스텔' },
-    { value: '아파트', content: '아파트' },
-    { value: '빌라/투룸', content: '빌라/투룸' },
+    { value: 'ONEROOM', content: '원룸' },
+    { value: 'OFFICETELL', content: '오피스텔' },
+    { value: 'APARTMENT', content: '아파트' },
+    { value: 'TWOROOM', content: '빌라/투룸' },
   ];
   const [HouseTypeRadioBtnContainer, houseType] = useRadioBtn<HouseType>(
     houseTypeOptions,
@@ -152,13 +152,15 @@ const ProfileEdit = () => {
                 purchaseMin: priceRanges[0][0],
                 purchaseMax: priceRanges[0][1],
               };
-      const response = await putUser({
-        file: imgSrc,
-        data: {
-          ...baseData,
-          ...priceData,
-        },
-      });
+
+      const imgres = await fetch(imgSrc);
+      const blob = await imgres.blob();
+      const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+      const userInfo = {
+        file: file,
+        data: { ...baseData, ...priceData },
+      };
+      const response = await putUser(userInfo);
 
       switch (response.code) {
         case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
@@ -202,7 +204,7 @@ const ProfileEdit = () => {
           });
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
       modal.open({
         title: '네트워크 오류',
         description:

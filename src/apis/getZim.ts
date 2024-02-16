@@ -61,21 +61,6 @@ export async function getZim() {
     }
   }
 
-  function convertHouseType(type: string): HouseType {
-    switch (type) {
-      case 'APARTMENT':
-        return '아파트';
-      case 'ONEROOM':
-        return '원룸';
-      case 'TWOROOM':
-        return '빌라/투룸';
-      case 'OFFICETELL':
-        return '오피스텔';
-      default:
-        return '아파트';
-    }
-  }
-
   return {
     ...res,
     result: {
@@ -83,7 +68,7 @@ export async function getZim() {
       realEstateInfo: res.result.realEstateInfo.map((realEstate) => ({
         ...realEstate,
         transactionType: convertTransactionType(realEstate.transactionType),
-        realestateType: convertHouseType(realEstate.realestateType),
+        realestateType: realEstate.realestateType,
       })),
     },
   } as ZipkokResponse<GetZimResult<RealEstate>>;

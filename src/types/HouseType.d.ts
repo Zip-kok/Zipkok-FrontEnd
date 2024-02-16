@@ -1,2 +1,2 @@
-type HouseType = '아파트' | '원룸' | '빌라/투룸' | '오피스텔';
+type HouseType = 'APARTMENT' | 'ONEROOM' | 'TWOROOM' | 'OFFICETELL';
 export type { HouseType };

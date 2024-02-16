@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { getUserDetail } from 'apis';
 import { Modal } from 'contexts/modalStore';
 import useModal from 'contexts/modalStore';
+import useMyPageStore from 'contexts/useMyPageStore';
+import isLoggedIn from 'utils/isLoggedIn';
 
 export default function Root() {
+  console.log('Root');
+  const MyPageStore = useMyPageStore((store) => store);
   const modal = useModal();
+  useEffect(() => {
+    if (isLoggedIn()) {
+      getUserDetail().then((res) => {
+        MyPageStore.setImageUrl(res.result.imageURL);
+        MyPageStore.setNickname(res.result.nickname);
+        MyPageStore.setBirthday(res.result.birthday);
+        MyPageStore.setGender(res.result.gender);
+        //api 수정필요
+        MyPageStore.setAddress(res.result.address);
+        MyPageStore.setRealEstateType(res.result.realEstateType);
+        MyPageStore.setTransactionType(res.result.transactionType);
+      });
+    }
+  }, []);
   return (
     <>
       {/* modal */}

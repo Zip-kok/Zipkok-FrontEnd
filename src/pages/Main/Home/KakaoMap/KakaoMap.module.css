@@ -21,3 +21,20 @@
   z-index: 1;
   padding: 10px;
 }
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 12px;
+  border-radius: 4px;
+  border: 2px solid var(--gray-color-gray030_text, #9fa4a9);
+  background: var(--gray-color-white, #fff);
+  color: var(--gray-color-gray080_text, #1b1d1f);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 166.667% */
+}

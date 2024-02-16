@@ -1,12 +1,13 @@
 import api from 'apis';
 
+import type { Gender } from 'pages/SignIn';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface ProfileEditInfo {
   imageUrl: string;
   nickname: string;
   birthday: string;
-  gender: string;
+  gender: Gender;
   address: string;
   realEstateType: string;
   transactionType: string;

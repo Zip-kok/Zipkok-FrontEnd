@@ -10,7 +10,7 @@ export async function onBoarding(
   address: string,
   latitude: number,
   longitude: number,
-  houseType: HouseType,
+  realEstateType: HouseType,
   mpriceMin: number,
   mpriceMax: number,
   mdepositMin: number,
@@ -20,22 +20,6 @@ export async function onBoarding(
   purchaseMin: number,
   purchaseMax: number,
 ) {
-  let realEstateType: string;
-  switch (houseType) {
-    case '빌라/투룸':
-      realEstateType = 'TWOROOM';
-      break;
-    case '아파트':
-      realEstateType = 'APARTMENT';
-      break;
-    case '오피스텔':
-      realEstateType = 'OFFICETELL';
-      break;
-    case '원룸':
-      realEstateType = 'ONEROOM';
-      break;
-  }
-
   const path = '/user';
   const method = 'PATCH';
   const body = {

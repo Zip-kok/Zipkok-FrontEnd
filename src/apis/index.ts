@@ -4,7 +4,9 @@ import Cookies from 'js-cookie';
 import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
 import { deletePin } from './deletePin';
+import { deleteUser } from './deleteUser';
 import { deleteZim } from './deleteZim';
+import { getDirection } from './getDirection';
 import { getKokContract } from './getKokContract';
 import { getKokDetail } from './getKokDetail';
 import { getKokInner } from './getKokInner';
@@ -24,6 +26,7 @@ import { logout } from './logout';
 import { onBoarding } from './onBoarding';
 import { patchPin } from './patchPin';
 import { postPin } from './postPin';
+import { putUser } from './putUser';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
 import { refreshTokens } from './refreshTokens';
 import { searchAddress } from './searchAddress';
@@ -32,7 +35,9 @@ import { zim } from './zim';
 
 export {
   deletePin,
+  deleteUser,
   searchAddress,
+  getDirection,
   signIn,
   kakaoLogin,
   refreshTokens,
@@ -57,6 +62,7 @@ export {
   patchPin,
   getRealEstateInfo,
   getUserKokList,
+  putUser,
 };
 
 /**
