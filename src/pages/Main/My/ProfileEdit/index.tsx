@@ -163,7 +163,7 @@ const ProfileEdit = () => {
         file: file,
         data: { ...baseData, ...priceData },
       };
-      const response = await putUser(userInfo);
+      const response = await putUser(file, userInfo);
 
       switch (response.code) {
         case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:

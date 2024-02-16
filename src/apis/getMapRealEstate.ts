@@ -1,11 +1,13 @@
 import api from '.';
 
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface MapRealEstate {
   filter: {
-    transactionType: string;
-    realEstateType: string;
+    transactionType: PriceType;
+    realEstateType: HouseType;
     mdepositMin: number;
     mdepositMax: number;
     mpriceMin: number;
@@ -21,8 +23,8 @@ export interface MapRealEstate {
       imageURL: string;
       deposit: number;
       price: number;
-      transactionType: string;
-      realEstateType: string;
+      transactionType: PriceType;
+      realEstateType: HouseType;
       address: string;
       detailAddress: string;
       latitude: number;

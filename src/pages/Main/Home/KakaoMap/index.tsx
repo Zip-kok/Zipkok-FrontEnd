@@ -9,7 +9,9 @@ import spot from 'assets/img/pinIcon/spot.svg';
 
 import styles from './KakaoMap.module.css';
 
+import type { HouseType } from 'types/HouseType';
 import type { Pin } from 'types/Pin';
+import type { PriceType } from 'types/PriceType';
 
 declare global {
   interface Window {
@@ -28,8 +30,8 @@ export interface realEstateInfo {
   imageURL: string;
   deposit: number;
   price: number;
-  transactionType: string;
-  realEstateType: string;
+  transactionType: PriceType;
+  realEstateType: HouseType;
   address: string;
   detailAddress: string;
   latitude: number;

@@ -1,5 +1,7 @@
 import api from '.';
 
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface UserKokList {
@@ -9,8 +11,8 @@ export interface UserKokList {
     address: string;
     detailAddress: string;
     estateAgent: string;
-    transactionType: string;
-    realEstateType: string;
+    transactionType: PriceType;
+    realEstateType: HouseType;
     deposit: number;
     price: number;
     isZimmed: boolean;

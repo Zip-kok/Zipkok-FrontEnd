@@ -1,5 +1,7 @@
 import api from 'apis';
 
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 interface postRealEstateInfo {
   realEstateId: number;
@@ -10,8 +12,8 @@ interface postRealEstateInfo {
 
 export async function postRealEstate(
   realEstateName: string,
-  transactionType: string,
-  realEstateType: string,
+  transactionType: PriceType,
+  realEstateType: HouseType,
   deposit: number,
   price: number,
   administrativeFee: number,

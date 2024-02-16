@@ -1,6 +1,8 @@
 import api from 'apis';
 
 import type { Gender } from 'pages/SignIn';
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface ProfileEditInfo {
@@ -9,8 +11,8 @@ export interface ProfileEditInfo {
   birthday: string;
   gender: Gender;
   address: string;
-  realEstateType: string;
-  transactionType: string;
+  realEstateType: HouseType;
+  transactionType: PriceType;
   mpriceMin: number;
   mpriceMax: number;
   mdepositMin: number;

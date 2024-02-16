@@ -1,5 +1,7 @@
 import api from './';
 
+import type { HouseType } from 'types/HouseType';
+import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface GetRealEstateInfoResult {
@@ -9,20 +11,27 @@ export interface GetRealEstateInfoResult {
     imageURL: string[];
   };
   address: string;
-  detailAddress: string;
-  transactionType: string;
+  detailAddress: string | null;
+  transactionType: PriceType;
   deposit: number;
   price: number;
-  detail: string;
-  areaSize: number;
-  pyeongsu: number;
-  realEstateType: string;
-  floorNum: number;
+  detail: string | null;
+  areaSize: number | null;
+  pyeongsu: number | null;
+  realEstateType: HouseType;
+  floorNum: number | null;
   administrativeFee: number;
   latitude: number;
   longitude: number;
   isZimmed: boolean;
   isKokked: boolean;
+  neighborRealEstates: {
+    realEstateId: number;
+    address: string;
+    deposit: number;
+    imageUrl: string;
+    price: number;
+  }[];
 }
 
 /**

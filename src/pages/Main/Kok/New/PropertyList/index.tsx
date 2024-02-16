@@ -5,7 +5,6 @@ import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn, TextInput, PropertyItem, IconBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
-import properties from 'models/properties';
 
 import styles from './PropertyList.module.css';
 
@@ -42,7 +41,7 @@ export default function PropertyList() {
       </div>
 
       <div className={styles.propertyContainer}>
-        {properties.map((property) => (
+        {/* properties.map((property) => (
           <PropertyItem
             key={property.id}
             id={property.id}
@@ -56,7 +55,7 @@ export default function PropertyList() {
             imageUrl={property.imageUrl}
             kokList={property.kokList}
           />
-        ))}
+        )) */}
       </div>
 
       <BottomBtn

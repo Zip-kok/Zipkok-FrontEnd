@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserKokList } from 'apis';
 import { UserKokList } from 'apis/getUserKokList';
 import checkIcon from 'assets/img/line(2)/check.svg';
+import listIcon from 'assets/img/line(2)/list_default.svg';
 import { ReactComponent as PenIcon } from 'assets/img/line(2)/pen_white.svg';
 import { BottomBtn, PropertyItem } from 'components';
 import useCustomKokStore from 'contexts/customKokStore';
@@ -91,7 +92,7 @@ export default function Koklist() {
           dataLength={propertyList?.koks.length || 0}
           next={getMoreData}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={<></>}
         >
           {propertyList && propertyList.koks.length > 0 ? (
             propertyList.koks.map((property: any) => (
@@ -111,7 +112,14 @@ export default function Koklist() {
               />
             ))
           ) : (
-            <div className={styles.noKokList}>콕 리스트가 없습니다.</div>
+            <div className={styles.noKokList}>
+              <img src={listIcon}></img>
+              <div>
+                콕리스트가 없어요
+                <br />
+                새로운 콕리스트를 작성해주세요
+              </div>
+            </div>
           )}
         </InfiniteScroll>
       </div>
