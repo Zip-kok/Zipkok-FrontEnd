@@ -51,7 +51,7 @@ export default function Search() {
       ]),
     );
 
-    setAddress(address);
+    setAddress(address, 'home_search');
     navigate(-1);
   }
 
@@ -67,7 +67,7 @@ export default function Search() {
       ]),
     );
 
-    setAddress(history.address);
+    setAddress(history.address, 'home_search');
     navigate(-1);
   }
 
