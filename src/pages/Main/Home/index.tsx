@@ -33,7 +33,7 @@ export default function Home() {
   const [pins, setPins] = useState<Pin[]>([]);
   const [mapRealEstate, setMapRealEstate] = useState<MapRealEstate>();
   const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
   const [initialLocation, setInitialLocation] = useState<{
     lat?: number;
     lng?: number;
@@ -69,8 +69,8 @@ export default function Home() {
       addressStore.resetSrc();
     } else if (MyPageStore.address !== undefined) {
       setInitialLocation({
-        lat: MyPageStore.address.y,
-        lng: MyPageStore.address.x,
+        lat: MyPageStore.latitude,
+        lng: MyPageStore.longitude,
         initialized: true,
       });
     } else {
@@ -111,7 +111,7 @@ export default function Home() {
     MyPageStore.mpriceMax,
     MyPageStore.mdepositMax,
     MyPageStore.ydepositMax,
-    MyPageStore.priceMax,
+    MyPageStore.purchaseMax,
   ]);
 
   const navigate = useNavigate();
@@ -157,8 +157,8 @@ export default function Home() {
                     MyPageStore.ydepositMax ?? 60_000_000,
                   ],
                   price: [
-                    MyPageStore.priceMin ?? 0,
-                    MyPageStore.priceMax ?? 120_000_000,
+                    MyPageStore.purchaseMin ?? 0,
+                    MyPageStore.purchaseMax ?? 120_000_000,
                   ],
                 }}
               />
@@ -208,7 +208,7 @@ export default function Home() {
                 )}
                 {MyPageStore.transactionType === 'PURCHASE' && (
                   <div className={styles.filter} onClick={handleFilterClick}>
-                    {`~${getPriceString(MyPageStore.priceMax!, true)}`}
+                    {`~${getPriceString(MyPageStore.purchaseMax!, true)}`}
                   </div>
                 )}
               </>

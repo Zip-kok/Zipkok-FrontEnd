@@ -5,13 +5,12 @@ import { getUserDetail } from 'apis';
 import { Modal } from 'contexts/modalStore';
 import useModal from 'contexts/modalStore';
 import useMyPageStore from 'contexts/useMyPageStore';
-import MyPageStore from 'contexts/useMyPageStore';
 import isLoggedIn from 'utils/isLoggedIn';
 
 export default function Root() {
   console.log('Root');
   const modal = useModal();
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
   useEffect(() => {
     if (isLoggedIn()) {
       getUserDetail().then((res) => {
@@ -19,8 +18,9 @@ export default function Root() {
         MyPageStore.setNickname(res.result.nickname);
         MyPageStore.setBirthday(res.result.birthday);
         MyPageStore.setGender(res.result.gender);
-        //api 수정필요
         MyPageStore.setAddress(res.result.address);
+        MyPageStore.setLatitude(res.result.latitude);
+        MyPageStore.setLongitude(res.result.longitude);
         MyPageStore.setRealEstateType(res.result.realEstateType);
         MyPageStore.setTransactionType(res.result.transactionType);
       });

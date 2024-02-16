@@ -62,7 +62,7 @@ export default function Filter({
     [0, 60_000_000],
     [0, 400_000],
   ]);
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
 
   const handelSaveBtnClick = () => {
     if (houseType === undefined || priceType === undefined) return;
@@ -78,10 +78,10 @@ export default function Filter({
       MyPageStore.setMPriceMin(monthlyRange[0]);
       MyPageStore.setMPriceMax(monthlyRange[1]);
 
-      MyPageStore.setYDepositMin(undefined);
-      MyPageStore.setYDepositMax(undefined);
-      MyPageStore.setYDepositMin(undefined);
-      MyPageStore.setYDepositMax(undefined);
+      MyPageStore.setYDepositMin(0);
+      MyPageStore.setYDepositMax(0);
+      MyPageStore.setYDepositMin(0);
+      MyPageStore.setYDepositMax(0);
 
       patchUserFilter(
         priceType,
@@ -97,12 +97,12 @@ export default function Filter({
       MyPageStore.setYDepositMin(depositRange[0]);
       MyPageStore.setYDepositMax(depositRange[1]);
 
-      MyPageStore.setMDepositMin(undefined);
-      MyPageStore.setMDepositMax(undefined);
-      MyPageStore.setMPriceMin(undefined);
-      MyPageStore.setMPriceMax(undefined);
-      MyPageStore.setPriceMin(undefined);
-      MyPageStore.setPriceMax(undefined);
+      MyPageStore.setMDepositMin(0);
+      MyPageStore.setMDepositMax(0);
+      MyPageStore.setMPriceMin(0);
+      MyPageStore.setMPriceMax(0);
+      MyPageStore.setPurchaseMin(0);
+      MyPageStore.setPurchaseMax(0);
 
       patchUserFilter(
         priceType,
@@ -115,15 +115,15 @@ export default function Filter({
     } else if (priceType === 'PURCHASE') {
       // 매매의 경우, 가격 범위만
       const [purchaseRange] = priceRanges;
-      MyPageStore.setPriceMin(purchaseRange[0]);
-      MyPageStore.setPriceMax(purchaseRange[1]);
+      MyPageStore.setPurchaseMin(purchaseRange[0]);
+      MyPageStore.setPurchaseMax(purchaseRange[1]);
 
-      MyPageStore.setYDepositMin(undefined);
-      MyPageStore.setYDepositMax(undefined);
-      MyPageStore.setMDepositMin(undefined);
-      MyPageStore.setMDepositMax(undefined);
-      MyPageStore.setMPriceMin(undefined);
-      MyPageStore.setMPriceMax(undefined);
+      MyPageStore.setYDepositMin(0);
+      MyPageStore.setYDepositMax(0);
+      MyPageStore.setMDepositMin(0);
+      MyPageStore.setMDepositMax(0);
+      MyPageStore.setMPriceMin(0);
+      MyPageStore.setMPriceMax(0);
 
       patchUserFilter(
         priceType,

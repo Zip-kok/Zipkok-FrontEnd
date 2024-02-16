@@ -7,9 +7,6 @@ import { getUserDetail } from 'apis';
 import useEmailStore from 'contexts/emailStore';
 import useModal from 'contexts/modalStore';
 import useMyPageStore from 'contexts/useMyPageStore';
-import MyPageStore from 'contexts/useMyPageStore';
-import { Gender } from 'pages/SignIn';
-import { Address } from 'types/Address';
 import storeToken from 'utils/storeToken';
 
 export default function Auth() {
@@ -17,7 +14,7 @@ export default function Auth() {
   const navigate = useNavigate();
   const modal = useModal();
   const setEmail = useEmailStore((store) => store.setEmail);
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
 
@@ -49,6 +46,8 @@ export default function Auth() {
               MyPageStore.setGender(res.result.gender);
               //api 수정필요
               MyPageStore.setAddress(res.result.address);
+              MyPageStore.setLatitude(res.result.latitude);
+              MyPageStore.setLongitude(res.result.longitude);
               MyPageStore.setRealEstateType(res.result.realEstateType);
               MyPageStore.setTransactionType(res.result.transactionType);
             });

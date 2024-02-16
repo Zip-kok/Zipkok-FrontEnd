@@ -12,7 +12,9 @@ export interface UserDetail {
   nickname: string;
   birthday: string;
   gender: Gender;
-  address: Address;
+  address: string;
+  longitude: number;
+  latitude: number;
   realEstateType: HouseType;
   transactionType: PriceType;
   mpriceMin: number;

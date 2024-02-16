@@ -4,13 +4,10 @@ import type { Gender } from 'pages/SignIn';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 interface SignInResult {
-  isMember: boolean;
-  authTokens: {
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
-    refreshTokenExpiresIn: number;
-  };
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+  refreshTokenExpiresIn: number;
 }
 
 /**

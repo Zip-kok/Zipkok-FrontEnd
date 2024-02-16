@@ -24,7 +24,7 @@ export type PriceRange = [number, number];
 export default function Onboarding() {
   const navigate = useNavigate();
   const modal = useModal();
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
 
   function handleSkip() {
     modal
@@ -126,9 +126,9 @@ export default function Onboarding() {
           break;
         case 'PURCHASE':
           purchaseMin = priceRanges[0][0];
-          MyPageStore.setPriceMin(priceRanges[0][0]);
+          MyPageStore.setPurchaseMin(priceRanges[0][0]);
           purchaseMax = priceRanges[0][1];
-          MyPageStore.setPriceMax(priceRanges[0][1]);
+          MyPageStore.setPurchaseMax(priceRanges[0][1]);
           break;
       }
 

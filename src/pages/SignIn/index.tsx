@@ -22,7 +22,7 @@ export default function SignIn() {
   const [step, setStep] = useState<Step>('nickname');
   const navigate = useNavigate();
   const modal = useModal();
-  const MyPageStore: any = useMyPageStore();
+  const MyPageStore = useMyPageStore();
   const email = useEmailStore((store) => store.email);
 
   const steps: Record<Step, JSX.Element> = {
@@ -76,7 +76,7 @@ export default function SignIn() {
               refreshToken,
               expiresIn,
               refreshTokenExpiresIn,
-            } = res.result.authTokens;
+            } = res.result;
             storeToken(
               accessToken,
               refreshToken,
