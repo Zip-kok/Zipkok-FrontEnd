@@ -26,7 +26,6 @@ export default function getPriceString(
   }
   const trimmed = result.trim();
   const withoutPostBillionChars = trimmed.replace(/억.*/, '억');
-  console.log(withoutPostBillionChars);
   if (trimmed === '') result = '0';
   if (omit) {
     return withoutPostBillionChars;

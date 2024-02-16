@@ -24,7 +24,6 @@ export async function patchUserFilter(
     depositMin,
     depositMax,
   };
-  console.log(body);
   const authRequired = true;
 
   const res = await api<ZipkokResponse<undefined>>(
