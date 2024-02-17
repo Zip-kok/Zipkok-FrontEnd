@@ -22,7 +22,7 @@ export default function Write() {
   const [pin, setPin] = useState<PinWithoutId>({
     name: '',
     address: {
-      address_name: '',
+      addressName: '',
       x: 0,
       y: 0,
     },
@@ -51,7 +51,7 @@ export default function Write() {
     setPin((prev) => ({
       ...prev,
       address: {
-        address_name: address.address_name,
+        addressName: address.address_name,
         x: address.x,
         y: address.y,
       },
@@ -64,7 +64,7 @@ export default function Write() {
       id: pinId !== undefined ? parseInt(pinId) : undefined,
       name,
       address: {
-        address_name: `${pin.address.address_name} ${detailAddress}`,
+        addressName: `${pin.address.addressName} ${detailAddress}`,
         x: pin.address.x,
         y: pin.address.y,
       },
@@ -91,13 +91,29 @@ export default function Write() {
             <AddressPage
               confirmLocation={handleAddressSubmit}
               showMap={() => setStep('map')}
-              defaultAddress={pinId !== undefined ? pin.address : undefined}
+              defaultAddress={
+                pinId !== undefined
+                  ? {
+                      address_name: pin.address.addressName,
+                      x: pin.address.x,
+                      y: pin.address.y,
+                    }
+                  : undefined
+              }
             />
           )}
           {step === 'map' && (
             <Map
               confirmLocation={handleAddressSubmit}
-              defaultAddress={pinId !== undefined ? pin.address : undefined}
+              defaultAddress={
+                pinId !== undefined
+                  ? {
+                      address_name: pin.address.addressName,
+                      x: pin.address.x,
+                      y: pin.address.y,
+                    }
+                  : undefined
+              }
             />
           )}
           {step === 'name' && <Name pin={pin} confirm={handlePinSubmit} />}
