@@ -19,14 +19,15 @@ export default function LocationEdit() {
   }, []);
 
   const navigate = useNavigate();
-  const setAddress = useAddressStore((state) => state.setAddress);
+  const addressStore = useAddressStore();
 
   return (
     <AddressSearchPage
       confirmLocation={(address) => {
-        setAddress(address);
+        addressStore.setAddress(address, 'profileEdit');
         navigate(-1);
       }}
+      defaultAddress={addressStore.address}
       skippable={false}
     />
   );

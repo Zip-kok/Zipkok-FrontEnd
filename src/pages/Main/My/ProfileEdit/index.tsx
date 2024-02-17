@@ -35,20 +35,16 @@ const ProfileEdit = () => {
   // 주소 설정
   const address = useAddressStore();
   useEffect(() => {
-    address.setAddress({
-      address_name: MyPageStore.address,
-      x: MyPageStore.longitude,
-      y: MyPageStore.latitude,
-    });
-  }, []);
-  useEffect(() => {
+    if (address.src !== 'profileEdit') return;
+
     setInput((prev) => ({
       ...prev,
       address: address.address.address_name,
       latitude: address.address.y,
       longitude: address.address.x,
     }));
-  }, [address]);
+    address.resetSrc();
+  }, [address.address, address.src]);
 
   const [input, setInput] = useState<UserInfoInput>({
     ...MyPageStore,
@@ -362,7 +358,7 @@ const ProfileEdit = () => {
         <div className={styles.inputContainer}>
           <p className={styles.title}>희망 거주지역</p>
           <TextInput
-            value={MyPageStore.address}
+            value={input.address}
             icon={searchIcon}
             style="roundedBox"
             onClick={() => navigate('/my/profileEdit/locationEdit')}
