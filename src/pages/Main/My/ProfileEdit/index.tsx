@@ -32,6 +32,24 @@ const ProfileEdit = () => {
   const MyPageStore = useMyPageStore();
   const modal = useModal();
 
+  // 주소 설정
+  const address = useAddressStore();
+  useEffect(() => {
+    address.setAddress({
+      address_name: MyPageStore.address,
+      x: MyPageStore.longitude,
+      y: MyPageStore.latitude,
+    });
+  }, []);
+  useEffect(() => {
+    setInput((prev) => ({
+      ...prev,
+      address: address.address.address_name,
+      latitude: address.address.y,
+      longitude: address.address.x,
+    }));
+  }, [address]);
+
   const [input, setInput] = useState<UserInfoInput>({
     ...MyPageStore,
     imageUrl: undefined,
@@ -82,10 +100,21 @@ const ProfileEdit = () => {
       }));
   }, [priceRanges]);
   useEffect(() => {
-    setPriceRanges([
-      [input.mdepositMin, input.mdepositMax],
-      [input.mpriceMin, input.mpriceMax],
-    ] as PriceRange[]);
+    if (MyPageStore.transactionType === 'MONTHLY')
+      setPriceRanges([
+        [MyPageStore.mdepositMin || 0, MyPageStore.mdepositMax || 60_000_000],
+        [MyPageStore.mpriceMin || 0, MyPageStore.mpriceMax || 400_000],
+      ]);
+    else if (MyPageStore.transactionType === 'YEARLY')
+      setPriceRanges([
+        [MyPageStore.ydepositMin || 0, MyPageStore.ydepositMax || 60_000_000],
+        [0, 0],
+      ]);
+    else if (MyPageStore.transactionType === 'PURCHASE')
+      setPriceRanges([
+        [MyPageStore.purchaseMin || 0, MyPageStore.purchaseMax || 120_000_000],
+        [0, 0],
+      ]);
   }, [input.transactionType]);
 
   useEffect(() => {
@@ -164,17 +193,6 @@ const ProfileEdit = () => {
   }, [birthday]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // 주소 설정
-  const address = useAddressStore((state) => state.address);
-  useEffect(() => {
-    setInput((prev) => ({
-      ...prev,
-      address: address.address_name,
-      latitude: address.y,
-      longitude: address.x,
-    }));
-  }, [address]);
 
   const defaultValues: Record<PriceType, PriceRange[]> = {
     MONTHLY: [
