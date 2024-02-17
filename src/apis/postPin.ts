@@ -12,7 +12,7 @@ export const postPin = async (pin: PinWithoutId) => {
   const path = `/pin`;
   const method = 'POST';
   const body = {
-    pin,
+    ...pin,
   };
   const authRequired = true;
   const res = await api<ZipkokResponse<undefined>>(

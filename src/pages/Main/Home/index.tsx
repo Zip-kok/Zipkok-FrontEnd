@@ -18,6 +18,7 @@ import { Filter, SearchBox } from './components';
 import styles from './Home.module.css';
 import KakaoMap, { realEstateInfo } from './KakaoMap';
 
+import type { PinResult } from 'apis/getPin';
 import type { Pin } from 'types/Pin';
 
 interface mapLocationInfo {
@@ -57,7 +58,7 @@ export default function Home() {
     }));
 
     if (isLoggedIn()) {
-      getPin().then((res) => setPins(res.result as Pin[]));
+      getPin().then((res) => setPins((res.result as PinResult).pinList));
     }
   }, []);
 

@@ -8,6 +8,7 @@ import useUIStore from 'contexts/uiStore';
 
 import styles from './Pin.module.css';
 
+import type { PinResult } from 'apis/getPin';
 import type { Pin } from 'types/Pin';
 
 export default function Pin() {
@@ -25,7 +26,7 @@ export default function Pin() {
     }));
 
     getPin().then((res) => {
-      setPins(res.result as Pin[]);
+      setPins((res.result as PinResult).pinList);
     });
   }, []);
 
