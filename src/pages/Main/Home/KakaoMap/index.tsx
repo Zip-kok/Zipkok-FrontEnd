@@ -323,7 +323,7 @@ const KakaoMap = ({
         });
       });
     }
-  }, [map, selectedProprety, selectedPin]);
+  }, [map, selectedProprety, selectedPin, realEstatesInfo]);
 
   useEffect(() => {
     if (!showPins) setSelectedPin(null);
