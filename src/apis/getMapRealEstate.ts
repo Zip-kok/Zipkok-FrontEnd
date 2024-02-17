@@ -1,3 +1,5 @@
+import isLoggedIn from 'utils/isLoggedIn';
+
 import api from '.';
 
 import type { HouseType } from 'types/HouseType';
@@ -50,15 +52,26 @@ export const getMapRealEstate = async (
     northEastLat,
     northEastLon,
   };
-  const authRequired = true;
 
-  const res = await api<ZipkokResponse<MapRealEstate>>(
-    path,
-    method,
-    authRequired,
-    params,
-    undefined,
-    undefined,
-  );
-  return res as ZipkokResponse<MapRealEstate>;
+  if (isLoggedIn()) {
+    const res = await api<ZipkokResponse<MapRealEstate>>(
+      path,
+      method,
+      true,
+      params,
+      undefined,
+      undefined,
+    );
+    return res as ZipkokResponse<MapRealEstate>;
+  } else {
+    const res = await api<ZipkokResponse<MapRealEstate>>(
+      path,
+      method,
+      false,
+      params,
+      undefined,
+      undefined,
+    );
+    return res as ZipkokResponse<MapRealEstate>;
+  }
 };

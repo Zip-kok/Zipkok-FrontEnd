@@ -13,6 +13,7 @@ export default function Root() {
   useEffect(() => {
     if (isLoggedIn()) {
       getUserDetail().then((res) => {
+        console.log(res.result);
         MyPageStore.setImageUrl(res.result.imageUrl);
         MyPageStore.setNickname(res.result.nickname);
         MyPageStore.setBirthday(res.result.birthday);
@@ -22,6 +23,14 @@ export default function Root() {
         MyPageStore.setLongitude(res.result.longitude);
         MyPageStore.setRealEstateType(res.result.realEstateType);
         MyPageStore.setTransactionType(res.result.transactionType);
+        MyPageStore.setMPriceMin(res.result.mpriceMin);
+        MyPageStore.setMPriceMax(res.result.mpriceMax);
+        MyPageStore.setMDepositMin(res.result.mdepositMin);
+        MyPageStore.setMDepositMax(res.result.mdepositMax);
+        MyPageStore.setYDepositMin(res.result.ydepositMin);
+        MyPageStore.setYDepositMax(res.result.ydepositMax);
+        MyPageStore.setPurchaseMin(res.result.priceMin);
+        MyPageStore.setPurchaseMax(res.result.priceMax);
       });
     }
   }, []);

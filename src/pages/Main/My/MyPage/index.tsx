@@ -103,6 +103,22 @@ const Mypage = () => {
     navigate('./kokEdit');
   };
   const handlePinClick = () => {
+    if (!isLoggedIn()) {
+      modal
+        .open({
+          title: '로그인이 필요한 서비스입니다.',
+          description: '로그인 후 이용해주세요.',
+          primaryButton: '로그인',
+          secondaryButton: '돌아가기',
+        })
+        .then((res) => {
+          if (res === 'primary') {
+            navigate('/login');
+          }
+        });
+      return;
+    }
+
     navigate('./pin');
   };
   const handleRecentClick = () => {};

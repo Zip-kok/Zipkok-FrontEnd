@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { patchUserFilter } from 'apis/patchUserFilter';
 import BottomBtn from 'components/BottomBtn';
 import useMyPageStore from 'contexts/useMyPageStore';
-import MyPageStore from 'contexts/useMyPageStore';
 import useRadioBtn from 'hooks/useRadioBtn';
 import Jeonse from 'pages/Onboarding/Price/priceSlider/Jeonse';
 import Monthly from 'pages/Onboarding/Price/priceSlider/Monthly';
 import Purchase from 'pages/Onboarding/Price/priceSlider/Purchase';
+import isLoggedIn from 'utils/isLoggedIn';
 
 import styles from './Filter.module.css';
 
@@ -64,7 +64,7 @@ export default function Filter({
   ]);
   const MyPageStore = useMyPageStore();
 
-  const handelSaveBtnClick = () => {
+  const handleSaveBtnClick = () => {
     if (houseType === undefined || priceType === undefined) return;
 
     MyPageStore.setRealEstateType(houseType);
@@ -83,14 +83,15 @@ export default function Filter({
       MyPageStore.setYDepositMin(0);
       MyPageStore.setYDepositMax(0);
 
-      patchUserFilter(
-        priceType,
-        houseType,
-        monthlyRange[0],
-        monthlyRange[1],
-        depositRange[0],
-        depositRange[1],
-      ).then((res) => res);
+      if (isLoggedIn())
+        patchUserFilter(
+          priceType,
+          houseType,
+          monthlyRange[0],
+          monthlyRange[1],
+          depositRange[0],
+          depositRange[1],
+        ).then((res) => res);
     } else if (priceType === 'YEARLY') {
       // 전세의 경우, 보증금 범위만
       const [depositRange] = priceRanges;
@@ -104,14 +105,15 @@ export default function Filter({
       MyPageStore.setPurchaseMin(0);
       MyPageStore.setPurchaseMax(0);
 
-      patchUserFilter(
-        priceType,
-        houseType,
-        0,
-        0,
-        depositRange[0],
-        depositRange[1],
-      ).then((res) => res);
+      if (isLoggedIn())
+        patchUserFilter(
+          priceType,
+          houseType,
+          0,
+          0,
+          depositRange[0],
+          depositRange[1],
+        ).then((res) => res);
     } else if (priceType === 'PURCHASE') {
       // 매매의 경우, 가격 범위만
       const [purchaseRange] = priceRanges;
@@ -125,14 +127,15 @@ export default function Filter({
       MyPageStore.setMPriceMin(0);
       MyPageStore.setMPriceMax(0);
 
-      patchUserFilter(
-        priceType,
-        houseType,
-        purchaseRange[0],
-        purchaseRange[1],
-        0,
-        0,
-      ).then((res) => res);
+      if (isLoggedIn())
+        patchUserFilter(
+          priceType,
+          houseType,
+          purchaseRange[0],
+          purchaseRange[1],
+          0,
+          0,
+        ).then((res) => res);
     }
 
     // 저장하면 필터 내리기
@@ -188,7 +191,7 @@ export default function Filter({
         </div>
       </div>
       <div style={{ height: '70px' }}></div>
-      <BottomBtn text="저장" onClick={handelSaveBtnClick} />
+      <BottomBtn text="저장" onClick={handleSaveBtnClick} />
     </div>
   );
 }

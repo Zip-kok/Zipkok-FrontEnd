@@ -8,10 +8,10 @@ import { PropertyItem, BottomSheet } from 'components';
 import useAddressStore from 'contexts/addressStore';
 import useUIStore from 'contexts/uiStore';
 import useMyPageStore from 'contexts/useMyPageStore';
-import MyPageStore from 'contexts/useMyPageStore';
 import convertHouseTypeToString from 'utils/convertHouseTypeToString';
 import convertPriceTypeToString from 'utils/convertPriceTypeToString';
 import getPriceString from 'utils/getPriceString';
+import isLoggedIn from 'utils/isLoggedIn';
 
 import HomeBottomSheet from './BottomSheet';
 import { Filter, SearchBox } from './components';
@@ -56,7 +56,9 @@ export default function Home() {
       path: 'home',
     }));
 
-    getPin().then((res) => setPins(res.result as Pin[]));
+    if (isLoggedIn()) {
+      getPin().then((res) => setPins(res.result as Pin[]));
+    }
   }, []);
 
   useLayoutEffect(() => {
