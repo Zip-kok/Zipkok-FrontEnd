@@ -6,14 +6,14 @@ import useUIStore from 'contexts/uiStore';
 export default function Kok() {
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
+    ui.setUI({
       naviEnabled: false,
-      headerIcon: undefined,
+      headerEnabled: true,
       headerTitle: '매물 직접 등록하기',
       headerBackButtonEnabled: true,
       headerRightButtons: [],
-    }));
+      path: 'kok',
+    });
   }, []);
 
   return <Outlet />;

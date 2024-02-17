@@ -26,14 +26,14 @@ const Tags = [
 export default function KokReview() {
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '발품 후기',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
+      headerEnabled: true,
+      headerTitle: '발품 후기',
+      headerBackButtonEnabled: true,
       headerRightButtons: [],
-    }));
+      path: 'kok',
+    });
   }, []);
 
   const navigate = useNavigate();

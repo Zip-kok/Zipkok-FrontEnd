@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 
 import mapImg from 'assets/img/common/map.png';
 import BottomBtn from 'components/BottomBtn';
-import PropertyItem from 'components/PropertyItem';
 import useUIStore from 'contexts/uiStore';
 
 import styles from './OnMap.module.css';
@@ -11,17 +9,15 @@ import styles from './OnMap.module.css';
 export default function PropertyMap() {
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerIcon: undefined,
-      title: '매물 선택하기',
+    ui.setUI({
+      naviEnabled: false,
+      headerEnabled: true,
+      headerTitle: '매물 선택하기',
+      headerBackButtonEnabled: true,
       headerRightButtons: [],
-    }));
+      path: 'kok',
+    });
   }, []);
-
-  const navigate = useNavigate();
-
-  const [property, setProperty] = useState();
 
   return (
     <div className={styles.root}>

@@ -14,14 +14,14 @@ import styles from './WriteKok.module.css';
 export default function WriteKok() {
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '콕리스트 작성',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
+      headerEnabled: true,
+      headerTitle: '콕리스트 작성',
+      headerBackButtonEnabled: true,
       headerRightButtons: [],
-    }));
+      path: 'kok',
+    });
   }, []);
 
   // 상단 메뉴 설정

@@ -8,13 +8,14 @@ import useUIStore from 'contexts/uiStore';
 export default function LocationEdit() {
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '프로필 수정하기',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
-    }));
+      headerEnabled: true,
+      headerTitle: '프로필 수정하기',
+      headerBackButtonEnabled: true,
+      headerRightButtons: [],
+      path: 'my',
+    });
   }, []);
 
   const navigate = useNavigate();

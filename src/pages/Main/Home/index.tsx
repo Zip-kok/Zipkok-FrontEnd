@@ -50,12 +50,14 @@ export default function Home() {
     navigate(`./item/${selectedPropertyId}`);
   };
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerEnabled: false,
+    ui.setUI({
       naviEnabled: true,
+      headerEnabled: false,
+      headerTitle: '',
+      headerBackButtonEnabled: true,
+      headerRightButtons: [],
       path: 'home',
-    }));
+    });
 
     if (isLoggedIn()) {
       getPin().then((res) => setPins((res.result as PinResult).pinList));

@@ -48,14 +48,15 @@ export default function Koklist() {
       }
       setPropertyList(res.result);
     });
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '콕리스트',
-      headerIcon: checkIcon,
-      headerBackButtonEnabled: false,
+    ui.setUI({
       naviEnabled: true,
+      headerEnabled: true,
+      headerIcon: checkIcon,
+      headerTitle: '콕리스트',
+      headerBackButtonEnabled: false,
       headerRightButtons: [],
-    }));
+      path: 'kok',
+    });
   }, []);
 
   const navigate = useNavigate();

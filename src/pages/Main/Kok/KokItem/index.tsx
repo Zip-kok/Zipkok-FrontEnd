@@ -63,18 +63,16 @@ const KokItem = () => {
   }, []);
 
   useEffect(() => {
-    ui.setUI((state) => {
-      return {
-        ...state,
-        headerTitle: KokDetail ? KokDetail.address : '',
-        headerIcon: undefined,
-        headerBackButtonEnabled: true,
-        naviEnabled: false,
-        headerRightButtons: [
-          { id: 'heart', img: heartIcon, onPress: () => {} },
-          { id: 'share', img: shareIcon, onPress: () => {} },
-        ],
-      };
+    ui.setUI({
+      naviEnabled: false,
+      headerEnabled: true,
+      headerTitle: KokDetail ? KokDetail.address : '',
+      headerBackButtonEnabled: true,
+      headerRightButtons: [
+        { id: 'heart', img: heartIcon, onPress: () => {} },
+        { id: 'share', img: shareIcon, onPress: () => {} },
+      ],
+      path: 'kok',
     });
   }, [KokDetail]);
 

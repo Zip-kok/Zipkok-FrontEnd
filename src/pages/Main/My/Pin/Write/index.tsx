@@ -29,13 +29,14 @@ export default function Write() {
   });
 
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: pinId !== undefined ? '핀 수정하기' : '핀 등록하기',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
-    }));
+      headerEnabled: true,
+      headerTitle: pinId !== undefined ? '핀 수정하기' : '핀 등록하기',
+      headerBackButtonEnabled: true,
+      headerRightButtons: [],
+      path: 'my',
+    });
 
     if (pinId !== undefined) {
       getPin(parseInt(pinId)).then((res) => {

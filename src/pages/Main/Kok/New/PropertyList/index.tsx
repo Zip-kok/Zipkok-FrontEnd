@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import mapIcon from 'assets/img/line(2)/map.svg';
 import searchIcon from 'assets/img/line(2)/search.svg';
-import { BottomBtn, TextInput, PropertyItem, IconBtn } from 'components';
+import { BottomBtn, TextInput, IconBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 
 import styles from './PropertyList.module.css';
@@ -11,12 +11,14 @@ import styles from './PropertyList.module.css';
 export default function PropertyList() {
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerIcon: undefined,
+    ui.setUI({
+      naviEnabled: false,
+      headerEnabled: true,
       headerTitle: '매물 선택하기',
+      headerBackButtonEnabled: true,
       headerRightButtons: [],
-    }));
+      path: 'kok',
+    });
   }, []);
 
   const navigate = useNavigate();

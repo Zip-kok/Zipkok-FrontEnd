@@ -7,7 +7,7 @@ export interface Button {
   onPress: () => void;
 }
 
-export interface UIStore {
+interface UI {
   naviEnabled: boolean;
   headerEnabled: boolean;
   headerIcon?: string;
@@ -15,14 +15,11 @@ export interface UIStore {
   headerBackButtonEnabled: boolean;
   headerRightButtons: Button[];
   path: MenuPath;
-  setUI: (
-    partial:
-      | UIStore
-      | Partial<UIStore>
-      | ((state: UIStore) => UIStore | Partial<UIStore>),
-    replace?: boolean | undefined,
-  ) => void;
 }
+
+export type UIStore = UI & {
+  setUI: (ui: UI) => void;
+};
 
 const initialState: UIStore = {
   naviEnabled: true,
@@ -36,7 +33,8 @@ const initialState: UIStore = {
 
 const useUIStore = create<UIStore>((set) => ({
   ...initialState,
-  setUI: set,
+  setUI: (ui: UI) =>
+    set({ ...ui, headerIcon: ui.headerIcon || initialState.headerIcon }),
 }));
 
 export default useUIStore;

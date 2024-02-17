@@ -10,11 +10,14 @@ export default function Complete() {
   const navigate = useNavigate();
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerIcon: undefined,
+    ui.setUI({
+      naviEnabled: false,
+      headerEnabled: false,
+      headerTitle: '',
       headerBackButtonEnabled: false,
-    }));
+      headerRightButtons: [],
+      path: 'kok',
+    });
   }, []);
 
   return (

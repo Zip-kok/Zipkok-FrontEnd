@@ -17,13 +17,14 @@ const LikedProperties = () => {
   useEffect(() => {
     getZim().then((res) => setProperties(res.result.realEstateInfo));
 
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '찜한 매물',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
-    }));
+      headerEnabled: true,
+      headerTitle: '찜한 매물',
+      headerBackButtonEnabled: true,
+      headerRightButtons: [],
+      path: 'my',
+    });
   }, []);
 
   return (

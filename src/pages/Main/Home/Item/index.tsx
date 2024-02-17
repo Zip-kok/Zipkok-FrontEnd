@@ -44,13 +44,11 @@ const Item = () => {
   };
   const ui = useUIStore();
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerEnabled: true,
-      headerTitle: realEstateInfo?.address,
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
+      headerEnabled: true,
+      headerTitle: realEstateInfo?.address ?? '',
+      headerBackButtonEnabled: true,
       headerRightButtons: [
         {
           id: '1',
@@ -58,7 +56,8 @@ const Item = () => {
           onPress: handlePress,
         },
       ],
-    }));
+      path: 'home',
+    });
   }, [realEstateInfo, isZimmed]);
 
   return (

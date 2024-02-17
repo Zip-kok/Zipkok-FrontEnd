@@ -25,13 +25,14 @@ const KokEdit = () => {
   const [contractOptions, setContractOptions] = useState<KokOption[]>([]);
 
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '콕리스트 항목 수정하기',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
-    }));
+      headerEnabled: true,
+      headerTitle: '콕리스트 항목 수정하기',
+      headerBackButtonEnabled: true,
+      headerRightButtons: [],
+      path: 'my',
+    });
 
     // api 함수로부터 받은 데이터를 컴포넌트에서 사용할 수 있는 형태로 변환하는 함수
     function convertRawOptions(rawOptions: UserKokOption[]) {

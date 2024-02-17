@@ -32,13 +32,15 @@ const Mypage = () => {
   const MyPageStore = useMyPageStore();
 
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '마이페이지',
-      headerIcon: my,
-      headerBackButtonEnabled: false,
+    ui.setUI({
       naviEnabled: true,
-    }));
+      headerEnabled: true,
+      headerIcon: my,
+      headerTitle: '마이페이지',
+      headerBackButtonEnabled: false,
+      headerRightButtons: [],
+      path: 'my',
+    });
   }, []);
 
   const navigate = useNavigate();

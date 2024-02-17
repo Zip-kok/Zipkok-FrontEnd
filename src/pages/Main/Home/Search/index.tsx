@@ -28,12 +28,14 @@ export default function Search() {
   );
 
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerEnabled: false,
+    ui.setUI({
       naviEnabled: false,
+      headerEnabled: false,
+      headerTitle: '',
+      headerBackButtonEnabled: false,
+      headerRightButtons: [],
       path: 'home',
-    }));
+    });
   }, []);
 
   const navigate = useNavigate();

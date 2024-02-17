@@ -17,13 +17,14 @@ export default function Pin() {
   const [pins, setPins] = useState<Pin[]>([]);
 
   useEffect(() => {
-    ui.setUI((state) => ({
-      ...state,
-      headerTitle: '나의 핀 관리',
-      headerIcon: undefined,
-      headerBackButtonEnabled: true,
+    ui.setUI({
       naviEnabled: false,
-    }));
+      headerEnabled: true,
+      headerTitle: '나의 핀 관리',
+      headerBackButtonEnabled: true,
+      headerRightButtons: [],
+      path: 'my',
+    });
 
     getPin().then((res) => {
       setPins((res.result as PinResult).pinList);
