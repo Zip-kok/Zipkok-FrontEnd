@@ -221,7 +221,7 @@ const ProfileEdit = () => {
 
       switch (response.code) {
         case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
-          MyPageStore.set(input);
+          MyPageStore.set({ ...input, imageUrl: imageUrl ?? null });
 
           navigate(-1);
           break;
