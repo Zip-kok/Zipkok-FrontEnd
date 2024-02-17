@@ -44,12 +44,19 @@ export default function Auth() {
               MyPageStore.setNickname(res.result.nickname);
               MyPageStore.setBirthday(res.result.birthday);
               MyPageStore.setGender(res.result.gender);
-              //api 수정필요
               MyPageStore.setAddress(res.result.address);
               MyPageStore.setLatitude(res.result.latitude);
               MyPageStore.setLongitude(res.result.longitude);
               MyPageStore.setRealEstateType(res.result.realEstateType);
               MyPageStore.setTransactionType(res.result.transactionType);
+              MyPageStore.setMPriceMin(res.result.mpriceMin);
+              MyPageStore.setMPriceMax(res.result.mpriceMax);
+              MyPageStore.setMDepositMin(res.result.mdepositMin);
+              MyPageStore.setMDepositMax(res.result.mdepositMax);
+              MyPageStore.setYDepositMin(res.result.ydepositMin);
+              MyPageStore.setYDepositMax(res.result.ydepositMax);
+              MyPageStore.setPurchaseMin(res.result.priceMin);
+              MyPageStore.setPurchaseMax(res.result.priceMax);
             });
             navigate('/');
           }
