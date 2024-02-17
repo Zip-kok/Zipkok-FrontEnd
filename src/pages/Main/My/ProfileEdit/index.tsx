@@ -100,17 +100,17 @@ const ProfileEdit = () => {
       }));
   }, [priceRanges]);
   useEffect(() => {
-    if (MyPageStore.transactionType === 'MONTHLY')
+    if (input.transactionType === 'MONTHLY')
       setPriceRanges([
         [MyPageStore.mdepositMin || 0, MyPageStore.mdepositMax || 60_000_000],
         [MyPageStore.mpriceMin || 0, MyPageStore.mpriceMax || 400_000],
       ]);
-    else if (MyPageStore.transactionType === 'YEARLY')
+    else if (input.transactionType === 'YEARLY')
       setPriceRanges([
         [MyPageStore.ydepositMin || 0, MyPageStore.ydepositMax || 60_000_000],
         [0, 0],
       ]);
-    else if (MyPageStore.transactionType === 'PURCHASE')
+    else if (input.transactionType === 'PURCHASE')
       setPriceRanges([
         [MyPageStore.purchaseMin || 0, MyPageStore.purchaseMax || 120_000_000],
         [0, 0],
