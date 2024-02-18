@@ -22,26 +22,12 @@ const Item = () => {
   const [realEstateInfo, setRealEstateInfo] =
     useState<GetRealEstateInfoResult>();
   const [isZimmed, setIsZimmed] = useState(realEstateInfo?.isZimmed);
-
   useEffect(() => {
     if (realEstateId === undefined) return;
     const ItemId = parseInt(realEstateId);
     getRealEstateInfo(ItemId).then((res) => setRealEstateInfo(res.result));
   }, [realEstateId]);
 
-  const handleWriteClick = () => {
-    navigate('../');
-  };
-  const handlePress = () => {
-    if (realEstateId === undefined) return;
-
-    setIsZimmed(!isZimmed);
-    if (!isZimmed) {
-      zim(parseInt(realEstateId)).then((res) => res);
-    } else if (isZimmed) {
-      deleteZim(parseInt(realEstateId)).then((res) => res);
-    }
-  };
   const ui = useUIStore();
   useEffect(() => {
     ui.setUI({
@@ -53,12 +39,26 @@ const Item = () => {
         {
           id: '1',
           img: isZimmed ? fillHeart : heart,
-          onPress: handlePress,
+          onPress: handleZimPress,
         },
       ],
       path: 'home',
     });
   }, [realEstateInfo, isZimmed]);
+
+  const handleWriteClick = () => {
+    navigate('../');
+  };
+  const handleZimPress = () => {
+    if (realEstateId === undefined) return;
+
+    setIsZimmed(!isZimmed);
+    if (!isZimmed) {
+      zim(parseInt(realEstateId)).then((res) => res);
+    } else if (isZimmed) {
+      deleteZim(parseInt(realEstateId)).then((res) => res);
+    }
+  };
 
   return (
     <div className={styles.root}>

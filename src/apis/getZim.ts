@@ -12,7 +12,7 @@ export interface RawRealEstate {
   address: string;
   agent: string;
   transactionType: PriceType;
-  realestateType: HouseType;
+  realEstateType: HouseType;
 }
 
 export interface RealEstate {
@@ -23,7 +23,7 @@ export interface RealEstate {
   address: string;
   agent: string;
   transactionType: PriceType;
-  realestateType: HouseType;
+  realEstateType: HouseType;
 }
 
 interface GetZimResult<T> {
@@ -55,7 +55,7 @@ export async function getZim() {
       realEstateInfo: res.result.realEstateInfo.map((realEstate) => ({
         ...realEstate,
         transactionType: realEstate.transactionType,
-        realestateType: realEstate.realestateType,
+        realestateType: realEstate.realEstateType,
       })),
     },
   } as ZipkokResponse<GetZimResult<RealEstate>>;
