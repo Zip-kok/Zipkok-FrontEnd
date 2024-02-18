@@ -7,6 +7,7 @@ import { deletePin } from './deletePin';
 import { deleteUser } from './deleteUser';
 import { deleteZim } from './deleteZim';
 import { getDirection } from './getDirection';
+import { getKokConfig } from './getKokConfig';
 import { getKokContract } from './getKokContract';
 import { getKokDetail } from './getKokDetail';
 import { getKokInner } from './getKokInner';
@@ -63,6 +64,7 @@ export {
   getRealEstateInfo,
   getUserKokList,
   putUser,
+  getKokConfig,
 };
 
 /**

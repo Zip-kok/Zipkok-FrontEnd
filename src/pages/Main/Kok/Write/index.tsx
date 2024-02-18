@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { getKokConfig } from 'apis';
 import propertyImg from 'assets/img/common/defaultThumbnail.png';
 import { BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
@@ -11,8 +12,15 @@ import InsideHome from './InsideHome';
 import NearHome from './NearHome';
 import styles from './WriteKok.module.css';
 
+import type { KokConfigResult } from 'apis/getKokConfig';
+
 export default function WriteKok() {
+  // kokId가 undefined이면 새로운 콕리스트 등록
+  // kokId가 있으면 해당 콕리스트 수정
+  const { kokId } = useParams<{ kokId: string }>();
   const ui = useUIStore();
+
+  const [kokConfig, setKokConfig] = useState<KokConfigResult>();
 
   useEffect(() => {
     ui.setUI({
@@ -24,6 +32,13 @@ export default function WriteKok() {
       path: 'kok',
     });
   }, []);
+
+  useEffect(() => {
+    if (kokId === undefined) return;
+    getKokConfig(parseInt(kokId)).then((res) => {
+      setKokConfig(res.result);
+    });
+  }, [kokId]);
 
   // 상단 메뉴 설정
   const [TopMenu, , , content] = useMenu([
@@ -73,10 +88,6 @@ export default function WriteKok() {
   ]);
 
   const navigate = useNavigate();
-
-  // kokId가 undefined이면 새로운 콕리스트 등록
-  // kokId가 있으면 해당 콕리스트 수정
-  const { kokId } = useParams<{ kokId: string }>();
 
   return (
     <div className={styles.root}>
