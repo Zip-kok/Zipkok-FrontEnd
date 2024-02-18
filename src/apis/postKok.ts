@@ -1,8 +1,9 @@
-import api from 'apis';
+import Cookies from 'js-cookie';
+import storeNewTokensToCookie from 'utils/storeNewTokensToCookie';
 
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 interface postKokInfo {
-  kokid: number;
+  kokId: number;
 }
 
 /**
@@ -22,48 +23,59 @@ export async function postKok(
     vibeStarCount: number;
     reviewText: string;
   },
-  checkedOuterOptions: [
-    {
-      optionId: number;
-      checkedDetailOptionIds: number[];
-    },
-  ],
-  checkedInnerOptions: [
-    {
-      optionId: number;
-      checkedDetailOptionIds: number[];
-    },
-  ],
-  checkedContractOptions: [
-    {
-      optionId: number;
-      checkedDetailOptionIds: number[];
-    },
-  ],
+  checkedOuterOptions: {
+    optionId: number;
+    checkedDetailOptionIds: number[];
+  }[],
+  checkedInnerOptions: {
+    optionId: number;
+    checkedDetailOptionIds: number[];
+  }[],
+  checkedContractOptions: {
+    optionId: number;
+    checkedDetailOptionIds: number[];
+  }[],
+  files?: File[],
 ) {
-  const path = '/kok';
-  const method = 'POST';
-  const body = {
-    realEstateId,
-    checkedHighlights,
-    checkedFurnitureOptions,
-    direction,
-    reviewInfo,
-    checkedOuterOptions,
-    checkedInnerOptions,
-    checkedContractOptions,
-  };
-  const authRequired = true;
-  const res = await api<ZipkokResponse<postKokInfo>>(
-    path,
-    method,
-    authRequired,
-    undefined,
-    body,
-    undefined,
+  const formData = new FormData();
+  files?.forEach((file) => formData.append('file', file, file.name));
+  formData.append(
+    'data',
+    new Blob(
+      [
+        JSON.stringify({
+          realEstateId,
+          checkedHighlights,
+          checkedFurnitureOptions,
+          direction,
+          reviewInfo,
+          checkedOuterOptions,
+          checkedInnerOptions,
+          checkedContractOptions,
+        }),
+      ],
+      {
+        type: 'application/json',
+      },
+    ),
   );
 
-  return {
-    res,
-  };
+  let accessToken = Cookies.get('accessToken');
+
+  // access token 만료 시
+  if (accessToken === undefined) {
+    accessToken = await storeNewTokensToCookie().then((res) => {
+      if (res === null) throw new Error('로그인이 필요합니다.');
+      return res.accessToken;
+    });
+  }
+
+  const res = (await fetch('https://zipkok.store/kok', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: formData,
+  }).then((res) => res.json())) as ZipkokResponse<postKokInfo>;
+  return res;
 }

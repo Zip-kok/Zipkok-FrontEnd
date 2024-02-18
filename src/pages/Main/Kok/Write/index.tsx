@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getKokConfig } from 'apis';
+import { getKokConfig, postKok } from 'apis';
 import { BottomBtn } from 'components';
+import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 
@@ -20,6 +21,7 @@ export default function WriteKok() {
   const realEstateId = new URLSearchParams(location.search).get('realEstateId');
   const kokId = new URLSearchParams(location.search).get('kokId');
   const ui = useUIStore();
+  const modal = useModal();
 
   const [kokConfig, setKokConfig] = useState<KokConfigResult>();
 
@@ -170,11 +172,57 @@ export default function WriteKok() {
 
   const navigate = useNavigate();
 
+  const handleSave = () => {
+    if (realEstateId === null) return;
+    if (kokConfig === undefined) return;
+
+    postKok(
+      parseInt(realEstateId),
+      kokConfig.checkedHilights ?? [],
+      kokConfig.checkedFurnitureOptions ?? [],
+      '남쪽',
+      {
+        checkedImpressions: [],
+        facilityStarCount: 5,
+        infraStarCount: 5,
+        structureStarCount: 5,
+        vibeStarCount: 5,
+        reviewText: '',
+      },
+      kokConfig.outerOptions.map((option) => ({
+        optionId: option.optionId,
+        checkedDetailOptionIds: option.detailOptions.map(
+          (detail) => detail.detailOptionId,
+        ),
+      })),
+      kokConfig.innerOptions.map((option) => ({
+        optionId: option.optionId,
+        checkedDetailOptionIds: option.detailOptions.map(
+          (detail) => detail.detailOptionId,
+        ),
+      })),
+      kokConfig.contractOptions.map((option) => ({
+        optionId: option.optionId,
+        checkedDetailOptionIds: option.detailOptions.map(
+          (detail) => detail.detailOptionId,
+        ),
+      })),
+    ).then((res) => {
+      if (res.code === 7011) navigate(`/kok/${res.result.kokId}`);
+      else
+        modal.open({
+          title: '콕리스트 등록 실패',
+          description: res.message,
+          primaryButton: '확인',
+        });
+    });
+  };
+
   return (
     <div className={styles.root}>
       <TopMenu className={styles.top} />
       <div className={styles.content}>{content}</div>
-      <BottomBtn text="저장하기" onClick={() => {}} />
+      <BottomBtn text="저장하기" onClick={handleSave} />
     </div>
   );
 }

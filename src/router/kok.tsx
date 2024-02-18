@@ -50,31 +50,26 @@ const KokRoute = {
           path: 'propertyMap',
           element: <PropertyMap />,
         },
-        {
-          // 새콕리스트 작성_체크 (=수정하기 화면 동일)
-          path: 'write',
-          element: <WriteKok />,
-        },
-        {
-          // 새콕리스트 작성_후기
-          path: 'review',
-          children: [
-            {
-              index: true,
-              element: <KokReview />,
-            },
-            {
-              path: 'complete',
-              element: <Complete />,
-            },
-          ],
-        },
       ],
     },
     {
       // 새콕리스트 작성_체크 (=수정하기 화면 동일)
       path: 'edit',
       element: <WriteKok />,
+    },
+    {
+      // 새콕리스트 작성_후기
+      path: 'review',
+      children: [
+        {
+          index: true,
+          element: <KokReview />,
+        },
+        {
+          path: 'complete',
+          element: <Complete />,
+        },
+      ],
     },
   ],
 };

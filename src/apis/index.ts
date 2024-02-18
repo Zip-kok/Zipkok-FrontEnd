@@ -25,6 +25,7 @@ import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
+import { postKok } from './postKok';
 import { postPin } from './postPin';
 import { postRealEstate } from './postRealEstate';
 import { putPin } from './putPin';
@@ -67,6 +68,7 @@ export {
   putUser,
   getKokConfig,
   postRealEstate,
+  postKok,
 };
 
 /**
