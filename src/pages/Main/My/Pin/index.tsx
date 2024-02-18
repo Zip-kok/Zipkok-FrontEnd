@@ -58,7 +58,7 @@ export default function Pin() {
           <div className={styles.pin} key={pin.id}>
             <div>
               <h1>{pin.name}</h1>
-              <h2>{pin.address.addressName}</h2>
+              <h2>{pin.address.address_name}</h2>
             </div>
             <div>
               <button onClick={() => handleEditPin(pin.id)}>수정</button>

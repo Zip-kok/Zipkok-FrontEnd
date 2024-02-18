@@ -274,7 +274,7 @@ export default function Home() {
         <div className={styles.selectedPin}>
           <div>
             <h1>{selectedPin.name}</h1>
-            <h2>{selectedPin.address.addressName}</h2>
+            <h2>{selectedPin.address.address_name}</h2>
           </div>
           <img src={pinIcon} />
         </div>

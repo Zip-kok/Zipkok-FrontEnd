@@ -21,7 +21,7 @@ export default function Name({ pin, confirm }: NameProps) {
     <div className={styles.root}>
       <div className={styles.container}>
         <div>
-          <h1 className={styles.address}>{pin.address.addressName}</h1>
+          <h1 className={styles.address}>{pin.address.address_name}</h1>
           <TextInput
             placeholder="상세 주소 (선택)"
             value={detailAddress}

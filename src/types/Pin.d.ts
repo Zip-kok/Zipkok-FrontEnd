@@ -1,10 +1,8 @@
+import { Address } from './Address';
+
 interface Pin {
   id: number;
   name: string;
-  address: {
-    addressName: string;
-    x: number;
-    y: number;
-  };
+  address: Address;
 }
 export type { Pin };

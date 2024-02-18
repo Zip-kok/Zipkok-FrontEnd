@@ -214,8 +214,8 @@ const KakaoMap = ({
     setPinMarkers(
       pins?.map((pin) => {
         const position = new window.kakao.maps.LatLng(
-          pin.address.x,
           pin.address.y,
+          pin.address.x,
         );
         const marker = new window.kakao.maps.Marker({
           opacity: !selectedPin || selectedPin?.id === pin.id ? 1 : 0.5,
@@ -266,10 +266,10 @@ const KakaoMap = ({
       pins?.forEach((pin) => {
         // 핀이 화면 내에 없으면 길찾기를 하지 않음
         if (
-          pin.address.y < (mapLocationInfo?.southWestLat ?? 0) ||
-          pin.address.y > (mapLocationInfo?.northEastLat ?? 0) ||
-          pin.address.x < (mapLocationInfo?.southWestLon ?? 0) ||
-          pin.address.x > (mapLocationInfo?.northEastLon ?? 0)
+          pin.address.x < (mapLocationInfo?.southWestLat ?? 0) ||
+          pin.address.x > (mapLocationInfo?.northEastLat ?? 0) ||
+          pin.address.y < (mapLocationInfo?.southWestLon ?? 0) ||
+          pin.address.y > (mapLocationInfo?.northEastLon ?? 0)
         )
           return;
 
@@ -281,11 +281,10 @@ const KakaoMap = ({
           },
           {
             name: pin.name,
-            x: pin.address.y,
-            y: pin.address.x,
+            x: pin.address.x,
+            y: pin.address.y,
           },
         ).then((res) => {
-          console.log(res);
           const path: any[] = [];
 
           res.routes[0].sections[0].roads.forEach((road) => {
@@ -298,7 +297,7 @@ const KakaoMap = ({
               );
             }
           });
-          path.push(new window.kakao.maps.LatLng(pin.address.x, pin.address.y));
+          path.push(new window.kakao.maps.LatLng(pin.address.y, pin.address.x));
 
           const overlay = new window.kakao.maps.CustomOverlay({
             map: map,

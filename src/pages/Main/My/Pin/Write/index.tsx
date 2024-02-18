@@ -22,7 +22,7 @@ export default function Write() {
   const [pin, setPin] = useState<PinWithoutId>({
     name: '',
     address: {
-      addressName: '',
+      address_name: '',
       x: 0,
       y: 0,
     },
@@ -52,7 +52,7 @@ export default function Write() {
     setPin((prev) => ({
       ...prev,
       address: {
-        addressName: address.address_name,
+        address_name: address.address_name,
         x: address.x,
         y: address.y,
       },
@@ -65,7 +65,7 @@ export default function Write() {
       id: pinId !== undefined ? parseInt(pinId) : undefined,
       name,
       address: {
-        addressName: `${pin.address.addressName} ${detailAddress}`,
+        address_name: `${pin.address.address_name} ${detailAddress}`,
         x: pin.address.x,
         y: pin.address.y,
       },
@@ -95,7 +95,7 @@ export default function Write() {
               defaultAddress={
                 pinId !== undefined
                   ? {
-                      address_name: pin.address.addressName,
+                      address_name: pin.address.address_name,
                       x: pin.address.x,
                       y: pin.address.y,
                     }
@@ -109,7 +109,7 @@ export default function Write() {
               defaultAddress={
                 pinId !== undefined
                   ? {
-                      address_name: pin.address.addressName,
+                      address_name: pin.address.address_name,
                       x: pin.address.x,
                       y: pin.address.y,
                     }
