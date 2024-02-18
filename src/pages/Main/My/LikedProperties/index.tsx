@@ -41,7 +41,6 @@ const LikedProperties = () => {
           address={property.address}
           propertyName={property.agent}
           imageUrl={property.imageURL}
-          kokList={true}
           onClick={() => navigate(`/item/${property.realEstateId}`)}
         />
       ))}

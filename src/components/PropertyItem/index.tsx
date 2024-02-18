@@ -23,7 +23,7 @@ interface PropertyItemProps {
   address: string;
   propertyName: string;
   imageUrl: string | null;
-  kokList: boolean;
+  kokList?: boolean;
   onClick?: (propertyId: number) => void;
 }
 export default function PropertyItem({
