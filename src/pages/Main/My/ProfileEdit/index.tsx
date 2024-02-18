@@ -218,7 +218,10 @@ const ProfileEdit = () => {
 
       switch (response.code) {
         case StatusCode.MEMBER_INFO_UPDATE_SUCCESS:
-          MyPageStore.set({ ...input, imageUrl: imageUrl ?? null });
+          MyPageStore.set({
+            ...input,
+            imageUrl: imageUrl ?? MyPageStore.imageUrl,
+          });
 
           navigate(-1);
           break;
@@ -260,7 +263,6 @@ const ProfileEdit = () => {
           });
       }
     } catch (error) {
-      console.log(error);
       modal.open({
         title: '네트워크 오류',
         description:
