@@ -26,6 +26,7 @@ import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
 import { postPin } from './postPin';
+import { postRealEstate } from './postRealEstate';
 import { putPin } from './putPin';
 import { putUser } from './putUser';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
@@ -65,6 +66,7 @@ export {
   getUserKokList,
   putUser,
   getKokConfig,
+  postRealEstate,
 };
 
 /**

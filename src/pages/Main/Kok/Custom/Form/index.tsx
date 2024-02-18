@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { postRealEstate } from 'apis/postRealEstate';
+import { postRealEstate } from 'apis';
 import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn, TextInput } from 'components';
 import useAddressStore from 'contexts/addressStore';
@@ -103,12 +103,8 @@ export default function CustomProperty() {
         memo as string,
         priceType as PriceType,
         houseType as HouseType,
-        priceType === 'MONTHLY' || 'YEARLY' ? (deposit as number) : 0,
-        priceType === 'MONTHLY'
-          ? (deposit as number)
-          : priceType === 'YEARLY'
-            ? (deposit as number)
-            : 0,
+        deposit ?? 0,
+        (priceType === 'MONTHLY' ? monthlyPrice : price) ?? 0,
         maintanenceFee as number,
         address.address_name,
         detailAddress as string,
@@ -117,9 +113,8 @@ export default function CustomProperty() {
         area as number,
         floor as number,
       ).then((res) => {
-        res;
+        navigate(`./confirm/${res.result.realEstateId}`);
       });
-      navigate('./confirm');
     }
   }
 

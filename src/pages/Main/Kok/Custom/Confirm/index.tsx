@@ -1,34 +1,55 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import { getRealEstateInfo } from 'apis';
 import { BottomBtn, PropertyComponents as Property } from 'components';
-import useCustomKokStore from 'contexts/customKokStore';
+
+import type { GetRealEstateInfoResult } from 'apis/getRealEstateInfo';
 
 export default function Confirm() {
-  const customKokStore = useCustomKokStore();
+  const [realEstateInfo, setRealEstateInfo] =
+    useState<GetRealEstateInfoResult>();
+  const { realEstateId } = useParams<{ realEstateId: string }>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (realEstateId === undefined) return;
+    getRealEstateInfo(parseInt(realEstateId)).then((res) => {
+      setRealEstateInfo(res.result);
+    });
+  }, [realEstateId]);
 
   return (
     <>
       <Property.Header
-        pictures={customKokStore.pictures}
-        address={customKokStore.address}
-        detailAddress={customKokStore.detailAddress}
-        deposit={customKokStore.deposit}
-        monthlyPrice={customKokStore.monthlyPrice}
-        price={customKokStore.price}
-        priceType={customKokStore.priceType}
+        pictures={realEstateInfo?.imageInfo.imageURL.filter<string>(
+          (e): e is string => e !== null,
+        )}
+        address={{
+          address_name: realEstateInfo?.address ?? '',
+          x: realEstateInfo?.latitude ?? 0,
+          y: realEstateInfo?.longitude ?? 0,
+        }}
+        detailAddress={realEstateInfo?.detailAddress ?? ''}
+        deposit={realEstateInfo?.deposit}
+        monthlyPrice={realEstateInfo?.price}
+        price={realEstateInfo?.price}
+        priceType={realEstateInfo?.transactionType ?? 'MONTHLY'}
       />
 
       <Property.BasicInfo
-        area={customKokStore.area}
-        houseType={customKokStore.houseType}
-        floor={customKokStore.floor}
-        maintanenceFee={customKokStore.maintanenceFee}
-        address={customKokStore.address}
+        area={realEstateInfo?.pyeongsu ?? undefined}
+        houseType={realEstateInfo?.realEstateType ?? 'ONEROOM'}
+        floor={realEstateInfo?.floorNum ?? 0}
+        maintanenceFee={realEstateInfo?.administrativeFee}
+        address={{
+          address_name: realEstateInfo?.address ?? '',
+          x: realEstateInfo?.latitude ?? 0,
+          y: realEstateInfo?.longitude ?? 0,
+        }}
       />
       <BottomBtn
-        onClick={() => navigate('/kok/edit')}
+        onClick={() => navigate(`/kok/edit/${realEstateId}`)}
         text="콕리스트 작성하기"
         occupySpace
       />

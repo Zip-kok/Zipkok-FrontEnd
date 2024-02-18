@@ -87,7 +87,9 @@ const Item = () => {
       {realEstateInfo && (
         <>
           <Property.Header
-            pictures={realEstateInfo.imageInfo.imageURL}
+            pictures={realEstateInfo.imageInfo.imageURL.filter<string>(
+              (e): e is string => e !== null,
+            )}
             address={{
               address_name: realEstateInfo.address,
               x: realEstateInfo.latitude,

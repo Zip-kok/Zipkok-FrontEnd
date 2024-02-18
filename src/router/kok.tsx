@@ -23,7 +23,7 @@ const KokRoute = {
       element: <Custom />,
       children: [
         { index: true, element: <CustomForm /> },
-        { path: 'confirm', element: <CustomConfirm /> },
+        { path: 'confirm/:realEstateId', element: <CustomConfirm /> },
         { path: 'locationEdit', element: <CustomFormLocationEdit /> },
       ],
     },
@@ -70,11 +70,6 @@ const KokRoute = {
           ],
         },
       ],
-    },
-    {
-      // 새콕리스트 작성_체크 (=수정하기 화면 동일)
-      path: 'edit',
-      element: <WriteKok />,
     },
     {
       // 새콕리스트 작성_체크 (=수정하기 화면 동일)

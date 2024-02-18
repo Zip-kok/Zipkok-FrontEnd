@@ -50,7 +50,5 @@ export async function postRealEstate(
     undefined,
   );
 
-  return {
-    res,
-  };
+  return res;
 }
