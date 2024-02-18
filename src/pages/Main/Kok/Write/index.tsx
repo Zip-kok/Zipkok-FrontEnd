@@ -13,6 +13,7 @@ import styles from './WriteKok.module.css';
 
 export default function WriteKok() {
   const ui = useUIStore();
+
   useEffect(() => {
     ui.setUI({
       naviEnabled: false,
@@ -25,7 +26,7 @@ export default function WriteKok() {
   }, []);
 
   // 상단 메뉴 설정
-  const [TopMenu, Content, menuIndex] = useMenu([
+  const [TopMenu, , , content] = useMenu([
     {
       name: '집 주변',
       element: (
@@ -80,7 +81,7 @@ export default function WriteKok() {
   return (
     <div className={styles.root}>
       <TopMenu className={styles.top} />
-      <Content />
+      {content}
       <BottomBtn text="저장하기" onClick={() => {}} />
     </div>
   );
