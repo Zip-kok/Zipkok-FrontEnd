@@ -1,10 +1,8 @@
 import api from 'apis';
 
-import type { HouseType } from 'types/HouseType';
-import type { PriceType } from 'types/PriceType';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
-interface postRealEstateInfo {
-  realEstateId: number;
+interface postKokInfo {
+  kokid: number;
 }
 
 /**
@@ -12,6 +10,7 @@ interface postRealEstateInfo {
  */
 
 export async function postKok(
+  realEstateId: number,
   checkedHighlights: string[],
   checkedFurnitureOptions: string[],
   direction: string,
@@ -23,24 +22,39 @@ export async function postKok(
     vibeStarCount: number;
     reviewText: string;
   },
-  checkedOuterOptions: {
-    optionId: number;
-    checkedDetailOptionIds: number[];
-  }[],
-  checkedInnerOptions: {
-    optionId: number;
-    checkedDetailOptionIds: number[];
-  }[],
-  checkedContractOptions: {
-    optionId: number;
-    checkedDetailOptionIds: number[];
-  }[],
+  checkedOuterOptions: [
+    {
+      optionId: number;
+      checkedDetailOptionIds: number[];
+    },
+  ],
+  checkedInnerOptions: [
+    {
+      optionId: number;
+      checkedDetailOptionIds: number[];
+    },
+  ],
+  checkedContractOptions: [
+    {
+      optionId: number;
+      checkedDetailOptionIds: number[];
+    },
+  ],
 ) {
   const path = '/kok';
   const method = 'POST';
-  const body = {};
+  const body = {
+    realEstateId,
+    checkedHighlights,
+    checkedFurnitureOptions,
+    direction,
+    reviewInfo,
+    checkedOuterOptions,
+    checkedInnerOptions,
+    checkedContractOptions,
+  };
   const authRequired = true;
-  const res = await api<ZipkokResponse<postRealEstateInfo>>(
+  const res = await api<ZipkokResponse<postKokInfo>>(
     path,
     method,
     authRequired,
