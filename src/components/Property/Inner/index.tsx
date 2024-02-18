@@ -4,20 +4,20 @@ import { OptionsComponent, Furnitures, TextInput } from 'components';
 
 import styles from './Inner.module.css';
 
+import type { UserKokOption } from 'apis/getUserKokOption';
+
 interface InnerProps {
   furnitureOptions: string[];
   direction: string;
-  options: {
-    option: string;
-    orderNumber: number;
-    detailOptions: string[];
-  }[];
+  options: UserKokOption[];
+  setOptions?: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
 }
 
 export default function Inner({
   furnitureOptions,
   direction,
   options,
+  setOptions,
 }: InnerProps) {
   const filteredFurnitures = Furnitures.filter((furniture) =>
     furnitureOptions.includes(furniture.name),
@@ -45,7 +45,11 @@ export default function Inner({
 
       {/* 체크리스트 */}
       <div className={styles.optionContainer}>
-        <OptionsComponent optionData={options} readOnly={true} />
+        <OptionsComponent
+          kokOptions={options}
+          setKokOptions={setOptions}
+          readOnly={true}
+        />
       </div>
     </>
   );

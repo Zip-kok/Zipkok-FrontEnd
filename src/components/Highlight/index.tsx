@@ -23,10 +23,10 @@ const Highlight = ({
   const handleClick = () => {
     if (enabled) {
       setEnabled(false);
-      onEnable?.();
+      onDisable?.();
     } else {
       setEnabled(true);
-      onDisable?.();
+      onEnable?.();
     }
   };
 

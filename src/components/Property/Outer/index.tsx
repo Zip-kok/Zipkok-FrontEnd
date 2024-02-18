@@ -4,16 +4,15 @@ import { OptionsComponent } from 'components';
 
 import styles from './Outer.module.css';
 
+import type { UserKokOption } from 'apis/getUserKokOption';
+
 interface OuterProps {
   highlights: string[];
-  options: {
-    option: string;
-    orderNumber: number;
-    detailOptions: string[];
-  }[];
+  options: UserKokOption[];
+  setOptions?: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
 }
 
-export default function Outer({ highlights, options }: OuterProps) {
+export default function Outer({ highlights, options, setOptions }: OuterProps) {
   return (
     <>
       <div className={styles.TagCtn}>
@@ -25,7 +24,11 @@ export default function Outer({ highlights, options }: OuterProps) {
       </div>
 
       <div className={styles.optionsCtn}>
-        <OptionsComponent optionData={options} readOnly={true} />
+        <OptionsComponent
+          kokOptions={options}
+          setKokOptions={setOptions}
+          readOnly={true}
+        />
       </div>
     </>
   );

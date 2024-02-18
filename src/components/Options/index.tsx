@@ -3,75 +3,58 @@ import React, { useEffect, useState } from 'react';
 import styles from './Options.module.css';
 import checkImg from '../../assets/img/check/check_selected.svg';
 
+import type { UserKokOption } from 'apis/getUserKokOption';
+
 interface OptionsComponentProps {
-  optionData: {
-    option: string;
-    orderNumber: number;
-    detailOptions: string[];
-  }[];
+  kokOptions: UserKokOption[];
+  setKokOptions?: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
   readOnly?: boolean;
 }
 
 const OptionsComponent: React.FC<OptionsComponentProps> = ({
-  optionData,
-  readOnly,
+  kokOptions,
+  setKokOptions,
+  readOnly = false,
 }) => {
-  // 각 체크박스의 상태를 저장하는 상태
-  const [checkboxStates, setCheckboxStates] = useState<{
-    [key: string]: boolean;
-  }>({});
-
-  // 체크박스 초기값 체크로 변경
-  useEffect(() => {
-    const initialCheckboxStates: { [key: string]: boolean } = {};
-    optionData.forEach((check) => {
-      check.detailOptions.forEach((_, index) => {
-        initialCheckboxStates[`${check.orderNumber}.${index}`] =
-          readOnly || false;
-      });
-    });
-    setCheckboxStates(initialCheckboxStates);
-  }, [optionData, readOnly]);
-
-  const handleCheckboxChange = (orderNumber: number, index: number) => {
-    if (readOnly) {
-      return;
-    }
-    const key = `${orderNumber}.${index}`;
-    setCheckboxStates((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
   return (
     <div className={styles.root}>
-      {optionData.map((check) => (
-        <div key={check.orderNumber}>
+      {kokOptions.map((option, index) => (
+        <div key={option.optionId}>
           <div className={styles.optionTitle}>
             <img src={checkImg} />
-            {check.option}
+            {option.optionTitle}
           </div>
 
           <div className={styles.checkCtn}>
-            {check.detailOptions.map((detailCheck, index) => (
-              <span key={index}>
+            {option.detailOptions.map((detailOption, detailIndex) => (
+              <div key={detailOption.detailOptionId}>
                 <input
                   type="checkbox"
-                  id={`checkBtn${check.orderNumber}.${index}`}
-                  className={styles.checkBtn}
-                  checked={
-                    checkboxStates[`${check.orderNumber}.${index}`] || false
-                  }
-                  onChange={() =>
-                    handleCheckboxChange(check.orderNumber, index)
-                  }
+                  className={styles.detailCheckBtn}
+                  defaultChecked={detailOption.detailOptionIsVisible}
+                  onChange={() => {
+                    setKokOptions?.((prevState) => {
+                      const newOptions = [...prevState];
+                      newOptions[index].detailOptions[
+                        detailIndex
+                      ].detailOptionIsVisible =
+                        !detailOption.detailOptionIsVisible;
+
+                      return newOptions;
+                    });
+                  }}
                   readOnly={readOnly}
+                  id={`detail.${detailOption.detailOptionId}`}
                 />
                 <label
                   className={styles.checkLabel}
-                  htmlFor={`checkBtn${check.orderNumber}.${index}`}
+                  htmlFor={`detail.${detailOption.detailOptionId}`}
                 >
-                  <p className={styles.checkText}>{detailCheck}</p>
+                  <p className={styles.checkText}>
+                    {detailOption.detailOptionTitle}
+                  </p>
                 </label>
-              </span>
+              </div>
             ))}
           </div>
         </div>

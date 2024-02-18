@@ -1,11 +1,13 @@
 import React from 'react';
 
+import compassIcon from 'assets/img/common/compass.svg';
+import deleteBtnIcon from 'assets/img/fill/delete.svg';
+import cameraIcon from 'assets/img/line(1)/camera.svg';
+import { TextInput, OptionsComponent, Furnitures } from 'components';
+
 import styles from './InsideHome.module.css';
-import compassIcon from '../../../../../assets/img/common/compass.svg';
-import deleteBtnIcon from '../../../../../assets/img/fill/delete.svg';
-import cameraIcon from '../../../../../assets/img/line(1)/camera.svg';
-import KoklistGroup from '../../../../../components/KoklistGroup';
-import TextInput from '../../../../../components/TextInput';
+
+import type { UserKokOption } from 'apis/getUserKokOption';
 
 interface Picture {
   id: number;
@@ -14,9 +16,21 @@ interface Picture {
 
 interface InsideHomeProps {
   pictures: Picture[];
+  furnitures: string[];
+  checkedFurnitures: string[];
+  setCheckedFurnitures: React.Dispatch<React.SetStateAction<string[]>>;
+  options: UserKokOption[];
+  setOptions: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
 }
 
-export default function InsideHome({ pictures }: InsideHomeProps) {
+export default function InsideHome({
+  pictures,
+  furnitures,
+  checkedFurnitures,
+  setCheckedFurnitures,
+  options,
+  setOptions,
+}: InsideHomeProps) {
   return (
     <div className={styles.root}>
       {/* 사진 */}
@@ -48,17 +62,41 @@ export default function InsideHome({ pictures }: InsideHomeProps) {
       {/* 옵션 가구 선택 */}
       <div className={styles.furnitureContainer}>
         <h1 className={styles.title}>옵션 가구 선택</h1>
-        <div className={styles.furnitures}>{/* TODO: 옵션 버튼 추가 */}</div>
+        <div className={styles.furnitures}>
+          {furnitures.map((furniture) => {
+            const furnitureObj = Furnitures.find((f) => f.name === furniture);
+            return (
+              <button
+                className={`${styles.furniture} ${
+                  checkedFurnitures.includes(furniture) ? styles.selected : ''
+                }`}
+                key={furniture}
+                onClick={() => {
+                  if (checkedFurnitures.includes(furniture)) {
+                    setCheckedFurnitures((prev) =>
+                      prev.filter((f) => f !== furniture),
+                    );
+                  } else {
+                    setCheckedFurnitures((prev) => [...prev, furniture]);
+                  }
+                }}
+              >
+                <img src={furnitureObj?.img} />
+                {furnitureObj?.name}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* 집 방향 */}
       <div className={styles.directionContainer}>
         <div className={styles.header}>
           <h1>집 방향</h1>
-          <h2>창문에 서서 우측 버튼을 눌러주세요</h2>
+          <h2>집 방향을 입력하고 우측 버튼을 눌러주세요</h2>
         </div>
         <div className={styles.directionInput}>
-          <TextInput value="북동향" style={'roundedBox'} readOnly />
+          <TextInput defaultValue="북동향" style={'roundedBox'} />
           <button className={styles.directionBtn}>
             <img src={compassIcon}></img>
           </button>
@@ -67,45 +105,7 @@ export default function InsideHome({ pictures }: InsideHomeProps) {
 
       {/* 콕리스트 */}
       <div className={styles.koklistContainer}>
-        <KoklistGroup
-          title="화장실"
-          koklists={[
-            { name: '공동현관 CCTV가 있는가 1', checked: true },
-            { name: '공동현관 CCTV가 있는가 2', checked: false },
-            { name: '공동현관 CCTV가 있는가 3', checked: true },
-          ]}
-          selected
-        />
-
-        <KoklistGroup
-          title="에어컨"
-          koklists={[
-            { name: '공동현관 CCTV가 있는가 1', checked: true },
-            { name: '공동현관 CCTV가 있는가 2', checked: false },
-            { name: '공동현관 CCTV가 있는가 3', checked: true },
-          ]}
-          selected={false}
-        />
-
-        <KoklistGroup
-          title="옷장"
-          koklists={[
-            { name: '공동현관 CCTV가 있는가 1', checked: true },
-            { name: '공동현관 CCTV가 있는가 2', checked: false },
-            { name: '공동현관 CCTV가 있는가 3', checked: true },
-          ]}
-          selected={false}
-        />
-
-        <KoklistGroup
-          title="싱크대 주방"
-          koklists={[
-            { name: '공동현관 CCTV가 있는가 1', checked: true },
-            { name: '공동현관 CCTV가 있는가 2', checked: false },
-            { name: '공동현관 CCTV가 있는가 3', checked: true },
-          ]}
-          selected={false}
-        />
+        <OptionsComponent kokOptions={options} setKokOptions={setOptions} />
       </div>
     </div>
   );

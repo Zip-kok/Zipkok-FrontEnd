@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getKokConfig } from 'apis';
-import propertyImg from 'assets/img/common/defaultThumbnail.png';
 import { BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
@@ -13,14 +12,46 @@ import NearHome from './NearHome';
 import styles from './WriteKok.module.css';
 
 import type { KokConfigResult } from 'apis/getKokConfig';
+import type { UserKokOption } from 'apis/getUserKokOption';
 
 export default function WriteKok() {
-  // kokId가 undefined이면 새로운 콕리스트 등록
+  // kokId가 undefined이면 realEstateId에 해당하는 매물의 새로운 콕리스트 등록
   // kokId가 있으면 해당 콕리스트 수정
-  const { kokId } = useParams<{ kokId: string }>();
+  const realEstateId = new URLSearchParams(location.search).get('realEstateId');
+  const kokId = new URLSearchParams(location.search).get('kokId');
   const ui = useUIStore();
 
   const [kokConfig, setKokConfig] = useState<KokConfigResult>();
+
+  const setHighlights = (
+    highlights: string[] | ((prevState: string[]) => string[]),
+  ) =>
+    setKokConfig((prev) =>
+      prev
+        ? {
+            ...prev,
+            checkedHilights:
+              typeof highlights === 'function'
+                ? highlights(prev.checkedHilights ?? [])
+                : highlights,
+          }
+        : undefined,
+    );
+
+  const setFurnitures = (
+    furnitures: string[] | ((prevState: string[]) => string[]),
+  ) =>
+    setKokConfig((prev) =>
+      prev
+        ? {
+            ...prev,
+            checkedFurnitureOptions:
+              typeof furnitures === 'function'
+                ? furnitures(prev.checkedFurnitureOptions ?? [])
+                : furnitures,
+          }
+        : undefined,
+    );
 
   useEffect(() => {
     ui.setUI({
@@ -34,7 +65,14 @@ export default function WriteKok() {
   }, []);
 
   useEffect(() => {
-    if (kokId === undefined) return;
+    if (realEstateId === null) return;
+    getKokConfig().then((res) => {
+      setKokConfig(res.result);
+    });
+  }, [realEstateId]);
+
+  useEffect(() => {
+    if (kokId === null) return;
     getKokConfig(parseInt(kokId)).then((res) => {
       setKokConfig(res.result);
     });
@@ -46,12 +84,28 @@ export default function WriteKok() {
       name: '집 주변',
       element: (
         <NearHome
-          pictures={[
-            { id: 0, src: propertyImg },
-            { id: 1, src: propertyImg },
-            { id: 2, src: propertyImg },
-            { id: 3, src: propertyImg },
-          ]}
+          pictures={[]}
+          highlights={kokConfig?.hilights || []}
+          checkedHighlights={kokConfig?.checkedHilights || []}
+          setCheckedHighlights={setHighlights}
+          options={kokConfig?.outerOptions || []}
+          setOptions={(
+            options:
+              | UserKokOption[]
+              | ((prevState: UserKokOption[]) => UserKokOption[]),
+          ) =>
+            setKokConfig((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    outerOptions:
+                      typeof options === 'function'
+                        ? options(prev.outerOptions)
+                        : options,
+                  }
+                : undefined,
+            )
+          }
         />
       ),
     },
@@ -60,13 +114,28 @@ export default function WriteKok() {
       name: '집 내부',
       element: (
         <InsideHome
-          pictures={[
-            { id: 0, src: propertyImg },
-            { id: 1, src: propertyImg },
-            { id: 2, src: propertyImg },
-            { id: 3, src: propertyImg },
-            { id: 4, src: propertyImg },
-          ]}
+          pictures={[]}
+          furnitures={kokConfig?.furnitureOptions || []}
+          checkedFurnitures={kokConfig?.checkedFurnitureOptions || []}
+          setCheckedFurnitures={setFurnitures}
+          options={kokConfig?.innerOptions || []}
+          setOptions={(
+            options:
+              | UserKokOption[]
+              | ((prevState: UserKokOption[]) => UserKokOption[]),
+          ) =>
+            setKokConfig((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    innerOptions:
+                      typeof options === 'function'
+                        ? options(prev.innerOptions)
+                        : options,
+                  }
+                : undefined,
+            )
+          }
         />
       ),
     },
@@ -75,13 +144,25 @@ export default function WriteKok() {
       name: '중개 / 계약',
       element: (
         <Contract
-          pictures={[
-            { id: 0, src: propertyImg },
-            { id: 1, src: propertyImg },
-            { id: 2, src: propertyImg },
-            { id: 3, src: propertyImg },
-            { id: 4, src: propertyImg },
-          ]}
+          pictures={[]}
+          options={kokConfig?.outerOptions || []}
+          setOptions={(
+            options:
+              | UserKokOption[]
+              | ((prevState: UserKokOption[]) => UserKokOption[]),
+          ) =>
+            setKokConfig((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    outerOptions:
+                      typeof options === 'function'
+                        ? options(prev.outerOptions)
+                        : options,
+                  }
+                : undefined,
+            )
+          }
         />
       ),
     },
@@ -92,7 +173,7 @@ export default function WriteKok() {
   return (
     <div className={styles.root}>
       <TopMenu className={styles.top} />
-      {content}
+      <div className={styles.content}>{content}</div>
       <BottomBtn text="저장하기" onClick={() => {}} />
     </div>
   );

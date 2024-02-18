@@ -13,22 +13,26 @@ import { KokDetail } from 'apis/getKokDetail';
 import { KokInner } from 'apis/getKokInner';
 import { KokOuter } from 'apis/getKokOuter';
 import { KokReview } from 'apis/getKokReview';
-import filledHeartIcon from 'assets/img/fill/heart_fill.svg';
 import heartIcon from 'assets/img/line(2)/heart.svg';
 import shareIcon from 'assets/img/line(2)/share.svg';
 import { PropertyComponents as Property, BottomBtn } from 'components';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
-import { StatusCode } from 'types/StatusCode';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 import styles from './KokItem.module.css';
 
+import type { UserKokOption } from 'apis/getUserKokOption';
 import type { Address } from 'types/Address';
 import type { HouseType } from 'types/HouseType';
-import type { PriceType } from 'types/PriceType';
+
+interface RawOption {
+  option: string;
+  orderNumber: number;
+  detailOptions: string[];
+}
 
 const KokItem = () => {
   const ui = useUIStore();
@@ -44,6 +48,18 @@ const KokItem = () => {
       x: longitude,
       y: latitude,
     }) as Address;
+
+  const convertRawOption = (rawOption: RawOption) =>
+    ({
+      optionId: rawOption.orderNumber,
+      optionTitle: rawOption.option,
+      orderNumber: rawOption.orderNumber,
+      detailOptions: rawOption.detailOptions.map((detailOption, index) => ({
+        detailOptionId: index,
+        detailOptionTitle: detailOption,
+        detailOptionIsVisible: false,
+      })),
+    }) as UserKokOption;
 
   const [KokOuter, setKokOuter] = useState<KokOuter>();
   const [KokInner, setKokInner] = useState<KokInner>();
@@ -93,9 +109,9 @@ const KokItem = () => {
           address={
             KokDetail
               ? getAddressObject(
-                  KokDetail!.address,
-                  KokDetail!.longtitude,
-                  KokDetail!.latitude,
+                  KokDetail?.address,
+                  KokDetail?.longtitude,
+                  KokDetail?.latitude,
                 )
               : { address_name: '', x: 0, y: 0 }
           }
@@ -107,7 +123,7 @@ const KokItem = () => {
       element: (
         <Property.Outer
           highlights={KokOuter ? KokOuter.hilights : []}
-          options={KokOuter ? KokOuter.options : []}
+          options={KokOuter ? KokOuter.options.map(convertRawOption) : []}
         />
       ),
     },
@@ -115,9 +131,9 @@ const KokItem = () => {
       name: '집 내부',
       element: (
         <Property.Inner
-          furnitureOptions={KokInner ? KokInner.furnitureOptions : []}
-          direction={KokInner ? KokInner!.direction : ''}
-          options={KokInner ? KokInner!.options : []}
+          furnitureOptions={KokInner?.furnitureOptions ?? []}
+          direction={KokInner?.direction ?? ''}
+          options={KokInner?.options.map(convertRawOption) ?? []}
         />
       ),
     },
@@ -125,8 +141,8 @@ const KokItem = () => {
       name: '중개 계약',
       element: (
         <Property.Contract
-          options={KokContract ? KokContract.options : []}
-          pictures={KokContract ? KokContract.imageInfo.imageURL : []}
+          options={KokContract?.options.map(convertRawOption) ?? []}
+          pictures={KokContract?.imageInfo.imageURL ?? []}
         />
       ),
     },

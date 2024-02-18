@@ -20,7 +20,7 @@
   justify-content: center;
 }
 
-.checkBtn {
+.detailCheckBtn {
   position: absolute;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -30,7 +30,7 @@
   width: 1px;
 }
 
-.checkBtn:checked + .checkLabel:after {
+.detailCheckBtn:checked + .checkLabel:after {
   opacity: 1;
 }
 

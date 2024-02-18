@@ -2,9 +2,11 @@ import React from 'react';
 
 import deleteBtnIcon from 'assets/img/fill/delete.svg';
 import cameraIcon from 'assets/img/line(1)/camera.svg';
-import KoklistGroup from 'components/KoklistGroup';
+import { OptionsComponent } from 'components';
 
 import styles from './Contract.module.css';
+
+import type { UserKokOption } from 'apis/getUserKokOption';
 
 interface Picture {
   id: number;
@@ -12,8 +14,15 @@ interface Picture {
 }
 interface ContractProps {
   pictures: Picture[];
+  options: UserKokOption[];
+  setOptions: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
 }
-export default function Contract({ pictures }: ContractProps) {
+
+export default function Contract({
+  pictures,
+  options,
+  setOptions,
+}: ContractProps) {
   return (
     <div className={styles.root}>
       {/* 사진 */}
@@ -43,18 +52,7 @@ export default function Contract({ pictures }: ContractProps) {
       </div>
       {/* 콕리스트 */}
       <div className={styles.koklistContainer}>
-        <KoklistGroup
-          title="계약 관련"
-          koklists={[
-            { name: '공동현관 CCTV가 있는가 1', checked: true },
-            { name: '공동현관 CCTV가 있는가 2', checked: false },
-            { name: '공동현관 CCTV가 있는가 3', checked: true },
-          ]}
-          selected
-        />
-
-        <KoklistGroup title="집주인 관련" koklists={[]} selected={false} />
-        <KoklistGroup title="부동산 관련" koklists={[]} selected={false} />
+        <OptionsComponent kokOptions={options} setKokOptions={setOptions} />
       </div>
     </div>
   );

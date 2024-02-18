@@ -4,10 +4,10 @@ import type { UserKokOption } from './getUserKokOption';
 import type { ZipkokResponse } from 'types/ZipkokResponse';
 
 export interface KokConfigResult {
-  highlights: string[];
-  checkedHighlights: string[];
+  hilights: string[];
+  checkedHilights: string[] | null;
   furnitureOptions: string[];
-  checkedFurnitureOptions: string[];
+  checkedFurnitureOptions: string[] | null;
   reviewInfo: {
     impressions: string[];
     checkedImpressions: string[];
@@ -27,10 +27,10 @@ export interface KokConfigResult {
  * 새 콕리스트 작성 시 유저 설정 정보를 불러오는 API
  * @param number kokId
  */
-export async function getKokConfig(kokId: number) {
+export async function getKokConfig(kokId?: number) {
   const path = `/kok/config`;
   const method = 'GET';
-  const params = { kokId };
+  const params = kokId && { kokId };
   const authRequired = true;
 
   const res = await api<ZipkokResponse<KokConfigResult>>(

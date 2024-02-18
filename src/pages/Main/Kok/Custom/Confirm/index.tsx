@@ -49,7 +49,7 @@ export default function Confirm() {
         }}
       />
       <BottomBtn
-        onClick={() => navigate(`/kok/edit/${realEstateId}`)}
+        onClick={() => navigate(`/kok/edit?realEstateId=${realEstateId}`)}
         text="콕리스트 작성하기"
         occupySpace
       />
