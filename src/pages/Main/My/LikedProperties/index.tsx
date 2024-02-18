@@ -34,7 +34,7 @@ const LikedProperties = () => {
           key={property.realEstateId}
           id={property.realEstateId}
           like={true}
-          type={property.realestateType}
+          type={property.realEstateType}
           priceType={property.transactionType}
           price={property.price}
           deposit={property.deposit}

@@ -13,7 +13,6 @@ export default function Root() {
   useEffect(() => {
     if (isLoggedIn()) {
       getUserDetail().then((res) => {
-        console.log(res.result);
         MyPageStore.setImageUrl(res.result.imageUrl);
         MyPageStore.setNickname(res.result.nickname);
         MyPageStore.setBirthday(res.result.birthday);

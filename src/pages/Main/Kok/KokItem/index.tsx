@@ -52,7 +52,6 @@ const KokItem = () => {
   const [KokReview, setKokReview] = useState<KokReview>();
 
   useEffect(() => {
-    console.log(kokId);
     if (kokId === undefined) return;
     const kokItemId = parseInt(kokId, 20);
     getKokOuter(kokItemId).then((res) => setKokOuter(res.result));

@@ -35,7 +35,6 @@ export default function WriteKok() {
             { id: 1, src: propertyImg },
             { id: 2, src: propertyImg },
             { id: 3, src: propertyImg },
-            { id: 4, src: propertyImg },
           ]}
         />
       ),
@@ -82,7 +81,7 @@ export default function WriteKok() {
     <div className={styles.root}>
       <TopMenu className={styles.top} />
       <Content />
-      <BottomBtn text="다음" onClick={() => {}} />
+      <BottomBtn text="저장하기" onClick={() => {}} />
     </div>
   );
 }

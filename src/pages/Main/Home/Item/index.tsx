@@ -32,9 +32,6 @@ const Item = () => {
     getRealEstateInfo(ItemId).then((res) => setRealEstateInfo(res.result));
   }, [realEstateId]);
 
-  const handleWriteClick = () => {
-    navigate('../');
-  };
   const handlePress = () => {
     if (realEstateId === undefined) return;
     if (realEstateInfo === undefined) return;
@@ -80,6 +77,10 @@ const Item = () => {
       path: 'home',
     });
   }, [realEstateInfo]);
+
+  const handleWriteClick = () => {
+    navigate('../');
+  };
 
   return (
     <div className={styles.root}>
