@@ -26,7 +26,6 @@ const LikedProperties = () => {
       path: 'my',
     });
   }, []);
-  console.log(properties);
 
   return (
     <div className={styles.root}>
