@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getZim, zim } from 'apis';
+import { zim } from 'apis';
 import { deleteZim } from 'apis';
 import { GetRealEstateInfoResult } from 'apis/getRealEstateInfo';
 import { getRealEstateInfo } from 'apis/getRealEstateInfo';
 import { BottomBtn } from 'components';
 import Property from 'components/Property';
+import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
+import { StatusCode } from 'types/StatusCode';
 import getPriceString from 'utils/getPriceString';
 
 import 'swiper/css';
@@ -18,10 +20,11 @@ import heart from '../../../../assets/img/line(2)/heart.svg';
 
 const Item = () => {
   const navigate = useNavigate();
+  const modal = useModal();
+
   const { realEstateId } = useParams();
   const [realEstateInfo, setRealEstateInfo] =
     useState<GetRealEstateInfoResult>();
-  const [isZimmed, setIsZimmed] = useState(realEstateInfo?.isZimmed);
 
   useEffect(() => {
     if (realEstateId === undefined) return;
@@ -34,12 +37,30 @@ const Item = () => {
   };
   const handlePress = () => {
     if (realEstateId === undefined) return;
+    if (realEstateInfo === undefined) return;
 
-    setIsZimmed(!isZimmed);
-    if (!isZimmed) {
-      zim(parseInt(realEstateId)).then((res) => res);
-    } else if (isZimmed) {
-      deleteZim(parseInt(realEstateId)).then((res) => res);
+    if (!realEstateInfo.isZimmed) {
+      zim(parseInt(realEstateId)).then((res) => {
+        if (res.code === StatusCode.FAVORITES_ADD_SUCCESS)
+          setRealEstateInfo({ ...realEstateInfo, isZimmed: true });
+        else
+          modal.open({
+            title: '찜 실패',
+            description: '찜하기에 실패했습니다.',
+            primaryButton: '확인',
+          });
+      });
+    } else {
+      deleteZim(parseInt(realEstateId)).then((res) => {
+        if (res.code === StatusCode.FAVORITES_CANCEL_SUCCESS)
+          setRealEstateInfo({ ...realEstateInfo, isZimmed: false });
+        else
+          modal.open({
+            title: '찜 취소 실패',
+            description: '찜 취소에 실패했습니다.',
+            primaryButton: '확인',
+          });
+      });
     }
   };
   const ui = useUIStore();
@@ -52,13 +73,13 @@ const Item = () => {
       headerRightButtons: [
         {
           id: '1',
-          img: isZimmed ? fillHeart : heart,
+          img: realEstateInfo?.isZimmed ? fillHeart : heart,
           onPress: handlePress,
         },
       ],
       path: 'home',
     });
-  }, [realEstateInfo, isZimmed]);
+  }, [realEstateInfo]);
 
   return (
     <div className={styles.root}>
