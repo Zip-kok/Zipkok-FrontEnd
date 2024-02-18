@@ -73,6 +73,11 @@ const KokRoute = {
     },
     {
       // 새콕리스트 작성_체크 (=수정하기 화면 동일)
+      path: 'edit',
+      element: <WriteKok />,
+    },
+    {
+      // 새콕리스트 작성_체크 (=수정하기 화면 동일)
       path: 'edit/:kokId',
       element: <WriteKok />,
     },

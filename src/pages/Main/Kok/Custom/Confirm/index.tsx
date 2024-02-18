@@ -28,7 +28,7 @@ export default function Confirm() {
         address={customKokStore.address}
       />
       <BottomBtn
-        onClick={() => navigate('/kok/edit/:kokId')}
+        onClick={() => navigate('/kok/edit')}
         text="콕리스트 작성하기"
         occupySpace
       />
