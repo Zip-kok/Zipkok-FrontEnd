@@ -12,19 +12,19 @@ export default function Main() {
   return (
     <div className={styles.main}>
       {/* header */}
-      <div className={styles.header}>
-        {ui.headerEnabled && (
-          <Header
-            title={ui.headerTitle}
-            backBtnEnabled={ui.headerBackButtonEnabled}
-            titleIcon={ui.headerIcon}
-            buttons={ui.headerRightButtons}
-          />
-        )}
-      </div>
 
       {/* content */}
       <div className={`${styles.body} ${ui.naviEnabled ? styles.padded : ''}`}>
+        <div className={styles.header}>
+          {ui.headerEnabled && (
+            <Header
+              title={ui.headerTitle}
+              backBtnEnabled={ui.headerBackButtonEnabled}
+              titleIcon={ui.headerIcon}
+              buttons={ui.headerRightButtons}
+            />
+          )}
+        </div>
         <Outlet />
       </div>
 
