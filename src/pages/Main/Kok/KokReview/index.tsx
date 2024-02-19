@@ -80,10 +80,9 @@ export default function KokReview() {
   return (
     <div className={styles.root}>
       <div className={styles.reviews}>
-        <div className={styles.image}>
+        {/* <div className={styles.image}>
           <SwiperCom imageUrls={[]}></SwiperCom>
-          {/* TODO: 매물 이미지 추가 */}
-        </div>
+        </div> */}
         <div>
           <div className={styles.review}>
             <h1
