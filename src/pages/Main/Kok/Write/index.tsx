@@ -214,9 +214,24 @@ export default function WriteKok() {
 
   const navigate = useNavigate();
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (realEstateId === null) return;
     if (kokConfig === undefined) return;
+
+    const getFile = async (url: string, prefix: string) =>
+      new File(
+        [await (await fetch(url)).blob()],
+        `${prefix}${Math.random().toString(36).substring(2, 12)}.jpg`,
+        {
+          type: 'image/jpeg',
+        },
+      );
+
+    const pictureData = await Promise.all([
+      ...pictures.outer.map((url) => getFile(url, 'OUTTER')),
+      ...pictures.inner.map((url) => getFile(url, 'INNER')),
+      ...pictures.contract.map((url) => getFile(url, 'CONTRACT')),
+    ]);
 
     postKok(
       parseInt(realEstateId),
@@ -249,6 +264,7 @@ export default function WriteKok() {
           (detail) => detail.detailOptionId,
         ),
       })),
+      pictureData,
     ).then((res) => {
       if (res.code === 7011) navigate(`/kok/${res.result.kokId}`);
       else
