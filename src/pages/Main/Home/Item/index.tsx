@@ -11,6 +11,7 @@ import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import { StatusCode } from 'types/StatusCode';
 import getPriceString from 'utils/getPriceString';
+import pushToRecents from 'utils/pushToRecents';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -29,7 +30,21 @@ const Item = () => {
   useEffect(() => {
     if (realEstateId === undefined) return;
     const ItemId = parseInt(realEstateId);
-    getRealEstateInfo(ItemId).then((res) => setRealEstateInfo(res.result));
+    getRealEstateInfo(ItemId).then((res) => {
+      setRealEstateInfo(res.result);
+      pushToRecents({
+        realEstateId: res.result.realEstateId,
+        like: res.result.isZimmed,
+        type: res.result.realEstateType,
+        priceType: res.result.transactionType,
+        deposit: res.result.deposit,
+        price: res.result.price,
+        address: res.result.address,
+        propertyName: '',
+        imageUrl: res.result.imageInfo.imageURL[0],
+        kokList: false,
+      });
+    });
   }, [realEstateId]);
 
   const handlePress = () => {
