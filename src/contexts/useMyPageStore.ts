@@ -31,7 +31,7 @@ type MyPageInfo = UserInfo & {
 const initialState: MyPageInfo = {
   imageUrl: null,
   nickname: '게스트',
-  birthday: '040405',
+  birthday: '000101',
   gender: 'DISCLOSURE',
   realEstateType: undefined,
   transactionType: undefined,
