@@ -2,9 +2,11 @@
   display: flex;
   gap: 8px;
   margin: 0 20px 10px 20px;
+  flex-wrap: wrap;
 }
 
 .tag {
+  display: flex;
   justify-content: center;
   border-radius: 500px;
   padding: 6px 12px;
@@ -14,6 +16,7 @@
   font-family: Pretendard;
   font-size: 14px;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .optionsCtn {
