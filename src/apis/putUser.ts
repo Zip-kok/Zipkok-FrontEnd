@@ -29,7 +29,7 @@ export async function putUser(user: User, file?: File) {
     });
   }
 
-  const res = (await fetch('https://zipkok.shop/user', {
+  const res = (await fetch('https://zipkok.store/user', {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${accessToken}`,

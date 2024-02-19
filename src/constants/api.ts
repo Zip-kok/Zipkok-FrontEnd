@@ -1,3 +1,3 @@
-const url = 'https://zipkok.shop';
+const url = 'https://zipkok.store';
 
 export { url };

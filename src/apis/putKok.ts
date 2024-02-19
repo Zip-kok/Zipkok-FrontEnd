@@ -69,7 +69,7 @@ export async function putKok(data: Partial<PutKokRequest>) {
     });
   }
 
-  const res = (await fetch('https://zipkok.shop/kok', {
+  const res = (await fetch('https://zipkok.store/kok', {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${accessToken}`,

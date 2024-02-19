@@ -70,7 +70,7 @@ export async function postKok(
     });
   }
 
-  const res = (await fetch('https://zipkok.shop/kok', {
+  const res = (await fetch('https://zipkok.store/kok', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
