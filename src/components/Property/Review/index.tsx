@@ -37,34 +37,14 @@ export default function Review({
         <span className={styles.title}>매물은 어떠셨나요?</span>
       </div>
       <div className={styles.starCtn}>
-        <StarRating
-          label="시설"
-          onRating={(facilityStarCount) => facilityStarCount}
-          readOnly={true}
-          starCount={facilityStarCount}
-        />
-        <StarRating
-          label="인프라"
-          onRating={(rating) => console.log(rating)}
-          readOnly={true}
-          starCount={infraStarCount}
-        />
-        <StarRating
-          label="구조"
-          onRating={(rating) => console.log(rating)}
-          readOnly={true}
-          starCount={structureStarCount}
-        />
-        <StarRating
-          label="분위기"
-          onRating={(rating) => console.log(rating)}
-          readOnly={true}
-          starCount={vibeStarCount}
-        />
+        <StarRating label="시설" readOnly starCount={facilityStarCount} />
+        <StarRating label="인프라" readOnly starCount={infraStarCount} />
+        <StarRating label="구조" readOnly starCount={structureStarCount} />
+        <StarRating label="분위기" readOnly starCount={vibeStarCount} />
       </div>
 
       <div className={styles.reviewTextCtn}>
-        <textarea defaultValue={reviewText} readOnly={true} />
+        <textarea defaultValue={reviewText} readOnly />
       </div>
     </>
   );

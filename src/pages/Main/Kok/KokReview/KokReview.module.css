@@ -81,7 +81,6 @@
   width: 100%;
   height: 99px;
   flex-shrink: 0;
-  color: var(--gray-color-gray030_text, #9fa4a9);
   border-radius: 8px;
   border: 1px solid var(--gray-color-gray020_border, #c8cbd1);
   background: var(--gray-color-white, #fff);

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { getKokReview } from 'apis';
+import { getKokReview, putKok } from 'apis';
 import BottomBtn from 'components/BottomBtn';
 import StarRating from 'components/StarRating';
 import SwiperCom from 'components/Swiper';
+import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 
 import styles from './KokReview.module.css';
@@ -27,8 +28,33 @@ const Tags = [
 
 export default function KokReview() {
   const ui = useUIStore();
+  const modal = useModal();
   const { kokId } = useParams<{ kokId: string }>();
   const [review, setReview] = useState<KokReview>();
+
+  const handleSave = () => {
+    if (kokId === undefined) return;
+
+    putKok({
+      kokId: parseInt(kokId),
+      reviewInfo: {
+        checkedImpressions: review?.impressions || [],
+        facilityStarCount: review?.facilityStarCount || 0,
+        infraStarCount: review?.infraStarCount || 0,
+        structureStarCount: review?.structureStarCount || 0,
+        vibeStarCount: review?.vibeStarCount || 0,
+        reviewText: review?.reviewText || '',
+      },
+    }).then((res) => {
+      if (res.code === 7014) navigate('/kok/complete');
+      else
+        modal.open({
+          title: '후기 저장 실패',
+          description: res.message,
+          primaryButton: '확인',
+        });
+    });
+  };
 
   useEffect(() => {
     ui.setUI({
@@ -50,13 +76,6 @@ export default function KokReview() {
   }, [kokId]);
 
   const navigate = useNavigate();
-  const [tags, setTags] = useState(Tags);
-
-  const [rating, setRating] = useState(0);
-  const totalStars = 5;
-  const handleStarClick = (index: number) => {
-    setRating(index + 1);
-  };
 
   return (
     <div className={styles.root}>
@@ -75,7 +94,7 @@ export default function KokReview() {
             </h1>
             <div>
               <div className={styles.tags}>
-                {tags.map((tag) => (
+                {Tags.map((tag) => (
                   <button
                     key={tag}
                     className={
@@ -113,27 +132,96 @@ export default function KokReview() {
             </h1>
             <StarRating
               label="시설"
-              onRating={(rating) => console.log(rating)}
-              starCount={review?.facilityStarCount}
+              starCount={review?.facilityStarCount ?? 0}
+              setStarCount={(
+                starCount: number | ((prevState: number) => number),
+              ) =>
+                setReview((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        facilityStarCount:
+                          typeof starCount === 'function'
+                            ? starCount(prev.facilityStarCount ?? 0)
+                            : starCount,
+                      }
+                    : undefined,
+                )
+              }
             />
             <StarRating
               label="인프라"
-              onRating={(rating) => console.log(rating)}
-              starCount={review?.infraStarCount}
+              starCount={review?.infraStarCount ?? 0}
+              setStarCount={(
+                starCount: number | ((prevState: number) => number),
+              ) =>
+                setReview((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        infraStarCount:
+                          typeof starCount === 'function'
+                            ? starCount(prev.infraStarCount ?? 0)
+                            : starCount,
+                      }
+                    : undefined,
+                )
+              }
             />
             <StarRating
               label="구조"
-              onRating={(rating) => console.log(rating)}
-              starCount={review?.structureStarCount}
+              starCount={review?.structureStarCount ?? 0}
+              setStarCount={(
+                starCount: number | ((prevState: number) => number),
+              ) =>
+                setReview((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        structureStarCount:
+                          typeof starCount === 'function'
+                            ? starCount(prev.structureStarCount ?? 0)
+                            : starCount,
+                      }
+                    : undefined,
+                )
+              }
             />
             <StarRating
               label="분위기"
-              onRating={(rating) => console.log(rating)}
-              starCount={review?.vibeStarCount}
+              starCount={review?.vibeStarCount ?? 0}
+              setStarCount={(
+                starCount: number | ((prevState: number) => number),
+              ) =>
+                setReview((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        vibeStarCount:
+                          typeof starCount === 'function'
+                            ? starCount(prev.vibeStarCount ?? 0)
+                            : starCount,
+                      }
+                    : undefined,
+                )
+              }
             />
           </div>
           <div className={styles.review}>
-            <textarea placeholder="매물에 대한 후기를 자유롭게 남겨보세요."></textarea>
+            <textarea
+              placeholder="매물에 대한 후기를 자유롭게 남겨보세요."
+              value={review?.reviewText}
+              onChange={(e) =>
+                setReview((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        reviewText: e.target.value,
+                      }
+                    : undefined,
+                )
+              }
+            ></textarea>
           </div>
         </div>
       </div>
@@ -141,7 +229,7 @@ export default function KokReview() {
         anchorText="건너뛰기"
         onAnchorClick={() => navigate('/kok/complete')}
         text="저장하기"
-        onClick={() => navigate('/kok/complete')}
+        onClick={handleSave}
         occupySpace
       />
     </div>

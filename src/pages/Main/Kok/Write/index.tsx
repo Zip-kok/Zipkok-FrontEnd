@@ -230,9 +230,10 @@ export default function WriteKok() {
       );
 
     const pictureData = await Promise.all([
-      ...kokConfig.outerImageUrls.map((url) => getFile(url, 'OUTTER')),
-      ...kokConfig.innerImageUrls.map((url) => getFile(url, 'INNER')),
-      ...kokConfig.contractImageUrls.map((url) => getFile(url, 'CONTRACT')),
+      ...(kokConfig.outerImageUrls?.map((url) => getFile(url, 'OUTTER')) ?? []),
+      ...(kokConfig.innerImageUrls?.map((url) => getFile(url, 'INNER')) ?? []),
+      ...(kokConfig.contractImageUrls?.map((url) => getFile(url, 'CONTRACT')) ??
+        []),
     ]);
 
     const outerOptions = kokConfig.outerOptions.map((option) => ({
@@ -284,24 +285,16 @@ export default function WriteKok() {
       });
     // 기존 콕 수정
     else if (kokId !== null)
-      putKok(
-        parseInt(kokId),
-        kokConfig.checkedHilights ?? [],
-        kokConfig.checkedFurnitureOptions ?? [],
-        '남쪽',
-        {
-          checkedImpressions: [],
-          facilityStarCount: 5,
-          infraStarCount: 5,
-          structureStarCount: 5,
-          vibeStarCount: 5,
-          reviewText: '',
-        },
-        outerOptions,
-        innerOptions,
-        contractOptions,
-        pictureData,
-      ).then((res) => {
+      putKok({
+        kokId: parseInt(kokId),
+        checkedHighlights: kokConfig.checkedHilights ?? [],
+        checkedFurnitureOptions: kokConfig.checkedFurnitureOptions ?? [],
+        direction: '남쪽',
+        checkedOuterOptions: outerOptions,
+        checkedInnerOptions: innerOptions,
+        checkedContractOptions: contractOptions,
+        files: pictureData,
+      }).then((res) => {
         if (res.code === 7014) navigate(`/kok/review/${kokId}`);
         else
           modal.open({

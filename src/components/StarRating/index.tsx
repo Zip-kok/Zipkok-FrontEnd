@@ -9,30 +9,21 @@ import styles from './StarRating.module.css';
 // readOnly 모드일 때 starCount 설정 가능
 interface StarRatingProps {
   label: string;
-  onRating: (rating: number) => void;
+  starCount: number;
+  setStarCount?: React.Dispatch<React.SetStateAction<number>>;
   readOnly?: boolean;
-  starCount?: number;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({
   label,
-  onRating,
+  starCount,
+  setStarCount,
   readOnly = false,
-  starCount = 0,
 }) => {
-  const [rating, setRating] = useState<number>(starCount);
-
-  useEffect(() => {
-    if (readOnly) {
-      setRating(starCount);
-    }
-  }, [readOnly, starCount]);
-
   const handleStarClick = (index: number): void => {
     if (!readOnly) {
       const newRating = index;
-      setRating(newRating);
-      onRating(newRating);
+      setStarCount?.(newRating);
     }
   };
 
@@ -44,7 +35,7 @@ const StarRating: React.FC<StarRatingProps> = ({
           <img
             key={index}
             className={styles.star}
-            src={index < rating ? starRed : starWhite}
+            src={index < starCount ? starRed : starWhite}
             alt={`${index + 1} stars`}
             onClick={() => handleStarClick(index + 1)}
             style={{ cursor: readOnly ? 'default' : 'pointer' }}
