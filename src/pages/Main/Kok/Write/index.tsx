@@ -191,7 +191,7 @@ export default function WriteKok() {
                 : undefined,
             )
           }
-          options={kokConfig?.outerOptions || []}
+          options={kokConfig?.contractOptions || []}
           setOptions={(
             options:
               | UserKokOption[]
@@ -201,9 +201,9 @@ export default function WriteKok() {
               prev
                 ? {
                     ...prev,
-                    outerOptions:
+                    contractOptions:
                       typeof options === 'function'
-                        ? options(prev.outerOptions)
+                        ? options(prev.contractOptions)
                         : options,
                   }
                 : undefined,
