@@ -8,7 +8,7 @@ export interface GetRealEstateInfoResult {
   realEstateId: number;
   imageInfo: {
     imageNumber: number;
-    imageURL: string[];
+    imageURL: (string | null)[];
   };
   address: string;
   detailAddress: string | null;
@@ -16,7 +16,6 @@ export interface GetRealEstateInfoResult {
   deposit: number;
   price: number;
   detail: string | null;
-  areaSize: number | null;
   pyeongsu: number | null;
   realEstateType: HouseType;
   floorNum: number | null;

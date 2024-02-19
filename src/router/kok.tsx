@@ -23,7 +23,7 @@ const KokRoute = {
       element: <Custom />,
       children: [
         { index: true, element: <CustomForm /> },
-        { path: 'confirm', element: <CustomConfirm /> },
+        { path: 'confirm/:realEstateId', element: <CustomConfirm /> },
         { path: 'locationEdit', element: <CustomFormLocationEdit /> },
       ],
     },
@@ -50,25 +50,6 @@ const KokRoute = {
           path: 'propertyMap',
           element: <PropertyMap />,
         },
-        {
-          // 새콕리스트 작성_체크 (=수정하기 화면 동일)
-          path: 'write',
-          element: <WriteKok />,
-        },
-        {
-          // 새콕리스트 작성_후기
-          path: 'review',
-          children: [
-            {
-              index: true,
-              element: <KokReview />,
-            },
-            {
-              path: 'complete',
-              element: <Complete />,
-            },
-          ],
-        },
       ],
     },
     {
@@ -77,9 +58,18 @@ const KokRoute = {
       element: <WriteKok />,
     },
     {
-      // 새콕리스트 작성_체크 (=수정하기 화면 동일)
-      path: 'edit/:kokId',
-      element: <WriteKok />,
+      // 새콕리스트 작성_후기
+      path: 'review/:kokId',
+      children: [
+        {
+          index: true,
+          element: <KokReview />,
+        },
+      ],
+    },
+    {
+      path: 'complete',
+      element: <Complete />,
     },
   ],
 };

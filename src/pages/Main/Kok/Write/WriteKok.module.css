@@ -4,7 +4,12 @@
   flex-direction: column;
 }
 
+.content {
+  padding-bottom: 80px;
+}
+
 .top {
   position: sticky;
   z-index: 1;
+  top: 56px;
 }

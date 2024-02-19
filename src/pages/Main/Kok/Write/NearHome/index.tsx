@@ -1,21 +1,53 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import deleteBtnIcon from 'assets/img/fill/delete.svg';
 import cameraIcon from 'assets/img/line(1)/camera.svg';
-import { Highlight, KoklistGroup } from 'components';
+import { Highlight, OptionsComponent } from 'components';
 
 import styles from './NearHome.module.css';
 
-interface Picture {
-  id: number;
-  src: string;
-}
+import type { UserKokOption } from 'apis/getUserKokOption';
 
 interface NearHomeProps {
-  pictures: Picture[];
+  pictures: string[];
+  setPictures: React.Dispatch<React.SetStateAction<string[]>>;
+  highlights: string[];
+  checkedHighlights: string[];
+  setCheckedHighlights: React.Dispatch<React.SetStateAction<string[]>>;
+  options: UserKokOption[];
+  setOptions: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
 }
 
-export default function NearHome({ pictures }: NearHomeProps) {
+export default function NearHome({
+  pictures,
+  setPictures,
+  highlights,
+  checkedHighlights,
+  setCheckedHighlights,
+  options,
+  setOptions,
+}: NearHomeProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const fileChange = async (fileBlob: File) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+
+    await new Promise<void>((resolve) => {
+      reader.onload = () => {
+        resolve();
+      };
+    });
+
+    setPictures((prev) => [...prev, reader.result as string]);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      fileChange(e.target.files[0]);
+    }
+  };
+
   return (
     <div className={styles.root}>
       {/* 사진 */}
@@ -26,17 +58,35 @@ export default function NearHome({ pictures }: NearHomeProps) {
           {/* 최대 사진 개수 이하인 경우에만 */}
           {pictures.length < 10 && (
             <div className={styles.picture}>
-              <button className={styles.addPicture}>
+              <button
+                className={styles.addPicture}
+                onClick={() => fileInputRef.current?.click()}
+              >
                 <img src={cameraIcon} />
                 <p>{pictures.length} / 10</p>
               </button>
+              <input
+                id="inputFile"
+                type="file"
+                name="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                disabled={pictures.length >= 10}
+              />
             </div>
           )}
 
           {pictures.map((picture) => (
-            <div key={picture.id} className={styles.picture}>
-              <img src={picture.src} />
-              <button className={styles.deletePicture}>
+            <div key={picture} className={styles.picture}>
+              <img src={picture} />
+              <button
+                className={styles.deletePicture}
+                onClick={() =>
+                  setPictures((prev) => prev.filter((e) => e !== picture))
+                }
+              >
                 <img src={deleteBtnIcon} />
               </button>
             </div>
@@ -48,15 +98,23 @@ export default function NearHome({ pictures }: NearHomeProps) {
       <div className={styles.highlightContainer}>
         <h1 className={styles.title}>매물 하이라이트</h1>
         <div className={styles.highlights}>
-          <Highlight text="CCTV" highlightEnabled />
-          <Highlight text="주차장" highlightEnabled />
-          <Highlight text="현관보안" highlightEnabled />
-          <Highlight text="편세권" highlightEnabled />
-          <Highlight text="역세권" highlightEnabled />
-          <Highlight text="더블역세권" highlightEnabled />
-          <Highlight text="트리플역세권" highlightEnabled />
-          <Highlight text="공원" highlightEnabled />
-          <Highlight text="마트" highlightEnabled />
+          {highlights.map((highlight) => (
+            <Highlight
+              text={highlight}
+              key={highlight}
+              highlightEnabled={checkedHighlights.includes(highlight)}
+              onEnable={() =>
+                setCheckedHighlights((prev) => {
+                  return [...prev, highlight];
+                })
+              }
+              onDisable={() =>
+                setCheckedHighlights((prev) =>
+                  prev.filter((e) => e !== highlight),
+                )
+              }
+            />
+          ))}
         </div>
       </div>
 
@@ -64,25 +122,7 @@ export default function NearHome({ pictures }: NearHomeProps) {
 
       {/* 콕리스트 */}
       <div className={styles.koklistContainer}>
-        <KoklistGroup
-          title="공동현관"
-          koklists={[
-            { name: '공동현관 CCTV가 있는가 1', checked: true },
-            { name: '공동현관 CCTV가 있는가 2', checked: false },
-            { name: '공동현관 CCTV가 있는가 3', checked: true },
-          ]}
-          selected
-        />
-
-        <KoklistGroup
-          title="복도 및 계단"
-          koklists={[
-            { name: '공동현관 CCTV가 있는가 1', checked: true },
-            { name: '공동현관 CCTV가 있는가 2', checked: false },
-            { name: '공동현관 CCTV가 있는가 3', checked: true },
-          ]}
-          selected={false}
-        />
+        <OptionsComponent kokOptions={options} setKokOptions={setOptions} />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { deletePin } from './deletePin';
 import { deleteUser } from './deleteUser';
 import { deleteZim } from './deleteZim';
 import { getDirection } from './getDirection';
+import { getKokConfig } from './getKokConfig';
 import { getKokContract } from './getKokContract';
 import { getKokDetail } from './getKokDetail';
 import { getKokInner } from './getKokInner';
@@ -24,7 +25,10 @@ import { getZim } from './getZim';
 import { kakaoLogin } from './kakaoLogin';
 import { logout } from './logout';
 import { onBoarding } from './onBoarding';
+import { postKok } from './postKok';
 import { postPin } from './postPin';
+import { postRealEstate } from './postRealEstate';
+import { putKok } from './putKok';
 import { putPin } from './putPin';
 import { putUser } from './putUser';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
@@ -36,6 +40,7 @@ import { zim } from './zim';
 export {
   deletePin,
   deleteUser,
+  putKok,
   searchAddress,
   getDirection,
   signIn,
@@ -63,6 +68,9 @@ export {
   getRealEstateInfo,
   getUserKokList,
   putUser,
+  getKokConfig,
+  postRealEstate,
+  postKok,
 };
 
 /**
