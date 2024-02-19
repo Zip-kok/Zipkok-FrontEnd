@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { getKokConfig, postKok, putKok } from 'apis';
 import { BottomBtn } from 'components';
-import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
 
@@ -23,6 +22,14 @@ export default function WriteKok() {
   const ui = useUIStore();
 
   const [kokConfig, setKokConfig] = useState<KokConfigResult>();
+
+  const [outerOptions, setOuterOptions] = useState<UserKokOption[]>([]);
+  const [innerOptions, setInnerOptions] = useState<UserKokOption[]>([]);
+  const [contractOptions, setContractOptions] = useState<UserKokOption[]>([]);
+
+  useEffect(() => {
+    console.log(outerOptions);
+  }, [outerOptions]);
 
   const setHighlights = (
     highlights: string[] | ((prevState: string[]) => string[]),
@@ -69,6 +76,9 @@ export default function WriteKok() {
     if (realEstateId === null) return;
     getKokConfig().then((res) => {
       setKokConfig(res.result);
+      setOuterOptions(res.result.outerOptions);
+      setInnerOptions(res.result.innerOptions);
+      setContractOptions(res.result.contractOptions);
     });
   }, [realEstateId]);
 
@@ -76,6 +86,9 @@ export default function WriteKok() {
     if (kokId === null) return;
     getKokConfig(parseInt(kokId)).then((res) => {
       setKokConfig(res.result);
+      setOuterOptions(res.result.outerOptions);
+      setInnerOptions(res.result.innerOptions);
+      setContractOptions(res.result.contractOptions);
     });
   }, [kokId]);
 
@@ -105,23 +118,7 @@ export default function WriteKok() {
           checkedHighlights={kokConfig?.checkedHilights || []}
           setCheckedHighlights={setHighlights}
           options={kokConfig?.outerOptions || []}
-          setOptions={(
-            options:
-              | UserKokOption[]
-              | ((prevState: UserKokOption[]) => UserKokOption[]),
-          ) =>
-            setKokConfig((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    outerOptions:
-                      typeof options === 'function'
-                        ? options(prev.outerOptions)
-                        : options,
-                  }
-                : undefined,
-            )
-          }
+          setOptions={setOuterOptions}
         />
       ),
     },
@@ -150,23 +147,7 @@ export default function WriteKok() {
           checkedFurnitures={kokConfig?.checkedFurnitureOptions || []}
           setCheckedFurnitures={setFurnitures}
           options={kokConfig?.innerOptions || []}
-          setOptions={(
-            options:
-              | UserKokOption[]
-              | ((prevState: UserKokOption[]) => UserKokOption[]),
-          ) =>
-            setKokConfig((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    innerOptions:
-                      typeof options === 'function'
-                        ? options(prev.innerOptions)
-                        : options,
-                  }
-                : undefined,
-            )
-          }
+          setOptions={setInnerOptions}
         />
       ),
     },
@@ -192,23 +173,7 @@ export default function WriteKok() {
             )
           }
           options={kokConfig?.contractOptions || []}
-          setOptions={(
-            options:
-              | UserKokOption[]
-              | ((prevState: UserKokOption[]) => UserKokOption[]),
-          ) =>
-            setKokConfig((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    contractOptions:
-                      typeof options === 'function'
-                        ? options(prev.contractOptions)
-                        : options,
-                  }
-                : undefined,
-            )
-          }
+          setOptions={setContractOptions}
         />
       ),
     },
@@ -219,7 +184,16 @@ export default function WriteKok() {
   const handleSave = () => {
     navigate(
       `/kok/review?kokId=${kokId ?? ''}&realEstateId=${realEstateId ?? ''}`,
-      { state: { kokConfig } },
+      {
+        state: {
+          kokConfig: {
+            ...kokConfig,
+            outerOptions,
+            innerOptions,
+            contractOptions,
+          },
+        },
+      },
     );
   };
 

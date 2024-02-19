@@ -32,13 +32,12 @@ const OptionsComponent: React.FC<OptionsComponentProps> = ({
                   type="checkbox"
                   className={styles.detailCheckBtn}
                   defaultChecked={detailOption.detailOptionIsVisible}
-                  onChange={() => {
+                  onChange={(e) => {
                     setKokOptions?.((prevState) => {
                       const newOptions = [...prevState];
                       newOptions[index].detailOptions[
                         detailIndex
-                      ].detailOptionIsVisible =
-                        !detailOption.detailOptionIsVisible;
+                      ].detailOptionIsVisible = e.target.checked;
 
                       return newOptions;
                     });
