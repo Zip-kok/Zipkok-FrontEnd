@@ -55,6 +55,20 @@
   margin: 0 20px;
 }
 
+.observer {
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  white-space: pre-wrap;
+  position: fixed;
+  visibility: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .memo {
   color: var(--gray-color-gray050_text, #4b5259);
   font-family: Pretendard;
