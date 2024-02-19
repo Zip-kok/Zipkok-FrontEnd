@@ -63,24 +63,30 @@ export default function KokReview() {
         []),
     ]);
 
-    const outerOptions = kokConfig.outerOptions.map((option) => ({
-      optionId: option.optionId,
-      checkedDetailOptionIds: option.detailOptions.map(
-        (detail) => detail.detailOptionId,
-      ),
-    }));
-    const innerOptions = kokConfig.innerOptions.map((option) => ({
-      optionId: option.optionId,
-      checkedDetailOptionIds: option.detailOptions.map(
-        (detail) => detail.detailOptionId,
-      ),
-    }));
-    const contractOptions = kokConfig.contractOptions.map((option) => ({
-      optionId: option.optionId,
-      checkedDetailOptionIds: option.detailOptions.map(
-        (detail) => detail.detailOptionId,
-      ),
-    }));
+    const outerOptions = kokConfig.outerOptions
+      .filter((option) => option.isVisible)
+      .map((option) => ({
+        optionId: option.optionId,
+        checkedDetailOptionIds: option.detailOptions
+          .filter((detailOption) => detailOption.detailOptionIsVisible)
+          .map((detail) => detail.detailOptionId),
+      }));
+    const innerOptions = kokConfig.innerOptions
+      .filter((option) => option.isVisible)
+      .map((option) => ({
+        optionId: option.optionId,
+        checkedDetailOptionIds: option.detailOptions
+          .filter((detailOption) => detailOption.detailOptionIsVisible)
+          .map((detail) => detail.detailOptionId),
+      }));
+    const contractOptions = kokConfig.contractOptions
+      .filter((option) => option.isVisible)
+      .map((option) => ({
+        optionId: option.optionId,
+        checkedDetailOptionIds: option.detailOptions
+          .filter((detailOption) => detailOption.detailOptionIsVisible)
+          .map((detail) => detail.detailOptionId),
+      }));
 
     // 새 콕 작성
     if (
