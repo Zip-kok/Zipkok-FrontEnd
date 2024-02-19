@@ -10,6 +10,7 @@ import useUIStore from 'contexts/uiStore';
 
 import styles from './KokReview.module.css';
 
+import type { KokConfigResult } from 'apis/getKokConfig';
 import type { KokReview } from 'apis/getKokReview';
 
 const Tags = [
@@ -26,7 +27,11 @@ const Tags = [
   '별로예요',
 ];
 
-export default function KokReview() {
+export default function KokReview({
+  kokConfig,
+}: {
+  kokConfig?: KokConfigResult;
+}) {
   const ui = useUIStore();
   const modal = useModal();
   const { kokId } = useParams<{ kokId: string }>();

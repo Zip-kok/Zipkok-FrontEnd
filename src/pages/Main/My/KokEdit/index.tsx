@@ -63,6 +63,7 @@ const KokEdit = () => {
       element: (
         <Outer
           highlights={highlights}
+          setHighlights={setHighlights}
           options={outerOptions}
           setOptions={setOuterOptions}
         />

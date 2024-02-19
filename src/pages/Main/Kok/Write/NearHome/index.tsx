@@ -103,16 +103,14 @@ export default function NearHome({
               text={highlight}
               key={highlight}
               highlightEnabled={checkedHighlights.includes(highlight)}
-              onEnable={() =>
-                setCheckedHighlights((prev) => {
-                  return [...prev, highlight];
-                })
-              }
-              onDisable={() =>
-                setCheckedHighlights((prev) =>
-                  prev.filter((e) => e !== highlight),
-                )
-              }
+              onChange={(enabled) => {
+                if (enabled)
+                  setCheckedHighlights((prev) => [...prev, highlight]);
+                else
+                  setCheckedHighlights((prev) =>
+                    prev.filter((h) => h !== highlight),
+                  );
+              }}
             />
           ))}
         </div>
