@@ -79,7 +79,7 @@ const Item = () => {
   }, [realEstateInfo]);
 
   const handleWriteClick = () => {
-    navigate('../');
+    navigate(`../../kok/edit?realEstateId=${realEstateId}`);
   };
 
   return (
