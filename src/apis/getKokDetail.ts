@@ -24,6 +24,7 @@ export interface KokDetail {
   latitude: number;
   longtitude: number;
   isZimmed: boolean;
+  realEstateId: number;
 }
 
 /**

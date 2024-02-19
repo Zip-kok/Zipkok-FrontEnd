@@ -8,21 +8,25 @@ import {
   getKokDetail,
   getKokReview,
 } from 'apis';
+import { zim } from 'apis';
+import { deleteZim } from 'apis';
 import { KokContract } from 'apis/getKokContract';
 import { KokDetail } from 'apis/getKokDetail';
 import { KokInner } from 'apis/getKokInner';
 import { KokOuter } from 'apis/getKokOuter';
 import { KokReview } from 'apis/getKokReview';
-import heartIcon from 'assets/img/line(2)/heart.svg';
-import shareIcon from 'assets/img/line(2)/share.svg';
 import { PropertyComponents as Property, BottomBtn } from 'components';
+import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 import useMenu from 'hooks/useMenu';
+import { StatusCode } from 'types/StatusCode';
+
+import styles from './KokItem.module.css';
+import fillHeart from '../../../../assets/img/fill/heart_selected.svg';
+import heart from '../../../../assets/img/line(2)/heart.svg';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-import styles from './KokItem.module.css';
 
 import type { UserKokOption } from 'apis/getUserKokOption';
 import type { Address } from 'types/Address';
@@ -37,6 +41,7 @@ interface RawOption {
 const KokItem = () => {
   const ui = useUIStore();
   const { kokId } = useParams();
+  const modal = useModal();
 
   const getAddressObject = (
     address: string,
@@ -67,6 +72,33 @@ const KokItem = () => {
   const [KokDetail, setKokDetail] = useState<KokDetail>();
   const [KokReview, setKokReview] = useState<KokReview>();
 
+  const handlePress = () => {
+    if (KokDetail === undefined) return;
+
+    if (!KokDetail.isZimmed) {
+      zim(KokDetail.realEstateId).then((res) => {
+        if (res.code === StatusCode.FAVORITES_ADD_SUCCESS)
+          setKokDetail({ ...KokDetail, isZimmed: true });
+        else
+          modal.open({
+            title: '찜 실패',
+            description: '찜하기에 실패했습니다.',
+            primaryButton: '확인',
+          });
+      });
+    } else {
+      deleteZim(KokDetail.realEstateId).then((res) => {
+        if (res.code === StatusCode.FAVORITES_CANCEL_SUCCESS)
+          setKokDetail({ ...KokDetail, isZimmed: false });
+        else
+          modal.open({
+            title: '찜 취소 실패',
+            description: '찜 취소에 실패했습니다.',
+            primaryButton: '확인',
+          });
+      });
+    }
+  };
   useEffect(() => {
     if (kokId === undefined) return;
     const kokItemId = parseInt(kokId, 10);
@@ -84,8 +116,11 @@ const KokItem = () => {
       headerTitle: KokDetail ? KokDetail.address : '',
       headerBackButtonEnabled: true,
       headerRightButtons: [
-        { id: 'heart', img: heartIcon, onPress: () => {} },
-        { id: 'share', img: shareIcon, onPress: () => {} },
+        {
+          id: '1',
+          img: KokDetail?.isZimmed ? fillHeart : heart,
+          onPress: handlePress,
+        },
       ],
       path: 'kok',
     });
