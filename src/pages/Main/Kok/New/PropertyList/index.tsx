@@ -2,13 +2,26 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import mapIcon from 'assets/img/line(2)/map.svg';
-import searchIcon from 'assets/img/line(2)/search.svg';
 import { BottomBtn, TextInput, IconBtn } from 'components';
+import useAddressStore from 'contexts/addressStore';
 import useUIStore from 'contexts/uiStore';
+import useAddressSearch from 'hooks/useAddressSearch';
 
 import styles from './PropertyList.module.css';
 
+import type { Address } from 'types/Address';
+
 export default function PropertyList() {
+  const { setAddress, resetSrc } = useAddressStore();
+
+  function handleAddressClick(address: Address) {
+    setAddress(address, 'new_kok');
+    navigate('/kok/new/propertyMap');
+  }
+
+  const [, , AddressSeachInput, AddressSearchResult, handleSubmit] =
+    useAddressSearch(handleAddressClick);
+
   const ui = useUIStore();
   useEffect(() => {
     ui.setUI({
@@ -26,15 +39,16 @@ export default function PropertyList() {
   return (
     <div className={styles.root}>
       <div className={styles.searchBox}>
-        <TextInput
-          placeholder="도로명, 지번 검색"
-          icon={searchIcon}
+        <AddressSeachInput
           style="underline"
+          placeholder="도로명, 지번 검색"
+          onSubmit={handleSubmit}
         />
         <IconBtn
           image={mapIcon}
           text="지도에서 위치 보기"
           onClick={() => {
+            resetSrc();
             navigate('../propertyMap');
           }}
           gap="8px"
@@ -42,22 +56,8 @@ export default function PropertyList() {
         />
       </div>
 
-      <div className={styles.propertyContainer}>
-        {/* properties.map((property) => (
-          <PropertyItem
-            key={property.id}
-            id={property.id}
-            like={property.like}
-            type={property.type}
-            priceType={property.priceType}
-            price={property.price}
-            deposit={0}
-            address={property.address}
-            propertyName={property.propertyName}
-            imageUrl={property.imageUrl}
-            kokList={property.kokList}
-          />
-        )) */}
+      <div className={styles.addressContainer}>
+        <AddressSearchResult />
       </div>
 
       <BottomBtn
