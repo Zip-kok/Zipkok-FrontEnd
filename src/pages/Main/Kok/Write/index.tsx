@@ -21,7 +21,6 @@ export default function WriteKok() {
   const realEstateId = new URLSearchParams(location.search).get('realEstateId');
   const kokId = new URLSearchParams(location.search).get('kokId');
   const ui = useUIStore();
-  const modal = useModal();
 
   const [kokConfig, setKokConfig] = useState<KokConfigResult>();
 
@@ -217,92 +216,11 @@ export default function WriteKok() {
 
   const navigate = useNavigate();
 
-  const handleSave = async () => {
-    if (kokConfig === undefined) return;
-
-    const getFile = async (url: string, prefix: string) =>
-      new File(
-        [await (await fetch(url)).blob()],
-        `${prefix}${Math.random().toString(36).substring(2, 12)}.jpg`,
-        {
-          type: 'image/jpeg',
-        },
-      );
-
-    const pictureData = await Promise.all([
-      ...(kokConfig.outerImageUrls?.map((url) => getFile(url, 'OUTTER')) ?? []),
-      ...(kokConfig.innerImageUrls?.map((url) => getFile(url, 'INNER')) ?? []),
-      ...(kokConfig.contractImageUrls?.map((url) => getFile(url, 'CONTRACT')) ??
-        []),
-    ]);
-
-    const outerOptions = kokConfig.outerOptions.map((option) => ({
-      optionId: option.optionId,
-      checkedDetailOptionIds: option.detailOptions.map(
-        (detail) => detail.detailOptionId,
-      ),
-    }));
-    const innerOptions = kokConfig.innerOptions.map((option) => ({
-      optionId: option.optionId,
-      checkedDetailOptionIds: option.detailOptions.map(
-        (detail) => detail.detailOptionId,
-      ),
-    }));
-    const contractOptions = kokConfig.contractOptions.map((option) => ({
-      optionId: option.optionId,
-      checkedDetailOptionIds: option.detailOptions.map(
-        (detail) => detail.detailOptionId,
-      ),
-    }));
-
-    // 새 콕 작성
-    if (kokId === null && realEstateId !== null)
-      postKok(
-        parseInt(realEstateId),
-        kokConfig.checkedHilights ?? [],
-        kokConfig.checkedFurnitureOptions ?? [],
-        '남쪽',
-        {
-          checkedImpressions: [],
-          facilityStarCount: 5,
-          infraStarCount: 5,
-          structureStarCount: 5,
-          vibeStarCount: 5,
-          reviewText: '',
-        },
-        outerOptions,
-        innerOptions,
-        contractOptions,
-        pictureData,
-      ).then((res) => {
-        if (res.code === 7011) navigate(`/kok/review/${res.result.kokId}`);
-        else
-          modal.open({
-            title: '콕리스트 등록 실패',
-            description: res.message,
-            primaryButton: '확인',
-          });
-      });
-    // 기존 콕 수정
-    else if (kokId !== null)
-      putKok({
-        kokId: parseInt(kokId),
-        checkedHighlights: kokConfig.checkedHilights ?? [],
-        checkedFurnitureOptions: kokConfig.checkedFurnitureOptions ?? [],
-        direction: '남쪽',
-        checkedOuterOptions: outerOptions,
-        checkedInnerOptions: innerOptions,
-        checkedContractOptions: contractOptions,
-        files: pictureData,
-      }).then((res) => {
-        if (res.code === 7014) navigate(`/kok/review/${kokId}`);
-        else
-          modal.open({
-            title: '콕리스트 수정 실패',
-            description: res.message,
-            primaryButton: '확인',
-          });
-      });
+  const handleSave = () => {
+    navigate(
+      `/kok/review?kokId=${kokId ?? ''}&realEstateId=${realEstateId ?? ''}`,
+      { state: { kokConfig } },
+    );
   };
 
   return (

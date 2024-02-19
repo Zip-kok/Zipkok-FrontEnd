@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-import { getKokReview, putKok } from 'apis';
+import { getKokReview, putKok, postKok } from 'apis';
 import BottomBtn from 'components/BottomBtn';
 import StarRating from 'components/StarRating';
-import SwiperCom from 'components/Swiper';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
 
@@ -27,38 +26,122 @@ const Tags = [
   '별로예요',
 ];
 
-export default function KokReview({
-  kokConfig,
-}: {
-  kokConfig?: KokConfigResult;
-}) {
+export default function KokReview() {
+  const { state } = useLocation();
+  const { kokConfig } = state as { kokConfig: KokConfigResult };
+
+  const realEstateId = new URLSearchParams(location.search).get('realEstateId');
+  const kokId = new URLSearchParams(location.search).get('kokId');
+
   const ui = useUIStore();
   const modal = useModal();
-  const { kokId } = useParams<{ kokId: string }>();
-  const [review, setReview] = useState<KokReview>();
+  const [review, setReview] = useState<KokReview>({
+    impressions: [],
+    facilityStarCount: 5,
+    infraStarCount: 5,
+    structureStarCount: 5,
+    vibeStarCount: 5,
+    reviewText: '',
+  });
 
-  const handleSave = () => {
-    if (kokId === undefined) return;
+  const handleSave = async () => {
+    if (kokConfig === undefined) return;
 
-    putKok({
-      kokId: parseInt(kokId),
-      reviewInfo: {
-        checkedImpressions: review?.impressions || [],
-        facilityStarCount: review?.facilityStarCount || 0,
-        infraStarCount: review?.infraStarCount || 0,
-        structureStarCount: review?.structureStarCount || 0,
-        vibeStarCount: review?.vibeStarCount || 0,
-        reviewText: review?.reviewText || '',
-      },
-    }).then((res) => {
-      if (res.code === 7014) navigate('/kok/complete');
-      else
-        modal.open({
-          title: '후기 저장 실패',
-          description: res.message,
-          primaryButton: '확인',
-        });
-    });
+    const getFile = async (url: string, prefix: string) =>
+      new File(
+        [await (await fetch(url)).blob()],
+        `${prefix}${Math.random().toString(36).substring(2, 12)}.jpg`,
+        {
+          type: 'image/jpeg',
+        },
+      );
+
+    const pictureData = await Promise.all([
+      ...(kokConfig.outerImageUrls?.map((url) => getFile(url, 'OUTTER')) ?? []),
+      ...(kokConfig.innerImageUrls?.map((url) => getFile(url, 'INNER')) ?? []),
+      ...(kokConfig.contractImageUrls?.map((url) => getFile(url, 'CONTRACT')) ??
+        []),
+    ]);
+
+    const outerOptions = kokConfig.outerOptions.map((option) => ({
+      optionId: option.optionId,
+      checkedDetailOptionIds: option.detailOptions.map(
+        (detail) => detail.detailOptionId,
+      ),
+    }));
+    const innerOptions = kokConfig.innerOptions.map((option) => ({
+      optionId: option.optionId,
+      checkedDetailOptionIds: option.detailOptions.map(
+        (detail) => detail.detailOptionId,
+      ),
+    }));
+    const contractOptions = kokConfig.contractOptions.map((option) => ({
+      optionId: option.optionId,
+      checkedDetailOptionIds: option.detailOptions.map(
+        (detail) => detail.detailOptionId,
+      ),
+    }));
+
+    // 새 콕 작성
+    if (
+      (kokId === '' || kokId === null) &&
+      realEstateId !== '' &&
+      realEstateId !== null
+    )
+      postKok(
+        parseInt(realEstateId),
+        kokConfig.checkedHilights ?? [],
+        kokConfig.checkedFurnitureOptions ?? [],
+        '남쪽',
+        {
+          checkedImpressions: review.impressions,
+          facilityStarCount: review.facilityStarCount,
+          infraStarCount: review.infraStarCount,
+          structureStarCount: review.structureStarCount,
+          vibeStarCount: review.vibeStarCount,
+          reviewText: review.reviewText,
+        },
+        outerOptions,
+        innerOptions,
+        contractOptions,
+        pictureData,
+      ).then((res) => {
+        if (res.code === 7011) navigate('/kok/complete');
+        else
+          modal.open({
+            title: '콕리스트 등록 실패',
+            description: res.message,
+            primaryButton: '확인',
+          });
+      });
+    // 기존 콕 수정
+    else if (kokId !== null && kokId !== '')
+      putKok({
+        kokId: parseInt(kokId),
+        checkedHighlights: kokConfig.checkedHilights ?? [],
+        checkedFurnitureOptions: kokConfig.checkedFurnitureOptions ?? [],
+        direction: '남쪽',
+        checkedOuterOptions: outerOptions,
+        checkedInnerOptions: innerOptions,
+        checkedContractOptions: contractOptions,
+        files: pictureData,
+        reviewInfo: {
+          checkedImpressions: review?.impressions || [],
+          facilityStarCount: review?.facilityStarCount || 0,
+          infraStarCount: review?.infraStarCount || 0,
+          structureStarCount: review?.structureStarCount || 0,
+          vibeStarCount: review?.vibeStarCount || 0,
+          reviewText: review?.reviewText || '',
+        },
+      }).then((res) => {
+        if (res.code === 7014) navigate(`/kok/complete`);
+        else
+          modal.open({
+            title: '콕리스트 수정 실패',
+            description: res.message,
+            primaryButton: '확인',
+          });
+      });
   };
 
   useEffect(() => {
@@ -73,7 +156,7 @@ export default function KokReview({
   }, []);
 
   useEffect(() => {
-    if (kokId === undefined) return;
+    if (kokId === null || kokId === '') return;
 
     getKokReview(parseInt(kokId)).then((res) => {
       setReview(res.result);
@@ -107,18 +190,14 @@ export default function KokReview({
                         : styles.tag
                     }
                     onClick={() =>
-                      setReview((prev) =>
-                        prev
-                          ? {
-                              ...prev,
-                              impressions: prev?.impressions.includes(tag)
-                                ? prev?.impressions.filter(
-                                    (impression) => impression !== tag,
-                                  )
-                                : [...(prev?.impressions || []), tag],
-                            }
-                          : undefined,
-                      )
+                      setReview((prev) => ({
+                        ...prev,
+                        impressions: prev?.impressions.includes(tag)
+                          ? prev?.impressions.filter(
+                              (impression) => impression !== tag,
+                            )
+                          : [...(prev?.impressions || []), tag],
+                      }))
                     }
                   >
                     {tag}
@@ -140,17 +219,13 @@ export default function KokReview({
               setStarCount={(
                 starCount: number | ((prevState: number) => number),
               ) =>
-                setReview((prev) =>
-                  prev
-                    ? {
-                        ...prev,
-                        facilityStarCount:
-                          typeof starCount === 'function'
-                            ? starCount(prev.facilityStarCount ?? 0)
-                            : starCount,
-                      }
-                    : undefined,
-                )
+                setReview((prev) => ({
+                  ...prev,
+                  facilityStarCount:
+                    typeof starCount === 'function'
+                      ? starCount(prev.facilityStarCount ?? 0)
+                      : starCount,
+                }))
               }
             />
             <StarRating
@@ -159,17 +234,13 @@ export default function KokReview({
               setStarCount={(
                 starCount: number | ((prevState: number) => number),
               ) =>
-                setReview((prev) =>
-                  prev
-                    ? {
-                        ...prev,
-                        infraStarCount:
-                          typeof starCount === 'function'
-                            ? starCount(prev.infraStarCount ?? 0)
-                            : starCount,
-                      }
-                    : undefined,
-                )
+                setReview((prev) => ({
+                  ...prev,
+                  infraStarCount:
+                    typeof starCount === 'function'
+                      ? starCount(prev.infraStarCount ?? 0)
+                      : starCount,
+                }))
               }
             />
             <StarRating
@@ -178,17 +249,13 @@ export default function KokReview({
               setStarCount={(
                 starCount: number | ((prevState: number) => number),
               ) =>
-                setReview((prev) =>
-                  prev
-                    ? {
-                        ...prev,
-                        structureStarCount:
-                          typeof starCount === 'function'
-                            ? starCount(prev.structureStarCount ?? 0)
-                            : starCount,
-                      }
-                    : undefined,
-                )
+                setReview((prev) => ({
+                  ...prev,
+                  structureStarCount:
+                    typeof starCount === 'function'
+                      ? starCount(prev.structureStarCount ?? 0)
+                      : starCount,
+                }))
               }
             />
             <StarRating
@@ -197,17 +264,13 @@ export default function KokReview({
               setStarCount={(
                 starCount: number | ((prevState: number) => number),
               ) =>
-                setReview((prev) =>
-                  prev
-                    ? {
-                        ...prev,
-                        vibeStarCount:
-                          typeof starCount === 'function'
-                            ? starCount(prev.vibeStarCount ?? 0)
-                            : starCount,
-                      }
-                    : undefined,
-                )
+                setReview((prev) => ({
+                  ...prev,
+                  vibeStarCount:
+                    typeof starCount === 'function'
+                      ? starCount(prev.vibeStarCount ?? 0)
+                      : starCount,
+                }))
               }
             />
           </div>
@@ -216,14 +279,10 @@ export default function KokReview({
               placeholder="매물에 대한 후기를 자유롭게 남겨보세요."
               value={review?.reviewText}
               onChange={(e) =>
-                setReview((prev) =>
-                  prev
-                    ? {
-                        ...prev,
-                        reviewText: e.target.value,
-                      }
-                    : undefined,
-                )
+                setReview((prev) => ({
+                  ...prev,
+                  reviewText: e.target.value,
+                }))
               }
             ></textarea>
           </div>
