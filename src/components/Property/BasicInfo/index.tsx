@@ -19,7 +19,9 @@ interface BasicInfoProps {
   houseType: HouseType;
   floor?: number;
   maintanenceFee?: number;
-  address: Address;
+  address?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export default function BasicInfo({
@@ -28,6 +30,8 @@ export default function BasicInfo({
   floor,
   maintanenceFee,
   address,
+  latitude,
+  longitude,
 }: BasicInfoProps) {
   function pyeongToSquareMeter(pyeong: number) {
     return pyeong * 3.305785;
@@ -65,7 +69,7 @@ export default function BasicInfo({
         {floor !== undefined && (
           <div className={styles.detail}>
             <img src={floorIcon} />
-            <span>{floor}층</span>
+            <span>{floor < 0 ? '지하' : `${floor}층`}</span>
           </div>
         )}
         <div className={styles.detail}>
@@ -84,7 +88,7 @@ export default function BasicInfo({
           <span className={styles.title}>위치</span>
         </div>
         <div className={styles.map}>
-          <StaticMap lat={address.y} lng={address.x} />
+          <StaticMap lat={longitude} lng={latitude} />
         </div>
       </div>
     </>

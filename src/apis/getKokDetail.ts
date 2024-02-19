@@ -22,7 +22,7 @@ export interface KokDetail {
   floorNum: number;
   administrativeFee: number;
   latitude: number;
-  longtitude: number;
+  longitude: number;
   isZimmed: boolean;
   realEstateId: number;
 }

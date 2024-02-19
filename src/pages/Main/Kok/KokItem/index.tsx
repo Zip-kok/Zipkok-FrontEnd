@@ -107,6 +107,8 @@ const KokItem = () => {
     getKokInner(kokItemId).then((res) => setKokInner(res.result));
     getKokReview(kokItemId).then((res) => setKokReview(res.result));
     getKokContract(kokItemId).then((res) => setKokContract(res.result));
+
+    console.log(KokInner);
   }, []);
 
   useEffect(() => {
@@ -137,19 +139,13 @@ const KokItem = () => {
       name: '기본정보',
       element: (
         <Property.BasicInfo
-          area={KokDetail?.areaSize}
+          area={KokDetail?.pyeongsu}
           houseType={KokDetail?.realEstateType as HouseType}
           floor={KokDetail?.floorNum}
           maintanenceFee={KokDetail?.administrativeFee}
-          address={
-            KokDetail
-              ? getAddressObject(
-                  KokDetail?.address,
-                  KokDetail?.longtitude,
-                  KokDetail?.latitude,
-                )
-              : { address_name: '', x: 0, y: 0 }
-          }
+          address={KokDetail?.address}
+          latitude={KokDetail?.latitude}
+          longitude={KokDetail?.longitude}
         />
       ),
     },
@@ -202,7 +198,7 @@ const KokItem = () => {
         pictures={KokDetail ? KokDetail.imageInfo.imageUrls : []}
         address={getAddressObject(
           KokDetail ? KokDetail.address : '',
-          KokDetail ? KokDetail.longtitude : 0,
+          KokDetail ? KokDetail.longitude : 0,
           KokDetail ? KokDetail.latitude : 0,
         )}
         detailAddress={KokDetail ? KokDetail.detailAddress : ''}

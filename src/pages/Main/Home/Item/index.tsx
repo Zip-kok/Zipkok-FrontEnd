@@ -108,11 +108,9 @@ const Item = () => {
             houseType={realEstateInfo.realEstateType}
             floor={realEstateInfo.floorNum ?? undefined}
             maintanenceFee={realEstateInfo.administrativeFee}
-            address={{
-              address_name: realEstateInfo.address,
-              x: realEstateInfo.latitude,
-              y: realEstateInfo.longitude,
-            }}
+            address={realEstateInfo?.address}
+            latitude={realEstateInfo?.latitude}
+            longitude={realEstateInfo?.longitude}
           />
         </>
       )}
