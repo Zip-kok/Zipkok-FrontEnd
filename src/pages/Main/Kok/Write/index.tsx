@@ -299,7 +299,7 @@ export default function WriteKok() {
         contractOptions,
         pictureData,
       ).then((res) => {
-        if (res.code === 7011) navigate(`/kok/review/${kokId}`);
+        if (res.code === 7014) navigate(`/kok/review/${kokId}`);
         else
           modal.open({
             title: '콕리스트 수정 실패',
