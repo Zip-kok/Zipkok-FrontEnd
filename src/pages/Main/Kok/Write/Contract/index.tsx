@@ -75,7 +75,12 @@ export default function Contract({
           {pictures.map((picture) => (
             <div key={picture} className={styles.picture}>
               <img src={picture} />
-              <button className={styles.deletePicture}>
+              <button
+                className={styles.deletePicture}
+                onClick={() =>
+                  setPictures((prev) => prev.filter((e) => e !== picture))
+                }
+              >
                 <img src={deleteBtnIcon} />
               </button>
             </div>
