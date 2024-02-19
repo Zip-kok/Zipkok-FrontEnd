@@ -69,7 +69,7 @@ const KokItem = () => {
 
   useEffect(() => {
     if (kokId === undefined) return;
-    const kokItemId = parseInt(kokId, 20);
+    const kokItemId = parseInt(kokId, 10);
     getKokOuter(kokItemId).then((res) => setKokOuter(res.result));
     getKokDetail(kokItemId).then((res) => setKokDetail(res.result));
     getKokInner(kokItemId).then((res) => setKokInner(res.result));
