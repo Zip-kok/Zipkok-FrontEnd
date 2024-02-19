@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getKokConfig, postKok } from 'apis';
+import { getKokConfig, postKok, putKok } from 'apis';
 import { BottomBtn } from 'components';
 import useModal from 'contexts/modalStore';
 import useUIStore from 'contexts/uiStore';
@@ -215,7 +215,6 @@ export default function WriteKok() {
   const navigate = useNavigate();
 
   const handleSave = async () => {
-    if (realEstateId === null) return;
     if (kokConfig === undefined) return;
 
     const getFile = async (url: string, prefix: string) =>
@@ -233,47 +232,81 @@ export default function WriteKok() {
       ...pictures.contract.map((url) => getFile(url, 'CONTRACT')),
     ]);
 
-    postKok(
-      parseInt(realEstateId),
-      kokConfig.checkedHilights ?? [],
-      kokConfig.checkedFurnitureOptions ?? [],
-      '남쪽',
-      {
-        checkedImpressions: [],
-        facilityStarCount: 5,
-        infraStarCount: 5,
-        structureStarCount: 5,
-        vibeStarCount: 5,
-        reviewText: '',
-      },
-      kokConfig.outerOptions.map((option) => ({
-        optionId: option.optionId,
-        checkedDetailOptionIds: option.detailOptions.map(
-          (detail) => detail.detailOptionId,
-        ),
-      })),
-      kokConfig.innerOptions.map((option) => ({
-        optionId: option.optionId,
-        checkedDetailOptionIds: option.detailOptions.map(
-          (detail) => detail.detailOptionId,
-        ),
-      })),
-      kokConfig.contractOptions.map((option) => ({
-        optionId: option.optionId,
-        checkedDetailOptionIds: option.detailOptions.map(
-          (detail) => detail.detailOptionId,
-        ),
-      })),
-      pictureData,
-    ).then((res) => {
-      if (res.code === 7011) navigate(`/kok/${res.result.kokId}`);
-      else
-        modal.open({
-          title: '콕리스트 등록 실패',
-          description: res.message,
-          primaryButton: '확인',
-        });
-    });
+    const outerOptions = kokConfig.outerOptions.map((option) => ({
+      optionId: option.optionId,
+      checkedDetailOptionIds: option.detailOptions.map(
+        (detail) => detail.detailOptionId,
+      ),
+    }));
+    const innerOptions = kokConfig.innerOptions.map((option) => ({
+      optionId: option.optionId,
+      checkedDetailOptionIds: option.detailOptions.map(
+        (detail) => detail.detailOptionId,
+      ),
+    }));
+    const contractOptions = kokConfig.contractOptions.map((option) => ({
+      optionId: option.optionId,
+      checkedDetailOptionIds: option.detailOptions.map(
+        (detail) => detail.detailOptionId,
+      ),
+    }));
+
+    // 새 콕 작성
+    if (kokId === null && realEstateId !== null)
+      postKok(
+        parseInt(realEstateId),
+        kokConfig.checkedHilights ?? [],
+        kokConfig.checkedFurnitureOptions ?? [],
+        '남쪽',
+        {
+          checkedImpressions: [],
+          facilityStarCount: 5,
+          infraStarCount: 5,
+          structureStarCount: 5,
+          vibeStarCount: 5,
+          reviewText: '',
+        },
+        outerOptions,
+        innerOptions,
+        contractOptions,
+        pictureData,
+      ).then((res) => {
+        if (res.code === 7011) navigate(`/kok/${res.result.kokId}`);
+        else
+          modal.open({
+            title: '콕리스트 등록 실패',
+            description: res.message,
+            primaryButton: '확인',
+          });
+      });
+    // 기존 콕 수정
+    else if (kokId !== null)
+      putKok(
+        parseInt(kokId),
+        kokConfig.checkedHilights ?? [],
+        kokConfig.checkedFurnitureOptions ?? [],
+        '남쪽',
+        {
+          checkedImpressions: [],
+          facilityStarCount: 5,
+          infraStarCount: 5,
+          structureStarCount: 5,
+          vibeStarCount: 5,
+          reviewText: '',
+        },
+        outerOptions,
+        innerOptions,
+        contractOptions,
+        pictureData,
+      ).then((res) => {
+        if (res.code === 7011) navigate(`/kok/${kokId}`);
+        else
+          modal.open({
+            title: '콕리스트 수정 실패',
+            description: res.message,
+            primaryButton: '확인',
+          });
+      });
   };
 
   return (

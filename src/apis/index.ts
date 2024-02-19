@@ -28,6 +28,7 @@ import { onBoarding } from './onBoarding';
 import { postKok } from './postKok';
 import { postPin } from './postPin';
 import { postRealEstate } from './postRealEstate';
+import { putKok } from './putKok';
 import { putPin } from './putPin';
 import { putUser } from './putUser';
 import putUserKokOption from './putUserKokOption'; // TODO: named export로 변경
@@ -39,6 +40,7 @@ import { zim } from './zim';
 export {
   deletePin,
   deleteUser,
+  putKok,
   searchAddress,
   getDirection,
   signIn,
