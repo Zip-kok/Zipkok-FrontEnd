@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import compassIcon from 'assets/img/common/compass.svg';
 import deleteBtnIcon from 'assets/img/fill/delete.svg';
@@ -9,13 +9,9 @@ import styles from './InsideHome.module.css';
 
 import type { UserKokOption } from 'apis/getUserKokOption';
 
-interface Picture {
-  id: number;
-  src: string;
-}
-
 interface InsideHomeProps {
-  pictures: Picture[];
+  pictures: string[];
+  setPictures: React.Dispatch<React.SetStateAction<string[]>>;
   furnitures: string[];
   checkedFurnitures: string[];
   setCheckedFurnitures: React.Dispatch<React.SetStateAction<string[]>>;
@@ -25,12 +21,34 @@ interface InsideHomeProps {
 
 export default function InsideHome({
   pictures,
+  setPictures,
   furnitures,
   checkedFurnitures,
   setCheckedFurnitures,
   options,
   setOptions,
 }: InsideHomeProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const fileChange = async (fileBlob: File) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+
+    await new Promise<void>((resolve) => {
+      reader.onload = () => {
+        resolve();
+      };
+    });
+
+    setPictures((prev) => [...prev, reader.result as string]);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      fileChange(e.target.files[0]);
+    }
+  };
+
   return (
     <div className={styles.root}>
       {/* 사진 */}
@@ -41,17 +59,35 @@ export default function InsideHome({
           {/* 최대 사진 개수 이하인 경우에만 */}
           {pictures.length < 10 && (
             <div className={styles.picture}>
-              <button className={styles.addPicture}>
+              <button
+                className={styles.addPicture}
+                onClick={() => fileInputRef.current?.click()}
+              >
                 <img src={cameraIcon} />
                 <p>{pictures.length} / 10</p>
               </button>
+              <input
+                id="inputFile"
+                type="file"
+                name="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                disabled={pictures.length >= 10}
+              />
             </div>
           )}
 
           {pictures.map((picture) => (
-            <div key={picture.id} className={styles.picture}>
-              <img src={picture.src} />
-              <button className={styles.deletePicture}>
+            <div key={picture} className={styles.picture}>
+              <img src={picture} />
+              <button
+                className={styles.deletePicture}
+                onClick={() =>
+                  setPictures((prev) => prev.filter((e) => e !== picture))
+                }
+              >
                 <img src={deleteBtnIcon} />
               </button>
             </div>

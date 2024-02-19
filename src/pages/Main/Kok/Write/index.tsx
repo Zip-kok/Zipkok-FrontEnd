@@ -24,6 +24,15 @@ export default function WriteKok() {
   const modal = useModal();
 
   const [kokConfig, setKokConfig] = useState<KokConfigResult>();
+  const [pictures, setPictures] = useState<{
+    outer: string[];
+    inner: string[];
+    contract: string[];
+  }>({
+    outer: [],
+    inner: [],
+    contract: [],
+  });
 
   const setHighlights = (
     highlights: string[] | ((prevState: string[]) => string[]),
@@ -86,7 +95,18 @@ export default function WriteKok() {
       name: '집 주변',
       element: (
         <NearHome
-          pictures={[]}
+          pictures={pictures.outer}
+          setPictures={(
+            pictures: string[] | ((prevState: string[]) => string[]),
+          ) =>
+            setPictures((prev) => ({
+              ...prev,
+              outer:
+                typeof pictures === 'function'
+                  ? pictures(prev.outer)
+                  : pictures,
+            }))
+          }
           highlights={kokConfig?.hilights || []}
           checkedHighlights={kokConfig?.checkedHilights || []}
           setCheckedHighlights={setHighlights}
@@ -116,7 +136,18 @@ export default function WriteKok() {
       name: '집 내부',
       element: (
         <InsideHome
-          pictures={[]}
+          pictures={pictures.inner}
+          setPictures={(
+            pictures: string[] | ((prevState: string[]) => string[]),
+          ) =>
+            setPictures((prev) => ({
+              ...prev,
+              inner:
+                typeof pictures === 'function'
+                  ? pictures(prev.inner)
+                  : pictures,
+            }))
+          }
           furnitures={kokConfig?.furnitureOptions || []}
           checkedFurnitures={kokConfig?.checkedFurnitureOptions || []}
           setCheckedFurnitures={setFurnitures}
@@ -146,7 +177,18 @@ export default function WriteKok() {
       name: '중개 / 계약',
       element: (
         <Contract
-          pictures={[]}
+          pictures={pictures.contract}
+          setPictures={(
+            pictures: string[] | ((prevState: string[]) => string[]),
+          ) =>
+            setPictures((prev) => ({
+              ...prev,
+              contract:
+                typeof pictures === 'function'
+                  ? pictures(prev.contract)
+                  : pictures,
+            }))
+          }
           options={kokConfig?.outerOptions || []}
           setOptions={(
             options:
