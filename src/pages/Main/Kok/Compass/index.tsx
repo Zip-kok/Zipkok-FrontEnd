@@ -8,7 +8,7 @@ import styles from './Compass.module.css';
 const Compass = () => {
   const [isIOS, setIsIOS] = useState(false);
   const [compassAngle, setCompassAngle] = useState(0);
-  const [log, setLog] = useState('남향');
+  const [log, setLog] = useState('북향');
   const ui = useUIStore();
 
   useEffect(() => {
@@ -52,10 +52,17 @@ const Compass = () => {
     setCompassAngle(compass);
   }
 
-  //방향으로 변환
+  //방향으로 변환 (한글)
   function mapDegreeToDirection(deg: number) {
     const directions = ['북', '북동', '동', '남동', '남', '남서', '서', '북서'];
-    const index = Math.round((deg % 360) / 45);
+    const index = Math.floor((deg % 360) / 45);
+    return directions[index];
+  }
+
+  //방향으로 변환 (영어)
+  function mapDegreeToDirectionEng(deg: number) {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.floor((deg % 360) / 45);
     return directions[index];
   }
 
@@ -73,6 +80,9 @@ const Compass = () => {
         />
       </div>
       <div className={styles.wrapper}>
+        <div className={styles.log}>
+          {Math.floor(compassAngle)}°{mapDegreeToDirectionEng(compassAngle)}
+        </div>
         <div className={styles.description}>핸드폰의 윗면이 </div>
         <div className={styles.description}>창문을 향하도록 해주세요</div>
       </div>
