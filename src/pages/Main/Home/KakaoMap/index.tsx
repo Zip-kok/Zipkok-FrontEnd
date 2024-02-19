@@ -262,7 +262,7 @@ const KakaoMap = ({
     overlays.forEach((overlay) => overlay.setMap(null));
 
     // 길찾기
-    if (selectedProprety !== null) {
+    if (selectedProprety !== null && showPins) {
       pins?.forEach((pin) => {
         // 핀이 화면 내에 없으면 길찾기를 하지 않음
         if (
@@ -303,7 +303,9 @@ const KakaoMap = ({
             map: map,
             position: path[Math.floor(path.length / 2)],
             content: `<div class="${styles.overlay}">
-                ${Math.floor(res.routes[0].summary.duration / 60)}분
+                ${Math.floor(
+                  (res.routes[0].summary.distance / 1000 / 4.5) * 60,
+                )}분
               </div>`,
           });
 
@@ -322,7 +324,7 @@ const KakaoMap = ({
         });
       });
     }
-  }, [map, selectedProprety, selectedPin, realEstatesInfo]);
+  }, [map, showPins, selectedProprety, selectedPin, realEstatesInfo]);
 
   useEffect(() => {
     if (!showPins) setSelectedPin(null);
