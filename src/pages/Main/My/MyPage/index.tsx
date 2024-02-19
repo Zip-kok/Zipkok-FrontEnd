@@ -123,7 +123,9 @@ const Mypage = () => {
 
     navigate('./pin');
   };
-  const handleRecentClick = () => {};
+  const handleRecentClick = () => {
+    navigate('./recentlyView');
+  };
   const handleNoticeClick = () => {};
   const handleInquiryClick = () => {};
   const handleLogoutClick = () => {
