@@ -28,6 +28,7 @@ export default function Outer({ highlights, options, setOptions }: OuterProps) {
           kokOptions={options}
           setKokOptions={setOptions}
           readOnly={true}
+          initialValue={true}
         />
       </div>
     </>
