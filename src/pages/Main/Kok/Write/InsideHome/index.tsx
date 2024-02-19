@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import compassIcon from 'assets/img/common/compass.svg';
 import deleteBtnIcon from 'assets/img/fill/delete.svg';
@@ -29,6 +30,7 @@ export default function InsideHome({
   setOptions,
 }: InsideHomeProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const fileChange = async (fileBlob: File) => {
     const reader = new FileReader();
@@ -47,6 +49,9 @@ export default function InsideHome({
     if (e.target.files && e.target.files[0]) {
       fileChange(e.target.files[0]);
     }
+  };
+  const onClickCompass = () => {
+    navigate('/kok/compass');
   };
 
   return (
@@ -133,7 +138,7 @@ export default function InsideHome({
         </div>
         <div className={styles.directionInput}>
           <TextInput defaultValue="북동향" style={'roundedBox'} />
-          <button className={styles.directionBtn}>
+          <button className={styles.directionBtn} onClick={onClickCompass}>
             <img src={compassIcon}></img>
           </button>
         </div>

@@ -1,4 +1,5 @@
 import Kok from 'pages/Main/Kok';
+import Compass from 'pages/Main/Kok/Compass';
 import Custom from 'pages/Main/Kok/Custom';
 import CustomConfirm from 'pages/Main/Kok/Custom/Confirm';
 import CustomForm from 'pages/Main/Kok/Custom/Form';
@@ -56,6 +57,11 @@ const KokRoute = {
       // 새콕리스트 작성_체크 (=수정하기 화면 동일)
       path: 'edit',
       element: <WriteKok />,
+    },
+    {
+      // 나침반
+      path: 'compass',
+      element: <Compass />,
     },
     {
       // 새콕리스트 작성_후기

@@ -6,7 +6,6 @@ import Login from 'pages/Login';
 import Main from 'pages/Main';
 import Onboarding from 'pages/Onboarding';
 import SignIn from 'pages/SignIn';
-import Test from 'pages/Test';
 
 import HomeRoute from './home';
 import KokRoute from './kok';
@@ -33,7 +32,6 @@ const router = createBrowserRouter([
         path: 'onboarding',
         element: <Onboarding />,
       },
-      { path: 'test', element: <Test /> },
       { path: 'auth', element: <Auth /> },
     ],
   },
