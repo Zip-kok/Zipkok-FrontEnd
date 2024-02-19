@@ -341,7 +341,7 @@ const ProfileEdit = () => {
 
           <div className={styles.birthGenderContainer}>
             <BirthInput
-              defaultValue={MyPageStore.birthday}
+              defaultValue={input.birthday}
               placeholder="6자리 숫자로 입력해주세요"
               style="roundedBox"
               caption={birthWarningMsg}
