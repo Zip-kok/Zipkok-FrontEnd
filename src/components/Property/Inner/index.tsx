@@ -49,6 +49,7 @@ export default function Inner({
           kokOptions={options}
           setKokOptions={setOptions}
           readOnly={true}
+          initialValue={true}
         />
       </div>
     </>

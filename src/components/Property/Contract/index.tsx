@@ -25,6 +25,7 @@ export default function Contract({
           kokOptions={options}
           setKokOptions={setOptions}
           readOnly={true}
+          initialValue={true}
         />
       </div>
 
