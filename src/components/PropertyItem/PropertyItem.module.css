@@ -60,7 +60,7 @@
 }
 
 .address {
-  display: inline;
+  display: block;
   color: var(--gray-color-gray050_text, #4b5259);
 
   font-family: Pretendard;
@@ -113,4 +113,5 @@
   gap: 12px;
   position: relative;
   height: 96px;
+  overflow: hidden;
 }
