@@ -16,6 +16,7 @@ interface InsideHomeProps {
   furnitures: string[];
   checkedFurnitures: string[];
   setCheckedFurnitures: React.Dispatch<React.SetStateAction<string[]>>;
+  direction: string;
   options: UserKokOption[];
   setOptions: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
 }
@@ -26,6 +27,7 @@ export default function InsideHome({
   furnitures,
   checkedFurnitures,
   setCheckedFurnitures,
+  direction,
   options,
   setOptions,
 }: InsideHomeProps) {
@@ -134,10 +136,10 @@ export default function InsideHome({
       <div className={styles.directionContainer}>
         <div className={styles.header}>
           <h1>집 방향</h1>
-          <h2>집 방향을 입력하고 우측 버튼을 눌러주세요</h2>
+          <h2>창문에 서서 우측 버튼을 눌러주세요</h2>
         </div>
         <div className={styles.directionInput}>
-          <TextInput defaultValue="북동향" style={'roundedBox'} />
+          <TextInput defaultValue={direction} style={'roundedBox'} readOnly />
           <button className={styles.directionBtn} onClick={onClickCompass}>
             <img src={compassIcon}></img>
           </button>

@@ -17,6 +17,7 @@ export interface KokConfigResult {
     vibeStarCount: number;
     reviewText: string;
   };
+  direction: string;
   outerOptions: UserKokOption[];
   innerOptions: UserKokOption[];
   contractOptions: UserKokOption[];

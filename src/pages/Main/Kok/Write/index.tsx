@@ -27,8 +27,6 @@ export default function WriteKok() {
   const [innerOptions, setInnerOptions] = useState<UserKokOption[]>([]);
   const [contractOptions, setContractOptions] = useState<UserKokOption[]>([]);
 
-  useEffect(() => console.log(outerOptions), [outerOptions]);
-
   const setHighlights = (
     highlights: string[] | ((prevState: string[]) => string[]),
   ) =>
@@ -144,6 +142,7 @@ export default function WriteKok() {
           furnitures={kokConfig?.furnitureOptions || []}
           checkedFurnitures={kokConfig?.checkedFurnitureOptions || []}
           setCheckedFurnitures={setFurnitures}
+          direction={kokConfig?.direction || ''}
           options={kokConfig?.innerOptions || []}
           setOptions={setInnerOptions}
         />
