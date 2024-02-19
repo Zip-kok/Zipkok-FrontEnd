@@ -79,21 +79,39 @@ const Item = () => {
   useEffect(() => {
     const splitedTitle = realEstateInfo?.address.split(' ');
     if (splitedTitle === undefined) return;
-    const convertTitle = splitedTitle[0] + ' ' + splitedTitle[1];
-    ui.setUI({
-      naviEnabled: false,
-      headerEnabled: true,
-      headerTitle: convertTitle ?? '',
-      headerBackButtonEnabled: true,
-      headerRightButtons: [
-        {
-          id: '1',
-          img: realEstateInfo?.isZimmed ? fillHeart : heart,
-          onPress: handlePress,
-        },
-      ],
-      path: 'home',
-    });
+    if (splitedTitle[1] === undefined) {
+      const convertTitle = splitedTitle[0] + ' ' + splitedTitle[1];
+      ui.setUI({
+        naviEnabled: false,
+        headerEnabled: true,
+        headerTitle: convertTitle ?? '',
+        headerBackButtonEnabled: true,
+        headerRightButtons: [
+          {
+            id: '1',
+            img: realEstateInfo?.isZimmed ? fillHeart : heart,
+            onPress: handlePress,
+          },
+        ],
+        path: 'home',
+      });
+    } else {
+      const convertTitle = splitedTitle[0] + ' ' + splitedTitle[1];
+      ui.setUI({
+        naviEnabled: false,
+        headerEnabled: true,
+        headerTitle: convertTitle ?? '',
+        headerBackButtonEnabled: true,
+        headerRightButtons: [
+          {
+            id: '1',
+            img: realEstateInfo?.isZimmed ? fillHeart : heart,
+            onPress: handlePress,
+          },
+        ],
+        path: 'home',
+      });
+    }
   }, [realEstateInfo]);
 
   const handleWriteClick = () => {
