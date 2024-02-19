@@ -16,38 +16,24 @@ const high = [
 ];
 interface HighlightProps {
   text: string;
-  onEnable?: () => void;
-  onDisable?: () => void;
-  highlightEnabled?: boolean;
+  highlightEnabled: boolean;
+  onChange: (enabled: boolean) => void;
 }
 
-const Highlight = ({
-  text,
-  onEnable,
-  onDisable,
-  highlightEnabled = false,
-}: HighlightProps) => {
-  const [enabled, setEnabled] = useState(highlightEnabled);
-
-  const handleClick = () => {
-    if (enabled) {
-      setEnabled(false);
-      onDisable?.();
-    } else {
-      setEnabled(true);
-      onEnable?.();
-    }
-  };
-
+const Highlight = ({ text, highlightEnabled, onChange }: HighlightProps) => {
   return (
     <button
       className={`${styles.container} ${
-        enabled ? styles.enabled : styles.disabled
+        highlightEnabled ? styles.enabled : styles.disabled
       }`}
-      onClick={handleClick}
+      onClick={() => onChange(!highlightEnabled)}
     >
       <span>{text}</span>
-      {enabled ? <img src={minusIcon}></img> : <img src={plusIcon}></img>}
+      {highlightEnabled ? (
+        <img src={minusIcon}></img>
+      ) : (
+        <img src={plusIcon}></img>
+      )}
     </button>
   );
 };

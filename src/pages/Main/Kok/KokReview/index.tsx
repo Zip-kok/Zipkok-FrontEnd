@@ -10,6 +10,7 @@ import useUIStore from 'contexts/uiStore';
 
 import styles from './KokReview.module.css';
 
+import type { KokConfigResult } from 'apis/getKokConfig';
 import type { KokReview } from 'apis/getKokReview';
 
 const Tags = [
@@ -26,7 +27,11 @@ const Tags = [
   '별로예요',
 ];
 
-export default function KokReview() {
+export default function KokReview({
+  kokConfig,
+}: {
+  kokConfig?: KokConfigResult;
+}) {
   const ui = useUIStore();
   const modal = useModal();
   const { kokId } = useParams<{ kokId: string }>();
@@ -80,10 +85,9 @@ export default function KokReview() {
   return (
     <div className={styles.root}>
       <div className={styles.reviews}>
-        <div className={styles.image}>
+        {/* <div className={styles.image}>
           <SwiperCom imageUrls={[]}></SwiperCom>
-          {/* TODO: 매물 이미지 추가 */}
-        </div>
+        </div> */}
         <div>
           <div className={styles.review}>
             <h1
