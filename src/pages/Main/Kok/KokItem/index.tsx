@@ -59,10 +59,11 @@ const KokItem = () => {
       optionId: rawOption.orderNumber,
       optionTitle: rawOption.option,
       orderNumber: rawOption.orderNumber,
+      isVisible: true,
       detailOptions: rawOption.detailOptions.map((detailOption, index) => ({
         detailOptionId: index,
         detailOptionTitle: detailOption,
-        detailOptionIsVisible: false,
+        detailOptionIsVisible: true,
       })),
     }) as UserKokOption;
 
@@ -99,6 +100,7 @@ const KokItem = () => {
       });
     }
   };
+
   useEffect(() => {
     if (kokId === undefined) return;
     const kokItemId = parseInt(kokId, 10);
@@ -107,8 +109,6 @@ const KokItem = () => {
     getKokInner(kokItemId).then((res) => setKokInner(res.result));
     getKokReview(kokItemId).then((res) => setKokReview(res.result));
     getKokContract(kokItemId).then((res) => setKokContract(res.result));
-
-    console.log(KokInner);
   }, []);
 
   useEffect(() => {
