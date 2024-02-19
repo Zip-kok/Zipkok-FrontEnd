@@ -62,10 +62,13 @@ const Item = () => {
   };
   const ui = useUIStore();
   useEffect(() => {
+    const splitedTitle = realEstateInfo?.address.split(' ');
+    if (splitedTitle === undefined) return;
+    const convertTitle = splitedTitle[0] + ' ' + splitedTitle[1];
     ui.setUI({
       naviEnabled: false,
       headerEnabled: true,
-      headerTitle: realEstateInfo?.address ?? '',
+      headerTitle: convertTitle ?? '',
       headerBackButtonEnabled: true,
       headerRightButtons: [
         {

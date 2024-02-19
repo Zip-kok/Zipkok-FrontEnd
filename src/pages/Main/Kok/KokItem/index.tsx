@@ -112,10 +112,13 @@ const KokItem = () => {
   }, []);
 
   useEffect(() => {
+    const splitedTitle = KokDetail?.address.split(' ');
+    if (splitedTitle === undefined) return;
+    const convertTitle = splitedTitle[0] + ' ' + splitedTitle[1];
     ui.setUI({
       naviEnabled: false,
       headerEnabled: true,
-      headerTitle: KokDetail ? KokDetail.address : '',
+      headerTitle: KokDetail ? convertTitle : '',
       headerBackButtonEnabled: true,
       headerRightButtons: [
         {

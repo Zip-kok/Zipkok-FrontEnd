@@ -6,6 +6,7 @@ import Pin from 'pages/Main/My/Pin';
 import PinWrite from 'pages/Main/My/Pin/Write';
 import ProfileEdit from 'pages/Main/My/ProfileEdit';
 import LocationEdit from 'pages/Main/My/ProfileEdit/LocationEdit';
+import RecentlyView from 'pages/Main/My/RecentlyView';
 
 const MyRoute = {
   path: 'my',
@@ -38,6 +39,7 @@ const MyRoute = {
         },
       ],
     },
+    { path: 'recentlyView', element: <RecentlyView /> },
   ],
 };
 
