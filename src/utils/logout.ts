@@ -9,6 +9,7 @@ export default async function logout() {
 
   Cookies.remove('accessToken');
   Cookies.remove('refreshToken');
+  window.localStorage.clear();
 
   return res;
 }

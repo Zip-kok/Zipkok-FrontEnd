@@ -159,8 +159,8 @@ const Mypage = () => {
 
     deleteUser().then((res) => {
       if (res.code === 5030) {
-        navigate('/login');
         logout();
+        navigate('/login');
       } else
         modal.open({
           title: '회원탈퇴 실패',

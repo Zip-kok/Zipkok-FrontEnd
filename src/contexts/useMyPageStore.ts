@@ -1,3 +1,4 @@
+import isLoggedIn from 'utils/isLoggedIn';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -32,9 +33,9 @@ const initialState: MyPageInfo = {
   nickname: '게스트',
   birthday: '040405',
   gender: 'DISCLOSURE',
-  realEstateType: 'ONEROOM',
-  transactionType: 'MONTHLY',
-  address: '화양동',
+  realEstateType: undefined,
+  transactionType: undefined,
+  address: '',
   longitude: 127.041,
   latitude: 37.551,
   setImageUrl: () => {},
