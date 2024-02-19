@@ -5,6 +5,7 @@ import { MapRealEstate, getMapRealEstate } from 'apis/getMapRealEstate';
 import { PropertyItem } from 'components';
 import useAddressStore from 'contexts/addressStore';
 import useUIStore from 'contexts/uiStore';
+import useMyPageStore from 'contexts/useMyPageStore';
 
 import KakaoMap, { realEstateInfo } from './KakaoMap';
 import styles from './OnMap.module.css';
@@ -18,7 +19,9 @@ interface mapLocationInfo {
 
 export default function PropertyMap() {
   const navigate = useNavigate();
-  const { address } = useAddressStore();
+  const myPageStore = useMyPageStore();
+  const { address, src } = useAddressStore();
+
   const [mapRealEstate, setMapRealEstate] = useState<MapRealEstate>();
   const [mapLocationInfo, setMapLocationInfo] = useState<mapLocationInfo>({});
   const [selectedProperty, setSelectedProperty] =
@@ -59,8 +62,8 @@ export default function PropertyMap() {
     <div className={styles.root}>
       <div className={styles.map}>
         <KakaoMap
-          lat={address.y}
-          lng={address.x}
+          lat={src === 'new_kok' ? address.y : myPageStore.latitude}
+          lng={src === 'new_kok' ? address.x : myPageStore.longitude}
           mapLocationInfo={mapLocationInfo}
           setMapLocationInfo={setMapLocationInfo}
           realEstatesInfo={mapRealEstate?.realEstateInfoList}
