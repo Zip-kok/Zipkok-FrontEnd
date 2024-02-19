@@ -20,6 +20,9 @@ export interface KokConfigResult {
   outerOptions: UserKokOption[];
   innerOptions: UserKokOption[];
   contractOptions: UserKokOption[];
+  outerImageUrls: string[];
+  innerImageUrls: string[];
+  contractImageUrls: string[];
 }
 
 /**

@@ -24,15 +24,6 @@ export default function WriteKok() {
   const modal = useModal();
 
   const [kokConfig, setKokConfig] = useState<KokConfigResult>();
-  const [pictures, setPictures] = useState<{
-    outer: string[];
-    inner: string[];
-    contract: string[];
-  }>({
-    outer: [],
-    inner: [],
-    contract: [],
-  });
 
   const setHighlights = (
     highlights: string[] | ((prevState: string[]) => string[]),
@@ -95,17 +86,21 @@ export default function WriteKok() {
       name: '집 주변',
       element: (
         <NearHome
-          pictures={pictures.outer}
+          pictures={kokConfig?.outerImageUrls ?? []}
           setPictures={(
             pictures: string[] | ((prevState: string[]) => string[]),
           ) =>
-            setPictures((prev) => ({
-              ...prev,
-              outer:
-                typeof pictures === 'function'
-                  ? pictures(prev.outer)
-                  : pictures,
-            }))
+            setKokConfig((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    outerImageUrls:
+                      typeof pictures === 'function'
+                        ? pictures(prev.outerImageUrls ?? [])
+                        : pictures,
+                  }
+                : undefined,
+            )
           }
           highlights={kokConfig?.hilights || []}
           checkedHighlights={kokConfig?.checkedHilights || []}
@@ -136,17 +131,21 @@ export default function WriteKok() {
       name: '집 내부',
       element: (
         <InsideHome
-          pictures={pictures.inner}
+          pictures={kokConfig?.innerImageUrls ?? []}
           setPictures={(
             pictures: string[] | ((prevState: string[]) => string[]),
           ) =>
-            setPictures((prev) => ({
-              ...prev,
-              inner:
-                typeof pictures === 'function'
-                  ? pictures(prev.inner)
-                  : pictures,
-            }))
+            setKokConfig((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    innerImageUrls:
+                      typeof pictures === 'function'
+                        ? pictures(prev.innerImageUrls ?? [])
+                        : pictures,
+                  }
+                : undefined,
+            )
           }
           furnitures={kokConfig?.furnitureOptions || []}
           checkedFurnitures={kokConfig?.checkedFurnitureOptions || []}
@@ -177,17 +176,21 @@ export default function WriteKok() {
       name: '중개 / 계약',
       element: (
         <Contract
-          pictures={pictures.contract}
+          pictures={kokConfig?.contractImageUrls ?? []}
           setPictures={(
             pictures: string[] | ((prevState: string[]) => string[]),
           ) =>
-            setPictures((prev) => ({
-              ...prev,
-              contract:
-                typeof pictures === 'function'
-                  ? pictures(prev.contract)
-                  : pictures,
-            }))
+            setKokConfig((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    contractImageUrls:
+                      typeof pictures === 'function'
+                        ? pictures(prev.contractImageUrls ?? [])
+                        : pictures,
+                  }
+                : undefined,
+            )
           }
           options={kokConfig?.outerOptions || []}
           setOptions={(
@@ -227,9 +230,9 @@ export default function WriteKok() {
       );
 
     const pictureData = await Promise.all([
-      ...pictures.outer.map((url) => getFile(url, 'OUTTER')),
-      ...pictures.inner.map((url) => getFile(url, 'INNER')),
-      ...pictures.contract.map((url) => getFile(url, 'CONTRACT')),
+      ...kokConfig.outerImageUrls.map((url) => getFile(url, 'OUTTER')),
+      ...kokConfig.innerImageUrls.map((url) => getFile(url, 'INNER')),
+      ...kokConfig.contractImageUrls.map((url) => getFile(url, 'CONTRACT')),
     ]);
 
     const outerOptions = kokConfig.outerOptions.map((option) => ({
