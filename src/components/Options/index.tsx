@@ -9,12 +9,14 @@ interface OptionsComponentProps {
   kokOptions: UserKokOption[];
   setKokOptions?: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
   readOnly?: boolean;
+  initialValue?: boolean;
 }
 
 const OptionsComponent: React.FC<OptionsComponentProps> = ({
   kokOptions,
   setKokOptions,
-  readOnly = false,
+  readOnly,
+  initialValue,
 }) => {
   return (
     <div className={styles.root}>
@@ -32,7 +34,11 @@ const OptionsComponent: React.FC<OptionsComponentProps> = ({
                   type="checkbox"
                   className={styles.detailCheckBtn}
                   defaultChecked={detailOption.detailOptionIsVisible}
+                  checked={
+                    initialValue ? true : detailOption.detailOptionIsVisible
+                  }
                   onChange={(e) => {
+                    if (readOnly) return false;
                     setKokOptions?.((prevState) => {
                       const newOptions = [...prevState];
                       newOptions[index].detailOptions[
