@@ -114,21 +114,39 @@ const KokItem = () => {
   useEffect(() => {
     const splitedTitle = KokDetail?.address.split(' ');
     if (splitedTitle === undefined) return;
-    const convertTitle = splitedTitle[0] + ' ' + splitedTitle[1];
-    ui.setUI({
-      naviEnabled: false,
-      headerEnabled: true,
-      headerTitle: KokDetail ? convertTitle : '',
-      headerBackButtonEnabled: true,
-      headerRightButtons: [
-        {
-          id: '1',
-          img: KokDetail?.isZimmed ? fillHeart : heart,
-          onPress: handlePress,
-        },
-      ],
-      path: 'kok',
-    });
+    if (splitedTitle[1] === undefined) {
+      const convertTitle = splitedTitle[0];
+      ui.setUI({
+        naviEnabled: false,
+        headerEnabled: true,
+        headerTitle: KokDetail ? convertTitle : '',
+        headerBackButtonEnabled: true,
+        headerRightButtons: [
+          {
+            id: '1',
+            img: KokDetail?.isZimmed ? fillHeart : heart,
+            onPress: handlePress,
+          },
+        ],
+        path: 'kok',
+      });
+    } else {
+      const convertTitle = splitedTitle[0] + ' ' + splitedTitle[1];
+      ui.setUI({
+        naviEnabled: false,
+        headerEnabled: true,
+        headerTitle: KokDetail ? convertTitle : '',
+        headerBackButtonEnabled: true,
+        headerRightButtons: [
+          {
+            id: '1',
+            img: KokDetail?.isZimmed ? fillHeart : heart,
+            onPress: handlePress,
+          },
+        ],
+        path: 'kok',
+      });
+    }
   }, [KokDetail]);
 
   const navigate = useNavigate();
