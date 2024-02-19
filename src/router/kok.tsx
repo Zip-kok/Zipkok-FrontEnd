@@ -65,11 +65,11 @@ const KokRoute = {
           index: true,
           element: <KokReview />,
         },
-        {
-          path: 'complete',
-          element: <Complete />,
-        },
       ],
+    },
+    {
+      path: 'complete',
+      element: <Complete />,
     },
   ],
 };

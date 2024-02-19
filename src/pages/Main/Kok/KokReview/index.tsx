@@ -139,9 +139,9 @@ export default function KokReview() {
       </div>
       <BottomBtn
         anchorText="건너뛰기"
-        onAnchorClick={() => navigate('/kok/new/review/complete')}
+        onAnchorClick={() => navigate('/kok/complete')}
         text="저장하기"
-        onClick={() => navigate('/kok/new/review/complete')}
+        onClick={() => navigate('/kok/complete')}
         occupySpace
       />
     </div>
