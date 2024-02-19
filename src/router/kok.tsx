@@ -59,7 +59,7 @@ const KokRoute = {
     },
     {
       // 새콕리스트 작성_후기
-      path: 'review',
+      path: 'review/:kokId',
       children: [
         {
           index: true,

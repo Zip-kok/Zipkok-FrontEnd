@@ -271,7 +271,7 @@ export default function WriteKok() {
         contractOptions,
         pictureData,
       ).then((res) => {
-        if (res.code === 7011) navigate(`/kok/${res.result.kokId}`);
+        if (res.code === 7011) navigate(`/kok/review/${res.result.kokId}`);
         else
           modal.open({
             title: '콕리스트 등록 실패',
@@ -299,7 +299,7 @@ export default function WriteKok() {
         contractOptions,
         pictureData,
       ).then((res) => {
-        if (res.code === 7011) navigate(`/kok/${kokId}`);
+        if (res.code === 7011) navigate(`/kok/review/${kokId}`);
         else
           modal.open({
             title: '콕리스트 수정 실패',

@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { getKokReview } from 'apis';
 import BottomBtn from 'components/BottomBtn';
 import StarRating from 'components/StarRating';
 import SwiperCom from 'components/Swiper';
 import useUIStore from 'contexts/uiStore';
 
 import styles from './KokReview.module.css';
-import data from '../../../../models/kokItemDetail.json';
+
+import type { KokReview } from 'apis/getKokReview';
 
 const Tags = [
-  { name: '깔끔해요', selected: false },
-  { name: '조용해요', selected: false },
-  { name: '세련돼요', selected: false },
-  { name: '심플해요', selected: false },
-  { name: '더러워요', selected: false },
-  { name: '냄새나요', selected: false },
-  { name: '시끄러워요', selected: false },
-  { name: '좁아요', selected: false },
-  { name: '그냥 그래요', selected: false },
-  { name: '마음에 들어요', selected: false },
-  { name: '별로예요', selected: false },
+  '깔끔해요',
+  '조용해요',
+  '세련돼요',
+  '심플해요',
+  '더러워요',
+  '냄새나요',
+  '시끄러워요',
+  '좁아요',
+  '그냥 그래요',
+  '마음에 들어요',
+  '별로예요',
 ];
 
 export default function KokReview() {
   const ui = useUIStore();
+  const { kokId } = useParams<{ kokId: string }>();
+  const [review, setReview] = useState<KokReview>();
+
   useEffect(() => {
     ui.setUI({
       naviEnabled: false,
@@ -36,6 +41,14 @@ export default function KokReview() {
     });
   }, []);
 
+  useEffect(() => {
+    if (kokId === undefined) return;
+
+    getKokReview(parseInt(kokId)).then((res) => {
+      setReview(res.result);
+    });
+  }, [kokId]);
+
   const navigate = useNavigate();
   const [tags, setTags] = useState(Tags);
 
@@ -45,23 +58,12 @@ export default function KokReview() {
     setRating(index + 1);
   };
 
-  const handleTagClick = (index: number) => {
-    setTags(
-      tags.map((tag, i) => {
-        if (i === index) {
-          return { ...tag, selected: !tag.selected };
-        }
-        return tag;
-      }),
-    );
-  };
-  const { code, message, result } = data;
-
   return (
     <div className={styles.root}>
       <div className={styles.reviews}>
         <div className={styles.image}>
-          <SwiperCom imageUrls={result.imageInfo.imageUrls}></SwiperCom>
+          <SwiperCom imageUrls={[]}></SwiperCom>
+          {/* TODO: 매물 이미지 추가 */}
         </div>
         <div>
           <div className={styles.review}>
@@ -73,13 +75,30 @@ export default function KokReview() {
             </h1>
             <div>
               <div className={styles.tags}>
-                {tags.map((tag, index) => (
+                {tags.map((tag) => (
                   <button
-                    key={index}
-                    className={tag.selected ? styles.tagSelected : styles.tag}
-                    onClick={() => handleTagClick(index)}
+                    key={tag}
+                    className={
+                      review?.impressions.includes(tag)
+                        ? styles.tagSelected
+                        : styles.tag
+                    }
+                    onClick={() =>
+                      setReview((prev) =>
+                        prev
+                          ? {
+                              ...prev,
+                              impressions: prev?.impressions.includes(tag)
+                                ? prev?.impressions.filter(
+                                    (impression) => impression !== tag,
+                                  )
+                                : [...(prev?.impressions || []), tag],
+                            }
+                          : undefined,
+                      )
+                    }
                   >
-                    {tag.name}
+                    {tag}
                   </button>
                 ))}
               </div>
@@ -95,34 +114,35 @@ export default function KokReview() {
             <StarRating
               label="시설"
               onRating={(rating) => console.log(rating)}
+              starCount={review?.facilityStarCount}
             />
             <StarRating
               label="인프라"
               onRating={(rating) => console.log(rating)}
+              starCount={review?.infraStarCount}
             />
             <StarRating
               label="구조"
               onRating={(rating) => console.log(rating)}
+              starCount={review?.structureStarCount}
             />
             <StarRating
               label="분위기"
               onRating={(rating) => console.log(rating)}
+              starCount={review?.vibeStarCount}
             />
           </div>
           <div className={styles.review}>
             <textarea placeholder="매물에 대한 후기를 자유롭게 남겨보세요."></textarea>
           </div>
-          <button
-            className={styles.skip}
-            onClick={() => navigate('/kok/new/review/complete')}
-          >
-            건너뛰기
-          </button>
         </div>
       </div>
       <BottomBtn
+        anchorText="건너뛰기"
+        onAnchorClick={() => navigate('/kok/new/review/complete')}
         text="저장하기"
         onClick={() => navigate('/kok/new/review/complete')}
+        occupySpace
       />
     </div>
   );
