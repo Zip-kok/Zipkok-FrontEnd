@@ -94,7 +94,7 @@ const KokItem = () => {
   const navigate = useNavigate();
 
   const handleEditClick = () => {
-    navigate('../../kok');
+    navigate(`/kok/edit?kokId=${kokId}`);
   };
 
   const [MidMenu, Content, menuIndex] = useMenu([
