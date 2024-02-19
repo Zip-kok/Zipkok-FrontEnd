@@ -47,10 +47,8 @@ export default function Header({
   useEffect(() => {
     // ResizeObserver 인스턴스 생성
     const observer = new ResizeObserver((entries) => {
-      if (isMemoExpanded) return;
-
       const isClamped =
-        entries[0].target.scrollHeight > entries[0].contentRect.height;
+        entries[0].target.scrollHeight > entries[0].contentRect.height + 3;
       setIsMemoClamped(isClamped);
     });
 
@@ -59,9 +57,9 @@ export default function Header({
 
     // cleanup
     return () => {
-      observer?.disconnect();
+      observer.disconnect();
     };
-  }, [memoRef, isMemoExpanded]);
+  }, [memoRef]);
 
   return (
     <>
@@ -107,9 +105,11 @@ export default function Header({
 
       {/* 메모 */}
       <div className={styles.memoContainer}>
+        <p className={styles.observer} ref={memoRef}>
+          {memo}
+        </p>
         <p
           className={`${styles.memo} ${isMemoExpanded ? styles.expanded : ''}`}
-          ref={memoRef}
         >
           {memo}
         </p>
