@@ -27,9 +27,7 @@ export default function WriteKok() {
   const [innerOptions, setInnerOptions] = useState<UserKokOption[]>([]);
   const [contractOptions, setContractOptions] = useState<UserKokOption[]>([]);
 
-  useEffect(() => {
-    console.log(outerOptions);
-  }, [outerOptions]);
+  useEffect(() => console.log(outerOptions), [outerOptions]);
 
   const setHighlights = (
     highlights: string[] | ((prevState: string[]) => string[]),
