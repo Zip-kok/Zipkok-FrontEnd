@@ -51,7 +51,6 @@ const ProfileEdit = () => {
     imageUrl: undefined,
   } as UserInfoInput);
   const [imageUrl, setImageUrl] = useState<string | undefined>();
-
   // 가격 범위 설정
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([
     [0, 0],
@@ -298,6 +297,13 @@ const ProfileEdit = () => {
     }
   };
 
+  const handleNickName = (e: React.FormEvent<HTMLInputElement>) => {
+    const newNickname = e.currentTarget.value;
+    setInput((prevInput) => ({
+      ...prevInput,
+      nickname: newNickname,
+    }));
+  };
   return (
     <div className={styles.root}>
       <div className={styles.body}>
@@ -332,6 +338,7 @@ const ProfileEdit = () => {
               fontSize: '14px',
               fontWeight: '400',
             }}
+            onChange={handleNickName}
           />
         </div>
 
