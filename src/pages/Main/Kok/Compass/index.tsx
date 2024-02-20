@@ -5,7 +5,11 @@ import useUIStore from 'contexts/uiStore';
 
 import styles from './Compass.module.css';
 
-const Compass = () => {
+interface CompassProps {
+  setIsOnCompass: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Compass = ({ setIsOnCompass }: CompassProps) => {
   const [isIOS, setIsIOS] = useState(false);
   const [compassAngle, setCompassAngle] = useState(0);
   const [log, setLog] = useState('북향');
@@ -26,6 +30,7 @@ const Compass = () => {
       headerTitle: '내 집 방향 찾기',
       headerBackButtonEnabled: true,
       headerRightButtons: [],
+      backCallback: () => setIsOnCompass(false),
       path: 'kok',
     });
   }, []);

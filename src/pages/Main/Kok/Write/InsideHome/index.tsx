@@ -19,6 +19,7 @@ interface InsideHomeProps {
   direction: string;
   options: UserKokOption[];
   setOptions: React.Dispatch<React.SetStateAction<UserKokOption[]>>;
+  setIsOnCompass: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function InsideHome({
@@ -30,6 +31,7 @@ export default function InsideHome({
   direction,
   options,
   setOptions,
+  setIsOnCompass,
 }: InsideHomeProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -53,7 +55,7 @@ export default function InsideHome({
     }
   };
   const onClickCompass = () => {
-    navigate('/kok/compass');
+    setIsOnCompass(true);
   };
 
   return (

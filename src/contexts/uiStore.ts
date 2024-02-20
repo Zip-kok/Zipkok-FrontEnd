@@ -14,6 +14,7 @@ interface UI {
   headerTitle: string;
   headerBackButtonEnabled: boolean;
   headerRightButtons: Button[];
+  backCallback?: () => void;
   path: MenuPath;
 }
 
@@ -34,7 +35,11 @@ const initialState: UIStore = {
 const useUIStore = create<UIStore>((set) => ({
   ...initialState,
   setUI: (ui: UI) =>
-    set({ ...ui, headerIcon: ui.headerIcon || initialState.headerIcon }),
+    set({
+      ...ui,
+      headerIcon: ui.headerIcon || initialState.headerIcon,
+      backCallback: ui.backCallback || undefined,
+    }),
 }));
 
 export default useUIStore;

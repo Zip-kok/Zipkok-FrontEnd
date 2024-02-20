@@ -59,11 +59,6 @@ const KokRoute = {
       element: <WriteKok />,
     },
     {
-      // 나침반
-      path: 'compass',
-      element: <Compass />,
-    },
-    {
       // 새콕리스트 작성_후기
       path: 'review',
       children: [
