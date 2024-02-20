@@ -20,6 +20,7 @@ export default function Main() {
             <Header
               title={ui.headerTitle}
               backBtnEnabled={ui.headerBackButtonEnabled}
+              backCallback={ui.backCallback}
               titleIcon={ui.headerIcon}
               buttons={ui.headerRightButtons}
             />

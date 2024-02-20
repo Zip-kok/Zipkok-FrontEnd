@@ -10,6 +10,7 @@ import type { Button } from 'contexts/uiStore';
 interface HeaderProps {
   title: string;
   titleIcon?: string;
+  backCallback?: () => void;
   backBtnEnabled?: boolean;
   buttons?: Button[];
 }
@@ -17,6 +18,7 @@ interface HeaderProps {
 const Header = ({
   title,
   titleIcon,
+  backCallback,
   backBtnEnabled = false,
   buttons = [],
 }: HeaderProps) => {
@@ -26,7 +28,16 @@ const Header = ({
     <div className={styles.container}>
       <span className={styles.btnContainer}>
         {backBtnEnabled && (
-          <button className="imgBtn" onClick={() => navigate(-1)}>
+          <button
+            className="imgBtn"
+            onClick={() => {
+              if (backCallback) {
+                backCallback();
+              } else {
+                navigate(-1);
+              }
+            }}
+          >
             <img src={backIcon}></img>
           </button>
         )}

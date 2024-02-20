@@ -10,6 +10,7 @@ import Contract from './Contract';
 import InsideHome from './InsideHome';
 import NearHome from './NearHome';
 import styles from './WriteKok.module.css';
+import Compass from '../Compass';
 
 import type { KokConfigResult } from 'apis/getKokConfig';
 import type { UserKokOption } from 'apis/getUserKokOption';
@@ -20,6 +21,8 @@ export default function WriteKok() {
   const realEstateId = new URLSearchParams(location.search).get('realEstateId');
   const kokId = new URLSearchParams(location.search).get('kokId');
   const ui = useUIStore();
+
+  const [isOnCompass, setIsOnCompass] = useState(false);
 
   const [kokConfig, setKokConfig] = useState<KokConfigResult>();
 
@@ -145,6 +148,7 @@ export default function WriteKok() {
           direction={kokConfig?.direction || ''}
           options={kokConfig?.innerOptions || []}
           setOptions={setInnerOptions}
+          setIsOnCompass={setIsOnCompass}
         />
       ),
     },
@@ -196,9 +200,15 @@ export default function WriteKok() {
 
   return (
     <div className={styles.root}>
-      <TopMenu className={styles.top} />
-      <div className={styles.content}>{content}</div>
-      <BottomBtn text="저장하기" onClick={handleSave} />
+      {isOnCompass && <Compass setIsOnCompass={setIsOnCompass} />}
+
+      {!isOnCompass && (
+        <>
+          <TopMenu className={styles.top} />
+          <div className={styles.content}>{content}</div>
+          <BottomBtn text="저장하기" onClick={handleSave} />
+        </>
+      )}
     </div>
   );
 }
