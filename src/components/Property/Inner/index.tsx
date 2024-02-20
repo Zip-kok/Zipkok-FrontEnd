@@ -22,7 +22,7 @@ export default function Inner({
   const filteredFurnitures = Furnitures.filter((furniture) =>
     furnitureOptions.includes(furniture.name),
   );
-
+  console.log(direction);
   return (
     <>
       {/* 가구 옵션 */}

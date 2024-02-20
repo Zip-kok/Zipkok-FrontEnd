@@ -98,7 +98,7 @@ export default function KokReview() {
         parseInt(realEstateId),
         kokConfig.checkedHilights ?? [],
         kokConfig.checkedFurnitureOptions ?? [],
-        '남쪽',
+        ' ',
         {
           checkedImpressions: review.impressions,
           facilityStarCount: review.facilityStarCount,
@@ -126,7 +126,7 @@ export default function KokReview() {
         kokId: parseInt(kokId),
         checkedHighlights: kokConfig.checkedHilights ?? [],
         checkedFurnitureOptions: kokConfig.checkedFurnitureOptions ?? [],
-        direction: '남쪽',
+        direction: ' ',
         checkedOuterOptions: outerOptions,
         checkedInnerOptions: innerOptions,
         checkedContractOptions: contractOptions,
