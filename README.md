@@ -1,6 +1,7 @@
 # 🏠 집콕 FrontEnd README
 
-//배너 넣을 예정
+<img width="1109" alt="image" src="https://github.com/Zip-kok/Zipkok-FrontEnd/assets/85235356/5ff7ffe6-c8f5-4e9b-a598-9850f731eb0b">
+
 
 
 <br>
@@ -30,36 +31,6 @@
 - 버전 및 이슈관리 : Github, Jira
 - 협업 툴 : Discord, Notion, Github
 - 서비스 배포 환경 : 
-
-<br>
-
-## 2. 역할 분담
-
-### 박시원
-
-- **UI**
-    - 페이지 :
-- **기능**
-    - 
-
-<br>
-    
-### 지호준
-
-- **UI**
-    - 페이지 : 
-    - 공통 컴포넌트 : 
-- **기능**
-    - 
-<br>
-
-### 정소은
-
-- **UI**
-    - 페이지 : 
-    - 공통 컴포넌트 : 
-- **기능**
-    - 
 
 <br>
 
